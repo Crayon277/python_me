@@ -1,0 +1,45 @@
+from math import radians
+from math import sin
+from Tkinter import *
+
+pos = []
+xPos = 0
+centerX = 0
+centerY = 0
+for deg in range(-360,361,10):
+        pos.append([xPos,int(40*(sin(radians(deg))))])
+        xPos +=1
+        if deg == 0:
+                centerX = xPos -1
+                centerY = pos[-1][1]
+
+root = Tk()
+root.title('tranble graph from -180 to 180')
+width, height = 550,450
+mHei = height/2
+mWid = width/2
+
+canvas = Canvas(root,width = width, height = height)
+canvas .create_line(0, mHei, width, mHei)
+canvas.create_line(mWid, 0, mWid, height)  #y axis
+ 
+xStep = (width-150)/len(pos)
+yStep = (height-150)/len(pos)
+ 
+radius = 3
+# the middle point (sin(0) is first drawn and used as position reference for all
+canvas.create_oval(mWid-radius, mHei-radius, mWid+radius, mHei+radius, fill='green')
+ 
+print pos
+print xStep, yStep, centerX, centerY
+#exit(0)
+for i in pos:
+    if i[0] == centerX: #center processed already.
+        continue
+    x = mWid + xStep*(i[0]-centerX)
+    # y is smaller, the bigger the value, so use minus
+    y = mHei - yStep*(i[1]-centerY)
+    canvas.create_oval(x-radius, y-radius, x+radius, y+radius, fill='green')
+     
+canvas.pack()
+root.mainloop()

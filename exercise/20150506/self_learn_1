@@ -1,0 +1,9 @@
+print "chenye"
+"chenye".capitalize()
+"chenye".index('en')
+
+"chenye".center(24)
+
+"123".join("index")
+
+

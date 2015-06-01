@@ -1,0 +1,45 @@
+#coding=utf-8
+#name    格子绘图
+import math
+import random
+ 
+def box(ox,oy,vv):
+    """绘制图形 ox～格长 oy～格高 
+    vv～坐标列表
+    dss～底色图案 hss绘图图案"""
+    dss,hss = ".","*"
+    ds=dss
+    #print vv
+    print "X",
+    for x in range(ox+1):
+        xs=chr(x+65)
+        print "%s" % xs,
+    print 
+    for y in range(oy,0,-1):
+        print "%.2d" % y,
+        for j in range(ox):
+            for v in vv:
+                if j==v[0]-1 and \
+                   y==v[1]:
+                   ds=hss
+            print "%s" % ds,
+            ds=dss
+        print "%.2d" % y
+    print "Y",
+    for x in range(ox+1):
+        xs=chr(x+65)
+        print "%s" % xs,
+    print 
+def dws(l): #返回坐标列表 l～点数
+    vzb=[[0,0]]
+    for i in range(1,l+1):
+        x=i
+        y=hansu(x)
+        vzb.append([x,y])
+    return vzb
+def hansu(x): #计算坐标函数 x～x值
+    #y=math.sin(x)
+    y=x
+    return round(y)
+if __name__=="__main__":
+   box(20,20,dws(40))
