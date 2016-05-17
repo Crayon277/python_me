@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Manipulating the Node Graph &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Formats" href="formats.html" />
+    <link rel="prev" title="Working with Channels and Layers" href="channels.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats.html" title="Formats"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="channels.html" title="Working with Channels and Layers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="manipulating-the-node-graph">
+<h1>Manipulating the Node Graph<a class="headerlink" href="#manipulating-the-node-graph" title="Permalink to this headline">¶</a></h1>
+<p>You can use Python to:</p>
+<ul class="simple">
+<li>get and set node properties that define the node&#8217;s position in the Node Graph (sometimes called the DAG)</li>
+<li>control the Node Graph&#8217;s zoom and pan values.</li>
+</ul>
+<p>There is a video tutorial about manipulating the Node Graph on <a class="reference external" href="http://www.nukepedia.com/video-tutorials/39/video/">Nukepedia</a>.</p>
+<div class="section" id="getting-and-setting-node-positions">
+<h2>Getting and Setting Node Positions<a class="headerlink" href="#getting-and-setting-node-positions" title="Permalink to this headline">¶</a></h2>
+<p>You can access a node&#8217;s x and y position in the Node Graph via its knobs:</p>
+<div class="highlight-python"><pre>node = nuke.createNode( 'NoOp' )
+print node['xpos'].value()</pre>
+</div>
+<p>Use the usual knob method to set a new position:</p>
+<div class="highlight-python"><pre>node['xpos'].setValue( 100 )
+print 'new position is', node['xpos'].value()</pre>
+</div>
+<p>For convenience, there are also methods to set and get node positions:</p>
+<div class="highlight-python"><pre>node.setXpos( 111 )
+node.setYpos( 222 )
+
+xPos = node.xpos()
+yPos = node.ypos()
+print 'new x position is', xPos
+print 'new y position is', yPos</pre>
+</div>
+<p>To set both x and y value at once:</p>
+<div class="highlight-python"><pre>node.setXYpos( 123, 234 )</pre>
+</div>
+<p>To get a node&#8217;s width and height in pixels at zoom level 1:</p>
+<div class="highlight-python"><pre>nodeWidth = node.screenWidth()
+nodeHeight = node.screenHeight()
+
+print "Node dimensions are %s x %s" % ( nodeWidth, nodeHeight )</pre>
+</div>
+<p>To arrange nodes in a neat tree formation so they don&#8217;t overlap, use <strong>node.autoplace()</strong>:</p>
+<div class="highlight-python"><pre>for n in nuke.allNodes():
+    n.autoplace()</pre>
+</div>
+<p>To snap nodes to the nearest grid position:</p>
+<div class="highlight-python"><pre>for n in nuke.allNodes():
+    nuke.autoplaceSnap( n )</pre>
+</div>
+</div>
+<div class="section" id="controlling-the-node-graph-s-pan-and-zoom">
+<h2>Controlling the Node Graph&#8217;s Pan and Zoom<a class="headerlink" href="#controlling-the-node-graph-s-pan-and-zoom" title="Permalink to this headline">¶</a></h2>
+<p>To pan and zoom the Node Graph, use <strong>nuke.zoom()</strong>.</p>
+<p>When called without any arguments, this simply returns the current zoom level:</p>
+<div class="highlight-python"><pre>nuke.zoom()</pre>
+</div>
+<p>With an argument larger than 0, the Node Graph zooms to the given level. For example, to reset the view to 1:1, use:</p>
+<div class="highlight-python"><pre>nuke.zoom(1)</pre>
+</div>
+<p>You can also specify the center of the zoom operation. To zoom into the selected node, use:</p>
+<div class="highlight-python"><pre>node = nuke.selectedNode()
+nuke.zoom( 3, [ node.xpos(), node.ypos() ])</pre>
+</div>
+<p>The above example actually zooms into the node&#8217;s upper left corner. Let&#8217;s zoom into the center of the node instead:</p>
+<div class="highlight-python"><pre>node = nuke.selectedNode()
+xC = node.xpos() + node.screenWidth()/2
+yC = node.ypos() + node.screenHeight()/2
+nuke.zoom( 3, [ xC, yC ])</pre>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-circle-made-of-dot-nodes">
+<h3>A Circle Made of Dot Nodes<a class="headerlink" href="#a-circle-made-of-dot-nodes" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>import math
+for x in xrange(1000):
+    n = nuke.nodes.Dot( xpos = math.sin(x)*100, ypos = math.cos(x)*100)
+    n['hide_input'].setValue(True)</pre>
+</div>
+<img alt="_images/dag_01.png" src="_images/dag_01.png" />
+</div>
+<div class="section" id="a-spiral">
+<h3>A Spiral<a class="headerlink" href="#a-spiral" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>import math
+for x in xrange(1000):
+    n = nuke.nodes.Dot( xpos = math.sin(x)*x/10, ypos = math.cos(x)*x/10)
+    n['hide_input'].setValue(True)</pre>
+</div>
+<img alt="_images/dag_02.png" src="_images/dag_02.png" />
+</div>
+<div class="section" id="controlling-the-distance-between-nodes">
+<h3>Controlling the Distance between Nodes<a class="headerlink" href="#controlling-the-distance-between-nodes" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>import nuke
+def scaleNodes( scale ):
+    nodes = nuke.selectedNodes()    # GET SELECTED NODES
+    amount = len( nodes )    # GET NUMBER OF SELECTED NODES
+    if amount == 0:    return # DO NOTHING IF NO NODES WERE SELECTED
+
+    allX = sum( [ n.xpos()+n.screenWidth()/2 for n in nodes ] )  # SUM OF ALL X VALUES
+    allY = sum( [ n.ypos()+n.screenHeight()/2 for n in nodes ] ) # SUM OF ALL Y VALUES
+
+    # CENTER OF SELECTED NODES
+    centreX = allX / amount
+    centreY = allY / amount
+
+    # REASSIGN NODE POSITIONS AS A FACTOR OF THEIR DISTANCE TO THE SELECTION CENTER
+    for n in nodes:
+        n.setXpos( centreX + ( n.xpos() - centreX ) * scale )
+        n.setYpos( centreY + ( n.ypos() - centreY ) * scale )</pre>
+</div>
+<img alt="_images/dag_03.png" src="_images/dag_03.png" />
+<div class="highlight-python"><pre>scaleNodes( 3 )</pre>
+</div>
+<img alt="_images/dag_04.png" src="_images/dag_04.png" />
+<div class="highlight-python"><pre>scaleNodes( .7 )</pre>
+</div>
+<img alt="_images/dag_05.png" src="_images/dag_05.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Manipulating the Node Graph</a><ul>
+<li><a class="reference internal" href="#getting-and-setting-node-positions">Getting and Setting Node Positions</a></li>
+<li><a class="reference internal" href="#controlling-the-node-graph-s-pan-and-zoom">Controlling the Node Graph&#8217;s Pan and Zoom</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#a-circle-made-of-dot-nodes">A Circle Made of Dot Nodes</a></li>
+<li><a class="reference internal" href="#a-spiral">A Spiral</a></li>
+<li><a class="reference internal" href="#controlling-the-distance-between-nodes">Controlling the Distance between Nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="channels.html"
+                        title="previous chapter">Working with Channels and Layers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="formats.html"
+                        title="next chapter">Formats</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="formats.html" title="Formats"
+             >next</a></li>
+        <li class="right" >
+          <a href="channels.html" title="Working with Channels and Layers"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Nuke as a Python Module &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Animation" href="animation.html" />
+    <link rel="prev" title="Getting Started" href="basics.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="animation.html" title="Animation"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="basics.html" title="Getting Started"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nuke-as-a-python-module">
+<h1>Nuke as a Python Module<a class="headerlink" href="#nuke-as-a-python-module" title="Permalink to this headline">¶</a></h1>
+<p>Since 8.0 Nuke can be used as a Python module.</p>
+<p>This means you can now use Python to do many of the complex things in your VFX pipeline that you couldn&#8217;t otherwise do, easily, and is essentially a production level, incredibly powerful replacement for most 2D, 3D and video-editing Python modules.</p>
+<p>Built against the version of Python Nuke ships with you can now comp programmatically having full access to the Nuke Python-API but from within a native Python interpreter instead of Nuke. This means you can do things like quickly re-grade 2000 shots, or change the timings of a set of fades based on a selection sheet all in a simple 5 or 6 line script, the Pythonic way. You can connect Nuke more easily to your infrastructure back-ends, integrate it into your pipelines and even put Nuke into other applications.</p>
+<p>To use Nuke as Python module you should use the interpreter shipped with Nuke (the module should work with other interpreters but the one Nuke ships with is the only one we officially support).</p>
+<p>As with standard Python, you can either use the interpreter interactively or via a script.</p>
+<p>So, for example a basic interactive example would be:</p>
+<div class="highlight-python"><pre>&lt;Nuke8.0-install-path&gt;$ python.exe
+&gt;&gt;&gt; import nuke
+&gt;&gt;&gt; r = nuke.nodes.Read(file='shot-90123-a.exr')
+&gt;&gt;&gt; g = nuke.nodes.Grade( inputs=[r] )
+&gt;&gt;&gt; g['black'].setValue( 0.05 )
+&gt;&gt;&gt; w = nuke.nodes.Write(file='shot-90123-a-graded-up.exr', inputs=[g])
+&gt;&gt;&gt; nuke.execute( w, 1, 1 )</pre>
+</div>
+<p>Or you could put the code into a script like this:</p>
+<div class="highlight-python"><pre>#gradeShots.py
+import nuke
+shot = sys.argv[0]
+r = nuke.nodes.Read(file=sys.argv[0])
+g = nuke.nodes.Grade( inputs=[r] )
+g['black'].setValue( 0.05 )
+outName = '%s-a-grade-up.mov'%(os.path.split(shot)[0])
+w = nuke.nodes.Write(file=outName, inputs=[g])
+nuke.execute( w, 1, 1 )</pre>
+</div>
+<p>Which you would then run like:</p>
+<div class="highlight-python"><pre>&lt;Nuke8.0-install-path&gt;/python.exe gradeShots.py shot-90123-a.exr</pre>
+</div>
+<div class="section" id="licensing">
+<h2>Licensing<a class="headerlink" href="#licensing" title="Permalink to this headline">¶</a></h2>
+<p>If you wish to import Nuke using an interactive license you will need to set the environment variable NUKE_INTERACTIVE to any non-zero integer.</p>
+<p>e.g.</p>
+<blockquote>
+<div>&lt;Nuke8.0-install-path&gt;$ python.exe
+&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.environ[ &#8220;NUKE_INTERACTIVE&#8221; ] = &#8220;1&#8221;
+&gt;&gt;&gt; import nuke
+&gt;&gt;&gt; ...
+&gt;&gt;&gt; ...</div></blockquote>
+<p>There are a million and one things you could do with Nuke&#8217;s Python module and we would love to hear what you have done with it.</p>
+<p>Written by: Frank Harrison.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Nuke as a Python Module</a><ul>
+<li><a class="reference internal" href="#licensing">Licensing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basics.html"
+                        title="previous chapter">Getting Started</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation.html"
+                        title="next chapter">Animation</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="animation.html" title="Animation"
+             >next</a></li>
+        <li class="right" >
+          <a href="basics.html" title="Getting Started"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

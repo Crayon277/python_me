@@ -1,0 +1,38 @@
+.. NUKE Python Developers Guide documentation master file, created by
+   sphinx-quickstart on Tue Apr  5 21:12:06 2011.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to NUKE Python Developer's Guide
+=======================================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 3
+   
+   intro
+   startup
+   basics
+   nuke_as_python_module
+   animation
+   command_line
+   callbacks
+   stereo
+   3d
+   rotopaint
+   image_data
+   custom_panels
+   custom_ui
+   flipbook
+   metadata
+   channels
+   dag
+   formats
+   math
+   asset
+   threading
+   render_farm
+   performance
+   installing_plugins
+   samples

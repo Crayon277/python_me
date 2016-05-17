@@ -1,0 +1,279 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Metadata &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Working with Channels and Layers" href="channels.html" />
+    <link rel="prev" title="Custom Flipbooks" href="flipbook.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="channels.html" title="Working with Channels and Layers"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="flipbook.html" title="Custom Flipbooks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="metadata">
+<h1>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how to read and write metadata.</p>
+<div class="section" id="reading-metadata">
+<h2>Reading Metadata<a class="headerlink" href="#reading-metadata" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">metadata()</span></tt> method returns a dictionary containing the metadata for the specified node:</p>
+<div class="highlight-python"><pre>node = nuke.toNode( 'Read1' )
+print node.metadata()
+
+# Result:
+{'exr/displayWindow': [0, 0, 2047, 1555], 'input/width': 2048, 'exr/nuke/camera/vaperture': '18.672', 'input/bitsperchannel': '16-bit half float', 'input/filereader': 'exr', 'nuke/node_hash': 'c82817f8e9526abe', 'input/mtime': '2011-04-11 16:47:54', 'exr/nuke/camera/haperture': '24.576', 'input/ctime': '2011-04-11 16:47:54', 'exr/nuke/camera/matrix': '[-0.30901703238487244, -0.16514922678470612, 0.93660777807235718, 9.5105648040771484, 0.0, 0.98480772972106934, 0.1736481785774231, 2.0, -0.95105648040771484, 0.05366024374961853, -0.30432236194610596, -3.0901703834533691, 0.0, 0.0, 0.0, 1.0]', 'input/filename': '/Volumes/ohufx/consulting/Foundry/PythonDevGuide/footage/metadata/renderWithMetadata.0003.exr', 'input/filesize': 193828, 'exr/screenWindowCenter': [0.0, 0.0], 'exr/dataWindow': [463, 417, 1518, 1435], 'exr/nuke/camera/focal': '50.0', 'exr/screenWindowWidth': 1.0, 'input/height': 1556, 'exr/pixelAspectRatio': 1.0}</pre>
+</div>
+<p>To make this a little more readable, we can instead use:</p>
+<div class="highlight-python"><pre>node = nuke.toNode( 'Read1' )
+for k, v in node.metadata().iteritems():
+    print k, v</pre>
+</div>
+<div class="highlight-python"><pre># Result:
+exr/displayWindow [0, 0, 2047, 1555]
+input/width 2048
+exr/nuke/camera/vaperture 18.672
+input/bitsperchannel 16-bit half float
+input/filereader exr
+nuke/node_hash c82817f8e9526abe
+input/mtime 2011-04-11 16:47:54
+exr/nuke/camera/haperture 24.576
+input/ctime 2011-04-11 16:47:54
+exr/nuke/camera/matrix [-0.30901703238487244, -0.16514922678470612, 0.93660777807235718, 9.5105648040771484, 0.0, 0.98480772972106934, 0.1736481785774231, 2.0, -0.95105648040771484, 0.05366024374961853, -0.30432236194610596, -3.0901703834533691, 0.0, 0.0, 0.0, 1.0]
+input/filename /Volumes/ohufx/consulting/Foundry/PythonDevGuide/footage/metadata/renderWithMetadata.0003.exr
+input/filesize 193828
+exr/screenWindowCenter [0.0, 0.0]
+exr/dataWindow [463, 417, 1518, 1435]
+exr/nuke/camera/focal 50.0
+exr/screenWindowWidth 1.0
+input/height 1556
+exr/pixelAspectRatio 1.0</pre>
+</div>
+</div>
+<div class="section" id="setting-metadata">
+<h2>Setting Metadata<a class="headerlink" href="#setting-metadata" title="Permalink to this headline">¶</a></h2>
+<p>To create custom metadata in a stream, you need the <strong>ModifyMetaData</strong> node. To render custom metadata, you need to use a file format that supports it (for example, exr).</p>
+<img alt="_images/setMetaDat_01.png" src="_images/setMetaDat_01.png" />
+<p>The <strong>ModifyMetaData</strong> node accepts expression syntax, which means you can use TCL and, to a limited extend, Python. In this example, we want to write a camera&#8217;s focal length and aperture as well as its transform matrix into the metadata.</p>
+<img alt="_images/setMetaDat_02.png" src="_images/setMetaDat_02.png" />
+<p>In our example, the camera&#8217;s two aperture fields are set using TCL syntax. The camera&#8217;s focal length is set using Python. The transform matrix is set using Python and a custom function called <strong>getTransform</strong>. This is what it looks like:</p>
+<div class="highlight-python"><pre>def getTransform( frame ):
+    cam = nuke.toNode( 'masterCam' )
+    m = []
+    for i in range(16):
+        m.append( cam['world_matrix'].valueAt( frame, i ) )
+    return m</pre>
+</div>
+<p>By placing the above code into your init.py or menu.py (or by importing it there), you can make it available in the knobs and therefore add all kinds of customizations to your <strong>ModifyMetaData</strong> node.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="createmetadatcam">
+<h3>createMetaDatCam<a class="headerlink" href="#createmetadatcam" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we look at a script that creates a camera based on the metadata in an exr file.
+You can download the example exr sequence <a class="reference download internal" href="_downloads/renderWithMetadata.zip"><tt class="xref download docutils literal"><span class="pre">here</span></tt></a>.</p>
+<img alt="_images/metaDatCam_01.png" src="_images/metaDatCam_01.png" />
+<p>Start a new function that checks for valid metadata in a node and creates a camera if it finds enough information. To access a node&#8217;s metadata anywhere in the stream, use the <strong>metadata</strong> method:</p>
+<div class="highlight-python"><pre>def createMetaDatCam( node ):
+    mDat = node.metadata()</pre>
+</div>
+<p>Next, collect a list of all the fields we expect to find in the metadata and prefix them with the group name (to get the full name as assigned in the metadata):</p>
+<div class="highlight-python"><pre>reqFields = ['exr/nuke/camera/%s' % i for i in ('focal', 'haperture', 'vaperture', 'matrix')]</pre>
+</div>
+<p>You can check if the required fields are a subset of the available metadata. If not, stop the script:</p>
+<div class="highlight-python"><pre>if not set( reqFields ).issubset( mDat ):
+    print 'no metdata for camera found'
+    return</pre>
+</div>
+<p>Ask the user for the frame range to create the camera for. Set the default value in the dialog to the node&#8217;s frame range:</p>
+<div class="highlight-python"><pre>first = node.firstFrame()
+last = node.lastFrame()
+ret = nuke.getFramesAndViews( 'Create Camera from Metadata', '%s-%s' %( first, last )  )</pre>
+</div>
+<img alt="_images/metaDatCam_02.png" src="_images/metaDatCam_02.png" />
+<p><strong>nuke.getFramesAndViews</strong> returns a list where the first item is the frame range and the second the requested views. Split off the frame range and convert the frame range string to a frame range object for easier handling. You can ignore the views for now.</p>
+<div class="highlight-python"><pre>fRange = nuke.FrameRange( ret[0] )</pre>
+</div>
+<p>Create a Camera node and set its <strong>useMatrix</strong> knob to <strong>True</strong>:</p>
+<div class="highlight-python"><pre>cam = nuke.createNode( 'Camera2' )
+cam['useMatrix'].setValue( True )</pre>
+</div>
+<p>Loop through the knobs you need and set them all to be animated:</p>
+<div class="highlight-python"><pre>for k in ( 'focal', 'haperture', 'vaperture', 'matrix'):
+    cam[k].setAnimated()</pre>
+</div>
+<p>Before you loop through the frame range to assign keyframes, create a progress bar so the user can cancel the process in the UI:</p>
+<div class="highlight-python"><pre>task = nuke.ProgressTask( 'Baking camera from meta data in %s' % node.name() )</pre>
+</div>
+<p>Start the loop using the <strong>enumerate</strong> function. This gives you the index of the current iteration, which you can use to update the progress bar (in this example, it&#8217;s referenced as <em>curTask</em>). As always when using progress bars, you should check if the user has hit the <strong>Cancel</strong> button to stop the loop:</p>
+<div class="highlight-python"><pre>for curTask, frame in enumerate( fRange ):
+    if task.isCancelled():
+        break</pre>
+</div>
+<p>Update the task message, so we know where we are:</p>
+<div class="highlight-python"><pre>task.setMessage( 'processing frame %s' % frame )</pre>
+</div>
+<p>Now grab the camera values in the metadata for focal length and aperture at the current frame, and convert them to float values so they can be assigned to the knobs:</p>
+<div class="highlight-python"><pre>for k in ( 'focal', 'haperture', 'vaperture' ):
+val = float( node.metadata( 'exr/nuke/camera/%s' % k, frame ) )</pre>
+</div>
+<p>Assign the new value to the knob:</p>
+<div class="highlight-python"><pre>cam[ k ].setValueAt(  float( val ), frame )</pre>
+</div>
+<p>This takes care of the projection parameters. Now you need to deal with the camera&#8217;s transform. In this case, the string held in the metadata is just a Python list, so you can turn it back into a list using <strong>evaluate</strong>:</p>
+<div class="highlight-python"><pre>matrixList = eval( node.metadata('exr/nuke/camera/matrix') )</pre>
+</div>
+<p>Iterate through the list and assign each value to the camera&#8217;s <strong>matrix</strong> knob at the current frame:</p>
+<div class="highlight-python"><pre>for i, v in enumerate( matrixList ):
+    cam[ 'matrix' ].setValueAt( v, frame, i)</pre>
+</div>
+<p>Finally, update the progress bar, so we know what&#8217;s going on:</p>
+<div class="highlight-python"><pre>task.setProgress( int( float(curTask) / fRange.frames() *100) )</pre>
+</div>
+<p>Here is the final code:</p>
+<div class="highlight-python"><pre>import nuke
+
+def createMetaDatCam( node ):
+    '''
+    create a camera node from meta data.
+    This assumes the following keys in the given nodes meta data stream: 'focal', 'haperture', 'vaperture' and 'matrix',
+    where 'matrix' carries the result of "[python nuke.toNode( 'Camera1' ).knob('world_matrix').valueAt( nuke.frame() )]"
+    args:
+       node  -  node to check for meta data
+       ask   -  prompt before creating camera
+    '''  
+    mDat = node.metadata()
+    reqFields = ['exr/nuke/camera/%s' % i for i in ('focal', 'haperture', 'vaperture', 'matrix')]
+    if not set( reqFields ).issubset( mDat ):
+        print 'no metdata for camera found'
+        return
+
+    first = node.firstFrame()
+    last = node.lastFrame()
+    ret = nuke.getFramesAndViews( 'Create Camera from Metadata', '%s-%s' %( first, last )  )
+    fRange = nuke.FrameRange( ret[0] )
+
+    cam = nuke.createNode( 'Camera2' )
+    cam['useMatrix'].setValue( True )
+
+    for k in ( 'focal', 'haperture', 'vaperture', 'matrix'):
+        cam[k].setAnimated()
+
+    task = nuke.ProgressTask( 'Baking camera from meta data in %s' % node.name() )
+
+    for curTask, frame in enumerate( fRange ):
+        if task.isCancelled():
+            break
+        task.setMessage( 'processing frame %s' % frame )
+
+        # GET ALL FRAMES
+        for k in ( 'focal', 'haperture', 'vaperture' ):
+            val = float( node.metadata( 'exr/nuke/camera/%s' % k, frame ) )
+            cam[ k ].setValueAt(  float( val ), frame )
+
+        # CONVERT STRING BACK TO LIST OBJECT AND ASSIGN
+        matrixList = eval( node.metadata('exr/nuke/camera/matrix') )
+        for i, v in enumerate( matrixList ):
+            cam[ 'matrix' ].setValueAt( v, frame, i)
+        # UPDATE PROGRESS BAR
+        task.setProgress( int( float(curTask) / fRange.frames() *100) )
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Metadata</a><ul>
+<li><a class="reference internal" href="#reading-metadata">Reading Metadata</a></li>
+<li><a class="reference internal" href="#setting-metadata">Setting Metadata</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#createmetadatcam">createMetaDatCam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="flipbook.html"
+                        title="previous chapter">Custom Flipbooks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="channels.html"
+                        title="next chapter">Working with Channels and Layers</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="channels.html" title="Working with Channels and Layers"
+             >next</a></li>
+        <li class="right" >
+          <a href="flipbook.html" title="Custom Flipbooks"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.camera</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;camera
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.camera-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.camera-module.html">Module nukescripts.camera</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 The Foundry Visionmongers Ltd.  All Rights Reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package nukescripts=nukescripts-module.html"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-1', 'nukescripts', 'link-1');">nukescripts</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">math</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="camera_up"></a><div id="camera_up-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="camera_up-toggle" onclick="return toggle('camera_up');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.camera-module.html#camera_up">camera_up</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="camera_up-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="camera_up-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">  <tt class="py-docstring">"""All new camera_up that uses the version_get/set functions.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">  This script takes the render camera up one in selected iread/writes.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">  Camera may be _c# or _p# for previs camera number"""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">  <tt id="link-2" class="py-name" targets="Method nuke.Box3_Knob.n()=nuke.Box3_Knob-class.html#n"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-2', 'n', 'link-2');">n</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-3', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method nuke.Group.selectedNodes()=nuke.Group-class.html#selectedNodes,Function nuke.selectedNodes()=nuke-module.html#selectedNodes"><a title="nuke.Group.selectedNodes
+nuke.selectedNodes" class="py-name" href="#" onclick="return doclink('link-4', 'selectedNodes', 'link-4');">selectedNodes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt id="link-5" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-5', 'n', 'link-2');">n</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-name">_class</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method nuke.Knob.Class()=nuke.Knob-class.html#Class,Method nuke.Node.Class()=nuke.Node-class.html#Class"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-6', 'Class', 'link-6');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">_class</tt> <tt class="py-op">==</tt> <tt class="py-string">"Read"</tt> <tt class="py-keyword">or</tt> <tt class="py-name">_class</tt> <tt class="py-op">==</tt> <tt class="py-string">"Write"</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">      <tt id="link-7" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-7', 'name', 'link-7');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-8', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method nuke.Gizmo.filename()=nuke.Gizmo-class.html#filename,Function nuke.filename()=nuke-module.html#filename"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-9', 'filename', 'link-9');">filename</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-10" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-10', 'name', 'link-7');">name</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt id="link-11" class="py-name" targets="Variable sys.prefix=sys-module.html#prefix"><a title="sys.prefix" class="py-name" href="#" onclick="return doclink('link-11', 'prefix', 'link-11');">prefix</a></tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-12', 'nukescripts', 'link-1');">nukescripts</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Function nukescripts.version.version_get()=nukescripts.version-module.html#version_get"><a title="nukescripts.version.version_get" class="py-name" href="#" onclick="return doclink('link-13', 'version_get', 'link-13');">version_get</a></tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-14', 'name', 'link-7');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">"[cp]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">v</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">              <tt class="py-comment"># use expression instead of expr so 0 prefix does not make octal</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">              <tt class="py-comment"># format result so it has 2 digits</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">          <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-string">"%(#)02d"</tt> <tt class="py-op">%</tt> <tt class="py-op">{</tt><tt class="py-string">"#"</tt><tt class="py-op">:</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-15', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method nuke.AnimationCurve.expression()=nuke.AnimationCurve-class.html#expression,Function nuke.expression()=nuke-module.html#expression"><a title="nuke.AnimationCurve.expression
+nuke.expression" class="py-name" href="#" onclick="return doclink('link-16', 'expression', 'link-16');">expression</a></tt><tt class="py-op">(</tt><tt class="py-name">v</tt><tt class="py-op">+</tt><tt class="py-string">"+1"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">          <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method nuke.AnimationCurve.knob()=nuke.AnimationCurve-class.html#knob,Method nuke.LinkableKnobInfo.knob()=nuke.LinkableKnobInfo-class.html#knob,Method nuke.Node.knob()=nuke.Node-class.html#knob,Function nuke.knob()=nuke-module.html#knob"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-17', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"file"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method nuke.Array_Knob.setValue()=nuke.Array_Knob-class.html#setValue,Method nuke.Boolean_Knob.setValue()=nuke.Boolean_Knob-class.html#setValue,Method nuke.Channel_Knob.setValue()=nuke.Channel_Knob-class.html#setValue,Method nuke.Disable_Knob.setValue()=nuke.Disable_Knob-class.html#setValue,Method nuke.EditableEnumeration_Knob.setValue()=nuke.EditableEnumeration_Knob-class.html#setValue,Method nuke.Enumeration_Knob.setValue()=nuke.Enumeration_Knob-class.html#setValue,Method nuke.File_Knob.setValue()=nuke.File_Knob-class.html#setValue,Method nuke.Font_Knob.setValue()=nuke.Font_Knob-class.html#setValue,Method nuke.Format_Knob.setValue()=nuke.Format_Knob-class.html#setValue,Method nuke.FreeType_Knob.setValue()=nuke.FreeType_Knob-class.html#setValue,Method nuke.Int_Knob.setValue()=nuke.Int_Knob-class.html#setValue,Method nuke.Knob.setValue()=nuke.Knob-class.html#setValue,Method nuke.Link_Knob.setValue()=nuke.Link_Knob-class.html#setValue,Method nuke.MultiView_Knob.setValue()=nuke.MultiView_Knob-class.html#setValue,Method nuke.Obsolete_Knob.setValue()=nuke.Obsolete_Knob-class.html#setValue,Method nuke.Password_Knob.setValue()=nuke.Password_Knob-class.html#setValue,Method nuke.Radio_Knob.setValue()=nuke.Radio_Knob-class.html#setValue,Method nuke.Script_Knob.setValue()=nuke.Script_Knob-class.html#setValue,Method nuke.String_Knob.setValue()=nuke.String_Knob-class.html#setValue,Method nuke.Tab_Knob.setValue()=nuke.Tab_Knob-class.html#setValue,Method nuke.Text_Knob.setValue()=nuke.Text_Knob-class.html#setValue,Method nuke.Unsigned_Knob.setValue()=nuke.Unsigned_Knob-class.html#setValue"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-18', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-19', 'nukescripts', 'link-1');">nukescripts</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Function nukescripts.version.version_set()=nukescripts.version-module.html#version_set"><a title="nukescripts.version.version_set" class="py-name" href="#" onclick="return doclink('link-20', 'version_set', 'link-20');">version_set</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-21', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"file"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-22', 'value', 'link-22');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-23" class="py-name"><a title="sys.prefix" class="py-name" href="#" onclick="return doclink('link-23', 'prefix', 'link-11');">prefix</a></tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">          <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-24', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"proxy"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-25', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-26', 'nukescripts', 'link-1');">nukescripts</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="nukescripts.version.version_set" class="py-name" href="#" onclick="return doclink('link-27', 'version_set', 'link-20');">version_set</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-28', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"proxy"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-29', 'value', 'link-22');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="sys.prefix" class="py-name" href="#" onclick="return doclink('link-30', 'prefix', 'link-11');">prefix</a></tt><tt class="py-op">,</tt> <tt class="py-name">v</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">          <tt id="link-31" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-31', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method nuke.Root.modified()=nuke.Root-class.html#modified,Function nuke.modified()=nuke-module.html#modified"><a title="nuke.Root.modified
+nuke.modified" class="py-name" href="#" onclick="return doclink('link-32', 'modified', 'link-32');">modified</a></tt><tt class="py-op">(</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="camera_down"></a><div id="camera_down-def"><a name="L28"></a><tt class="py-lineno">28</tt> <a class="py-toggle" href="#" id="camera_down-toggle" onclick="return toggle('camera_down');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.camera-module.html#camera_down">camera_down</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="camera_down-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="camera_down-expanded"><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">  <tt class="py-docstring">"""All new camera_down that uses the version_get/set functions.</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-docstring">  This script takes the render camera up one in selected iread/writes.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-docstring">  Camera may be _c# or _p# for previs camera number"""</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">  <tt id="link-33" class="py-name" targets="Function nukescripts.camera.camera_up()=nukescripts.camera-module.html#camera_up"><a title="nukescripts.camera.camera_up" class="py-name" href="#" onclick="return doclink('link-33', 'camera_up', 'link-33');">camera_up</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="create_camera_here"></a><div id="create_camera_here-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="create_camera_here-toggle" onclick="return toggle('create_camera_here');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.camera-module.html#create_camera_here">create_camera_here</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_camera_here-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="create_camera_here-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">  <tt class="py-comment"># get selected nodes</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">  <tt class="py-name">selected_nodes</tt> <tt class="py-op">=</tt> <tt id="link-34" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-34', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="nuke.Group.selectedNodes
+nuke.selectedNodes" class="py-name" href="#" onclick="return doclink('link-35', 'selectedNodes', 'link-4');">selectedNodes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">  <tt class="py-comment"># deselect all nodes so the camera doesn't link</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt id="link-36" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-36', 'n', 'link-2');">n</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">selected_nodes</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt id="link-37" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-37', 'n', 'link-2');">n</a></tt><tt class="py-op">[</tt><tt class="py-string">"selected"</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-38', 'setValue', 'link-18');">setValue</a></tt> <tt class="py-op">(</tt> <tt class="py-name">False</tt> <tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">  <tt id="link-39" class="py-name" targets="Module nukescripts.camera=nukescripts.camera-module.html"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-39', 'camera', 'link-39');">camera</a></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-40', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Function nuke.createNode()=nuke-module.html#createNode"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-41', 'createNode', 'link-41');">createNode</a></tt><tt class="py-op">(</tt><tt class="py-string">"Camera2"</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">  <tt class="py-name">viewer</tt> <tt class="py-op">=</tt> <tt id="link-42" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-42', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Function nuke.activeViewer()=nuke-module.html#activeViewer"><a title="nuke.activeViewer" class="py-name" href="#" onclick="return doclink('link-43', 'activeViewer', 'link-43');">activeViewer</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">  <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-name">viewer</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method nuke.ViewerWindow.getGLCameraMatrix()=nuke.ViewerWindow-class.html#getGLCameraMatrix"><a title="nuke.ViewerWindow.getGLCameraMatrix" class="py-name" href="#" onclick="return doclink('link-44', 'getGLCameraMatrix', 'link-44');">getGLCameraMatrix</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">  <tt id="link-45" class="py-name" targets="Method nuke.BBox_Knob.t()=nuke.BBox_Knob-class.html#t,Method nuke.Box.t()=nuke.Box-class.html#t,Method nuke.Box3_Knob.t()=nuke.Box3_Knob-class.html#t,Method nuke.Format.t()=nuke.Format-class.html#t"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-45', 't', 'link-45');">t</a></tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method _curvelib.CMatrix4.translation()=_curvelib.CMatrix4-class.html#translation,Variable _curvelib.CTransform.translation=_curvelib.CTransform-class.html#translation"><a title="_curvelib.CMatrix4.translation
+_curvelib.CTransform.translation" class="py-name" href="#" onclick="return doclink('link-46', 'translation', 'link-46');">translation</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">  <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt class="py-name">rotationsZXY</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">  <tt id="link-47" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-47', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-48', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"rotate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-49', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">degrees</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">  <tt id="link-50" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-50', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-51', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"rotate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-52', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">degrees</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">  <tt id="link-53" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-53', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-54', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"rotate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-55', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-name">math</tt><tt class="py-op">.</tt><tt class="py-name">degrees</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">  <tt id="link-56" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-56', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-57', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"translate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-58', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt id="link-59" class="py-name"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-59', 't', 'link-45');">t</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">  <tt id="link-60" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-60', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-61', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"translate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-62', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-63', 't', 'link-45');">t</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">  <tt id="link-64" class="py-name"><a title="nukescripts.camera" class="py-name" href="#" onclick="return doclink('link-64', 'camera', 'link-39');">camera</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-65', 'knob', 'link-17');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"translate"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-66', 'setValue', 'link-18');">setValue</a></tt><tt class="py-op">(</tt><tt id="link-67" class="py-name"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-67', 't', 'link-45');">t</a></tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:23 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

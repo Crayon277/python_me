@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Math &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Asset Management Systems / Pipeline Integration" href="asset.html" />
+    <link rel="prev" title="Formats" href="formats.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="asset.html" title="Asset Management Systems / Pipeline Integration"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="formats.html" title="Formats"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="math">
+<h1>Math<a class="headerlink" href="#math" title="Permalink to this headline">¶</a></h1>
+<p>This chapter describes some features of the math module that offer vector and matrix objects and respective functions. A good tutorial can be found on <a class="reference external" href="http://www.nukepedia.com/written-tutorials/using-the-nukemath-python-module-to-do-vector-and-matrix-operations/">Nukepedia</a>.</p>
+<div class="section" id="using-matrix">
+<h2>Using matrix<a class="headerlink" href="#using-matrix" title="Permalink to this headline">¶</a></h2>
+<p>Also see:</p>
+<p><a class="reference internal" href="stereo.html#stereosetup-ref-label"><em>Setting Up Stereo</em></a></p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="paintpoints">
+<span id="paintpoints-ref-label"></span><h3>paintPoints<a class="headerlink" href="#paintpoints" title="Permalink to this headline">¶</a></h3>
+<p>This is a rather experimental function that combines ways of reading geometry, getting a camera&#8217;s projection matrix, and creating paint strokes. It&#8217;s not at all efficient, so only try this on light geometry.
+The idea is to project 3D points of all objects in the Viewer to screen space (through the currently selected camera) and paint a dot for each using paint strokes. This is not written for production, but rather to demonstrate some of the latest API additions.</p>
+<img alt="_images/paintPoints_01.png" src="_images/paintPoints_01.png" />
+<p>Start the new function and call it &#8220;paintPoints&#8221;. Define the node that provides the geometry (we&#8217;ll just grab the current Viewer for that) and a camera (assume a camera node is currently selected)</p>
+<div class="highlight-python"><pre>def paintPoints():
+    geoNode = nuke.activeViewer().node()
+    camera = nuke.selectedNode()</pre>
+</div>
+<p>Just in case the selected node is not a camera, we let the user know:</p>
+<div class="highlight-python"><pre>if not camera.Class() in ( 'Camera', 'Camera2' ):
+    nuke.message( 'Please select a camera node first')
+    return</pre>
+</div>
+<p>To gain access to the geometry the current Viewer is connected to, we grab the Viewer&#8217;s <strong>geo</strong> knob and check it for objects:</p>
+<div class="highlight-python"><pre>geoKnob = geoNode['geo']
+objs = geoKnob.getGeometry()
+if not objs:
+    nuke.message( 'No geometry found in %s' % geoNode.name() )</pre>
+</div>
+<p>To collect the world position of all 3D points, we need to:</p>
+<ul>
+<li><p class="first">loop through all objects</p>
+</li>
+<li><p class="first">get each object&#8217;s world transform</p>
+</li>
+<li><p class="first">loop through all points in the objects</p>
+</li>
+<li><p class="first">get each point&#8217;s local transform and multiply it by their parent object&#8217;s transform matrix to get the point&#8217;s world position:</p>
+<div class="highlight-python"><pre>pts = []
+for o in objs:
+    objTransform = o.transform()
+    for p in o.points():
+        worldP = objTransform * nuke.math.Vector4( p.x, p.y, p.z, 1 )
+        pts.append( [worldP.x, worldP.y, worldP.z] )</pre>
+</div>
+</li>
+</ul>
+<p>This collects each 3D point&#8217;s world space position in the list <strong>pts</strong>. Here is the code so far:</p>
+<div class="highlight-python"><pre>def paintPoints():
+    geoNode = nuke.activeViewer().node()
+    camera = nuke.selectedNode()
+
+    if not camera.Class() in ( 'Camera', 'Camera2' ):
+        nuke.message( 'Please select a camera node first')
+        return
+
+    geoKnob = geoNode['geo']
+    objs = geoKnob.getGeometry()
+    if not objs:
+        nuke.message( 'No geometry found in %s' % geoNode.name() )
+
+    pts = []
+    for o in objs:
+        objTransform = o.transform()
+        for p in o.points():
+            worldP = objTransform * nuke.math.Vector4(p.x, p.y, p.z, 1)
+            pts.append( [worldP.x, worldP.y, worldP.z] )</pre>
+</div>
+<p>Now we can loop through all the points, calculate their screen positions, and use the RotoPaint node to draw a paint stroke to mark each position. To get to all strokes, shapes, and so on in a Roto or RotoPaint node, we grab its <strong>curves</strong> knob:</p>
+<div class="highlight-python"><pre>curvesKnob = nuke.createNode( 'RotoPaint' )['curves']</pre>
+</div>
+<p>Because we know this may take a while to run, we&#8217;d better set up a progress bar:</p>
+<div class="highlight-python"><pre>task  = nuke.ProgressTask( 'painting points' )</pre>
+</div>
+<p>First, make sure the process can be cancelled via the progress bar and the progress bar is updated with each iteration so you know what&#8217;s happening:</p>
+<div class="highlight-python"><pre>for i, pt in enumerate( pts ):
+    if task.isCancelled():
+        break
+task.setMessage( 'painting point %s' % i )</pre>
+</div>
+<p>Then, create a paint stroke object for each point and assign it to the RotoPaint node&#8217;s <strong>curves</strong> knob:</p>
+<div class="highlight-python"><pre>stroke = nuke.rotopaint.Stroke( curvesKnob )</pre>
+</div>
+<p>To get the point&#8217;s position in screen space, we can use the <strong>nukescripts.snap3d</strong> module, which does a lot of that kind of work for us:</p>
+<div class="highlight-python"><pre>pos= nukescripts.snap3d.projectPoint( camera, pt )</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For other handy 3D functions that deal with projecting points or point selections, have a closer look at the snap3d.py file inside the <strong>nukescripts</strong> folder that ships with NUKE.</p>
+</div>
+<p>To assign the newly-found screen position to a paint stroke, we need to first create an <strong>AnimationControlPoint</strong>, which defines the position of a control point:</p>
+<div class="highlight-python"><pre>ctrlPoint = nuke.rotopaint.AnimControlPoint( pos )</pre>
+</div>
+<p>Now, let&#8217;s append the new control point to the new stroke:</p>
+<div class="highlight-python"><pre>stroke.append( ctrlPoint )</pre>
+</div>
+<p>We also need to append it to the root layer in the RotoPaint node:</p>
+<div class="highlight-python"><pre>curvesKnob.rootLayer.append( stroke )</pre>
+</div>
+<p>Finally, we update the progress bar we created earlier:</p>
+<div class="highlight-python"><pre>task.setProgress( int( float(i)/len(pts)*100 ) )</pre>
+</div>
+<p>Here is the final code:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts
+
+def paintPoints():
+    '''
+    Rather experimental but kinda fun. This projects sleected 3D points through a camera ito screen space
+    and draws a dot for each using a paint stroke.
+    '''
+    # GET THE GEO NODE FROM THE CURRENTLY ACTIVE VIEWER
+    geoNode = nuke.activeViewer().node()   
+
+    # WE EXPECT A CAMERA TO BE SELECTED
+    camera = nuke.selectedNode()
+    if not camera.Class() in ( 'Camera', 'Camera2' ):
+        nuke.message( 'Please select a camera node first')
+        return
+
+    # COLLECT ALL OBJECTS IN THE CURRENT GEO KNOB. QUIT IFNONE WERE FOUND
+    geoKnob = geoNode['geo']
+    objs = geoKnob.getGeometry()
+    if not objs:
+        nuke.message( 'No geometry found in %s' % geoNode.name() )
+
+    pts = []
+    for o in objs:
+        # CYCLE THROUGH ALL OBJECTS
+        objTransform = o.transform()
+        for p in o.points():
+            # CYCLE THROUGH ALL POINTS OF CURRENT OBJECT
+            worldP = objTransform * nuke.math.Vector4(p.x, p.y, p.z, 1)
+            pts.append( [worldP.x, worldP.y, worldP.z] )
+
+    # CREATE THE NODE THAT WILL HOLD THE PAINT STROKES
+    curvesKnob = nuke.createNode( 'RotoPaint' )['curves']
+    # PREP THE TASK BAR
+    task  = nuke.ProgressTask( 'painting points' )
+    
+    for i, pt in enumerate( pts ):
+        if task.isCancelled():
+            break
+        task.setMessage( 'painting point %s' % i )
+        # CREATE A NEW STROKE
+        stroke = nuke.rotopaint.Stroke( curvesKnob )
+        # PROJECT THE POINT TO SCREEN SPACE
+        pos = nukescripts.snap3d.projectPoint( camera, pt )
+        # CREATE ANE CONTROL POINT FOR
+        ctrlPoint = nuke.rotopaint.AnimControlPoint( pos )
+        # ASSIGN IT TO THE STROKE
+        stroke.append( ctrlPoint )
+        # ASSIGN TH E STROKE TO THE ROOT LAYER
+        curvesKnob.rootLayer.append( stroke )
+        # UPDARE PROGRESS BAR
+        task.setProgress( int( float(i)/len(pts)*100 ) )
+</pre>
+</div>
+<img alt="_images/paintPoints_01.png" src="_images/paintPoints_01.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Math</a><ul>
+<li><a class="reference internal" href="#using-matrix">Using matrix</a></li>
+<li><a class="reference internal" href="#example">Example</a><ul>
+<li><a class="reference internal" href="#paintpoints">paintPoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="formats.html"
+                        title="previous chapter">Formats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="asset.html"
+                        title="next chapter">Asset Management Systems / Pipeline Integration</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="asset.html" title="Asset Management Systems / Pipeline Integration"
+             >next</a></li>
+        <li class="right" >
+          <a href="formats.html" title="Formats"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

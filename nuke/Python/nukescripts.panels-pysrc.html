@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.panels</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;panels
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.panels-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.panels-module.html">Module nukescripts.panels</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 The Foundry Visionmongers Ltd.  All Rights Reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module sys=sys-module.html"><a title="sys" class="py-name" href="#" onclick="return doclink('link-0', 'sys', 'link-0');">sys</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-1', 'nuke', 'link-1');">nuke</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">pyui</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable nukescripts.panels.__panels=nukescripts.panels-module.html#__panels"><a title="nukescripts.panels.__panels" class="py-name" href="#" onclick="return doclink('link-2', '__panels', 'link-2');">__panels</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="registerPanel"></a><div id="registerPanel-def"><a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="registerPanel-toggle" onclick="return toggle('registerPanel');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels-module.html#registerPanel">registerPanel</a><tt class="py-op">(</tt> <tt class="py-param">id</tt><tt class="py-op">,</tt> <tt class="py-param">command</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="registerPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="registerPanel-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">  <tt id="link-3" class="py-name"><a title="nukescripts.panels.__panels" class="py-name" href="#" onclick="return doclink('link-3', '__panels', 'link-2');">__panels</a></tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Method nuke.Gizmo.command()=nuke.Gizmo-class.html#command,Method nuke.Script_Knob.command()=nuke.Script_Knob-class.html#command"><a title="nuke.Gizmo.command
+nuke.Script_Knob.command" class="py-name" href="#" onclick="return doclink('link-4', 'command', 'link-4');">command</a></tt> </tt>
+</div><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="unregisterPanel"></a><div id="unregisterPanel-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="unregisterPanel-toggle" onclick="return toggle('unregisterPanel');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels-module.html#unregisterPanel">unregisterPanel</a><tt class="py-op">(</tt> <tt class="py-param">id</tt><tt class="py-op">,</tt> <tt class="py-param">command</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unregisterPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="unregisterPanel-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">  <tt class="py-keyword">del</tt> <tt id="link-5" class="py-name"><a title="nukescripts.panels.__panels" class="py-name" href="#" onclick="return doclink('link-5', '__panels', 'link-2');">__panels</a></tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="restorePanel"></a><div id="restorePanel-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="restorePanel-toggle" onclick="return toggle('restorePanel');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels-module.html#restorePanel">restorePanel</a><tt class="py-op">(</tt> <tt class="py-param">id</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="restorePanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="restorePanel-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-6" class="py-name"><a title="nukescripts.panels.__panels" class="py-name" href="#" onclick="return doclink('link-6', '__panels', 'link-2');">__panels</a></tt><tt class="py-op">[</tt><tt class="py-name">id</tt><tt class="py-op">]</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">"Can't restore panel '"</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">,</tt> <tt class="py-string">"' because it hasn't been registered."</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanelKnobChanged"></a><div id="PythonPanelKnobChanged-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="PythonPanelKnobChanged-toggle" onclick="return toggle('PythonPanelKnobChanged');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels-module.html#PythonPanelKnobChanged">PythonPanelKnobChanged</a><tt class="py-op">(</tt><tt class="py-param">widget</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanelKnobChanged-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PythonPanelKnobChanged-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">  <tt class="py-name">widget</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method nukescripts.panels.PythonPanel.knobChangedCallback()=nukescripts.panels.PythonPanel-class.html#knobChangedCallback"><a title="nukescripts.panels.PythonPanel.knobChangedCallback" class="py-name" href="#" onclick="return doclink('link-7', 'knobChangedCallback', 'link-7');">knobChangedCallback</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-8', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Function nuke.thisKnob()=nuke-module.html#thisKnob"><a title="nuke.thisKnob" class="py-name" href="#" onclick="return doclink('link-9', 'thisKnob', 'link-9');">thisKnob</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel"></a><div id="PythonPanel-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="PythonPanel-toggle" onclick="return toggle('PythonPanel');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html">PythonPanel</a><tt class="py-op">(</tt> <tt class="py-base-class">pyui</tt><tt class="py-op">.</tt><tt class="py-base-class">Dialog</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PythonPanel-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.__init__"></a><div id="PythonPanel.__init__-def"><a name="L27"></a><tt class="py-lineno"> 27</tt> <a class="py-toggle" href="#" id="PythonPanel.__init__-toggle" onclick="return toggle('PythonPanel.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#__init__">__init__</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">title</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-param">scrollable</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.__init__-expanded"><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-name">pyui</tt><tt class="py-op">.</tt><tt class="py-name">Dialog</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method nuke.AColor_Knob.__init__()=nuke.AColor_Knob-class.html#__init__,Method nuke.AnimationKey.__init__()=nuke.AnimationKey-class.html#__init__,Method nuke.Axis_Knob.__init__()=nuke.Axis_Knob-class.html#__init__,Method nuke.BBox_Knob.__init__()=nuke.BBox_Knob-class.html#__init__,Method nuke.Boolean_Knob.__init__()=nuke.Boolean_Knob-class.html#__init__,Method nuke.Box.__init__()=nuke.Box-class.html#__init__,Method nuke.Box3_Knob.__init__()=nuke.Box3_Knob-class.html#__init__,Method nuke.CascadingEnumeration_Knob.__init__()=nuke.CascadingEnumeration_Knob-class.html#__init__,Method nuke.ChannelMask_Knob.__init__()=nuke.ChannelMask_Knob-class.html#__init__,Method nuke.Channel_Knob.__init__()=nuke.Channel_Knob-class.html#__init__,Method nuke.ColorChip_Knob.__init__()=nuke.ColorChip_Knob-class.html#__init__,Method nuke.Color_Knob.__init__()=nuke.Color_Knob-class.html#__init__,Method nuke.Disable_Knob.__init__()=nuke.Disable_Knob-class.html#__init__,Method nuke.Double_Knob.__init__()=nuke.Double_Knob-class.html#__init__,Method nuke.EditableEnumeration_Knob.__init__()=nuke.EditableEnumeration_Knob-class.html#__init__,Method nuke.Enumeration_Knob.__init__()=nuke.Enumeration_Knob-class.html#__init__,Method nuke.EvalString_Knob.__init__()=nuke.EvalString_Knob-class.html#__init__,Method nuke.Eyedropper_Knob.__init__()=nuke.Eyedropper_Knob-class.html#__init__,Method nuke.File_Knob.__init__()=nuke.File_Knob-class.html#__init__,Method nuke.Font_Knob.__init__()=nuke.Font_Knob-class.html#__init__,Method nuke.Format.__init__()=nuke.Format-class.html#__init__,Method nuke.Format_Knob.__init__()=nuke.Format_Knob-class.html#__init__,Method nuke.FrameRange.__init__()=nuke.FrameRange-class.html#__init__,Method nuke.FrameRanges.__init__()=nuke.FrameRanges-class.html#__init__,Method nuke.FreeType_Knob.__init__()=nuke.FreeType_Knob-class.html#__init__,Method nuke.Help_Knob.__init__()=nuke.Help_Knob-class.html#__init__,Method nuke.Histogram_Knob.__init__()=nuke.Histogram_Knob-class.html#__init__,Method nuke.IArray_Knob.__init__()=nuke.IArray_Knob-class.html#__init__,Method nuke.Info.__init__()=nuke.Info-class.html#__init__,Method nuke.Int_Knob.__init__()=nuke.Int_Knob-class.html#__init__,Method nuke.Keyer_Knob.__init__()=nuke.Keyer_Knob-class.html#__init__,Method nuke.Knob.__init__()=nuke.Knob-class.html#__init__,Method nuke.Link_Knob.__init__()=nuke.Link_Knob-class.html#__init__,Method nuke.LookupCurves_Knob.__init__()=nuke.LookupCurves_Knob-class.html#__init__,Method nuke.MultiView_Knob.__init__()=nuke.MultiView_Knob-class.html#__init__,Method nuke.Multiline_Eval_String_Knob.__init__()=nuke.Multiline_Eval_String_Knob-class.html#__init__,Method nuke.Obsolete_Knob.__init__()=nuke.Obsolete_Knob-class.html#__init__,Method nuke.Password_Knob.__init__()=nuke.Password_Knob-class.html#__init__,Method nuke.Pulldown_Knob.__init__()=nuke.Pulldown_Knob-class.html#__init__,Method nuke.PyCustom_Knob.__init__()=nuke.PyCustom_Knob-class.html#__init__,Method nuke.PyScript_Knob.__init__()=nuke.PyScript_Knob-class.html#__init__,Method nuke.PythonCustomKnob.__init__()=nuke.PythonCustomKnob-class.html#__init__,Method nuke.PythonKnob.__init__()=nuke.PythonKnob-class.html#__init__,Method nuke.Radio_Knob.__init__()=nuke.Radio_Knob-class.html#__init__,Method nuke.Range_Knob.__init__()=nuke.Range_Knob-class.html#__init__,Method nuke.Scale_Knob.__init__()=nuke.Scale_Knob-class.html#__init__,Method nuke.SceneView_Knob.__init__()=nuke.SceneView_Knob-class.html#__init__,Method nuke.Script_Knob.__init__()=nuke.Script_Knob-class.html#__init__,Method nuke.String_Knob.__init__()=nuke.String_Knob-class.html#__init__,Method nuke.Text_Knob.__init__()=nuke.Text_Knob-class.html#__init__,Method nuke.Transform2d_Knob.__init__()=nuke.Transform2d_Knob-class.html#__init__,Method nuke.UV_Knob.__init__()=nuke.UV_Knob-class.html#__init__,Method nuke.Unsigned_Knob.__init__()=nuke.Unsigned_Knob-class.html#__init__,Method nuke.View.__init__()=nuke.View-class.html#__init__,Method nuke.ViewView_Knob.__init__()=nuke.ViewView_Knob-class.html#__init__,Method nuke.WH_Knob.__init__()=nuke.WH_Knob-class.html#__init__,Method nuke.XYZ_Knob.__init__()=nuke.XYZ_Knob-class.html#__init__,Method nuke.XY_Knob.__init__()=nuke.XY_Knob-class.html#__init__,Method nukescripts.applymaterial.ObjectNameChooserDialog.__init__()=nukescripts.applymaterial.ObjectNameChooserDialog-class.html#__init__,Method nukescripts.blinkscripteditor.InputHighlighter.__init__()=nukescripts.blinkscripteditor.InputHighlighter-class.html#__init__,Method nukescripts.blinkscripteditor.LineNumberArea.__init__()=nukescripts.blinkscripteditor.LineNumberArea-class.html#__init__,Method nukescripts.blinkscripteditor.ScriptInputArea.__init__()=nukescripts.blinkscripteditor.ScriptInputArea-class.html#__init__,Method nukescripts.camerapresets.CameraFilmBackPresets.__init__()=nukescripts.camerapresets.CameraFilmBackPresets-class.html#__init__,Method nukescripts.cameratracker.LinkableImportPanel.__init__()=nukescripts.cameratracker.LinkableImportPanel-class.html#__init__,Method nukescripts.captureViewer.CaptureViewer.__init__()=nukescripts.captureViewer.CaptureViewer-class.html#__init__,Method nukescripts.clientserver.client.__init__()=nukescripts.clientserver.client-class.html#__init__,Method nukescripts.clientserver.server.__init__()=nukescripts.clientserver.server-class.html#__init__,Method nukescripts.flipbooking.FlipbookApplication.__init__()=nukescripts.flipbooking.FlipbookApplication-class.html#__init__,Method nukescripts.flipbooking.FlipbookFactory.__init__()=nukescripts.flipbooking.FlipbookFactory-class.html#__init__,Method nukescripts.flipbooking.FlipbookLUTPathRegistry.__init__()=nukescripts.flipbooking.FlipbookLUTPathRegistry-class.html#__init__,Method nukescripts.framecycler.FramecyclerFlipbook.__init__()=nukescripts.framecycler.FramecyclerFlipbook-class.html#__init__,Method nukescripts.framerangepanel.FrameRangePanel.__init__()=nukescripts.framerangepanel.FrameRangePanel-class.html#__init__,Method nukescripts.hardwareinfo.HardwareInfo.__init__()=nukescripts.hardwareinfo.HardwareInfo-class.html#__init__,Method nukescripts.nodepresets.CreateNodePresetsPanel.__init__()=nukescripts.nodepresets.CreateNodePresetsPanel-class.html#__init__,Method nukescripts.nodepresets.PresetsDeletePanel.__init__()=nukescripts.nodepresets.PresetsDeletePanel-class.html#__init__,Method nukescripts.nodepresets.PresetsLoadPanel.__init__()=nukescripts.nodepresets.PresetsLoadPanel-class.html#__init__,Method nukescripts.nodepresets.UserPresetsDeletePanel.__init__()=nukescripts.nodepresets.UserPresetsDeletePanel-class.html#__init__,Method nukescripts.nodepresets.UserPresetsLoadPanel.__init__()=nukescripts.nodepresets.UserPresetsLoadPanel-class.html#__init__,Method nukescripts.nukeprofiler.NukeProfiler.__init__()=nukescripts.nukeprofiler.NukeProfiler-class.html#__init__,Method nukescripts.panels.PythonPanel.__init__()=nukescripts.panels.PythonPanel-class.html#__init__,Method nukescripts.panels.WidgetKnob.__init__()=nukescripts.panels.WidgetKnob-class.html#__init__,Method nukescripts.precomp.PrecompOptions.__init__()=nukescripts.precomp.PrecompOptions-class.html#__init__,Method nukescripts.precomp.PrecompOptionsDialog.__init__()=nukescripts.precomp.PrecompOptionsDialog-class.html#__init__,Method nukescripts.psd.BreakoutThreadClass.__init__()=nukescripts.psd.BreakoutThreadClass-class.html#__init__,Method nukescripts.psd.Layer.__init__()=nukescripts.psd.Layer-class.html#__init__,Method nukescripts.pyAppUtils.pyAppHelper.__init__()=nukescripts.pyAppUtils.pyAppHelper-class.html#__init__,Method nukescripts.pyQtAppUtils.pyQtAppHelper.__init__()=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html#__init__,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.__init__()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#__init__,Method nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.__init__()=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html#__init__,Method nukescripts.pyQtExamples.webBrowser.WebBrowserPanel.__init__()=nukescripts.pyQtExamples.webBrowser.WebBrowserPanel-class.html#__init__,Method nukescripts.pyQtExamples.webBrowser.WebBrowserWidget.__init__()=nukescripts.pyQtExamples.webBrowser.WebBrowserWidget-class.html#__init__,Method nukescripts.pyWxAppUtils.pyWxAppHelper.__init__()=nukescripts.pyWxAppUtils.pyWxAppHelper-class.html#__init__,Method nukescripts.renderdialog.DialogState.__init__()=nukescripts.renderdialog.DialogState-class.html#__init__,Method nukescripts.renderdialog.ExecuteDialog.__init__()=nukescripts.renderdialog.ExecuteDialog-class.html#__init__,Method nukescripts.renderdialog.FlipbookDialog.__init__()=nukescripts.renderdialog.FlipbookDialog-class.html#__init__,Method nukescripts.renderdialog.RenderDialog.__init__()=nukescripts.renderdialog.RenderDialog-class.html#__init__,Method nukescripts.renderdialog.ViewerCaptureDialog.__init__()=nukescripts.renderdialog.ViewerCaptureDialog-class.html#__init__,Method nukescripts.renderdialog.ViewerCaptureDialogThread.__init__()=nukescripts.renderdialog.ViewerCaptureDialogThread-class.html#__init__,Method nukescripts.scripteditorknob.ScriptEditor.__init__()=nukescripts.scripteditorknob.ScriptEditor-class.html#__init__,Method nukescripts.scripteditorknob.ScriptEditorWidgetKnob.__init__()=nukescripts.scripteditorknob.ScriptEditorWidgetKnob-class.html#__init__,Method nukescripts.snap3d.VertexInfo.__init__()=nukescripts.snap3d.VertexInfo-class.html#__init__,Method nukescripts.snap3d.VertexSelection.__init__()=nukescripts.snap3d.VertexSelection-class.html#__init__,Method nukescripts.toolsets.CreateToolsetsPanel.__init__()=nukescripts.toolsets.CreateToolsetsPanel-class.html#__init__,Method nukescripts.trackerlinkingdialog.LinkToTrackPanel.__init__()=nukescripts.trackerlinkingdialog.LinkToTrackPanel-class.html#__init__,Method nukescripts.udim.UDIMErrorDialog.__init__()=nukescripts.udim.UDIMErrorDialog-class.html#__init__,Method nukescripts.udim.UDIMFile.__init__()=nukescripts.udim.UDIMFile-class.html#__init__,Method nukescripts.udim.UDIMOptionsDialog.__init__()=nukescripts.udim.UDIMOptionsDialog-class.html#__init__"><a title="nuke.AColor_Knob.__init__
+nuke.AnimationKey.__init__
+nuke.Axis_Knob.__init__
+nuke.BBox_Knob.__init__
+nuke.Boolean_Knob.__init__
+nuke.Box.__init__
+nuke.Box3_Knob.__init__
+nuke.CascadingEnumeration_Knob.__init__
+nuke.ChannelMask_Knob.__init__
+nuke.Channel_Knob.__init__
+nuke.ColorChip_Knob.__init__
+nuke.Color_Knob.__init__
+nuke.Disable_Knob.__init__
+nuke.Double_Knob.__init__
+nuke.EditableEnumeration_Knob.__init__
+nuke.Enumeration_Knob.__init__
+nuke.EvalString_Knob.__init__
+nuke.Eyedropper_Knob.__init__
+nuke.File_Knob.__init__
+nuke.Font_Knob.__init__
+nuke.Format.__init__
+nuke.Format_Knob.__init__
+nuke.FrameRange.__init__
+nuke.FrameRanges.__init__
+nuke.FreeType_Knob.__init__
+nuke.Help_Knob.__init__
+nuke.Histogram_Knob.__init__
+nuke.IArray_Knob.__init__
+nuke.Info.__init__
+nuke.Int_Knob.__init__
+nuke.Keyer_Knob.__init__
+nuke.Knob.__init__
+nuke.Link_Knob.__init__
+nuke.LookupCurves_Knob.__init__
+nuke.MultiView_Knob.__init__
+nuke.Multiline_Eval_String_Knob.__init__
+nuke.Obsolete_Knob.__init__
+nuke.Password_Knob.__init__
+nuke.Pulldown_Knob.__init__
+nuke.PyCustom_Knob.__init__
+nuke.PyScript_Knob.__init__
+nuke.PythonCustomKnob.__init__
+nuke.PythonKnob.__init__
+nuke.Radio_Knob.__init__
+nuke.Range_Knob.__init__
+nuke.Scale_Knob.__init__
+nuke.SceneView_Knob.__init__
+nuke.Script_Knob.__init__
+nuke.String_Knob.__init__
+nuke.Text_Knob.__init__
+nuke.Transform2d_Knob.__init__
+nuke.UV_Knob.__init__
+nuke.Unsigned_Knob.__init__
+nuke.View.__init__
+nuke.ViewView_Knob.__init__
+nuke.WH_Knob.__init__
+nuke.XYZ_Knob.__init__
+nuke.XY_Knob.__init__
+nukescripts.applymaterial.ObjectNameChooserDialog.__init__
+nukescripts.blinkscripteditor.InputHighlighter.__init__
+nukescripts.blinkscripteditor.LineNumberArea.__init__
+nukescripts.blinkscripteditor.ScriptInputArea.__init__
+nukescripts.camerapresets.CameraFilmBackPresets.__init__
+nukescripts.cameratracker.LinkableImportPanel.__init__
+nukescripts.captureViewer.CaptureViewer.__init__
+nukescripts.clientserver.client.__init__
+nukescripts.clientserver.server.__init__
+nukescripts.flipbooking.FlipbookApplication.__init__
+nukescripts.flipbooking.FlipbookFactory.__init__
+nukescripts.flipbooking.FlipbookLUTPathRegistry.__init__
+nukescripts.framecycler.FramecyclerFlipbook.__init__
+nukescripts.framerangepanel.FrameRangePanel.__init__
+nukescripts.hardwareinfo.HardwareInfo.__init__
+nukescripts.nodepresets.CreateNodePresetsPanel.__init__
+nukescripts.nodepresets.PresetsDeletePanel.__init__
+nukescripts.nodepresets.PresetsLoadPanel.__init__
+nukescripts.nodepresets.UserPresetsDeletePanel.__init__
+nukescripts.nodepresets.UserPresetsLoadPanel.__init__
+nukescripts.nukeprofiler.NukeProfiler.__init__
+nukescripts.panels.PythonPanel.__init__
+nukescripts.panels.WidgetKnob.__init__
+nukescripts.precomp.PrecompOptions.__init__
+nukescripts.precomp.PrecompOptionsDialog.__init__
+nukescripts.psd.BreakoutThreadClass.__init__
+nukescripts.psd.Layer.__init__
+nukescripts.pyAppUtils.pyAppHelper.__init__
+nukescripts.pyQtAppUtils.pyQtAppHelper.__init__
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.__init__
+nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserPanel.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserWidget.__init__
+nukescripts.pyWxAppUtils.pyWxAppHelper.__init__
+nukescripts.renderdialog.DialogState.__init__
+nukescripts.renderdialog.ExecuteDialog.__init__
+nukescripts.renderdialog.FlipbookDialog.__init__
+nukescripts.renderdialog.RenderDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialogThread.__init__
+nukescripts.scripteditorknob.ScriptEditor.__init__
+nukescripts.scripteditorknob.ScriptEditorWidgetKnob.__init__
+nukescripts.snap3d.VertexInfo.__init__
+nukescripts.snap3d.VertexSelection.__init__
+nukescripts.toolsets.CreateToolsetsPanel.__init__
+nukescripts.trackerlinkingdialog.LinkToTrackPanel.__init__
+nukescripts.udim.UDIMErrorDialog.__init__
+nukescripts.udim.UDIMFile.__init__
+nukescripts.udim.UDIMOptionsDialog.__init__" class="py-name" href="#" onclick="return doclink('link-10', '__init__', 'link-10');">__init__</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Method nuke.Panel.title()=nuke.Panel-class.html#title"><a title="nuke.Panel.title" class="py-name" href="#" onclick="return doclink('link-11', 'title', 'link-11');">title</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">,</tt> <tt class="py-name">scrollable</tt> <tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-12', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Class nuke.PanelNode=nuke.PanelNode-class.html"><a title="nuke.PanelNode" class="py-name" href="#" onclick="return doclink('link-13', 'PanelNode', 'link-13');">PanelNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__widget</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_isModalDialog</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.addCallback"></a><div id="PythonPanel.addCallback-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="PythonPanel.addCallback-toggle" onclick="return toggle('PythonPanel.addCallback');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#addCallback">addCallback</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.addCallback-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.addCallback-expanded"><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt id="link-14" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-14', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Function nuke.callbacks.addKnobChanged()=nuke.callbacks-module.html#addKnobChanged"><a title="nuke.callbacks.addKnobChanged" class="py-name" href="#" onclick="return doclink('link-15', 'addKnobChanged', 'link-15');">addKnobChanged</a></tt><tt class="py-op">(</tt><tt class="py-name">PythonPanelKnobChanged</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt> <tt class="py-op">=</tt> <tt class="py-string">'PanelNode'</tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name" targets="Method nuke.Group.node()=nuke.Group-class.html#node,Method nuke.Knob.node()=nuke.Knob-class.html#node,Method nuke.ViewerProcess.node()=nuke.ViewerProcess-class.html#node,Method nuke.ViewerWindow.node()=nuke.ViewerWindow-class.html#node"><a title="nuke.Group.node
+nuke.Knob.node
+nuke.ViewerProcess.node
+nuke.ViewerWindow.node" class="py-name" href="#" onclick="return doclink('link-16', 'node', 'link-16');">node</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.removeCallback"></a><div id="PythonPanel.removeCallback-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="PythonPanel.removeCallback-toggle" onclick="return toggle('PythonPanel.removeCallback');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#removeCallback">removeCallback</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.removeCallback-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.removeCallback-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-17', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function nuke.callbacks.removeKnobChanged()=nuke.callbacks-module.html#removeKnobChanged"><a title="nuke.callbacks.removeKnobChanged" class="py-name" href="#" onclick="return doclink('link-18', 'removeKnobChanged', 'link-18');">removeKnobChanged</a></tt><tt class="py-op">(</tt><tt class="py-name">PythonPanelKnobChanged</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt> <tt class="py-op">=</tt> <tt class="py-string">'PanelNode'</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="nuke.Group.node
+nuke.Knob.node
+nuke.ViewerProcess.node
+nuke.ViewerWindow.node" class="py-name" href="#" onclick="return doclink('link-19', 'node', 'link-16');">node</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.addKnob"></a><div id="PythonPanel.addKnob-def"><a name="L42"></a><tt class="py-lineno"> 42</tt> <a class="py-toggle" href="#" id="PythonPanel.addKnob-toggle" onclick="return toggle('PythonPanel.addKnob');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#addKnob">addKnob</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">knob</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.addKnob-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.addKnob-expanded"><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name" targets="Method nuke.AnimationCurve.knob()=nuke.AnimationCurve-class.html#knob,Method nuke.LinkableKnobInfo.knob()=nuke.LinkableKnobInfo-class.html#knob,Method nuke.Node.knob()=nuke.Node-class.html#knob,Function nuke.knob()=nuke-module.html#knob"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-20', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-21" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-21', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Class nuke.BeginTabGroup_Knob=nuke.BeginTabGroup_Knob-class.html"><a title="nuke.BeginTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-22', 'BeginTabGroup_Knob', 'link-22');">BeginTabGroup_Knob</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-23" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-23', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-24" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-24', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Class nuke.EndTabGroup_Knob=nuke.EndTabGroup_Knob-class.html"><a title="nuke.EndTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-25', 'EndTabGroup_Knob', 'link-25');">EndTabGroup_Knob</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-26" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-26', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-27" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-27', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Class nuke.Tab_Knob=nuke.Tab_Knob-class.html"><a title="nuke.Tab_Knob" class="py-name" href="#" onclick="return doclink('link-28', 'Tab_Knob', 'link-28');">Tab_Knob</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method nuke.Node.addKnob()=nuke.Node-class.html#addKnob,Method nuke.PanelNode.addKnob()=nuke.PanelNode-class.html#addKnob,Method nukescripts.panels.PythonPanel.addKnob()=nukescripts.panels.PythonPanel-class.html#addKnob,Method nukescripts.renderdialog.ExecuteDialog.addKnob()=nukescripts.renderdialog.ExecuteDialog-class.html#addKnob"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-29', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt> <tt id="link-30" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-30', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="nuke.BeginTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-31', 'BeginTabGroup_Knob', 'link-22');">BeginTabGroup_Knob</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-32', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt> <tt id="link-33" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-33', 'knob', 'link-20');">knob</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt id="link-34" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-34', 'knob', 'link-20');">knob</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Method _curveknob.Layer.setFlag()=_curveknob.Layer-class.html#setFlag,Method _curveknob.Shape.setFlag()=_curveknob.Shape-class.html#setFlag,Method _curveknob.Stroke.setFlag()=_curveknob.Stroke-class.html#setFlag,Method _curvelib.Flag.setFlag()=_curvelib.Flag-class.html#setFlag,Method nuke.Knob.setFlag()=nuke.Knob-class.html#setFlag"><a title="_curveknob.Layer.setFlag
+_curveknob.Shape.setFlag
+_curveknob.Stroke.setFlag
+_curvelib.Flag.setFlag
+nuke.Knob.setFlag" class="py-name" href="#" onclick="return doclink('link-35', 'setFlag', 'link-35');">setFlag</a></tt><tt class="py-op">(</tt> <tt id="link-36" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-36', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Variable nuke.NO_UNDO=nuke-module.html#NO_UNDO"><a title="nuke.NO_UNDO" class="py-name" href="#" onclick="return doclink('link-37', 'NO_UNDO', 'link-37');">NO_UNDO</a></tt> <tt class="py-op">|</tt> <tt id="link-38" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-38', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Variable nuke.NO_ANIMATION=nuke-module.html#NO_ANIMATION"><a title="nuke.NO_ANIMATION" class="py-name" href="#" onclick="return doclink('link-39', 'NO_ANIMATION', 'link-39');">NO_ANIMATION</a></tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.removeKnob"></a><div id="PythonPanel.removeKnob-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="PythonPanel.removeKnob-toggle" onclick="return toggle('PythonPanel.removeKnob');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#removeKnob">removeKnob</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">knob</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.removeKnob-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.removeKnob-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-40" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-40', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-41" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-41', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="nuke.BeginTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-42', 'BeginTabGroup_Knob', 'link-22');">BeginTabGroup_Knob</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-43', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-44" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-44', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="nuke.EndTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-45', 'EndTabGroup_Knob', 'link-25');">EndTabGroup_Knob</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Method nuke.Node.removeKnob()=nuke.Node-class.html#removeKnob,Method nuke.PanelNode.removeKnob()=nuke.PanelNode-class.html#removeKnob,Method nukescripts.panels.PythonPanel.removeKnob()=nukescripts.panels.PythonPanel-class.html#removeKnob"><a title="nuke.Node.removeKnob
+nuke.PanelNode.removeKnob
+nukescripts.panels.PythonPanel.removeKnob" class="py-name" href="#" onclick="return doclink('link-46', 'removeKnob', 'link-46');">removeKnob</a></tt><tt class="py-op">(</tt> <tt id="link-47" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-47', 'knob', 'link-20');">knob</a></tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.knobs"></a><div id="PythonPanel.knobs-def"><a name="L61"></a><tt class="py-lineno"> 61</tt> <a class="py-toggle" href="#" id="PythonPanel.knobs-toggle" onclick="return toggle('PythonPanel.knobs');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#knobs">knobs</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.knobs-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.knobs-expanded"><a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method nuke.Node.knobs()=nuke.Node-class.html#knobs,Method nuke.PanelNode.knobs()=nuke.PanelNode-class.html#knobs,Method nukescripts.panels.PythonPanel.knobs()=nukescripts.panels.PythonPanel-class.html#knobs"><a title="nuke.Node.knobs
+nuke.PanelNode.knobs
+nukescripts.panels.PythonPanel.knobs" class="py-name" href="#" onclick="return doclink('link-48', 'knobs', 'link-48');">knobs</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.writeKnobs"></a><div id="PythonPanel.writeKnobs-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="PythonPanel.writeKnobs-toggle" onclick="return toggle('PythonPanel.writeKnobs');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#writeKnobs">writeKnobs</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">flags</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.writeKnobs-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.writeKnobs-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Method nuke.Node.writeKnobs()=nuke.Node-class.html#writeKnobs,Method nuke.PanelNode.writeKnobs()=nuke.PanelNode-class.html#writeKnobs,Method nukescripts.panels.PythonPanel.writeKnobs()=nukescripts.panels.PythonPanel-class.html#writeKnobs"><a title="nuke.Node.writeKnobs
+nuke.PanelNode.writeKnobs
+nukescripts.panels.PythonPanel.writeKnobs" class="py-name" href="#" onclick="return doclink('link-49', 'writeKnobs', 'link-49');">writeKnobs</a></tt><tt class="py-op">(</tt> <tt id="link-50" class="py-name" targets="Module nukescripts.flags=nukescripts.flags-module.html,Variable sys.flags=sys-module.html#flags"><a title="nukescripts.flags
+sys.flags" class="py-name" href="#" onclick="return doclink('link-50', 'flags', 'link-50');">flags</a></tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.readKnobs"></a><div id="PythonPanel.readKnobs-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="PythonPanel.readKnobs-toggle" onclick="return toggle('PythonPanel.readKnobs');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#readKnobs">readKnobs</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">s</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.readKnobs-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.readKnobs-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method nuke.Node.readKnobs()=nuke.Node-class.html#readKnobs,Method nuke.PanelNode.readKnobs()=nuke.PanelNode-class.html#readKnobs,Method nukescripts.panels.PythonPanel.readKnobs()=nukescripts.panels.PythonPanel-class.html#readKnobs"><a title="nuke.Node.readKnobs
+nuke.PanelNode.readKnobs
+nukescripts.panels.PythonPanel.readKnobs" class="py-name" href="#" onclick="return doclink('link-51', 'readKnobs', 'link-51');">readKnobs</a></tt><tt class="py-op">(</tt> <tt class="py-name">s</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.knobChangedCallback"></a><div id="PythonPanel.knobChangedCallback-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="PythonPanel.knobChangedCallback-toggle" onclick="return toggle('PythonPanel.knobChangedCallback');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#knobChangedCallback">knobChangedCallback</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">knob</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.knobChangedCallback-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.knobChangedCallback-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name" targets="Function nuke.callbacks.knobChanged()=nuke.callbacks-module.html#knobChanged,Method nukescripts.nodepresets.CreateNodePresetsPanel.knobChanged()=nukescripts.nodepresets.CreateNodePresetsPanel-class.html#knobChanged,Method nukescripts.nodepresets.PresetsDeletePanel.knobChanged()=nukescripts.nodepresets.PresetsDeletePanel-class.html#knobChanged,Method nukescripts.nodepresets.PresetsLoadPanel.knobChanged()=nukescripts.nodepresets.PresetsLoadPanel-class.html#knobChanged,Method nukescripts.nodepresets.UserPresetsDeletePanel.knobChanged()=nukescripts.nodepresets.UserPresetsDeletePanel-class.html#knobChanged,Method nukescripts.nodepresets.UserPresetsLoadPanel.knobChanged()=nukescripts.nodepresets.UserPresetsLoadPanel-class.html#knobChanged,Method nukescripts.panels.PythonPanel.knobChanged()=nukescripts.panels.PythonPanel-class.html#knobChanged,Method nukescripts.renderdialog.ExecuteDialog.knobChanged()=nukescripts.renderdialog.ExecuteDialog-class.html#knobChanged,Method nukescripts.renderdialog.FlipbookDialog.knobChanged()=nukescripts.renderdialog.FlipbookDialog-class.html#knobChanged,Method nukescripts.renderdialog.RenderDialog.knobChanged()=nukescripts.renderdialog.RenderDialog-class.html#knobChanged,Method nukescripts.renderdialog.ViewerCaptureDialog.knobChanged()=nukescripts.renderdialog.ViewerCaptureDialog-class.html#knobChanged,Method nukescripts.toolsets.CreateToolsetsPanel.knobChanged()=nukescripts.toolsets.CreateToolsetsPanel-class.html#knobChanged,Method nukescripts.trackerlinkingdialog.LinkToTrackPanel.knobChanged()=nukescripts.trackerlinkingdialog.LinkToTrackPanel-class.html#knobChanged"><a title="nuke.callbacks.knobChanged
+nukescripts.nodepresets.CreateNodePresetsPanel.knobChanged
+nukescripts.nodepresets.PresetsDeletePanel.knobChanged
+nukescripts.nodepresets.PresetsLoadPanel.knobChanged
+nukescripts.nodepresets.UserPresetsDeletePanel.knobChanged
+nukescripts.nodepresets.UserPresetsLoadPanel.knobChanged
+nukescripts.panels.PythonPanel.knobChanged
+nukescripts.renderdialog.ExecuteDialog.knobChanged
+nukescripts.renderdialog.FlipbookDialog.knobChanged
+nukescripts.renderdialog.RenderDialog.knobChanged
+nukescripts.renderdialog.ViewerCaptureDialog.knobChanged
+nukescripts.toolsets.CreateToolsetsPanel.knobChanged
+nukescripts.trackerlinkingdialog.LinkToTrackPanel.knobChanged" class="py-name" href="#" onclick="return doclink('link-52', 'knobChanged', 'link-52');">knobChanged</a></tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-53', 'knob', 'link-20');">knob</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-54" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-54', 'knob', 'link-20');">knob</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name" targets="Method nukescripts.panels.PythonPanel.finishModalDialog()=nukescripts.panels.PythonPanel-class.html#finishModalDialog"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-55', 'finishModalDialog', 'link-55');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">True</tt> <tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-56" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-56', 'knob', 'link-20');">knob</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-57', 'finishModalDialog', 'link-55');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">False</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.knobChanged"></a><div id="PythonPanel.knobChanged-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="PythonPanel.knobChanged-toggle" onclick="return toggle('PythonPanel.knobChanged');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#knobChanged">knobChanged</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">knob</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.knobChanged-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.knobChanged-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.finishModalDialog"></a><div id="PythonPanel.finishModalDialog-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="PythonPanel.finishModalDialog-toggle" onclick="return toggle('PythonPanel.finishModalDialog');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#finishModalDialog">finishModalDialog</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">result</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.finishModalDialog-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.finishModalDialog-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__modalResult</tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name" targets="Method nuke.RunInMainThread.result()=nuke.RunInMainThread-class.html#result"><a title="nuke.RunInMainThread.result" class="py-name" href="#" onclick="return doclink('link-58', 'result', 'link-58');">result</a></tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method nukescripts.panels.PythonPanel.hide()=nukescripts.panels.PythonPanel-class.html#hide"><a title="nukescripts.panels.PythonPanel.hide" class="py-name" href="#" onclick="return doclink('link-59', 'hide', 'link-59');">hide</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.ok"></a><div id="PythonPanel.ok-def"><a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="PythonPanel.ok-toggle" onclick="return toggle('PythonPanel.ok');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#ok">ok</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.ok-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.ok-expanded"><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-60', 'finishModalDialog', 'link-55');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">True</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.cancel"></a><div id="PythonPanel.cancel-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="PythonPanel.cancel-toggle" onclick="return toggle('PythonPanel.cancel');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#cancel">cancel</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.cancel-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.cancel-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-61', 'finishModalDialog', 'link-55');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">False</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.create"></a><div id="PythonPanel.create-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="PythonPanel.create-toggle" onclick="return toggle('PythonPanel.create');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#create">create</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.create-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.create-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-62', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-63', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="nuke.EndTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-64', 'EndTabGroup_Knob', 'link-25');">EndTabGroup_Knob</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__widget</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__widget</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__node</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name" targets="Method nuke.PanelNode.createWidget()=nuke.PanelNode-class.html#createWidget"><a title="nuke.PanelNode.createWidget" class="py-name" href="#" onclick="return doclink('link-65', 'createWidget', 'link-65');">createWidget</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt> <tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Method _curveknob.CurveWidget.add()=_curveknob.CurveWidget-class.html#add,Method _curvelib.AnimAttributes.add()=_curvelib.AnimAttributes-class.html#add,Method nuke.Format.add()=nuke.Format-class.html#add,Method nuke.FrameRanges.add()=nuke.FrameRanges-class.html#add,Method nukescripts.snap3d.VertexSelection.add()=nukescripts.snap3d.VertexSelection-class.html#add"><a title="_curveknob.CurveWidget.add
+_curvelib.AnimAttributes.add
+nuke.Format.add
+nuke.FrameRanges.add
+nukescripts.snap3d.VertexSelection.add" class="py-name" href="#" onclick="return doclink('link-66', 'add', 'link-66');">add</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__widget</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">3</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.show"></a><div id="PythonPanel.show-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="PythonPanel.show-toggle" onclick="return toggle('PythonPanel.show');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#show">show</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.show-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.show-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name" targets="Method nukescripts.panels.PythonPanel.addCallback()=nukescripts.panels.PythonPanel-class.html#addCallback"><a title="nukescripts.panels.PythonPanel.addCallback" class="py-name" href="#" onclick="return doclink('link-67', 'addCallback', 'link-67');">addCallback</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-68" class="py-name" targets="Module nukescripts.create=nukescripts.create-module.html,Method nukescripts.panels.PythonPanel.create()=nukescripts.panels.PythonPanel-class.html#create"><a title="nukescripts.create
+nukescripts.panels.PythonPanel.create" class="py-name" href="#" onclick="return doclink('link-68', 'create', 'link-68');">create</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-69" class="py-name" targets="Class nukescripts.panels.PythonPanel=nukescripts.panels.PythonPanel-class.html"><a title="nukescripts.panels.PythonPanel" class="py-name" href="#" onclick="return doclink('link-69', 'PythonPanel', 'link-69');">PythonPanel</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name" targets="Method nuke.Panel.show()=nuke.Panel-class.html#show,Function nuke.show()=nuke-module.html#show,Method nukescripts.panels.PythonPanel.show()=nukescripts.panels.PythonPanel-class.html#show"><a title="nuke.Panel.show
+nuke.show
+nukescripts.panels.PythonPanel.show" class="py-name" href="#" onclick="return doclink('link-70', 'show', 'link-70');">show</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.hide"></a><div id="PythonPanel.hide-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="PythonPanel.hide-toggle" onclick="return toggle('PythonPanel.hide');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#hide">hide</a><tt class="py-op">(</tt> <tt class="py-param">self</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.hide-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.hide-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-71" class="py-name"><a title="nukescripts.panels.PythonPanel" class="py-name" href="#" onclick="return doclink('link-71', 'PythonPanel', 'link-69');">PythonPanel</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="nukescripts.panels.PythonPanel.hide" class="py-name" href="#" onclick="return doclink('link-72', 'hide', 'link-59');">hide</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.showModalDialog"></a><div id="PythonPanel.showModalDialog-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="PythonPanel.showModalDialog-toggle" onclick="return toggle('PythonPanel.showModalDialog');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#showModalDialog">showModalDialog</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">defaultKnobText</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.showModalDialog-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.showModalDialog-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__modalResult</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">;</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_isModalDialog</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt> <tt class="py-op">==</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name" targets="Method nukescripts.panels.PythonPanel._makeOkCancelButton()=nukescripts.panels.PythonPanel-class.html#_makeOkCancelButton"><a title="nukescripts.panels.PythonPanel._makeOkCancelButton" class="py-name" href="#" onclick="return doclink('link-73', '_makeOkCancelButton', 'link-73');">_makeOkCancelButton</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">defaultKnobText</tt> <tt class="py-op">==</tt> <tt class="py-string">""</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">      <tt class="py-name">defaultKnobText</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-74', 'name', 'link-74');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Method nukescripts.panels.PythonPanel.showModal()=nukescripts.panels.PythonPanel-class.html#showModal"><a title="nukescripts.panels.PythonPanel.showModal" class="py-name" href="#" onclick="return doclink('link-75', 'showModal', 'link-75');">showModal</a></tt><tt class="py-op">(</tt><tt class="py-name">defaultKnobText</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__modalResult</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel._makeOkCancelButton"></a><div id="PythonPanel._makeOkCancelButton-def"><a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="PythonPanel._makeOkCancelButton-toggle" onclick="return toggle('PythonPanel._makeOkCancelButton');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#_makeOkCancelButton">_makeOkCancelButton</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel._makeOkCancelButton-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel._makeOkCancelButton-expanded"><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__openTabGroups</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-76', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt><tt id="link-77" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-77', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="nuke.EndTabGroup_Knob" class="py-name" href="#" onclick="return doclink('link-78', 'EndTabGroup_Knob', 'link-25');">EndTabGroup_Knob</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt> <tt class="py-op">=</tt> <tt id="link-79" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-79', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-80" class="py-name" targets="Class nuke.Script_Knob=nuke.Script_Knob-class.html"><a title="nuke.Script_Knob" class="py-name" href="#" onclick="return doclink('link-80', 'Script_Knob', 'link-80');">Script_Knob</a></tt><tt class="py-op">(</tt> <tt class="py-string">"OK"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-81', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt> <tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="_curveknob.Layer.setFlag
+_curveknob.Shape.setFlag
+_curveknob.Stroke.setFlag
+_curvelib.Flag.setFlag
+nuke.Knob.setFlag" class="py-name" href="#" onclick="return doclink('link-82', 'setFlag', 'link-35');">setFlag</a></tt><tt class="py-op">(</tt> <tt id="link-83" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-83', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name" targets="Variable nuke.STARTLINE=nuke-module.html#STARTLINE"><a title="nuke.STARTLINE" class="py-name" href="#" onclick="return doclink('link-84', 'STARTLINE', 'link-84');">STARTLINE</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt> <tt class="py-op">=</tt> <tt id="link-85" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-85', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="nuke.Script_Knob" class="py-name" href="#" onclick="return doclink('link-86', 'Script_Knob', 'link-80');">Script_Knob</a></tt><tt class="py-op">(</tt> <tt class="py-string">"Cancel"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-87', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.showModal"></a><div id="PythonPanel.showModal-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="PythonPanel.showModal-toggle" onclick="return toggle('PythonPanel.showModal');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#showModal">showModal</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">defaultKnobText</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.showModal-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.showModal-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="nukescripts.panels.PythonPanel.addCallback" class="py-name" href="#" onclick="return doclink('link-88', 'addCallback', 'link-67');">addCallback</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="nukescripts.create
+nukescripts.panels.PythonPanel.create" class="py-name" href="#" onclick="return doclink('link-89', 'create', 'link-68');">create</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-90" class="py-name"><a title="nukescripts.panels.PythonPanel" class="py-name" href="#" onclick="return doclink('link-90', 'PythonPanel', 'link-69');">PythonPanel</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="nukescripts.panels.PythonPanel.showModal" class="py-name" href="#" onclick="return doclink('link-91', 'showModal', 'link-75');">showModal</a></tt><tt class="py-op">(</tt><tt class="py-name">defaultKnobText</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name" targets="Method nukescripts.panels.PythonPanel.removeCallback()=nukescripts.panels.PythonPanel-class.html#removeCallback"><a title="nukescripts.panels.PythonPanel.removeCallback" class="py-name" href="#" onclick="return doclink('link-92', 'removeCallback', 'link-92');">removeCallback</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.addToPane"></a><div id="PythonPanel.addToPane-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="PythonPanel.addToPane-toggle" onclick="return toggle('PythonPanel.addToPane');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#addToPane">addToPane</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pane</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.addToPane-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.addToPane-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-93" class="py-name"><a title="nukescripts.create
+nukescripts.panels.PythonPanel.create" class="py-name" href="#" onclick="return doclink('link-93', 'create', 'link-68');">create</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">pane</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">      <tt class="py-name">pane</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="_curveknob.CurveWidget.add
+_curvelib.AnimAttributes.add
+nuke.Format.add
+nuke.FrameRanges.add
+nukescripts.snap3d.VertexSelection.add" class="py-name" href="#" onclick="return doclink('link-94', 'add', 'link-66');">add</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt> <tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-95" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-95', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-96" class="py-name" targets="Function nuke.thisPane()=nuke-module.html#thisPane"><a title="nuke.thisPane" class="py-name" href="#" onclick="return doclink('link-96', 'thisPane', 'link-96');">thisPane</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">      <tt id="link-97" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-97', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="nuke.thisPane" class="py-name" href="#" onclick="return doclink('link-98', 'thisPane', 'link-96');">thisPane</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="_curveknob.CurveWidget.add
+_curvelib.AnimAttributes.add
+nuke.Format.add
+nuke.FrameRanges.add
+nukescripts.snap3d.VertexSelection.add" class="py-name" href="#" onclick="return doclink('link-99', 'add', 'link-66');">add</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt> <tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="nukescripts.panels.PythonPanel.addCallback" class="py-name" href="#" onclick="return doclink('link-100', 'addCallback', 'link-67');">addCallback</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.accept"></a><div id="PythonPanel.accept-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="PythonPanel.accept-toggle" onclick="return toggle('PythonPanel.accept');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#accept">accept</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.accept-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.accept-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_isModalDialog</tt><tt class="py-op">:</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name" targets="Method nukescripts.panels.PythonPanel.ok()=nukescripts.panels.PythonPanel-class.html#ok"><a title="nukescripts.panels.PythonPanel.ok" class="py-name" href="#" onclick="return doclink('link-101', 'ok', 'link-101');">ok</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="PythonPanel.reject"></a><div id="PythonPanel.reject-def"><a name="L143"></a><tt class="py-lineno">143</tt> <a class="py-toggle" href="#" id="PythonPanel.reject-toggle" onclick="return toggle('PythonPanel.reject');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.PythonPanel-class.html#reject">reject</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PythonPanel.reject-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="PythonPanel.reject-expanded"><a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_isModalDialog</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-102" class="py-name" targets="Method nuke.Undo.cancel()=nuke.Undo-class.html#cancel,Function nuke.cancel()=nuke-module.html#cancel,Method nukescripts.panels.PythonPanel.cancel()=nukescripts.panels.PythonPanel-class.html#cancel"><a title="nuke.Undo.cancel
+nuke.cancel
+nukescripts.panels.PythonPanel.cancel" class="py-name" href="#" onclick="return doclink('link-102', 'cancel', 'link-102');">cancel</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="WidgetKnob"></a><div id="WidgetKnob-def"><a name="L148"></a><tt class="py-lineno">148</tt> <a class="py-toggle" href="#" id="WidgetKnob-toggle" onclick="return toggle('WidgetKnob');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.panels.WidgetKnob-class.html">WidgetKnob</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WidgetKnob-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="WidgetKnob-expanded"><a name="WidgetKnob.__init__"></a><div id="WidgetKnob.__init__-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="WidgetKnob.__init__-toggle" onclick="return toggle('WidgetKnob.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.WidgetKnob-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">widget</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WidgetKnob.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="WidgetKnob.__init__-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">widgetClass</tt> <tt class="py-op">=</tt> <tt class="py-name">widget</tt> </tt>
+</div><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="WidgetKnob.makeUI"></a><div id="WidgetKnob.makeUI-def"><a name="L152"></a><tt class="py-lineno">152</tt> <a class="py-toggle" href="#" id="WidgetKnob.makeUI-toggle" onclick="return toggle('WidgetKnob.makeUI');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels.WidgetKnob-class.html#makeUI">makeUI</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="WidgetKnob.makeUI-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="WidgetKnob.makeUI-expanded"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">widget</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">widgetClass</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">widget</tt> </tt>
+</div></div><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="registerWidgetAsPanel"></a><div id="registerWidgetAsPanel-def"><a name="L156"></a><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="registerWidgetAsPanel-toggle" onclick="return toggle('registerWidgetAsPanel');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.panels-module.html#registerWidgetAsPanel">registerWidgetAsPanel</a> <tt class="py-op">(</tt> <tt class="py-param">widget</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">,</tt> <tt class="py-param">create</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="registerWidgetAsPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="registerWidgetAsPanel-expanded"><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">  <tt class="py-docstring">"""registerWidgetAsPanel(widget, name, id, create) -&gt; PythonPanel</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt class="py-docstring">    Wraps and registers a widget to be used in a Nuke panel.</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"><tt class="py-docstring">    widget - should be a string of the class for the widget</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">    name - is is the name as it will appear on the Pane menu</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">    id - should the the unique ID for this widget panel</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">    create - if this is set to true a new NukePanel will be returned that wraps this widget</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">    Example ( using PyQt )</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">    import nuke</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">    import PyQt4.QtCore as QtCore</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">    import PyQt4.QtGui as QtGui</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">    from nukescripts import panels</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">    class NukeTestWindow(QtGui.QWidget):</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">      def __init__(self, parent=None):</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        QtGui.QWidget.__init__(self, parent)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        self.setLayout( QtGui.QVBoxLayout() )</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        self.myTable    = QtGui.QTableWidget( )</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"><tt class="py-docstring">        self.myTable.header = ['Date', 'Files', 'Size', 'Path' ]</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"><tt class="py-docstring">        self.myTable.size = [ 75, 375, 85, 600 ]</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line"><tt class="py-docstring">        self.layout().addWidget( self.myTable )</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">    nukescripts.registerWidgetAsPanel('NukeTestWindow', 'NukeTestWindow', 'uk.co.thefoundry.NukeTestWindow' )</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line"> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">  <tt class="py-keyword">class</tt> <tt class="py-def-name">Panel</tt><tt class="py-op">(</tt> <tt class="py-base-class">PythonPanel</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">__init__</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">widget</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">      <tt id="link-103" class="py-name"><a title="nukescripts.panels.PythonPanel" class="py-name" href="#" onclick="return doclink('link-103', 'PythonPanel', 'link-69');">PythonPanel</a></tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="nuke.AColor_Knob.__init__
+nuke.AnimationKey.__init__
+nuke.Axis_Knob.__init__
+nuke.BBox_Knob.__init__
+nuke.Boolean_Knob.__init__
+nuke.Box.__init__
+nuke.Box3_Knob.__init__
+nuke.CascadingEnumeration_Knob.__init__
+nuke.ChannelMask_Knob.__init__
+nuke.Channel_Knob.__init__
+nuke.ColorChip_Knob.__init__
+nuke.Color_Knob.__init__
+nuke.Disable_Knob.__init__
+nuke.Double_Knob.__init__
+nuke.EditableEnumeration_Knob.__init__
+nuke.Enumeration_Knob.__init__
+nuke.EvalString_Knob.__init__
+nuke.Eyedropper_Knob.__init__
+nuke.File_Knob.__init__
+nuke.Font_Knob.__init__
+nuke.Format.__init__
+nuke.Format_Knob.__init__
+nuke.FrameRange.__init__
+nuke.FrameRanges.__init__
+nuke.FreeType_Knob.__init__
+nuke.Help_Knob.__init__
+nuke.Histogram_Knob.__init__
+nuke.IArray_Knob.__init__
+nuke.Info.__init__
+nuke.Int_Knob.__init__
+nuke.Keyer_Knob.__init__
+nuke.Knob.__init__
+nuke.Link_Knob.__init__
+nuke.LookupCurves_Knob.__init__
+nuke.MultiView_Knob.__init__
+nuke.Multiline_Eval_String_Knob.__init__
+nuke.Obsolete_Knob.__init__
+nuke.Password_Knob.__init__
+nuke.Pulldown_Knob.__init__
+nuke.PyCustom_Knob.__init__
+nuke.PyScript_Knob.__init__
+nuke.PythonCustomKnob.__init__
+nuke.PythonKnob.__init__
+nuke.Radio_Knob.__init__
+nuke.Range_Knob.__init__
+nuke.Scale_Knob.__init__
+nuke.SceneView_Knob.__init__
+nuke.Script_Knob.__init__
+nuke.String_Knob.__init__
+nuke.Text_Knob.__init__
+nuke.Transform2d_Knob.__init__
+nuke.UV_Knob.__init__
+nuke.Unsigned_Knob.__init__
+nuke.View.__init__
+nuke.ViewView_Knob.__init__
+nuke.WH_Knob.__init__
+nuke.XYZ_Knob.__init__
+nuke.XY_Knob.__init__
+nukescripts.applymaterial.ObjectNameChooserDialog.__init__
+nukescripts.blinkscripteditor.InputHighlighter.__init__
+nukescripts.blinkscripteditor.LineNumberArea.__init__
+nukescripts.blinkscripteditor.ScriptInputArea.__init__
+nukescripts.camerapresets.CameraFilmBackPresets.__init__
+nukescripts.cameratracker.LinkableImportPanel.__init__
+nukescripts.captureViewer.CaptureViewer.__init__
+nukescripts.clientserver.client.__init__
+nukescripts.clientserver.server.__init__
+nukescripts.flipbooking.FlipbookApplication.__init__
+nukescripts.flipbooking.FlipbookFactory.__init__
+nukescripts.flipbooking.FlipbookLUTPathRegistry.__init__
+nukescripts.framecycler.FramecyclerFlipbook.__init__
+nukescripts.framerangepanel.FrameRangePanel.__init__
+nukescripts.hardwareinfo.HardwareInfo.__init__
+nukescripts.nodepresets.CreateNodePresetsPanel.__init__
+nukescripts.nodepresets.PresetsDeletePanel.__init__
+nukescripts.nodepresets.PresetsLoadPanel.__init__
+nukescripts.nodepresets.UserPresetsDeletePanel.__init__
+nukescripts.nodepresets.UserPresetsLoadPanel.__init__
+nukescripts.nukeprofiler.NukeProfiler.__init__
+nukescripts.panels.PythonPanel.__init__
+nukescripts.panels.WidgetKnob.__init__
+nukescripts.precomp.PrecompOptions.__init__
+nukescripts.precomp.PrecompOptionsDialog.__init__
+nukescripts.psd.BreakoutThreadClass.__init__
+nukescripts.psd.Layer.__init__
+nukescripts.pyAppUtils.pyAppHelper.__init__
+nukescripts.pyQtAppUtils.pyQtAppHelper.__init__
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.__init__
+nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserPanel.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserWidget.__init__
+nukescripts.pyWxAppUtils.pyWxAppHelper.__init__
+nukescripts.renderdialog.DialogState.__init__
+nukescripts.renderdialog.ExecuteDialog.__init__
+nukescripts.renderdialog.FlipbookDialog.__init__
+nukescripts.renderdialog.RenderDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialogThread.__init__
+nukescripts.scripteditorknob.ScriptEditor.__init__
+nukescripts.scripteditorknob.ScriptEditorWidgetKnob.__init__
+nukescripts.snap3d.VertexInfo.__init__
+nukescripts.snap3d.VertexSelection.__init__
+nukescripts.toolsets.CreateToolsetsPanel.__init__
+nukescripts.trackerlinkingdialog.LinkToTrackPanel.__init__
+nukescripts.udim.UDIMErrorDialog.__init__
+nukescripts.udim.UDIMFile.__init__
+nukescripts.udim.UDIMOptionsDialog.__init__" class="py-name" href="#" onclick="return doclink('link-104', '__init__', 'link-10');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-105" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-105', 'name', 'link-74');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt> <tt class="py-op">)</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">customKnob</tt> <tt class="py-op">=</tt> <tt id="link-106" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-106', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Class nuke.PyCustom_Knob=nuke.PyCustom_Knob-class.html"><a title="nuke.PyCustom_Knob" class="py-name" href="#" onclick="return doclink('link-107', 'PyCustom_Knob', 'link-107');">PyCustom_Knob</a></tt><tt class="py-op">(</tt> <tt id="link-108" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-108', 'name', 'link-74');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">"__import__('nukescripts').panels.WidgetKnob("</tt> <tt class="py-op">+</tt> <tt class="py-name">widget</tt> <tt class="py-op">+</tt> <tt class="py-string">")"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-109', 'addKnob', 'link-29');">addKnob</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">customKnob</tt>  <tt class="py-op">)</tt> </tt>
+</div></div><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">  <tt class="py-keyword">def</tt> <tt class="py-def-name">addPanel</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-110" class="py-name" targets="Variable PySide.QtGui.QFrame.Shape.Panel=PySide.QtGui.QFrame.Shape-class.html#Panel,Class nuke.Panel=nuke.Panel-class.html"><a title="PySide.QtGui.QFrame.Shape.Panel
+nuke.Panel" class="py-name" href="#" onclick="return doclink('link-110', 'Panel', 'link-110');">Panel</a></tt><tt class="py-op">(</tt> <tt class="py-name">widget</tt><tt class="py-op">,</tt> <tt id="link-111" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-111', 'name', 'link-74');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt> <tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-112" class="py-name" targets="Method nukescripts.panels.PythonPanel.addToPane()=nukescripts.panels.PythonPanel-class.html#addToPane,Method nukescripts.renderdialog.ExecuteDialog.addToPane()=nukescripts.renderdialog.ExecuteDialog-class.html#addToPane,Method nukescripts.trackerlinkingdialog.LinkToTrackPanel.addToPane()=nukescripts.trackerlinkingdialog.LinkToTrackPanel-class.html#addToPane"><a title="nukescripts.panels.PythonPanel.addToPane
+nukescripts.renderdialog.ExecuteDialog.addToPane
+nukescripts.trackerlinkingdialog.LinkToTrackPanel.addToPane" class="py-name" href="#" onclick="return doclink('link-112', 'addToPane', 'link-112');">addToPane</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">  <tt id="link-113" class="py-name" targets="Method nuke.Menu.menu()=nuke.Menu-class.html#menu,Method nuke.MenuBar.menu()=nuke.MenuBar-class.html#menu,Method nuke.ToolBar.menu()=nuke.ToolBar-class.html#menu,Function nuke.menu()=nuke-module.html#menu,Variable nukescripts.pyQtExamples.webBrowser.menu=nukescripts.pyQtExamples.webBrowser-module.html#menu"><a title="nuke.Menu.menu
+nuke.MenuBar.menu
+nuke.ToolBar.menu
+nuke.menu
+nukescripts.pyQtExamples.webBrowser.menu" class="py-name" href="#" onclick="return doclink('link-113', 'menu', 'link-113');">menu</a></tt> <tt class="py-op">=</tt> <tt id="link-114" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-114', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="nuke.Menu.menu
+nuke.MenuBar.menu
+nuke.ToolBar.menu
+nuke.menu
+nukescripts.pyQtExamples.webBrowser.menu" class="py-name" href="#" onclick="return doclink('link-115', 'menu', 'link-113');">menu</a></tt><tt class="py-op">(</tt><tt class="py-string">'Pane'</tt><tt class="py-op">)</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">  <tt id="link-116" class="py-name"><a title="nuke.Menu.menu
+nuke.MenuBar.menu
+nuke.ToolBar.menu
+nuke.menu
+nukescripts.pyQtExamples.webBrowser.menu" class="py-name" href="#" onclick="return doclink('link-116', 'menu', 'link-113');">menu</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name" targets="Method nuke.Menu.addCommand()=nuke.Menu-class.html#addCommand,Method nuke.MenuBar.addCommand()=nuke.MenuBar-class.html#addCommand,Method nuke.ToolBar.addCommand()=nuke.ToolBar-class.html#addCommand"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-117', 'addCommand', 'link-117');">addCommand</a></tt><tt class="py-op">(</tt> <tt id="link-118" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-118', 'name', 'link-74');">name</a></tt><tt class="py-op">,</tt> <tt id="link-119" class="py-name" targets="Function nukescripts.pyQtExamples.webBrowser.addPanel()=nukescripts.pyQtExamples.webBrowser-module.html#addPanel"><a title="nukescripts.pyQtExamples.webBrowser.addPanel" class="py-name" href="#" onclick="return doclink('link-119', 'addPanel', 'link-119');">addPanel</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">  <tt class="py-name">registerPanel</tt><tt class="py-op">(</tt> <tt class="py-name">id</tt><tt class="py-op">,</tt> <tt id="link-120" class="py-name"><a title="nukescripts.pyQtExamples.webBrowser.addPanel" class="py-name" href="#" onclick="return doclink('link-120', 'addPanel', 'link-119');">addPanel</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-op">(</tt> <tt id="link-121" class="py-name"><a title="nukescripts.create
+nukescripts.panels.PythonPanel.create" class="py-name" href="#" onclick="return doclink('link-121', 'create', 'link-68');">create</a></tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-122" class="py-name"><a title="PySide.QtGui.QFrame.Shape.Panel
+nuke.Panel" class="py-name" href="#" onclick="return doclink('link-122', 'Panel', 'link-110');">Panel</a></tt><tt class="py-op">(</tt> <tt class="py-name">widget</tt><tt class="py-op">,</tt> <tt id="link-123" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-123', 'name', 'link-74');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">id</tt> <tt class="py-op">)</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:23 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using the Command-line &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Callbacks" href="callbacks.html" />
+    <link rel="prev" title="Animation" href="animation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="callbacks.html" title="Callbacks"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="animation.html" title="Animation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-the-command-line">
+<h1>Using the Command-line<a class="headerlink" href="#using-the-command-line" title="Permalink to this headline">¶</a></h1>
+<p>This topic covers how to use the NUKE command line to execute Python scripts.</p>
+<div class="section" id="running-nuke-in-python-mode">
+<h2>Running NUKE in Python Mode<a class="headerlink" href="#running-nuke-in-python-mode" title="Permalink to this headline">¶</a></h2>
+<p>NUKE can be executed in Python interpreter mode by using the <strong>-t</strong> argument.  For example:</p>
+<div class="highlight-python"><pre>/Applications/Nuke6.3v1/Nuke6.3v1.app/Nuke6.3v1 -t
+
+NUKE 6.3v1, 64 bit, built Jul  4 2011.
+Copyright (c) 2011 The Foundry Visionmongers Ltd.  All Rights Reserved.
+Using "nukebeta" licence.
+&gt;&gt;&gt;</pre>
+</div>
+<p>To execute a Python script at startup, use the script file name after the <strong>-t</strong> switch:</p>
+<div class="highlight-python"><pre>./Nuke6.3v1 -t &lt;mypythonscript.py&gt;</pre>
+</div>
+</div>
+<div class="section" id="using-command-line-arguments">
+<h2>Using Command-line Arguments<a class="headerlink" href="#using-command-line-arguments" title="Permalink to this headline">¶</a></h2>
+<p>When NUKE runs a Python script, it passes the script arguments to the script in <strong>sys.argv</strong>.</p>
+<p>For example, first make a file called <strong>test.py</strong> containing the following:</p>
+<div class="highlight-python"><pre>## make a file called test.py that contains the following
+
+import sys, nuke
+print sys.argv</pre>
+</div>
+<p>Now run this from the command line to see what <strong>sys.argv</strong> contains:</p>
+<div class="highlight-python"><pre>./Nuke6.3v1 -t test.py Hello World
+
+NUKE 6.3v1, 64 bit, built Jul  4 2011.
+Copyright (c) 2011 The Foundry Visionmongers Ltd.  All Rights Reserved.
+Using "nukebeta" licence.
+['test.py', 'Hello', 'World']</pre>
+</div>
+<p>As you can see, NUKE passes the arguments after <strong>-t</strong> to the Python interpreter.</p>
+<p>The only exception to this is if the last argument is a number or frame range. For example:</p>
+<div class="highlight-python"><pre>./Nuke6.3v1 -t test.py Hello World 1,20</pre>
+</div>
+<p>In this case, the 1,20 is stripped from <strong>sys.args</strong> and the frame range is available in nuke.tcl(&#8216;frames all&#8217;).</p>
+<p>To access all the command-line arguments passed to nuke you can use:</p>
+<div class="highlight-python"><pre>nuke.rawArgs</pre>
+</div>
+<p>For example, edit the <strong>test.py</strong> to contain the following:</p>
+<div class="highlight-python"><pre>import sys, nuke
+print nuke.rawArgs</pre>
+</div>
+<p>Now execute this:</p>
+<div class="highlight-python"><pre>./Nuke6.3v1  -t test.py  Hello World 1,2
+
+NUKE 6.3v1, 64 bit, built Jul  4 2011.
+Copyright (c) 2011 The Foundry Visionmongers Ltd.  All Rights Reserved.
+Using "nukebeta" licence.
+['/Applications/Nuke6.3v1b37/Nuke6.3v1b37.app/Nuke6.3v1b37', '-t', 'test.py', 'Hello', 'World', '1,2']</pre>
+</div>
+</div>
+<div class="section" id="modifying-existing-nuke-scripts">
+<h2>Modifying Existing NUKE Scripts<a class="headerlink" href="#modifying-existing-nuke-scripts" title="Permalink to this headline">¶</a></h2>
+<p>It is sometimes useful to modify existing NUKE scripts using Python, for instance, when rewriting file paths.</p>
+<p>The following script opens up a NUKE script on the command-line, rewrites all the write file paths, and
+finally saves the script:</p>
+<div class="highlight-python"><pre>### save this file as replaceWritePaths.py
+
+import nuke
+import os
+import sys
+
+def RecursiveFindNodes(nodeClass, startNode):
+    if startNode.Class() == nodeClass:
+        yield startNode
+    elif isinstance(startNode, nuke.Group):
+        for child in startNode.nodes():
+            for foundNode in RecursiveFindNodes(nodeClass, child):
+                yield foundNode
+
+
+
+if len ( sys.argv ) != 5:
+  print 'Usage: NUKE replaceWritePaths.py &lt;nuke_script&gt; &lt;new_nuke_script&gt; &lt;in_file_pattern&gt; &lt;new_file_pattern&gt;'
+  sys.exit(-1)
+
+inScript = sys.argv[1]
+outScript = sys.argv[2]
+inPattern = sys.argv[3]
+outPattern = sys.argv[4]
+
+nuke.scriptOpen( inScript )
+
+allWriteNodes = [w for w in RecursiveFindNodes('Write', nuke.root())]
+
+for write in allWriteNodes:
+  path = write['file'].value()
+  path = path.replace( inPattern, outPattern )
+  write['file'].setValue( path )
+
+nuke.scriptSave( outScript )</pre>
+</div>
+<p>This example has the following syntax when run:</p>
+<div class="highlight-python"><pre>./Nuke6.3v1 replaceWritePaths.py &lt;nuke_script&gt; &lt;new_nuke_script&gt; &lt;in_file_pattern&gt; &lt;new_file_pattern&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>Where:</dt>
+<dd><ul class="first last simple">
+<li><strong>&lt;nuke_script&gt;</strong> is the script to read in</li>
+<li><strong>&lt;new_nuke_script&gt;</strong> is the name to save the modified script to</li>
+<li><strong>&lt;in_file_pattern&gt;</strong> is string to search for in all the write file paths</li>
+<li><strong>&lt;new_file_pattern&gt;</strong> is the string to replace &lt;in_file_pattern&gt; in all the write file paths</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="executing-frame-ranges">
+<h2>Executing Frame Ranges<a class="headerlink" href="#executing-frame-ranges" title="Permalink to this headline">¶</a></h2>
+<p>When running Python with the <strong>-t</strong> switch, NUKE does not render or execute any nodes by default.</p>
+<p>To render a node you need to call:</p>
+<div class="highlight-python"><pre>nuke.execute( nodeName, firstFrame, lastFrame )</pre>
+</div>
+<p>However, when you use the <strong>-x</strong> switch to render a frame range and you supply a Python file (.py) instead of a NUKE (.nk) script, NUKE executes the Python first and then renders all the writes in the script with the given frame range.</p>
+<p>For example, save this script as <strong>convert.py</strong>:</p>
+<div class="highlight-python"><pre>import sys
+import nuke
+r = nuke.nodes.Read(file = sys.argv[1])
+w = nuke.nodes.Write(file = sys.argv[2])
+w.setInput(0, r)</pre>
+</div>
+<p>Now, as an example, run the script from the command line as shown to convert some jpegs to tifs for 5 frames:</p>
+<div class="highlight-python"><pre>Nuke6.3v1 -x convert.py myfiles.###.jpg myfiles.###.tif 1,5</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using the Command-line</a><ul>
+<li><a class="reference internal" href="#running-nuke-in-python-mode">Running NUKE in Python Mode</a></li>
+<li><a class="reference internal" href="#using-command-line-arguments">Using Command-line Arguments</a></li>
+<li><a class="reference internal" href="#modifying-existing-nuke-scripts">Modifying Existing NUKE Scripts</a></li>
+<li><a class="reference internal" href="#executing-frame-ranges">Executing Frame Ranges</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation.html"
+                        title="previous chapter">Animation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="callbacks.html"
+                        title="next chapter">Callbacks</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="callbacks.html" title="Callbacks"
+             >next</a></li>
+        <li class="right" >
+          <a href="animation.html" title="Animation"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

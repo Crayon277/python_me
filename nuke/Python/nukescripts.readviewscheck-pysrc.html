@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.readviewscheck</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;readviewscheck
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.readviewscheck-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.readviewscheck-module.html">Module nukescripts.readviewscheck</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">""" Check for multiple views in files when a read node is created, by</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">looking for a VIEW_NAMES entry in the node's metadata.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">Most file types won't specify views but EXR/SXR and potentially other</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">files may do.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">Registers for callbacks when a Read node is created, or its 'file' knob</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">is changed.  If there are multiple views, and they do not exist on the</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">root node, the user is asked if they should be created.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PySide</tt><tt class="py-op">.</tt><tt class="py-name">QtCore</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QTimer</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">PySide</tt><tt class="py-op">.</tt><tt class="py-name">QtGui</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QApplication</tt><tt class="py-op">,</tt> <tt class="py-name">QMessageBox</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># Global for storing when the user says no</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable nukescripts.readviewscheck.UserAlreadySaidNo=nukescripts.readviewscheck-module.html#UserAlreadySaidNo"><a title="nukescripts.readviewscheck.UserAlreadySaidNo" class="py-name" href="#" onclick="return doclink('link-1', 'UserAlreadySaidNo', 'link-1');">UserAlreadySaidNo</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="createViews"></a><div id="createViews-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="createViews-toggle" onclick="return toggle('createViews');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.readviewscheck-module.html#createViews">createViews</a><tt class="py-op">(</tt><tt class="py-param">views</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="createViews-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="createViews-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">  <tt class="py-docstring">""" Add the views in a list to the root node. """</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt id="link-2" class="py-name" targets="Method nuke.AnimationCurve.view()=nuke.AnimationCurve-class.html#view,Method nuke.OutputContext.view()=nuke.OutputContext-class.html#view,Method nuke.ViewerWindow.view()=nuke.ViewerWindow-class.html#view"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-2', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">in</tt> <tt id="link-3" class="py-name" targets="Function nuke.views()=nuke-module.html#views"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-3', 'views', 'link-3');">views</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-comment"># Set "left" and "right" colours to match "setup views for stereo" behaviour</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-4" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-4', 'view', 'link-2');">view</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"left"</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">      <tt id="link-5" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-5', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-6', 'root', 'link-6');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method nuke.Root.addView()=nuke.Root-class.html#addView,Function nuke.addView()=nuke-module.html#addView"><a title="nuke.Root.addView
+nuke.addView" class="py-name" href="#" onclick="return doclink('link-7', 'addView', 'link-7');">addView</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-8', 'view', 'link-2');">view</a></tt><tt class="py-op">,</tt> <tt class="py-string">"#FF0000"</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-9" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-9', 'view', 'link-2');">view</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"right"</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">      <tt id="link-10" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-10', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-11', 'root', 'link-6');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="nuke.Root.addView
+nuke.addView" class="py-name" href="#" onclick="return doclink('link-12', 'addView', 'link-7');">addView</a></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-13', 'view', 'link-2');">view</a></tt><tt class="py-op">,</tt> <tt class="py-string">"#00FF00"</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">      <tt id="link-14" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-14', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-15', 'root', 'link-6');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="nuke.Root.addView
+nuke.addView" class="py-name" href="#" onclick="return doclink('link-16', 'addView', 'link-7');">addView</a></tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-17', 'view', 'link-2');">view</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="getViews"></a><div id="getViews-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="getViews-toggle" onclick="return toggle('getViews');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.readviewscheck-module.html#getViews">getViews</a><tt class="py-op">(</tt><tt class="py-param">read</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getViews-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getViews-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">  <tt class="py-docstring">""" Attempt to get the views from a read node's metadata.  Returns an</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">  empty list if no views were found or if the node is disabled. """</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">  <tt class="py-comment"># disabled nodes return None when calling metadata()</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">read</tt><tt class="py-op">[</tt><tt class="py-string">'disable'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-18', 'value', 'link-18');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">  <tt class="py-name">readMetadata</tt> <tt class="py-op">=</tt> <tt class="py-name">read</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method nuke.Node.metadata()=nuke.Node-class.html#metadata"><a title="nuke.Node.metadata" class="py-name" href="#" onclick="return doclink('link-19', 'metadata', 'link-19');">metadata</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">readMetadata</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">dict</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">      <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">  <tt class="py-comment"># Try to read the expected key.  Catch KeyError and return an empty list if</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">  <tt class="py-comment"># not present</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-comment"># If present, the metadata value is a list of view names separated by</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-comment"># newlines.</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-20', 'views', 'link-3');">views</a></tt> <tt class="py-op">=</tt> <tt class="py-name">readMetadata</tt><tt class="py-op">[</tt><tt id="link-21" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-21', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable nuke.VIEW_NAMES=nuke-module.html#VIEW_NAMES"><a title="nuke.VIEW_NAMES" class="py-name" href="#" onclick="return doclink('link-22', 'VIEW_NAMES', 'link-22');">VIEW_NAMES</a></tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-comment"># Now exclude any views that are wrapped in [], which indicate they're generic views rather</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-comment"># than explicitly specified named views (e.g. we're reading from a multitrack QuickTime file</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-comment"># and hence they're just some placeholder names generated by the reader).</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-comment"># rick: This shouldn't be necessary when we support view-to-track mapping for QuickTimes, etc.</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-name">trueViews</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-23" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-23', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">in</tt> <tt id="link-24" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-24', 'views', 'link-3');">views</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-25', 'view', 'link-2');">view</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'['</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt id="link-26" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-26', 'view', 'link-2');">view</a></tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">']'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">trueViews</tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt id="link-27" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-27', 'view', 'link-2');">view</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">trueViews</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="checkReadNodeViews"></a><div id="checkReadNodeViews-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="checkReadNodeViews-toggle" onclick="return toggle('checkReadNodeViews');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.readviewscheck-module.html#checkReadNodeViews">checkReadNodeViews</a><tt class="py-op">(</tt><tt class="py-param">read</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="checkReadNodeViews-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="checkReadNodeViews-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">  <tt class="py-docstring">""" Check if a read has multiple views, and if so, ask the user if they</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">  want to add them to the root node. """</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-keyword">global</tt> <tt id="link-28" class="py-name"><a title="nukescripts.readviewscheck.UserAlreadySaidNo" class="py-name" href="#" onclick="return doclink('link-28', 'UserAlreadySaidNo', 'link-1');">UserAlreadySaidNo</a></tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-29" class="py-name"><a title="nukescripts.readviewscheck.UserAlreadySaidNo" class="py-name" href="#" onclick="return doclink('link-29', 'UserAlreadySaidNo', 'link-1');">UserAlreadySaidNo</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt id="link-30" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-30', 'views', 'link-3');">views</a></tt> <tt class="py-op">=</tt> <tt class="py-name">getViews</tt><tt class="py-op">(</tt><tt class="py-name">read</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-31" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-31', 'views', 'link-3');">views</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">      <tt class="py-comment"># Find the views in the read that do not exist on the Root node and if</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">      <tt class="py-comment"># there are any, ask the user what to do.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">      <tt class="py-name">rootViews</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-32', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-33', 'views', 'link-3');">views</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">      <tt class="py-name">missingViews</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt id="link-34" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-34', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">for</tt> <tt id="link-35" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-35', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">in</tt> <tt id="link-36" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-36', 'views', 'link-3');">views</a></tt> <tt class="py-keyword">if</tt> <tt id="link-37" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-37', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">rootViews</tt> <tt class="py-op">]</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">       </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">missingViews</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">userChoice</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-38', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Function nuke.showCreateViewsDialog()=nuke-module.html#showCreateViewsDialog"><a title="nuke.showCreateViewsDialog" class="py-name" href="#" onclick="return doclink('link-39', 'showCreateViewsDialog', 'link-39');">showCreateViewsDialog</a></tt><tt class="py-op">(</tt><tt class="py-name">missingViews</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">userChoice</tt> <tt class="py-keyword">is</tt> <tt id="link-40" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-40', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Variable nuke.DONT_CREATE_VIEWS=nuke-module.html#DONT_CREATE_VIEWS"><a title="nuke.DONT_CREATE_VIEWS" class="py-name" href="#" onclick="return doclink('link-41', 'DONT_CREATE_VIEWS', 'link-41');">DONT_CREATE_VIEWS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">          <tt id="link-42" class="py-name"><a title="nukescripts.readviewscheck.UserAlreadySaidNo" class="py-name" href="#" onclick="return doclink('link-42', 'UserAlreadySaidNo', 'link-1');">UserAlreadySaidNo</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">userChoice</tt> <tt class="py-keyword">is</tt> <tt id="link-43" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-43', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable nuke.REPLACE_VIEWS=nuke-module.html#REPLACE_VIEWS"><a title="nuke.REPLACE_VIEWS" class="py-name" href="#" onclick="return doclink('link-44', 'REPLACE_VIEWS', 'link-44');">REPLACE_VIEWS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">          <tt class="py-name">viewsToDelete</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt id="link-45" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-45', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">for</tt> <tt id="link-46" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-46', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">rootViews</tt> <tt class="py-keyword">if</tt> <tt id="link-47" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-47', 'view', 'link-2');">view</a></tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt id="link-48" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-48', 'views', 'link-3');">views</a></tt> <tt class="py-op">]</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">          <tt class="py-comment"># Create all views in the clip</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">          <tt class="py-name">createViews</tt><tt class="py-op">(</tt><tt id="link-49" class="py-name"><a title="nuke.views" class="py-name" href="#" onclick="return doclink('link-49', 'views', 'link-3');">views</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">          <tt class="py-comment"># Remove the views that are not in views</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">          <tt class="py-keyword">for</tt> <tt class="py-name">existingView</tt> <tt class="py-keyword">in</tt> <tt class="py-name">viewsToDelete</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">            <tt id="link-50" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-50', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-51', 'root', 'link-6');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name" targets="Method nuke.Root.deleteView()=nuke.Root-class.html#deleteView,Function nuke.deleteView()=nuke-module.html#deleteView"><a title="nuke.Root.deleteView
+nuke.deleteView" class="py-name" href="#" onclick="return doclink('link-52', 'deleteView', 'link-52');">deleteView</a></tt><tt class="py-op">(</tt><tt class="py-name">existingView</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">userChoice</tt> <tt class="py-keyword">is</tt> <tt id="link-53" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-53', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Variable nuke.ADD_VIEWS=nuke-module.html#ADD_VIEWS"><a title="nuke.ADD_VIEWS" class="py-name" href="#" onclick="return doclink('link-54', 'ADD_VIEWS', 'link-54');">ADD_VIEWS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">          <tt class="py-comment"># Create only the missing views</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">          <tt class="py-name">createViews</tt><tt class="py-op">(</tt><tt class="py-name">missingViews</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="onReadNodeCreated"></a><div id="onReadNodeCreated-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="onReadNodeCreated-toggle" onclick="return toggle('onReadNodeCreated');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.readviewscheck-module.html#onReadNodeCreated">onReadNodeCreated</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="onReadNodeCreated-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="onReadNodeCreated-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">  <tt class="py-docstring">""" Callback when a Read node is created.  Note that the knob values</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"><tt class="py-docstring">  don't seem to be set when this callback occurs.  Defer the check with</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">  a QTimer, which will cause the views check to be done when the Qt event</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">  loop next sends events.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">  <tt class="py-name">read</tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-55', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Function nuke.thisNode()=nuke-module.html#thisNode"><a title="nuke.thisNode" class="py-name" href="#" onclick="return doclink('link-56', 'thisNode', 'link-56');">thisNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">  <tt class="py-name">QTimer</tt><tt class="py-op">.</tt><tt class="py-name">singleShot</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt class="py-name">checkReadNodeViews</tt><tt class="py-op">(</tt><tt class="py-name">read</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="onReadNodeKnobChanged"></a><div id="onReadNodeKnobChanged-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="onReadNodeKnobChanged-toggle" onclick="return toggle('onReadNodeKnobChanged');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.readviewscheck-module.html#onReadNodeKnobChanged">onReadNodeKnobChanged</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="onReadNodeKnobChanged-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="onReadNodeKnobChanged-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-docstring">""" Callback when a Read node knob changes.  If it's the file knob,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">  check for multi views.</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-57" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-57', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Function nuke.thisKnob()=nuke-module.html#thisKnob"><a title="nuke.thisKnob" class="py-name" href="#" onclick="return doclink('link-58', 'thisKnob', 'link-58');">thisKnob</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-59', 'name', 'link-59');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"file"</tt><tt class="py-op">:</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">checkReadNodeViews</tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-60', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="nuke.thisNode" class="py-name" href="#" onclick="return doclink('link-61', 'thisNode', 'link-56');">thisNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-comment"># Register the callbacks</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt id="link-62" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-62', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-63" class="py-name" targets="Function nuke.callbacks.addKnobChanged()=nuke.callbacks-module.html#addKnobChanged"><a title="nuke.callbacks.addKnobChanged" class="py-name" href="#" onclick="return doclink('link-63', 'addKnobChanged', 'link-63');">addKnobChanged</a></tt><tt class="py-op">(</tt><tt class="py-name">onReadNodeKnobChanged</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt><tt class="py-op">=</tt><tt class="py-string">"Read"</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt id="link-64" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-64', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name" targets="Function nuke.callbacks.addOnUserCreate()=nuke.callbacks-module.html#addOnUserCreate"><a title="nuke.callbacks.addOnUserCreate" class="py-name" href="#" onclick="return doclink('link-65', 'addOnUserCreate', 'link-65');">addOnUserCreate</a></tt><tt class="py-op">(</tt><tt class="py-name">onReadNodeCreated</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt><tt class="py-op">=</tt><tt class="py-string">"Read"</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

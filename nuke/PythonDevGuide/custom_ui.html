@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Customizing the UI &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Custom Flipbooks" href="flipbook.html" />
+    <link rel="prev" title="Custom Panels" href="custom_panels.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="flipbook.html" title="Custom Flipbooks"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="custom_panels.html" title="Custom Panels"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="customizing-the-ui">
+<span id="customisingui-ref-label"></span><h1>Customizing the UI<a class="headerlink" href="#customizing-the-ui" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how to create your own hotkeys, menus, and menu items. This kind of code is typically placed in the <a class="reference internal" href="startup.html#menupy-ref-label"><em>menu.py</em></a> file. Please refer to <a class="reference internal" href="installing_plugins.html#installingplugins-ref-label"><em>Installing Plug-ins</em></a> for information on how to install custom files.</p>
+<p>The menus currently available in NUKE are:</p>
+<ul class="simple">
+<li><strong>Nuke</strong> - the application menu on top of the interface.</li>
+</ul>
+<img alt="_images/ui_01.png" src="_images/ui_01.png" />
+<ul class="simple">
+<li><strong>Window</strong> - the <strong>Window</strong> menu found in all content menus.</li>
+</ul>
+<img alt="_images/ui_02.png" src="_images/ui_02.png" />
+<ul class="simple">
+<li><strong>Nodes</strong> - the toolbar (and the right-click menu in the Node Graph).</li>
+</ul>
+<img alt="_images/ui_03.png" src="_images/ui_03.png" />
+<ul class="simple">
+<li><strong>Properties</strong> - right-click menus of properties panels.</li>
+</ul>
+<img alt="_images/ui_04.png" src="_images/ui_04.png" />
+<ul class="simple">
+<li><strong>Animation</strong> - the pop-up menu on the Animation button of all properties panels, and the right-click menu of the Curve Editor.</li>
+</ul>
+<img alt="_images/ui_05.png" src="_images/ui_05.png" />
+<ul class="simple">
+<li><strong>Viewer</strong> - the right-click menu of the Viewer.</li>
+</ul>
+<img alt="_images/ui_06.png" src="_images/ui_06.png" />
+<ul class="simple">
+<li><strong>Node Graph</strong> - the right-click menu of the Node Graph.</li>
+</ul>
+<img alt="_images/ui_07.png" src="_images/ui_07.png" />
+<ul class="simple">
+<li><strong>Axis</strong> - the menus on all Axis_Knobs.</li>
+</ul>
+<img alt="_images/ui_08.png" src="_images/ui_08.png" />
+<div class="section" id="creating-a-custom-menu">
+<h2>Creating a Custom Menu<a class="headerlink" href="#creating-a-custom-menu" title="Permalink to this headline">¶</a></h2>
+<p>To create a custom menu, use:</p>
+<div class="highlight-python"><pre>m = nuke.menu( 'Viewer' )
+myMenu = m.addMenu( 'MyStuff' )</pre>
+</div>
+<p>You can assign an icon to the menu as well:</p>
+<div class="highlight-python"><pre>m = nuke.menu( 'Viewer' )
+myMenu = m.addMenu( 'MyStuff', icon='ohu_icon.png' )</pre>
+</div>
+<img alt="_images/ui_15.png" src="_images/ui_15.png" />
+</div>
+<div class="section" id="creating-a-custom-toolbar">
+<h2>Creating a Custom Toolbar<a class="headerlink" href="#creating-a-custom-toolbar" title="Permalink to this headline">¶</a></h2>
+<p>To create a custom toolbar, use:</p>
+<div class="highlight-python"><pre>myToolbar = nuke.toolbar( 'My nodes' )</pre>
+</div>
+<img alt="_images/ui_16.png" src="_images/ui_16.png" />
+<p>You can add custom items to the toolbar in the same way as to a menu (see below for details):</p>
+<div class="highlight-python"><pre>myToolbar.addCommand( 'My Gizmo', lambda: nuke.createNode('NoOp') )</pre>
+</div>
+<p>If you don&#8217;t specify a toolbar menu for the item, the item is added as a button on the toolbar:</p>
+<img alt="_images/ui_17.png" src="_images/ui_17.png" />
+<p>Otherwise, the item is added as a menu (like in the default toolbar):</p>
+<div class="highlight-python"><pre>myToolbar.addCommand( 'My Other Tools/tool A', lambda: nuke.createNode('NoOp') )
+myToolbar.addCommand( 'My Other Tools/tool B', lambda: nuke.createNode('NoOp') )</pre>
+</div>
+<img alt="_images/ui_18.png" src="_images/ui_18.png" />
+<p>To add an icon for the menu, create it explicitly before assigning menu items to it:</p>
+<div class="highlight-python"><pre>myMenu = myToolbar.addMenu( 'My Other Tools', icon='ohu_icon.png' )
+myMenu.addCommand( 'tool A', lambda: nuke.createNode('NoOp') )
+myMenu.addCommand( 'tool B', lambda: nuke.createNode('NoOp') )</pre>
+</div>
+<img alt="_images/ui_19.png" src="_images/ui_19.png" />
+</div>
+<div class="section" id="creating-a-custom-menu-item">
+<h2>Creating a Custom Menu Item<a class="headerlink" href="#creating-a-custom-menu-item" title="Permalink to this headline">¶</a></h2>
+<p>To add a custom entry to any of the above menus, use <tt class="docutils literal"><span class="pre">menu.addCommand()</span></tt>:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nuke' ).addCommand( 'MyMenu/my tool 1', lambda: nuke.message('yay, it works') )</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the above example, we create a menu called <em>MyMenu</em> menu on the fly.</p>
+</div>
+<img alt="_images/ui_10.png" src="_images/ui_10.png" />
+<p>Instead of using <strong>lambda</strong> to create an anonymous function that isn&#8217;t executed until the menu item is evoked, you could also wrap the desired command into a string:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nuke' ).addCommand( 'MyMenu/my tool 2', "nuke.message('yay, it works too')" )</pre>
+</div>
+<img alt="_images/ui_11.png" src="_images/ui_11.png" />
+<p>You can also assign an icon to the menu item from NUKE&#8217;s plug-in path:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nuke' ).addCommand( 'MyMenu/my tool 2', "nuke.message('yay, it works too')", icon='ohu_icon.png' )</pre>
+</div>
+<img alt="_images/ui_12.png" src="_images/ui_12.png" />
+<p>To set the position of the item in the menu, use the <strong>index</strong> argument:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nuke' ).addCommand( 'MyMenu/my tool 1.5', "nuke.message('yay, it works too')", index=1 )</pre>
+</div>
+<img alt="_images/ui_13.png" src="_images/ui_13.png" />
+<p>Find the menu by name (we didn&#8217;t assign it to a variable at creation time), and add a separator before adding another menu item:</p>
+<div class="highlight-python"><pre>m = nuke.menu( 'Nuke' ).findItem( 'MyMenu' )
+m.addSeparator()
+nuke.menu( 'Nuke' ).addCommand( 'MyMenu/my tool 3', "nuke.message('yay, it works too')")</pre>
+</div>
+<img alt="_images/ui_20.png" src="_images/ui_20.png" />
+<p>To find an existing menu item and run its function call, use:</p>
+<div class="highlight-python"><pre>m = nuke.menu( 'Nuke' ).findItem( 'Edit/Node/Filename/Show' )
+m.invoke()</pre>
+</div>
+<p>To deactivate a menu item, use:</p>
+<div class="highlight-python"><pre>m = nuke.menu( 'Nuke' ).findItem( 'Render/Proxy Mode' )
+m.setEnabled( False )</pre>
+</div>
+<img alt="_images/ui_14.png" src="_images/ui_14.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you deactivate a menu item, the hotkey assigned to it still continues to work.</p>
+</div>
+</div>
+<div class="section" id="assigning-a-hotkey">
+<h2>Assigning a Hotkey<a class="headerlink" href="#assigning-a-hotkey" title="Permalink to this headline">¶</a></h2>
+<p>To assign a hotkey to an existing menu item, you effectively replace the whole menu item.</p>
+<p>Let&#8217;s assign a hotkey to the Axis2 node. This node lives in the <strong>Nodes</strong> menu (that is, the toolbar), inside the <strong>3D</strong> sub-menu. Its menu item is called <em>Axis</em>.</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', lambda: nuke.createNode( 'Axis2' ), 'a')</pre>
+</div>
+<p>Pressing <strong>a</strong> on the keyboard now creates an Axis node.</p>
+<img alt="_images/ui_09.png" src="_images/ui_09.png" />
+<p>You can also use modifier keys when assigning a hotkey.</p>
+<p>To use <strong>Ctrl</strong> (or <strong>cmd</strong> on Mac OS X) as the modifier, use:</p>
+<ul class="simple">
+<li><strong>ctrl+</strong> followed by the key, or</li>
+<li><strong>^</strong> followed by the key.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", 'ctrl+a')</pre>
+</div>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", '^a')</pre>
+</div>
+<p>To use <strong>alt</strong> as the modifier, use:</p>
+<ul class="simple">
+<li><strong>alt+</strong> followed by the key, or</li>
+<li><strong>#</strong> followed by the key.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", 'alt+a')</pre>
+</div>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", '#a')</pre>
+</div>
+<p>To use <strong>shift</strong> as the modifier, use:</p>
+<ul class="simple">
+<li><strong>shift+</strong> followed by the key, or</li>
+<li><strong>+</strong> followed by the key.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", 'shift+a')</pre>
+</div>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( '3D/Axis', "nuke.createNode( 'Axis2' )", '+a')</pre>
+</div>
+</div>
+<div class="section" id="defining-knob-defaults">
+<span id="knobdefaults-ref-label"></span><h2>Defining Knob Defaults<a class="headerlink" href="#defining-knob-defaults" title="Permalink to this headline">¶</a></h2>
+<p>To change the default values for knobs, use <tt class="docutils literal"><span class="pre">nuke.knobDefault()</span></tt>:</p>
+<div class="highlight-python"><pre>nuke.knobDefault( 'Blur.size', '77' )</pre>
+</div>
+<p>The above line sets the <strong>size</strong> control of any subsequently created Blur nodes to <strong>77</strong> by default.</p>
+<p>When skipping the node class, the new default value is applied to all controls of the given name:</p>
+<div class="highlight-python"><pre>nuke.knobDefault( 'channels', 'rgba' )</pre>
+</div>
+<p>The above sets all <strong>channels</strong> controls to <strong>rgba</strong> on node creation.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Customizing the UI</a><ul>
+<li><a class="reference internal" href="#creating-a-custom-menu">Creating a Custom Menu</a></li>
+<li><a class="reference internal" href="#creating-a-custom-toolbar">Creating a Custom Toolbar</a></li>
+<li><a class="reference internal" href="#creating-a-custom-menu-item">Creating a Custom Menu Item</a></li>
+<li><a class="reference internal" href="#assigning-a-hotkey">Assigning a Hotkey</a></li>
+<li><a class="reference internal" href="#defining-knob-defaults">Defining Knob Defaults</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="custom_panels.html"
+                        title="previous chapter">Custom Panels</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="flipbook.html"
+                        title="next chapter">Custom Flipbooks</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="flipbook.html" title="Custom Flipbooks"
+             >next</a></li>
+        <li class="right" >
+          <a href="custom_panels.html" title="Custom Panels"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

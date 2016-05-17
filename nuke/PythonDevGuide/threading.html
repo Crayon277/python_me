@@ -1,0 +1,362 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Threading &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Render Farm Integration (Concept)" href="render_farm.html" />
+    <link rel="prev" title="Asset Management Systems / Pipeline Integration" href="asset.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="render_farm.html" title="Render Farm Integration (Concept)"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="asset.html" title="Asset Management Systems / Pipeline Integration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="threading">
+<h1>Threading<a class="headerlink" href="#threading" title="Permalink to this headline">¶</a></h1>
+<p>Threading is important, as it allows you to run background processes without making the main thread (your NUKE session) hang and wait for completion of the code.
+It&#8217;s handy for running background conversions, launching external commands or applications, and so on.</p>
+<p>Depending on what your code is designed to do, you can simply run an existing function as a thread using Python&#8217;s threading interface, like this:</p>
+<div class="highlight-python"><pre>threading.Thread( target=&lt;function_name&gt;, args=&lt;tuple_of_arguments&gt; ).start()</pre>
+</div>
+<p>Alternatively, you can create your own class inheriting <tt class="xref py py-class docutils literal"><span class="pre">threading.Thread</span></tt>:</p>
+<div class="highlight-python"><pre>class MyClass( threading.Thread ):
+        def __init__( self ):
+                threading.Thread.__init__( self )</pre>
+</div>
+<p>When you want to communicate from a child thread back to the main thread (the NUKE session), you need to use one of the following methods:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">executeInMainThread(call,</span> <span class="pre">args=(),</span> <span class="pre">kwargs={})</span></tt></dt>
+<dd><p class="first last">Execute the callable &#8216;call&#8217; with optional arguments &#8216;args&#8217; and named arguments &#8216;kwargs&#8217; in NUKE&#8217;s main thread and return immediately.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">executeInMainThreadWithResult(call,</span> <span class="pre">args=(),</span> <span class="pre">kwargs={})</span></tt></dt>
+<dd><p class="first last">Execute the callable &#8216;call&#8217; with optional arguments &#8216;args&#8217; and named arguments &#8216;kwargs&#8217; in NUKE&#8217;s main thread and wait for the result to become available.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not run the above functions from within the main thread or NUKE will hang.</p>
+</div>
+<p>The MirrorNodes example below shows how you can animate nodes in the Node Graph (DAG) by using the above methods.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mirrornodes">
+<h3>MirrorNodes<a class="headerlink" href="#mirrornodes" title="Permalink to this headline">¶</a></h3>
+<p>This little tool mirrors node position in the Node Graph, which may be helpful when re-organizing large portions of a complex node tree. The script uses threading to animate the nodes to their new position (rather than snap them to it), which makes it visually less confusing – and more fun.
+So let&#8217;s look at the basics first. Here is a code snippet that mirrors the selected nodes horizontally:</p>
+<div class="highlight-python"><pre>nodes = nuke.selectedNodes()
+positions = [ n.xpos()+n.screenWidth()/2 for n in nodes]
+axis = float( sum( positions ) ) / len( positions )</pre>
+</div>
+<p>In line 2, we collect all node positions to calculate the average number that represents the center line across which we move the nodes to mirror their positions. Note that we need to add half of the nodes&#8217; screen width to get the actual center. This is because a node&#8217;s position is measured from its upper left corner, not from its center.</p>
+<p>Once we&#8217;ve got the center line (stored in <strong>axis</strong>), we can loop through the nodes and move them across that line:</p>
+<div class="highlight-python"><pre>for n in nodes:
+        centrePos = n.xpos() + n.screenWidth()/2
+        nodePos = centrePos - 2*( centrePos - axis ) - n.screenWidth()/2.0
+        n.setXpos( round( nodePos ) )</pre>
+</div>
+<p>Once again, we need to calculate the nodes&#8217; actual center position (<strong>centrePos</strong>) and use that to get the expected result.
+In line 3, the mirrored node position is calculated by subtracting twice the node&#8217;s distance to the axis.
+Once again we have to take into account that NUKE moves the node&#8217;s upper left corner (rather than its center) to a new position, so we apply an offset of half the node&#8217;s screen width to accommodate for that.
+Lastly, we apply the new position to the node and since the <strong>setXpos()</strong> prefers integers, we round the result first (the method works with floating point numbers as well but may spit out a DepreciationWarning).</p>
+<p>When running this script on a selection of nodes, the script snaps them into their new positions, but it&#8217;s much cooler to see the nodes move across the Node Graph, so let&#8217;s turn the above into a threaded process to animate the nodes:</p>
+<p>First, we create a threaded class by inheriting <strong>threading.Thread</strong> and calling its constructor:</p>
+<div class="highlight-python"><pre>class MirrorNodes( threading.Thread ):
+        def __init__( self ):
+                threading.Thread.__init__( self )</pre>
+</div>
+<p>This is not necessarily required to run a function as a separate thread but it&#8217;s a little safer than alternative approaches, as some of the commands we will have to use will freeze NUKE if run from the main thread. We will get to that a little later though.</p>
+<p>To make this script more flexible, let&#8217;s assign arguments to define the nodes to operate on as well as a “direction” argument, so we can mirror nodes both horizontally and vertically:</p>
+<div class="highlight-python"><pre>class MirrorNodes( threading.Thread ):
+        def __init__( self, nodes, direction='x' ):
+                threading.Thread.__init__( self )</pre>
+</div>
+<p>While we are writing the constructor, we go ahead and add a few variables that we are going to need:</p>
+<div class="highlight-python"><pre>class MirrorNodes( threading.Thread ):
+        def __init__( self, nodes, direction='x' ):
+                threading.Thread.__init__( self )
+
+                self.posDict = {}
+                self.nodes= nodes
+                self.direction = direction</pre>
+</div>
+<div class="line-block">
+<div class="line"><strong>self.posDict</strong> will hold a dictionary of nodes and their respective new Node Graph positions.</div>
+<div class="line"><strong>self.nodes</strong> will hold the nodes that we want to move.</div>
+<div class="line"><strong>self.direction</strong> just tells us what direction the user wants to mirror the nodes.</div>
+</div>
+<p>We only allow &#8216;x&#8217; and &#8216;y&#8217; (lower or upper case) as valid values for the direction argument, and we need at least two nodes to make this whole thing worth while, so let&#8217;s put some error handling in there as well:</p>
+<div class="highlight-python"><pre>class MirrorNodes( threading.Thread ):
+        def __init__( self, nodes, direction='x' ):
+                threading.Thread.__init__( self )
+
+                self.direction = direction.lower()
+                if len( nodes ) &lt; 2:
+                        raise ValueError, 'At least two nodes have to be selected'
+                if self.direction not in ('x', 'y'):
+                        raise ValueError, 'direction argument must be x or y'
+
+                self.posDict = {}
+                self.nodes= nodes</pre>
+</div>
+<p>In the beginning, we looped through the nodes and assigned a new value to each node as we went.
+This time, we use the same code to just find the new position for each node and store it in self.posDict instead of actually moving the node.
+This enables us to move the nodes bit by bit later on and control the speed and smoothness with which they move. So using the code snippet from the beginning, let&#8217;s create a method called <strong>__mirrorPos</strong> for our new class.
+This does most of the work:</p>
+<div class="highlight-python"><pre>def __mirrorPos( self ):
+        positions = [ n.xpos()+n.screenWidth()/2 for n in self.nodes]
+        axis = float( sum( positions ) ) / len( positions )
+
+        for n in self.nodes:
+                centrePos = n.xpos() + n.screenWidth()/2
+                oldPos = n.xpos()
+                newPos = centrePos - 2*( centrePos - axis ) - n.screenWidth()/2.0
+                self.posDict[ n ] = ( oldPos, round( newPos ) )</pre>
+</div>
+<p>The main differences here compared to our initial snippet are:</p>
+<ul class="simple">
+<li>We use <strong>self.nodes</strong> instead of <strong>nodes</strong> because we define the node selection in the class&#8217; constructor.</li>
+<li>Instead of directly applying the new position to the nodes in the last line, we just store the old and new positions as a tuple in the dictionary <strong>self.posDict</strong> using the nodes themselves as the keys.</li>
+</ul>
+<p>The nodes&#8217; old position is the first item in the assigned tuple and their new position the second. We need to keep track of the original position, as we want to change it bit by bit as we go.</p>
+<p>But since we want to make this more flexible, we need to add the case when vertical mirroring is requested:</p>
+<div class="highlight-python"><pre>def __mirrorPos( self ):
+        if self.direction == 'x':
+                positions = [ n.xpos()+n.screenWidth()/2 for n in self.nodes]
+        else:
+                positions = [ n.ypos()+n.screenHeight()/2 for n in self.nodes]
+
+        axis = float( sum( positions ) ) / len( positions )
+        for n in self.nodes:
+                if self.direction == 'x':
+                        centrePos = n.xpos() + n.screenWidth()/2
+                        oldPos = n.xpos()
+                        newPos = centrePos - 2*( centrePos - axis ) - n.screenWidth()/2.0
+                else:
+                        centrePos = n.ypos() + n.screenHeight()/2
+                        oldPos = n.ypos()
+                        newPos = centrePos - 2*( centrePos - axis ) - n.screenHeight()/2.0
+                self.posDict[ n ] = ( oldPos, round( newPos ) )</pre>
+</div>
+<p>Here, we first check <strong>self.direction</strong>. If its value is &#8216;x&#8217;, we use the node methods <strong>xpos()</strong> and <strong>screenWidth()</strong> to figure out the center and respective new positions. Otherwise, we use <strong>ypos()</strong> and <strong>screenHeight()</strong>.</p>
+<p>Now for the fun bit:</p>
+<p>We override the <strong>run()</strong> method we inherited with the <strong>threading.Thread</strong> class to trigger the actual changes to the nodes in NUKE&#8217;s main thread. A Thread object&#8217;s <strong>run()</strong> method represents the object&#8217;s activity and is run on a separate thread in the background, which means NUKE does not freeze up while the code is being executed (like it would if we weren&#8217;t using a threaded approach).
+The idea is to create a loop through which we move every node by a percentage of the distance between its old and new position (the one stored in <strong>self.posDict</strong>). We do the calculation for each iteration in the background thread, then use the results to move the nodes in the main thread, which means we can actually see what is happening as the code is progressing.</p>
+<p>Let&#8217;s say we move each node 10 percent towards its new position at a time:</p>
+<div class="highlight-python"><pre>def run( self ):
+        incs = 10
+        for i in xrange( incs ):
+                ...</pre>
+</div>
+<p>In each iteration, we loop through the nodes, calculate the current position (that is, a percentage of the distance between the old and new position):</p>
+<div class="highlight-python"><pre>def run( self ):
+        incs = 10
+        for i in xrange( incs ):
+                for n in self.nodes:
+                        oldPos = self.posDict[ n ][ 0 ]
+                        newPos = self.posDict[ n ][ 1 ]
+                        curPos = oldPos + ( newPos - oldPos ) / incs * (i+1)</pre>
+</div>
+<p>and apply it to the nodes in NUKE&#8217;s main thread:</p>
+<div class="highlight-python"><pre>def run( self ):
+        incs = 10
+        for i in xrange( incs ):
+                for n in self.nodes:
+                        oldPos = self.posDict[ n ][ 0 ]
+                        newPos = self.posDict[ n ][ 1 ]
+                        curPos = oldPos + ( newPos - oldPos ) / incs * (i+1)
+                        if self.direction == 'x':
+                                nuke.executeInMainThreadWithResult( n.setXpos, int(curPos) )
+                        else:
+                                nuke.executeInMainThreadWithResult( n.setYpos, int(curPos) )</pre>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>nuke.executeInMainThread</strong> and <strong>nuke.executeInMainThreadWithResult</strong> should always be run from a child thread. If run from within the main thread, they freeze NUKE.</p>
+</div>
+<p>To make sure we can actually see what&#8217;s happening, we make each iteration wait for a split second before moving the node again by adding a sleep command at the end:</p>
+<div class="highlight-python"><pre>def run( self ):
+        incs = 10
+        for i in xrange( incs ):
+                for n in self.nodes:
+                        oldPos = self.posDict[ n ][ 0 ]
+                        newPos = self.posDict[ n ][ 1 ]
+                        curPos = oldPos + ( newPos - oldPos ) / incs * (i+1)
+                        if self.direction == 'x':
+                                nuke.executeInMainThreadWithResult( n.setXpos, int(curPos) )
+                        else:
+                                nuke.executeInMainThreadWithResult( n.setYpos, int(curPos) )
+                time.sleep(.02)</pre>
+</div>
+<p>One last thing we need to do is to actually run the <strong>self.__mirrorPos()</strong> method in <strong>__init()__</strong>, so the node positions are calculated when the class is first created.</p>
+<p>Here is the complete code with the required import statements:</p>
+<div class="highlight-python"><pre>import nuke
+import time
+import threading
+
+class MirrorNodes( threading.Thread ):
+        def __init__( self, nodes, direction='x' ):
+                threading.Thread.__init__( self )
+
+                self.direction = direction.lower()
+                if len( nodes ) &lt; 2:
+                        raise ValueError, 'At least two nodes have to be selected'
+                if direction.lower() not in ('x', 'y'):
+                        raise ValueError, 'direction argument must be x or y'
+
+                self.posDict = {}
+                self.nodes= nodes
+                self.__mirrorPos()
+
+        #----------------------------------
+        def __mirrorPos( self ):
+                '''Get the mirrored position for each node'''
+                if self.direction == 'x':
+                        positions = [ n.xpos()+n.screenWidth()/2 for n in self.nodes]
+                else:
+                        positions = [ n.ypos()+n.screenHeight()/2 for n in self.nodes]
+
+                axis = float( sum( positions ) ) / len( positions )
+
+                for n in self.nodes:
+                        if self.direction == 'x':
+                                centrePos = n.xpos() + n.screenWidth()/2
+                                oldPos = n.xpos()
+                                newPos = centrePos - 2*( centrePos - axis ) - n.screenWidth()/2.0
+                        else:
+                                centrePos = n.ypos() + n.screenHeight()/2
+                                oldPos = n.ypos()
+                                newPos = centrePos - 2*( centrePos - axis ) - n.screenHeight()/2.0
+                        self.posDict[ n ] = ( oldPos, round( newPos ) )
+
+        #----------------------------------
+        def run( self ):
+                incs = 10
+                for i in xrange( incs ):
+                        for n in self.nodes:
+                                oldPos = self.posDict[ n ][ 0 ]
+                                newPos = self.posDict[ n ][ 1 ]
+                                curPos = oldPos + ( newPos - oldPos ) / incs * (i+1)
+                                if self.direction == 'x':
+                                        nuke.executeInMainThreadWithResult( n.setXpos, int(curPos) )
+                                else:
+                                        nuke.executeInMainThreadWithResult( n.setYpos, int(curPos) )
+                        time.sleep(.02)</pre>
+</div>
+<p>After evaluating this, you can now mirror nodes by selecting some nodes in the Node Graph and executing:</p>
+<div class="highlight-python"><pre>MirrorNodes( nuke.selectedNodes() ).start()</pre>
+</div>
+<p>The <strong>start()</strong> method came with the inherited <strong>Thread</strong> object and takes care that the <strong>run()</strong> method is invoked in a separate thread.</p>
+<p>To mirror selected nodes vertically, run this:</p>
+<div class="highlight-python"><pre>MirrorNodes( nuke.selectedNodes(), 'y' ).start()</pre>
+</div>
+<p>or more explicitly:</p>
+<div class="highlight-python"><pre>MirrorNodes( nuke.selectedNodes(), direction='y' ).start()</pre>
+</div>
+<p>Finally, here are example entries for the menu.py file. This will have to be modified depending on how the <strong>MirrorNodes</strong> class is saved and imported:</p>
+<div class="highlight-python"><pre>import examples
+m = nuke.menu( 'Nuke' )
+m.addCommand( 'Mirror Nodes/x', lambda: examples.MirrorNodes( nuke.selectedNodes() ).start() )
+m.addCommand( 'Mirror Nodes/y', lambda: examples.MirrorNodes( nuke.selectedNodes(), direction='y').start() )</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Threading</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#mirrornodes">MirrorNodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="asset.html"
+                        title="previous chapter">Asset Management Systems / Pipeline Integration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="render_farm.html"
+                        title="next chapter">Render Farm Integration (Concept)</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="render_farm.html" title="Render Farm Integration (Concept)"
+             >next</a></li>
+        <li class="right" >
+          <a href="asset.html" title="Asset Management Systems / Pipeline Integration"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

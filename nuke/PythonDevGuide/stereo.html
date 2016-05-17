@@ -1,0 +1,410 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Stereo &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Roto and RotoPaint" href="rotopaint.html" />
+    <link rel="prev" title="Callbacks" href="callbacks.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rotopaint.html" title="Roto and RotoPaint"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="callbacks.html" title="Callbacks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="stereo">
+<h1>Stereo<a class="headerlink" href="#stereo" title="Permalink to this headline">¶</a></h1>
+<p>How to deal with stereo in NUKE.</p>
+<div class="section" id="multi-view-knob-values">
+<h2>Multi View Knob Values<a class="headerlink" href="#multi-view-knob-values" title="Permalink to this headline">¶</a></h2>
+<p>Adding values per view in a stereo project is as simple as adding different values to a translate&#8217;s <strong>x</strong> and <strong>y</strong> knob. Here is a quick primer.</p>
+<p>This adds a Transform node and splits out the right view:</p>
+<div class="highlight-python"><pre>n = nuke.createNode('Transform')
+k = n['translate']
+k.splitView('right')</pre>
+</div>
+<p>When splitting out a view, all &#8220;un-split&#8221; views are controlled together like a &#8220;main&#8221; view, so if no explicit view is specified, all &#8220;un-split&#8221; knobs are changed.</p>
+<p>The following assigns the value of 1 to the knob&#8217;s <strong>x</strong> and <strong>y</strong> field for the main view, but not for the split out views:</p>
+<div class="highlight-python"><pre>k.setValue(1)</pre>
+</div>
+<img alt="_images/stereoPrimer_01.png" src="_images/stereoPrimer_01.png" />
+<p>This assigns the value of 2 to only the right view:</p>
+<div class="highlight-python"><pre>k.setValue(2, view='right')</pre>
+</div>
+<img alt="_images/stereoPrimer_02.png" src="_images/stereoPrimer_02.png" />
+<p>This sets the translate values for the main view to x=1 and y=2:</p>
+<div class="highlight-python"><pre>k.setValue(1, 0)
+k.setValue(2, 1)</pre>
+</div>
+<img alt="_images/stereoPrimer_03.png" src="_images/stereoPrimer_03.png" />
+<p>While this sets the translate values in the right view to x=3 and y=4:</p>
+<div class="highlight-python"><pre>k.setValue(3, 0, view='right')
+k.setValue(4, 1, view='right')</pre>
+</div>
+<img alt="_images/stereoPrimer_04.png" src="_images/stereoPrimer_04.png" />
+<p>You can create animation in different views in a similar way. This sets the main views to be animated:</p>
+<div class="highlight-python"><pre>k.setAnimated()</pre>
+</div>
+<p>This sets the right view to be animated:</p>
+<div class="highlight-python"><pre>k.setAnimated(view='right')</pre>
+</div>
+<p>Setting keyframes for main and right view at frame 1 and 100:</p>
+<div class="highlight-python"><pre>k.setValueAt(50, 1)
+k.setValueAt(70, 100)
+
+k.setValueAt(80, 1, view='right')
+k.setValueAt(110, 100, view='right')</pre>
+</div>
+<p>And reading animation values for both views:</p>
+<div class="highlight-python"><pre>mainX = k.valueAt(50, 0)
+mainY = k.valueAt(50, 1)
+rightX = k.valueAt(50, 0, view='right')
+rightY = k.valueAt(50, 1, view='right')
+
+print 'left (main) view values at frame 50 are X=%s, Y=%s' % (mainX, mainY)
+print 'right view values at frame 50 are X=%s, Y=%s' % (rightX, rightY)</pre>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">#</span> <span class="pre">Result:</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">left</span> <span class="pre">(main)</span> <span class="pre">view</span> <span class="pre">values</span> <span class="pre">at</span> <span class="pre">frame</span> <span class="pre">50</span> <span class="pre">are</span> <span class="pre">X=59.898989898,</span> <span class="pre">Y=59.898989898</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">right</span> <span class="pre">view</span> <span class="pre">values</span> <span class="pre">at</span> <span class="pre">frame</span> <span class="pre">50</span> <span class="pre">are</span> <span class="pre">X=94.8484848507,</span> <span class="pre">Y=94.8484848507</span></tt></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-converting-a-stereo-camera">
+<span id="stereocam"></span><h3>Creating/Converting a Stereo Camera<a class="headerlink" href="#creating-converting-a-stereo-camera" title="Permalink to this headline">¶</a></h3>
+<p>Here is an example function to create or convert a camera for stereo work. Start with the usual function definition using two arguments to define the Camera node and the interocular distance.
+Set the default value for <strong>node</strong> to <strong>None</strong> (in which case we create a new camera) and the <strong>interoc</strong> to whatever value works for you:</p>
+<div class="highlight-python"><pre>def stereoCam(node=None, interoc=.6):
+    try:
+        node = node or nuke.selectedNode()
+    except ValueError:
+        # IF NO NODE IS GIVEN AND NOTHING IS SELECTED, CREATE A NEW NODE
+        node = nuke.createNode( 'Camera2' )</pre>
+</div>
+<p>Next we get the current script&#8217;s views. We assume the first view in the list is the left eye, the second the right eye:</p>
+<blockquote>
+<div>views = nuke.views()
+leftView = views[0]
+rightView = views[1]</div></blockquote>
+<p>Calculate the offset from the camera&#8217;s current position to the left and right based on the given <strong>interoc</strong> value:</p>
+<div class="highlight-python"><pre>rightOffset = float(interoc)/2
+leftOffset = -rightOffset</pre>
+</div>
+<p>The camera can be driven by the matrix knob or by the transform knobs. Let&#8217;s start with the first case - grab the matrix knob and copy the current matrix so we can create the second eye with it:</p>
+<div class="highlight-python"><pre>if node['useMatrix'].value():
+    knob = node['matrix']
+    leftEyeMatrix = node['transform'].value() # GETS MATRIX BUT IN REVERSE ORDER
+    rightEyeMatrix = nuke.math.Matrix4(leftEyeMatrix) # COPY MATRIX</pre>
+</div>
+<p>Now move the original matrix to the left to represent the left eye based on the values calculated above, then do the same for the right eye:</p>
+<div class="highlight-python"><pre>leftEyeMatrix.translate(leftOffset, 0, 0)
+rightEyeMatrix.translate(rightOffset, 0, 0)</pre>
+</div>
+<p>Because <strong>node[&#8216;transform&#8217;].value()</strong> above returned the matrix in reverse order, we need to reverse it again before we assign the new values:</p>
+<div class="highlight-python"><pre>leftEyeMatrix.transpose()
+rightEyeMatrix.transpose()</pre>
+</div>
+<p>If there are only two views in the script, we use the left view as the main view and only split off the right view. If there are more than two views we split both:</p>
+<div class="highlight-python"><pre>if len(views) &gt; 2:
+    knob.splitView(leftView)
+knob.splitView(rightView)</pre>
+</div>
+<p>Now we can assign the new values by cycling through the values of the 4x4 matrix and assigning them one by one:</p>
+<div class="highlight-python"><pre>for i in range(16):
+    knob.setValueAt(leftEyeMatrix[i], nuke.frame(), i, leftView)
+    knob.setValueAt(rightEyeMatrix[i], nuke.frame(), i, rightView)</pre>
+</div>
+<p>This takes care of the case where the camera is driven by the matrix knob. In the other case, things are a little easier but we are doing the same stuff. Grab the transform knob&#8217;s <strong>x</strong> value and offset it by the values calculated from the interocular argument:</p>
+<div class="highlight-python"><pre>else:
+    knob = node['translate']
+    # GET THE NEW VALUES FOR LEFT AND RIGHT EYE
+    leftEye = knob.value(0) + leftOffset
+    rightEye = knob.value(0) + rightOffset</pre>
+</div>
+<p>Split the knobs as required:</p>
+<div class="highlight-python"><pre>if len( views ) &gt; 2:
+    knob.splitView( leftView )
+knob.splitView( rightView )</pre>
+</div>
+<p>Assign the new values to the new views:</p>
+<div class="highlight-python"><pre>knob.setValue( leftEye, 0, view=leftView )
+knob.setValue( rightEye, 0, view=rightView )</pre>
+</div>
+<p>The final code:</p>
+<div class="highlight-python"><pre>import nuke
+
+def stereoCam( node=None, interoc=.6 ):
+    '''
+    Create a simple stereo camera or convert an existing one.
+    args:
+       node - camera node to convert to stereo. if None a camera will be created
+       interoc  -  distance between right and left view
+    '''
+    try:
+        node = node or nuke.selectedNode()
+    except ValueError:
+        # IF NO NODE IS GIVEN AND NOTHING IS SELECTED, CREATE A NEW NODE
+        node = nuke.createNode( 'Camera2' )
+
+    # GET SCRIPT SETTIONGS' VIEWS
+    views = nuke.views()
+    leftView = views[0]
+    rightView = views[1]
+
+    # THE OFFSET AS REQUESTED
+    rightOffset = float(interoc)/2
+    leftOffset = -rightOffset
+      
+    # THE KNOB TO SPLIT
+    if node['useMatrix'].value():
+        knob = node['matrix']
+        leftEyeMatrix = node['transform'].value() # GETS MATRIX BUT IN REVERSE ORDER
+        rightEyeMatrix = nuke.math.Matrix4( leftEyeMatrix ) # COPY MATRIX
+
+        # GET THE NEW VALUES FOR LEFT AND RIGHT EYE
+        leftEyeMatrix.translate( leftOffset, 0, 0 ) 
+        rightEyeMatrix.translate( rightOffset, 0, 0 )
+
+        # REVERSE FOR ASSIGNMENT
+        leftEyeMatrix.transpose()
+        rightEyeMatrix.transpose()
+
+        # IF THERE ARE MORE THAN 2 VIEWS MAKE SURE TO SPLIT OFF LEFT VIEW AS WELL
+        if len( views ) &gt; 2:
+            knob.splitView( leftView )
+        knob.splitView( rightView )
+
+        # ASSIGN VALUES
+        for i in range(16):
+            knob.setValueAt( leftEyeMatrix[i], nuke.frame(), i, leftView )
+            knob.setValueAt( rightEyeMatrix[i], nuke.frame(), i, rightView )
+    else:
+        knob = node['translate']
+        # GET THE NEW VALUES FOR LEFT AND RIGHT EYE
+        leftEye = knob.value(0) + leftOffset
+        rightEye = knob.value(0) + rightOffset
+
+        # IF THERE ARE MORE THAN 2 VIEWS MAKE SURE TO SPLIT OFF LEFT VIEW AS WELL
+        if len( views ) &gt; 2:
+            knob.splitView( leftView )
+        knob.splitView( rightView )
+        
+        # ASSIGN NEW VALUE
+        knob.setValue( leftEye, 0, view=leftView )
+        knob.setValue( rightEye, 0, view=rightView )
+
+</pre>
+</div>
+</div>
+<div class="section" id="setting-up-stereo">
+<span id="stereosetup-ref-label"></span><h3>Setting Up Stereo<a class="headerlink" href="#setting-up-stereo" title="Permalink to this headline">¶</a></h3>
+<p>Here is a way to automatically force new NUKE projects to be stereo (or generally multi view) setups.
+First, we write a function that turns a NUKE project into a multi view project with all the desired parameters, then we hook up that function to a callback making sure it is run every time a new root node is created.</p>
+<p>The knob we need to modify to create new views is <strong>nuke.root().knob(&#8216;views&#8217;)</strong>.
+This knob does not have any dedicated methods to set views, so let&#8217;s examine it&#8217;s script syntax for a default stereo project:</p>
+<div class="highlight-python"><pre>viewKnob = nuke.root().knob('views')
+print viewKnob.toScript()
+
+# Result:
+left #ff0000
+right #00ff00</pre>
+</div>
+<p>The <strong>toScript</strong> method converts the knob to it&#8217;s script syntax, the way it&#8217;s written in the .nk file, and is a good way to analyse complex knobs. In this case, it tells us the root&#8217;s view names and associated colors in hex code. The views are delimited by line breaks.
+With this info we can now construct our own list of names and color values, then use the <strong>fromScript</strong> method to initialize the knob with our values.</p>
+<p>Let&#8217;s test this first:</p>
+<div class="highlight-python"><pre>viewKnob = nuke.root().knob('views')
+viewKnob.fromScript( 'testView #ff0000')</pre>
+</div>
+<div class="line-block">
+<div class="line">This sets the root&#8217;s <strong>view</strong> knob to have a single view called <em>testView</em> and assigns a primary red to it.</div>
+<div class="line">In reality, it is much more convenient to be able to assign rgb values rather than hex values, so let&#8217;s write a little converter to avoid having to worry about hex values in the future - using Python&#8217;s string formatting this is pretty simple.</div>
+</div>
+<p>This converts an integer value to a hex value:</p>
+<div class="highlight-python"><pre>intValue = 255
+hexValue = '%x' % intValue
+print hexValue
+
+# Result:
+ff</pre>
+</div>
+<p>So let&#8217;s do this for r, g and b:</p>
+<div class="highlight-python"><pre>rgb = (255, 0, 0)
+hexCol = '#%02x%02x%02x' % rgb
+print hexCol
+
+# Result:
+#ff0000</pre>
+</div>
+<p>Since NUKE mostly works in floating point values, let&#8217;s modify this so we can input normalized values (0-1) rather than 8 bit integers (0-255):</p>
+<div class="highlight-python"><pre>col = (.5,.3,.2)
+rgb = tuple([ int(v*255) for v in col ])
+hexCol = '#%02x%02x%02x' % rgb
+print hexCol
+
+# Result:
+#7f4c33</pre>
+</div>
+<p>The above converts each normalized floating point value in <strong>col</strong> to an 8 bit integer using list comprehension. The output is a list which is converted to a tuple before being stored in <strong>rgb</strong> - this is essential for the subsequent string formatting requirements.</p>
+<p>Let&#8217;s throw it all together to build our own script syntax for a custom view called <strong>testView</strong> and assign a dark red color:</p>
+<div class="highlight-python"><pre>name = 'testView'
+col = (.5, 0, 0)
+rgb = tuple([ int(v*255) for v in col ])
+hexCol = '#%02x%02x%02x' % rgb
+view = '%s %s' % (name, hexCol)
+# NOW INITIALIZE THE VIEW KNOB WITH THE NEW VIEW
+nuke.root().knob('views').fromScript(view)</pre>
+</div>
+<p>If we want more than one view, we just throw a line break in between the views:</p>
+<div class="highlight-python"><pre>newViews = []
+
+name = 'testView'
+col = (.5, 0, 0)
+rgb = tuple([ int(v*255) for v in col ])
+hexCol = '#%02x%02x%02x' % rgb
+view = '%s %s' % (name, hexCol)
+newViews.append(view)
+
+name2 = 'testView2'
+col2 = (0, .5, 0)
+rgb2 = tuple([ int(v*255) for v in col2 ])
+hexCol2 = '#%02x%02x%02x' % rgb2
+view2 = '%s %s' % (name2, hexCol2)
+newViews.append(view2)
+
+nuke.root().knob('views').fromScript('\n'.join(newViews))</pre>
+</div>
+<p>Now let&#8217;s tidy this up, add the nuke <strong>import</strong>, and make a function that let&#8217;s the user define a list of views where each view is a tuple with the view&#8217;s name followed by it&#8217;s color:</p>
+<div class="highlight-python"><pre>import nuke
+
+def setUpMultiView( views=[ ('left',(0,1,0)), ('right',(1,0,0) ) ] ):
+    '''
+    set up the nuke project with an arbitrary amount of colour coded views
+    args:
+       views  -  nested list with view names and rgb tuples for each view. rgb values are assumed to be normalise, eg red = (1,0,0)
+    '''
+    newViews = []
+    for v in views:   # CYCLE THROUGH EACH REQUESTED VIEW
+        name = v[0]   # GRAB THE CURRENT VIEWS NAME
+        col = v[1]    # GRAB THE CURRENT VIEWS COLOUR
+        rgb = tuple( [ int(v*255) for v in col ] ) #CONVERT FLOAT TO 8BIT INT AND RETURN A TUPLE
+        hexCol = '#%02x%02x%02x' % rgb             #CONVERT INTEGER NUMBERS TO HEX CODE
+        curView = '%s %s' % ( name, hexCol )       #COMBINE NAME AND HEX COLOUR TO SCRIPT SYNTAX
+        newViews.append( curView )      # COLLECT ALL REQUESTED VIEWS
+
+    # COMBINE ALL VIEWS WITH LINE BREAK AND INITIALISE THE VIEWS KNOB WITH THE RESULTING SCRIPT SYNTAX
+    nuke.root().knob('views').fromScript( '\n'.join( newViews ) )
+</pre>
+</div>
+<dl class="docutils">
+<dt>Run the function to test it. Note that the above function defines the left and right views with green and red colors as the default, so you could run the function without any arguments as well if you&#8217;re happy with those settings::</dt>
+<dd>setUpMultiView()</dd>
+</dl>
+<p>If you want the left view to be red and the right one to be green, call the function with different values:</p>
+<div class="highlight-python"><pre>setUpMultiView([ ('left', (1,0,0)), ('right', (0,1,0)) ])</pre>
+</div>
+<p>The latter creates two views called <strong>left</strong> and <strong>right</strong> and assigns a primary red and green respectively.</p>
+<img alt="_images/setUpMultiView_01.png" src="_images/setUpMultiView_01.png" />
+<p>All the hard work is done.</p>
+<div class="line-block">
+<div class="line">If you want NUKE to run this script on start-up, so that new sessions are automatically in stereo mode, hook up the function to the <strong>onUserCreate</strong> callback.</div>
+<div class="line">See <a class="reference internal" href="callbacks.html#stereocallback-ref-label"><em>Using Callbacks on Root to Add Stereo Setup</em></a></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Stereo</a><ul>
+<li><a class="reference internal" href="#multi-view-knob-values">Multi View Knob Values</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#creating-converting-a-stereo-camera">Creating/Converting a Stereo Camera</a></li>
+<li><a class="reference internal" href="#setting-up-stereo">Setting Up Stereo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="callbacks.html"
+                        title="previous chapter">Callbacks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="rotopaint.html"
+                        title="next chapter">Roto and RotoPaint</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="rotopaint.html" title="Roto and RotoPaint"
+             >next</a></li>
+        <li class="right" >
+          <a href="callbacks.html" title="Callbacks"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

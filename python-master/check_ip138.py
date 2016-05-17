@@ -7,7 +7,7 @@ import sys
 
 
 def ISIP(s):
-    return len([i for i in s.split('.') if (0<= int(i)<= 255)])== 4
+    return len([i for i in s.split('.') if (0<= int(i)<= 255)])== 4 #check if s, the given parameter, is an IP address
 
 def URL(ip):
 	uip=urllib.urlopen('http://wap.ip138.com/ip.asp?ip=%s'%ip)
@@ -29,9 +29,9 @@ if __name__ == "__main__":
 	if len(sys.argv) < 2:
 		print "请输入IP地址或者域名 (例如:192.168.1.1 / www.baidu.com)"
 		sys.exit()
-	INPUT=sys.argv[1]
-	if not re.findall('(\d{1,3}\.){3}\d{1,3}',INPUT):
-	        if re.findall(r'(\w+\.)?(\w+)(\.\D+){1,2}',INPUT) :
+	INPUT=sys.argv[1] # get argument given by command
+	if not re.findall('(\d{1,3}\.){3}\d{1,3}',INPUT): # regex can match the ip address like 123.123.123.123 but also 001.1.001.001. And this statement is not ipaddress
+	        if re.findall(r'(\w+\.)?(\w+)(\.\D+){1,2}',INPUT) : #check if Input is domain name
 	                DOMAIN=INPUT
 			DO(DOMAIN)
 	        else:

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.pyQtExamples.pyQtRender</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        <a href="nukescripts.pyQtExamples-module.html">Package&nbsp;pyQtExamples</a> ::
+        Module&nbsp;pyQtRender
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.pyQtExamples.pyQtRender-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.pyQtExamples.pyQtRender-module.html">Module nukescripts.pyQtExamples.pyQtRender</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 The Foundry Visionmongers Ltd.  All Rights Reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># This example should be used if PyQt4 was not built with the Nuke's own binaries</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># otherwise please use pyQtRender2.py</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module sys=sys-module.html"><a title="sys" class="py-name" href="#" onclick="return doclink('link-0', 'sys', 'link-0');">sys</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Module os=os-module.html"><a title="os" class="py-name" href="#" onclick="return doclink('link-1', 'os', 'link-1');">os</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method nukescripts.flipbooking.FlipbookApplication.path()=nukescripts.flipbooking.FlipbookApplication-class.html#path,Method nukescripts.framecycler.FramecyclerFlipbook.path()=nukescripts.framecycler.FramecyclerFlipbook-class.html#path,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#path,Variable sys.path=sys-module.html#path"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-2', 'path', 'link-2');">path</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name" targets="Package nukescripts=nukescripts-module.html"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-3', 'nukescripts', 'link-3');">nukescripts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Module nukescripts.pyQtAppUtils=nukescripts.pyQtAppUtils-module.html"><a title="nukescripts.pyQtAppUtils" class="py-name" href="#" onclick="return doclink('link-4', 'pyQtAppUtils', 'link-4');">pyQtAppUtils</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Module nuke.utils=nuke.utils-module.html,Module nukescripts.utils=nukescripts.utils-module.html"><a title="nuke.utils
+nukescripts.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-6', 'nuke', 'link-6');">nuke</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="initPyQtRenderDialog"></a><div id="initPyQtRenderDialog-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="initPyQtRenderDialog-toggle" onclick="return toggle('initPyQtRenderDialog');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.pyQtExamples.pyQtRender-module.html#initPyQtRenderDialog">initPyQtRenderDialog</a><tt class="py-op">(</tt><tt class="py-param">pyQtApp</tt><tt class="py-op">,</tt> <tt class="py-param">appArgv</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'pyQtRenderDialog'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="initPyQtRenderDialog-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="initPyQtRenderDialog-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">  <tt class="py-keyword">from</tt> <tt class="py-name">PyQt4</tt> <tt class="py-keyword">import</tt> <tt class="py-name">QtCore</tt><tt class="py-op">,</tt> <tt class="py-name">QtGui</tt><tt class="py-op">,</tt> <tt class="py-name">uic</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">  <tt class="py-keyword">class</tt> <tt class="py-def-name">pyQtRenderDialog</tt><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">__init__</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">      <tt class="py-comment"># Set up the user interface from Designer.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt> <tt class="py-op">=</tt> <tt class="py-name">uic</tt><tt class="py-op">.</tt><tt class="py-name">loadUi</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-7', 'os', 'link-1');">os</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-8', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-9" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-9', 'os', 'link-1');">os</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-10', 'path', 'link-2');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">dirname</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-11', 'nukescripts', 'link-3');">nukescripts</a></tt><tt class="py-op">.</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"pyQtExamples"</tt><tt class="py-op">,</tt> <tt class="py-string">"pyQtRender.ui"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt><tt class="py-op">.</tt><tt class="py-name">renderButton</tt><tt class="py-op">,</tt> <tt class="py-name">QtCore</tt><tt class="py-op">.</tt><tt class="py-name">SIGNAL</tt><tt class="py-op">(</tt><tt class="py-string">"clicked()"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Function nuke.render()=nuke-module.html#render,Method nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.render()=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html#render"><a title="nuke.render
+nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.render" class="py-name" href="#" onclick="return doclink('link-12', 'render', 'link-12');">render</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">      <tt id="link-13" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-13', 'nuke', 'link-6');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Function nuke.callbacks.addOnCreate()=nuke.callbacks-module.html#addOnCreate"><a title="nuke.callbacks.addOnCreate" class="py-name" href="#" onclick="return doclink('link-14', 'addOnCreate', 'link-14');">addOnCreate</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.onCreateCallback()=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html#onCreateCallback"><a title="nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.onCreateCallback" class="py-name" href="#" onclick="return doclink('link-15', 'onCreateCallback', 'link-15');">onCreateCallback</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method nuke.Panel.show()=nuke.Panel-class.html#show,Function nuke.show()=nuke-module.html#show,Method nukescripts.panels.PythonPanel.show()=nukescripts.panels.PythonPanel-class.html#show"><a title="nuke.Panel.show
+nuke.show
+nukescripts.panels.PythonPanel.show" class="py-name" href="#" onclick="return doclink('link-16', 'show', 'link-16');">show</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">onCreateCallback</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">      <tt id="link-17" class="py-name" targets="Method nuke.Box3_Knob.n()=nuke.Box3_Knob-class.html#n"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-17', 'n', 'link-17');">n</a></tt> <tt class="py-op">=</tt> <tt id="link-18" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-18', 'nuke', 'link-6');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Function nuke.thisNode()=nuke-module.html#thisNode"><a title="nuke.thisNode" class="py-name" href="#" onclick="return doclink('link-19', 'thisNode', 'link-19');">thisNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-20" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-20', 'n', 'link-17');">n</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method nuke.Knob.Class()=nuke.Knob-class.html#Class,Method nuke.Node.Class()=nuke.Node-class.html#Class"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-21', 'Class', 'link-21');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"Write"</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt id="link-22" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-22', 'n', 'link-17');">n</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method _curvelib.AnimAttributes.setName()=_curvelib.AnimAttributes-class.html#setName,Method nuke.Format.setName()=nuke.Format-class.html#setName,Method nuke.Knob.setName()=nuke.Knob-class.html#setName,Method nuke.Layer.setName()=nuke.Layer-class.html#setName,Method nuke.Node.setName()=nuke.Node-class.html#setName"><a title="_curvelib.AnimAttributes.setName
+nuke.Format.setName
+nuke.Knob.setName
+nuke.Layer.setName
+nuke.Node.setName" class="py-name" href="#" onclick="return doclink('link-23', 'setName', 'link-23');">setName</a></tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-24', 'n', 'link-17');">n</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-25', 'name', 'link-25');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.addItem()=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html#addItem"><a title="nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.addItem" class="py-name" href="#" onclick="return doclink('link-26', 'addItem', 'link-26');">addItem</a></tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-27', 'n', 'link-17');">n</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">addItem</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">n</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">      <tt class="py-name">item</tt> <tt class="py-op">=</tt> <tt class="py-name">QtGui</tt><tt class="py-op">.</tt><tt class="py-name">QTreeWidgetItem</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">      <tt class="py-name">item</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method nuke.String_Knob.setText()=nuke.String_Knob-class.html#setText"><a title="nuke.String_Knob.setText" class="py-name" href="#" onclick="return doclink('link-28', 'setText', 'link-28');">setText</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-29', 'n', 'link-17');">n</a></tt><tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-30', 'value', 'link-30');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt><tt class="py-op">.</tt><tt class="py-name">treeWidget</tt><tt class="py-op">.</tt><tt class="py-name">addTopLevelItem</tt><tt class="py-op">(</tt><tt class="py-name">item</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">render</tt><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">      <tt class="py-name">selectedItems</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ui</tt><tt class="py-op">.</tt><tt class="py-name">treeWidget</tt><tt class="py-op">.</tt><tt class="py-name">selectedItems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">      <tt class="py-name">writeNodes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">j</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">selectedItems</tt> <tt class="py-keyword">for</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt id="link-31" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-31', 'nuke', 'link-6');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Function nuke.allNodes()=nuke-module.html#allNodes,Function nukescripts.snap3d.allNodes()=nukescripts.snap3d-module.html#allNodes"><a title="nuke.allNodes
+nukescripts.snap3d.allNodes" class="py-name" href="#" onclick="return doclink('link-32', 'allNodes', 'link-32');">allNodes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">j</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-33', 'Class', 'link-21');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"Write"</tt> <tt class="py-keyword">and</tt> <tt class="py-name">j</tt><tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-34', 'value', 'link-30');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">      <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">writeNodes</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-35" class="py-name"><a title="nuke.utils
+nukescripts.utils" class="py-name" href="#" onclick="return doclink('link-35', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Function nuke.executeInMain.executeInMainThread()=nuke.executeInMain-module.html#executeInMainThread"><a title="nuke.executeInMain.executeInMainThread" class="py-name" href="#" onclick="return doclink('link-36', 'executeInMainThread', 'link-36');">executeInMainThread</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">[</tt><tt class="py-string">'Render'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method nuke.Panel.execute()=nuke.Panel-class.html#execute,Method nuke.Script_Knob.execute()=nuke.Script_Knob-class.html#execute,Function nuke.execute()=nuke-module.html#execute,Module nukescripts.execute=nukescripts.execute-module.html"><a title="nuke.Panel.execute
+nuke.Script_Knob.execute
+nuke.execute
+nukescripts.execute" class="py-name" href="#" onclick="return doclink('link-37', 'execute', 'link-37');">execute</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">  <tt class="py-name">app</tt> <tt class="py-op">=</tt> <tt class="py-name">pyQtApp</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method nukescripts.flipbooking.FlipbookFactory.getApplication()=nukescripts.flipbooking.FlipbookFactory-class.html#getApplication,Method nukescripts.pyQtAppUtils.pyQtAppHelper.getApplication()=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html#getApplication,Method nukescripts.pyWxAppUtils.pyWxAppHelper.getApplication()=nukescripts.pyWxAppUtils.pyWxAppHelper-class.html#getApplication"><a title="nukescripts.flipbooking.FlipbookFactory.getApplication
+nukescripts.pyQtAppUtils.pyQtAppHelper.getApplication
+nukescripts.pyWxAppUtils.pyWxAppHelper.getApplication" class="py-name" href="#" onclick="return doclink('link-38', 'getApplication', 'link-38');">getApplication</a></tt><tt class="py-op">(</tt><tt class="py-name">appArgv</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">  <tt class="py-name">dialog</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name" targets="Class nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html"><a title="nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog" class="py-name" href="#" onclick="return doclink('link-39', 'pyQtRenderDialog', 'link-39');">pyQtRenderDialog</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">  <tt class="py-name">app</tt><tt class="py-op">.</tt><tt class="py-name">exec_</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="startQtRenderDialog"></a><div id="startQtRenderDialog-def"><a name="L40"></a><tt class="py-lineno">40</tt> <a class="py-toggle" href="#" id="startQtRenderDialog-toggle" onclick="return toggle('startQtRenderDialog');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.pyQtExamples.pyQtRender-module.html#startQtRenderDialog">startQtRenderDialog</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="startQtRenderDialog-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="startQtRenderDialog-expanded"><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">  <tt class="py-name">pyQtApp</tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="nukescripts.pyQtAppUtils" class="py-name" href="#" onclick="return doclink('link-40', 'pyQtAppUtils', 'link-4');">pyQtAppUtils</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Class nukescripts.pyQtAppUtils.pyQtAppHelper=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html"><a title="nukescripts.pyQtAppUtils.pyQtAppHelper" class="py-name" href="#" onclick="return doclink('link-41', 'pyQtAppHelper', 'link-41');">pyQtAppHelper</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name" targets="Method nukescripts.clientserver.server.start()=nukescripts.clientserver.server-class.html#start,Function nukescripts.openurl.start()=nukescripts.openurl-module.html#start,Method nukescripts.pyQtAppUtils.pyQtAppHelper.start()=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html#start,Method nukescripts.pyWxAppUtils.pyWxAppHelper.start()=nukescripts.pyWxAppUtils.pyWxAppHelper-class.html#start"><a title="nukescripts.clientserver.server.start
+nukescripts.openurl.start
+nukescripts.pyQtAppUtils.pyQtAppHelper.start
+nukescripts.pyWxAppUtils.pyWxAppHelper.start" class="py-name" href="#" onclick="return doclink('link-42', 'start', 'link-42');">start</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">  <tt class="py-name">pyQtApp</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Method nuke.Group.run()=nuke.Group-class.html#run,Method nukescripts.flipbooking.FlipbookApplication.run()=nukescripts.flipbooking.FlipbookApplication-class.html#run,Method nukescripts.framecycler.FramecyclerFlipbook.run()=nukescripts.framecycler.FramecyclerFlipbook-class.html#run,Method nukescripts.psd.BreakoutThreadClass.run()=nukescripts.psd.BreakoutThreadClass-class.html#run,Method nukescripts.pyAppUtils.pyAppHelper.run()=nukescripts.pyAppUtils.pyAppHelper-class.html#run,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.run()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#run,Method nukescripts.renderdialog.ExecuteDialog.run()=nukescripts.renderdialog.ExecuteDialog-class.html#run,Method nukescripts.renderdialog.FlipbookDialog.run()=nukescripts.renderdialog.FlipbookDialog-class.html#run,Method nukescripts.renderdialog.RenderDialog.run()=nukescripts.renderdialog.RenderDialog-class.html#run,Method nukescripts.renderdialog.ViewerCaptureDialogThread.run()=nukescripts.renderdialog.ViewerCaptureDialogThread-class.html#run"><a title="nuke.Group.run
+nukescripts.flipbooking.FlipbookApplication.run
+nukescripts.framecycler.FramecyclerFlipbook.run
+nukescripts.psd.BreakoutThreadClass.run
+nukescripts.pyAppUtils.pyAppHelper.run
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.run
+nukescripts.renderdialog.ExecuteDialog.run
+nukescripts.renderdialog.FlipbookDialog.run
+nukescripts.renderdialog.RenderDialog.run
+nukescripts.renderdialog.ViewerCaptureDialogThread.run" class="py-name" href="#" onclick="return doclink('link-43', 'run', 'link-43');">run</a></tt><tt class="py-op">(</tt><tt id="link-44" class="py-name" targets="Function nukescripts.pyQtExamples.pyQtRender.initPyQtRenderDialog()=nukescripts.pyQtExamples.pyQtRender-module.html#initPyQtRenderDialog"><a title="nukescripts.pyQtExamples.pyQtRender.initPyQtRenderDialog" class="py-name" href="#" onclick="return doclink('link-44', 'initPyQtRenderDialog', 'link-44');">initPyQtRenderDialog</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">pyQtApp</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">pyQtApp</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:20 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

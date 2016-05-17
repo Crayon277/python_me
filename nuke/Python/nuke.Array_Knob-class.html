@@ -1,0 +1,2527 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nuke.Array_Knob</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nuke-module.html">Package&nbsp;nuke</a> ::
+        Class&nbsp;Array_Knob
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nuke.Array_Knob-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Array_Knob</h1><p class="nomargin-top"></p>
+<pre class="base-tree">
+object --+    
+         |    
+ <a href="nuke.Knob-class.html">nuke.Knob</a> --+
+             |
+            <strong class="uidshort">nuke.Array_Knob</strong>
+</pre>
+
+<dl><dt>Known Subclasses:</dt>
+<dd>
+      <ul class="subclass-list">
+<li><a href="nuke.Color_Knob-class.html">Color_Knob</a></li><li>, <a href="nuke.BBox_Knob-class.html">BBox_Knob</a></li><li>, <a href="nuke.Unsigned_Knob-class.html">Unsigned_Knob</a></li><li>, <a href="nuke.Boolean_Knob-class.html">Boolean_Knob</a></li><li>, <a href="nuke.Box3_Knob-class.html">Box3_Knob</a></li><li>, <a href="nuke.Double_Knob-class.html">Double_Knob</a></li><li>, <a href="nuke.IArray_Knob-class.html">IArray_Knob</a></li><li>, <a href="nuke.Int_Knob-class.html">Int_Knob</a></li><li>, <a href="nuke.Keyer_Knob-class.html">Keyer_Knob</a></li><li>, <a href="nuke.Range_Knob-class.html">Range_Knob</a></li><li>, <a href="nuke.Scale_Knob-class.html">Scale_Knob</a></li><li>, <a href="nuke.UV_Knob-class.html">UV_Knob</a></li><li>, <a href="nuke.WH_Knob-class.html">WH_Knob</a></li><li>, <a href="nuke.XYZ_Knob-class.html">XYZ_Knob</a></li><li>, <a href="nuke.XY_Knob-class.html">XY_Knob</a></li>  </ul>
+</dd></dl>
+
+<hr />
+<p>A knob which holds an array of values.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">a new object with type S, a subtype of T</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#__new__" class="summary-sig-name">__new__</a>(<span class="summary-sig-arg">T</span>,
+        <span class="summary-sig-arg">S</span>,
+        <span class="summary-sig-arg">...</span>)</span></td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">AnimationCurve or None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#animation" class="summary-sig-name">animation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">chan</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Return the AnimationCurve for the  channel 'chan' and view 'view'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">AnimationCurve list</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#animations" class="summary-sig-name">animations</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Returns:
+      AnimationCurve list.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List of knob values</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#array" class="summary-sig-name">array</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      List of knob values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Number of elements in array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#arraySize" class="summary-sig-name">arraySize</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Number of elements in array.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#clearAnimated" class="summary-sig-name">clearAnimated</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Delete animation.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#copyAnimation" class="summary-sig-name">copyAnimation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">channel</span>,
+        <span class="summary-sig-arg">curve</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Copies the i'th channel of the AnimationCurve curve to this object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#copyAnimations" class="summary-sig-name">copyAnimations</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">curves</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Copies the AnimationCurves from curves to this object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Default value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#defaultValue" class="summary-sig-name">defaultValue</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Default value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#deleteAnimation" class="summary-sig-name">deleteAnimation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">curve</span>)</span><br />
+      Raises ValueError if not found.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Dimensions in array</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#dimensions" class="summary-sig-name">dimensions</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Dimensions in array.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Frame number</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#frame" class="summary-sig-name">frame</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Frame number.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if successful, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#fromScript" class="summary-sig-name">fromScript</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span><br />
+      Set value of the knob to a user defined script (TCL syntax, as in .nk
+      file).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getDerivative" class="summary-sig-name">getDerivative</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return derivative at time 't' and index 'i'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getIntegral" class="summary-sig-name">getIntegral</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return integral at time interval [t1, t2] and index 'i'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getKeyIndex" class="summary-sig-name">getKeyIndex</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return index of the keyframe at time 't' and channel 'c'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getKeyTime" class="summary-sig-name">getKeyTime</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return time of the keyframe at time 't' and channel 'c'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getNthDerivative" class="summary-sig-name">getNthDerivative</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return n'th derivative at time 't' and index 'i'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getNumKeys" class="summary-sig-name">getNumKeys</a>(<span class="summary-sig-arg">...</span>)</span><br />
+      Return number of keys at channel 'c'.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Floating point or List of floating point values (in case some are 
+      different)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getValue" class="summary-sig-name">getValue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>,
+        <span class="summary-sig-arg">time</span>)</span><br />
+      Returns:
+      Floating point or List of floating point values (in case some are 
+      different).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Floating point or List of floating point values (in case some are 
+      different)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#getValueAt" class="summary-sig-name">getValueAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Return value for this knob at specified time, optional index and 
+      view.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if has expression, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#hasExpression" class="summary-sig-name">hasExpression</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>)</span><br />
+      Returns:
+      True if has expression, False otherwise.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Height of array of values</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#height" class="summary-sig-name">height</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Height of array of values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if animated, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#isAnimated" class="summary-sig-name">isAnimated</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Returns:
+      True if animated, False otherwise.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#isKey" class="summary-sig-name">isKey</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Returns:
+      True if succeeded, False otherwise.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#isKeyAt" class="summary-sig-name">isKeyAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Returns True if there is a keyframe at specified time, optional index
+      and view, otherwise returns False.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Maximum value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#max" class="summary-sig-name">max</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Maximum value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Maximum value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#maximum" class="summary-sig-name">maximum</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Maximum value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Minimum value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#min" class="summary-sig-name">min</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Minimum value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Minimum value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#minimum" class="summary-sig-name">minimum</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Minimum value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if any of the values is not set to the default, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#notDefault" class="summary-sig-name">notDefault</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      True if any of the values is not set to the default, False otherwise.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#removeKey" class="summary-sig-name">removeKey</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Remove key.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#removeKeyAt" class="summary-sig-name">removeKeyAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Remove keyframe at specified time, optional index and view.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if successful, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#resize" class="summary-sig-name">resize</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">w</span>,
+        <span class="summary-sig-arg">h</span>)</span><br />
+      Resize the array.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if succeeded, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setAnimated" class="summary-sig-name">setAnimated</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Create an Animation object.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setDefaultValue" class="summary-sig-name">setDefaultValue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span><br />
+      Returns:
+      None.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setExpression" class="summary-sig-name">setExpression</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">expression</span>,
+        <span class="summary-sig-arg">channel</span>=<span class="summary-sig-default">-1</span>,
+        <span class="summary-sig-arg">view</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Set the expression for a knob.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setKeyAt" class="summary-sig-name">setKeyAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Set a key on element 'index', at time and view.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setRange" class="summary-sig-name">setRange</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">f1</span>,
+        <span class="summary-sig-arg">f2</span>)</span><br />
+      Set range of values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setSingleValue" class="summary-sig-name">setSingleValue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">b</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Set to just hold a single value or not.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if value changed, False otherwise</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setValue" class="summary-sig-name">setValue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Safe to ignore.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#setValueAt" class="summary-sig-name">setValueAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Set value of element 'index' at time for view.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">True if holds a single value</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#singleValue" class="summary-sig-name">singleValue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Returns:
+      True if holds a single value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#splitView" class="summary-sig-name">splitView</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Split the view away from the current knob value.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">String</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#toScript" class="summary-sig-name">toScript</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">quote</span>,
+        <span class="summary-sig-arg">context</span>)</span><br />
+      Return the value of the knob in script syntax.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">None</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#unsplitView" class="summary-sig-name">unsplitView</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Unsplit the view so that it shares a value with other views.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Floating point or List of floating point values (in case some are 
+      different)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#value" class="summary-sig-name">value</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>,
+        <span class="summary-sig-arg">time</span>)</span><br />
+      Returns:
+      Floating point or List of floating point values (in case some are 
+      different).</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Floating point or List of floating point values (in case some are 
+      different)</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#valueAt" class="summary-sig-name">valueAt</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">time</span>,
+        <span class="summary-sig-arg">index</span>,
+        <span class="summary-sig-arg">view</span>)</span><br />
+      Return value for this knob at specified time, optional index and 
+      view.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">List of knob values</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#vect" class="summary-sig-name">vect</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      List of knob values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">Width of array of values</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="nuke.Array_Knob-class.html#width" class="summary-sig-name">width</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns:
+      Width of array of values.</td>
+          <td align="right" valign="top">
+            
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="nuke.Knob-class.html">Knob</a></code></b>:
+      <code><a href="nuke.Knob-class.html#Class">Class</a></code>,
+      <code><a href="nuke.Knob-class.html#__init__">__init__</a></code>,
+      <code><a href="nuke.Knob-class.html#clearFlag">clearFlag</a></code>,
+      <code><a href="nuke.Knob-class.html#critical">critical</a></code>,
+      <code><a href="nuke.Knob-class.html#debug">debug</a></code>,
+      <code><a href="nuke.Knob-class.html#enabled">enabled</a></code>,
+      <code><a href="nuke.Knob-class.html#error">error</a></code>,
+      <code><a href="nuke.Knob-class.html#fullyQualifiedName">fullyQualifiedName</a></code>,
+      <code><a href="nuke.Knob-class.html#getFlag">getFlag</a></code>,
+      <code><a href="nuke.Knob-class.html#getKeyList">getKeyList</a></code>,
+      <code><a href="nuke.Knob-class.html#label">label</a></code>,
+      <code><a href="nuke.Knob-class.html#name">name</a></code>,
+      <code><a href="nuke.Knob-class.html#node">node</a></code>,
+      <code><a href="nuke.Knob-class.html#setEnabled">setEnabled</a></code>,
+      <code><a href="nuke.Knob-class.html#setFlag">setFlag</a></code>,
+      <code><a href="nuke.Knob-class.html#setLabel">setLabel</a></code>,
+      <code><a href="nuke.Knob-class.html#setName">setName</a></code>,
+      <code><a href="nuke.Knob-class.html#setTooltip">setTooltip</a></code>,
+      <code><a href="nuke.Knob-class.html#setVisible">setVisible</a></code>,
+      <code><a href="nuke.Knob-class.html#tooltip">tooltip</a></code>,
+      <code><a href="nuke.Knob-class.html#visible">visible</a></code>,
+      <code><a href="nuke.Knob-class.html#warning">warning</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__new__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__new__</span>(<span class="sig-arg">T</span>,
+        <span class="sig-arg">S</span>,
+        <span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: a new object with type S, a subtype of T</dt>
+    <dt>Overrides:
+        object.__new__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="animation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">animation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">chan</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return the AnimationCurve for the  channel 'chan' and view 'view'. The
+  view argument is optional.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>channel</code></strong> - The channel index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: AnimationCurve or None</dt>
+        <dd>AnimationCurve or None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="animations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">animations</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: AnimationCurve list</dt>
+        <dd>AnimationCurve list. Example: b = nuke.nodes.Blur() k = b['size']
+          k.setAnimated(0) a = k.animations() a[0].setKey(0, 11) 
+          a[0].setKey(10, 20)</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="array"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">array</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: List of knob values</dt>
+        <dd>List of knob values.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="arraySize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">arraySize</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Number of elements in array</dt>
+        <dd>Number of elements in array.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="clearAnimated"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">clearAnimated</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Delete animation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#clearAnimated">Knob.clearAnimated</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="copyAnimation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">copyAnimation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">channel</span>,
+        <span class="sig-arg">curve</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copies the i'th channel of the AnimationCurve curve to this object. 
+  The view is optional and defaults to the current view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>channel</code></strong> - The channel index.</li>
+        <li><strong class="pname"><code>curve</code></strong> - AnimationCurve.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Defaults to current.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="copyAnimations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">copyAnimations</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">curves</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Copies the AnimationCurves from curves to this object. The view is 
+  optional and defaults to the current view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>curves</code></strong> - AnimationCurve list.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Defaults to current.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="defaultValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">defaultValue</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Default value</dt>
+        <dd>Default value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="deleteAnimation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">deleteAnimation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">curve</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Raises ValueError if not found. Deletes the AnimationCurve.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>curve</code></strong> - An AnimationCurve instance which belongs to this Knob.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None. Raises ValueError if not found.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="dimensions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">dimensions</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Dimensions in array</dt>
+        <dd>Dimensions in array.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="frame"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">frame</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Frame number</dt>
+        <dd>Frame number.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="fromScript"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">fromScript</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">s</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set value of the knob to a user defined script (TCL syntax, as in .nk 
+  file). Return True if successful.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>s</code></strong> - Nuke script to be set on knob.</li>
+    </ul></dd>
+    <dt>Returns: True if successful, False otherwise</dt>
+        <dd>True if successful, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#fromScript">Knob.fromScript</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getDerivative"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getDerivative</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return derivative at time 't' and index 'i'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getDerivative">Knob.getDerivative</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getIntegral"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getIntegral</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return integral at time interval [t1, t2] and index 'i'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getIntegral">Knob.getIntegral</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getKeyIndex"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getKeyIndex</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return index of the keyframe at time 't' and channel 'c'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getKeyIndex">Knob.getKeyIndex</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getKeyTime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getKeyTime</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return time of the keyframe at time 't' and channel 'c'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getKeyTime">Knob.getKeyTime</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getNthDerivative"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getNthDerivative</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return n'th derivative at time 't' and index 'i'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getNthDerivative">Knob.getNthDerivative</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getNumKeys"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getNumKeys</span>(<span class="sig-arg">...</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return number of keys at channel 'c'.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getNumKeys">Knob.getNumKeys</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getValue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>,
+        <span class="sig-arg">time</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return value at the current frame for channel 'c'.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index. Default is 0.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+        <li><strong class="pname"><code>time</code></strong> - Optional time.</li>
+    </ul></dd>
+    <dt>Returns: Floating point or List of floating point values (in case some are 
+      different)</dt>
+        <dd>Floating point or List of floating point values (in case some are
+          different).</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getValue">Knob.getValue</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getValueAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getValueAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return value for this knob at specified time, optional index and 
+  view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index. Default is 0.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: Floating point or List of floating point values (in case some are 
+      different)</dt>
+        <dd>Floating point or List of floating point values (in case some are
+          different).</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#getValueAt">Knob.getValueAt</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="hasExpression"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">hasExpression</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return True if animation at index 'index' has an expression.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+    </ul></dd>
+    <dt>Returns: True if has expression, False otherwise</dt>
+        <dd>True if has expression, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#hasExpression">Knob.hasExpression</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="height"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">height</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Height of array of values</dt>
+        <dd>Height of array of values.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="isAnimated"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isAnimated</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return True if channel 'c' is animated.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if animated, False otherwise</dt>
+        <dd>True if animated, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#isAnimated">Knob.isAnimated</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="isKey"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isKey</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return True if there is a keyframe at the current frame for channel 
+  'c'.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#isKey">Knob.isKey</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="isKeyAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">isKeyAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns True if there is a keyframe at specified time, optional index 
+  and view, otherwise returns False.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#isKeyAt">Knob.isKeyAt</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="max"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">max</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Maximum value</dt>
+        <dd>Maximum value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="maximum"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">maximum</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Maximum value</dt>
+        <dd>Maximum value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="min"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">min</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Minimum value</dt>
+        <dd>Minimum value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="minimum"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">minimum</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Minimum value</dt>
+        <dd>Minimum value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="notDefault"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">notDefault</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: True if any of the values is not set to the default, False otherwise</dt>
+        <dd>True if any of the values is not set to the default, False 
+          otherwise.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="removeKey"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeKey</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove key.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#removeKey">Knob.removeKey</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="removeKeyAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">removeKeyAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Remove keyframe at specified time, optional index and view. Return 
+  True if successful.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#removeKeyAt">Knob.removeKeyAt</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="resize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">resize</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">w</span>,
+        <span class="sig-arg">h</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Resize the array.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>w</code></strong> - New width</li>
+        <li><strong class="pname"><code>h</code></strong> - Optional new height</li>
+    </ul></dd>
+    <dt>Returns: True if successful, False otherwise</dt>
+        <dd>True if successful, False otherwise.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setAnimated"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setAnimated</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create an Animation object. Return True if successful, in which case 
+  caller must initialise it by calling setValue() or setValueAt().</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if succeeded, False otherwise</dt>
+        <dd>True if succeeded, False otherwise.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#setAnimated">Knob.setAnimated</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setDefaultValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setDefaultValue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">s</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>s</code></strong> - Sequence of floating-point values.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setExpression"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setExpression</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">expression</span>,
+        <span class="sig-arg">channel</span>=<span class="sig-default">-1</span>,
+        <span class="sig-arg">view</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the expression for a knob. You can optionally specify a channel to
+  set the expression for.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>expression</code></strong> - The new expression for the knob. This should be a string.</li>
+        <li><strong class="pname"><code>channel</code></strong> - Optional parameter, specifying the channel to set the expression 
+          for. This should be an integer.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view parameter. Without, this command will set the 
+          expression for the current view theinterface is displaying. Can 
+          be the name of the view or the index.</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>True if successful, False if not.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#setExpression">Knob.setExpression</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setKeyAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setKeyAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set a key on element 'index', at time and view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setRange"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setRange</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">f1</span>,
+        <span class="sig-arg">f2</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set range of values. @param f1 Min value. @param f2 Max value.</p>
+  <dl class="fields">
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setSingleValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setSingleValue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">b</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set to just hold a single value or not.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>b</code></strong> - Boolean object.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Default is current view.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setValue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Safe to ignore. Set index to value at time and view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>value</code></strong> - Floating point value.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>time</code></strong> - Optional time.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: True if value changed, False otherwise</dt>
+        <dd>True if value changed, False otherwise. Safe to ignore.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#setValue">Knob.setValue</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="setValueAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">setValueAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set value of element 'index' at time for view. If the knob is 
+  animated, it will set a new keyframe or change an existing one. Index and
+  view are optional. Return True if successful.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>value</code></strong> - Floating point value.</li>
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd>True if value changed, False otherwise. Safe to ignore.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#setValueAt">Knob.setValueAt</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="singleValue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">singleValue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Default is current view.</li>
+    </ul></dd>
+    <dt>Returns: True if holds a single value</dt>
+        <dd>True if holds a single value.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="splitView"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">splitView</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Split the view away from the current knob value.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Default is current view.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="toScript"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">toScript</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">quote</span>,
+        <span class="sig-arg">context</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return the value of the knob in script syntax.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>quote</code></strong> - Optional, default is False. Specify True to return the knob value
+          quoted in {}.</li>
+        <li><strong class="pname"><code>context</code></strong> - Optional context, default is current, None will be 
+          &quot;contextless&quot; (all views, all keys) as in a .nk file.</li>
+    </ul></dd>
+    <dt>Returns: String</dt>
+        <dd>String.</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#toScript">Knob.toScript</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unsplitView"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">unsplitView</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Unsplit the view so that it shares a value with other views.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>view</code></strong> - Optional view. Default is current view.</li>
+    </ul></dd>
+    <dt>Returns: None</dt>
+        <dd>None.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">value</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>,
+        <span class="sig-arg">time</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return value at the current frame for channel 'c'.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>index</code></strong> - Optional index. Default is 0.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+        <li><strong class="pname"><code>time</code></strong> - Optional time.</li>
+    </ul></dd>
+    <dt>Returns: Floating point or List of floating point values (in case some are 
+      different)</dt>
+        <dd>Floating point or List of floating point values (in case some are
+          different).</dd>
+    <dt>Overrides:
+        <a href="nuke.Knob-class.html#value">Knob.value</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="valueAt"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">valueAt</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">time</span>,
+        <span class="sig-arg">index</span>,
+        <span class="sig-arg">view</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Return value for this knob at specified time, optional index and 
+  view.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>time</code></strong> - Time.</li>
+        <li><strong class="pname"><code>index</code></strong> - Optional index. Default is 0.</li>
+        <li><strong class="pname"><code>view</code></strong> - Optional view.</li>
+    </ul></dd>
+    <dt>Returns: Floating point or List of floating point values (in case some are 
+      different)</dt>
+        <dd>Floating point or List of floating point values (in case some are
+          different).</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="vect"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">vect</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: List of knob values</dt>
+        <dd>List of knob values.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="width"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">width</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    >&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Returns: Width of array of values</dt>
+        <dd>Width of array of values.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:17 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

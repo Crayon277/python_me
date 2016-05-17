@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3D &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="d">
+<h1>3D<a class="headerlink" href="#d" title="Permalink to this headline">¶</a></h1>
+<p>How to access 3D information in a NUKE scene.</p>
+<div class="section" id="getting-basic-selection-information">
+<h2>Getting basic selection information<a class="headerlink" href="#getting-basic-selection-information" title="Permalink to this headline">¶</a></h2>
+<p>Currently there are two nodes that provide the <strong>geo</strong> knob required to retrieve a vertex selection:</p>
+<ul class="simple">
+<li>the Viewer node</li>
+<li>the GeoSelect node</li>
+</ul>
+<p>To access the selection info of those nodes at the most basic level, you would do this:</p>
+<div class="highlight-python"><pre>geoSelectKnob1 = nuke.activeViewer().node()['geo']
+geoSelectKnob2 = nuke.toNode('GeoSelect1')['geo']
+
+viewerSel = geoSelectKnob1.getSelection() #SELECTION IN THE CURRENTLY ACTIVE VIEWER
+geoSel = geoSelectKnob2.getSelection() #SELECTION SAVED IN GEOSELECT NODE</pre>
+</div>
+<p>The above will return a list of points per object. Each point in that list carries it&#8217;s selection value (&#8216;1.0&#8217; being selected and &#8216;0.0&#8217; being unselected).
+So with the above code, this will return the selection state of point index 540 in the first object saved in the GeoSelects geo knob:</p>
+<div class="highlight-python"><pre>geoSel[0][540]</pre>
+</div>
+<p>To get useful information from this:</p>
+<div class="highlight-python"><pre>def selectedVertexInfos(selectionThreshold=0.5):
+  '''
+  selectedPoints(selectionThreshold) -&gt; iterator
+  Return an iterator which yields a tuple of the index and position of each point currently selected in the Viewer in turn.
+
+  The selectionThreshold parameter is used when working with a soft selection.
+  Only points with a selection level &gt;= the selection threshold will be returned by this function.
+  '''
+  if not nuke.activeViewer():
+    return
+
+  geoSelectKnob = nuke.activeViewer().node()['geo']
+  sel = geoSelectKnob.getSelection()
+  objs = geoSelectKnob.getGeometry()
+  for o in xrange(len(sel)):
+    objSelection = sel[o]
+    objPoints = objs[o].points()
+    objTransform = objs[o].transform()
+    for p in xrange(len(objSelection)):
+      value = objSelection[p]
+      if value &gt;= selectionThreshold:
+        pos = objPoints[p]
+        tPos = objTransform * _nukemath.Vector4(pos.x, pos.y, pos.z, 1.0)
+        yield VertexInfo(p, value, _nukemath.Vector3(tPos.x, tPos.y, tPos.z))</pre>
+</div>
+<p>And with the above we can now get the vertex info of all selected points:</p>
+<div class="highlight-python"><pre>def getSelection(selectionThreshold=0.5):
+  # Build a VertexSelection from VertexInfos
+  vertexSelection = VertexSelection()
+  for info in selectedVertexInfos(selectionThreshold):
+    vertexSelection.add(info)
+  return vertexSelection</pre>
+</div>
+<p>This may seem like an awful lot of hassle, which is why the <strong>nukescripts.snap3d</strong> module is provided to do all the above work for you for common tasks:</p>
+</div>
+<div class="section" id="working-with-the-current-selection">
+<h2>Working with the current selection<a class="headerlink" href="#working-with-the-current-selection" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to get information from the current vertex selection is using the <strong>nukescripts.snap3d</strong> module.:</p>
+<div class="highlight-python"><pre>for v in nukescripts.snap3d.getSelection():
+    print v</pre>
+</div>
+<p>This will return the <strong>VertexInfo</strong> objects. To get each selected vertex&#8217; position:</p>
+<div class="highlight-python"><pre>for v in nukescripts.snap3d.getSelection():
+    print v.position</pre>
+</div>
+<p>There are many functions that will get the selection for you and do fancy stuff with it already.
+Here is a very simple example of how create a card at the selected vertices&#8217; position and bind a hotkey to it:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Viewer' ).addCommand( 'Quick Snap', lambda: nukescripts.snap3d.translateRotateToPoints( nuke.createNode( 'Card2' ) ), 'shift+q' )</pre>
+</div>
+<p>All this is doing is calling the <strong>nukescripts.snap3d.translateRotateToPoints</strong> method on a newly created card and assigning this action to a menu and hotkey - done.</p>
+<img alt="_images/quickSnap.png" src="_images/quickSnap.png" />
+<p>There are heaps of goodies in this module, so make sure to take a closer look:</p>
+<div class="highlight-python"><pre>dir( nukescripts.snap3d )
+# Result:
+['VertexInfo', 'VertexSelection', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_nukemath', 'addSnapFunc', 'allNodes', 'anySelectedPoint', 'averageNormal', 'calcAveragePosition', 'calcBounds', 'calcRotationVector', 'callSnapFunc', 'cameraProjectionMatrix', 'getSelection', 'math', 'nuke', 'planeRotation', 'projectPoint', 'projectPoints', 'projectSelectedPoints', 'rotateToPointsVerified', 'scaleToPointsVerified', 'selectedPoints', 'selectedVertexInfos', 'snapFuncs', 'translateRotateScaleSelectionToPoints', 'translateRotateScaleThisNodeToPoints', 'translateRotateScaleToPoints', 'translateRotateScaleToPointsVerified', 'translateRotateSelectionToPoints', 'translateRotateThisNodeToPoints', 'translateRotateToPoints', 'translateRotateToPointsVerified', 'translateSelectionToPoints', 'translateThisNodeToPoints', 'translateToPoints', 'translateToPointsVerified', 'transpose', 'verifyNodeOrder', 'verifyNodeToSnap', 'verifyVertexSelection']</pre>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="extending-the-snap-menu">
+<h3>Extending the snap menu<a class="headerlink" href="#extending-the-snap-menu" title="Permalink to this headline">¶</a></h3>
+<p>Adding animated versions of the default 3 snap functions doesn&#8217;t take much effort, thanks to the handy methods available in the nukescripts.snap3d module:</p>
+<img alt="_images/snapMenu_01.png" src="_images/snapMenu_01.png" />
+<p>these are the corresponding methods that transform the node based on the vertex selection:</p>
+<ul class="simple">
+<li>nukescripts.snap3d.translateToPoints( node )</li>
+<li>nukescripts.snap3d.translateRotateToPoints( node )</li>
+<li>nukescripts.snap3d.translateRotateScaleToPoints( node )</li>
+</ul>
+<p>So lining up a node to the vertex selection in the active viewer is as simple as running the appropriate function with it. eg:</p>
+<div class="highlight-python"><pre>nukescripts.snap3d.translateRotateScaleToPoints( nuke.createNode('Card2') )</pre>
+</div>
+<img alt="_images/snapMenu_02.png" src="_images/snapMenu_02.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">examine the nukescripts.snap3d module to find more handy functions and save yourself a lot of time.</p>
+</div>
+<p>So let&#8217;s get started on creating animated versions of this:</p>
+<p>Let&#8217;s create a new function with two arguments that provide the node and the mode:</p>
+<div class="highlight-python"><pre>def snapToPointsAnim( node=None, mode='t'):</pre>
+</div>
+<p>If the node is not given, we assume that the node in the current context is used (i.e. when called from a node&#8217;s snap menu).</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>def snapToPointsAnim( node=None, mode=&#8217;t&#8217;):</dt>
+<dd>node = node or nuke.thisNode()</dd>
+</dl>
+</div></blockquote>
+<p>Some error handling might be in order in case the function is not called with one of the expected values for the mode:</p>
+<div class="highlight-python"><pre>def snapToPointsAnim( node=None, mode='t'):
+    node = node or nuke.thisNode()
+    if mode not in ( 't', 'tr', 'trs' ):
+        raise ValueError, 'mode must be "t", "tr" or "trs"'</pre>
+</div>
+<p>Each mode tells us which knobs we need to adjust for the respective line up, so let&#8217;s create a dictionary that will let us look up the knobs for each mode:</p>
+<div class="highlight-python"><pre>knobs = dict( t=['translate'], tr=['translate', 'rotate'], trs=['translate', 'rotate','scaling'] )</pre>
+</div>
+<p>And similarly, we will save the required functions for each mode, so we can easily look them up later one:</p>
+<div class="highlight-python"><pre>snapFn = dict( t=nukescripts.snap3d.translateToPoints,
+       tr=nukescripts.snap3d.translateRotateToPoints,
+       trs=nukescripts.snap3d.translateRotateScaleToPoints )</pre>
+</div>
+<p>Set the required knobs to be animated and clear any old animation they may have:</p>
+<div class="highlight-python"><pre>for k in knobs[ mode ]:
+    node[ k ].clearAnimated()
+    node[ k ].setAnimated()</pre>
+</div>
+<p>Next we need to get the frame range from the user so we know which keyframes to set:</p>
+<div class="highlight-python"><pre>fRange = nuke.getInput( 'Frame Range', '%s-%s' % ( nuke.root().firstFrame(), nuke.root().lastFrame() ))
+if not fRange:
+    return</pre>
+</div>
+<p>We are now ready to loop through all requested frames and set animation keys for the respective vertex positions:</p>
+<div class="highlight-python"><pre>tmp = nuke.nodes.CurveTool() # HACK TO FORCE PROPER UPDATE. THIS SHOULD BE FIXED
+for f in nuke.FrameRange( fRange ):
+    nuke.execute( tmp, f, f )
+    snapFn[ mode ](node)
+nuke.delete( tmp ) # CLEAN UP THE HACKY BIT</pre>
+</div>
+<p>The complete code:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts.snap3d
+
+def snapToPointsAnim( node=None, mode='t'):
+    '''
+    Animated versions of the three default snapping funtions in the axis menu
+    args:
+       node  -  node to snap
+       mode  -  which mode. Available modes are: 't' to match translation, 'tr', to match translation ans rotation, 'trs' to match translation, rotation and scale. default: 't'
+    '''
+
+    node = node or nuke.thisNode()
+    if mode not in ( 't', 'tr', 'trs' ):
+        raise ValueError, 'mode must be "t", "tr" or "trs"'
+    
+    # KNOB MAP
+    knobs = dict( t=['translate'], tr=['translate', 'rotate'], trs=['translate', 'rotate','scaling'] )
+    # SNAP FUNCTION MAP
+    snapFn = dict( t=nukescripts.snap3d.translateToPoints,
+                   tr=nukescripts.snap3d.translateRotateToPoints,
+                   trs=nukescripts.snap3d.translateRotateScaleToPoints )
+
+    # SET REQUIRED KNOBS TO BE ANIMATED
+    for k in knobs[ mode ]:
+        node[ k ].clearAnimated()
+        node[ k ].setAnimated()
+    
+    # GET FRAME RANGE
+    fRange = nuke.getInput( 'Frame Range', '%s-%s' % ( nuke.root().firstFrame(), nuke.root().lastFrame() ))
+    if not fRange:
+        return
+    
+    # DO THE WORK
+    tmp = nuke.nodes.CurveTool() # HACK TO FORCE PROPER UPDATE. THIS SHOULD BE FIXED
+    for f in nuke.FrameRange( fRange ):
+        nuke.execute( tmp, f, f )
+        snapFn[ mode ](node)
+    nuke.delete( tmp ) # CLEAN UP THE HACKY BIT
+</pre>
+</div>
+<p>With the code in place you can now run:</p>
+<ul class="simple">
+<li>snapToPointsAnim() - match <strong>position</strong> of selected vertices</li>
+<li>snapToPointsAnim( mode=&#8217;tr&#8217; ) - match <strong>position</strong> and <strong>rotation</strong> of selected vertices</li>
+<li>snapToPointsAnim( mode=&#8217;trs&#8217; ) - match <strong>position</strong>, <strong>rotation</strong> and <strong>scale</strong> of selected vertices</li>
+</ul>
+<p>To add these functions to the <strong>snap menu</strong>, place something like this in your menu.py (in this example the <strong>examples</strong> is imported to provide the function):</p>
+<div class="highlight-python"><pre>import examples
+m = nuke.menu( 'Axis' )
+m.addCommand( 'Snap/Match selected position (animated)', lambda: examples.snapToPointsAnim( mode='t' ) )
+m.addCommand( 'Snap/Match selected position, orientation (animated)', lambda: examples.snapToPointsAnim( mode='tr' ) )
+m.addCommand( 'Snap/Match selected position, orientation, size (animated)', lambda: examples.snapToPointsAnim( mode='trs' ) )</pre>
+</div>
+<img alt="_images/snapMenu_03.png" src="_images/snapMenu_03.png" />
+</div>
+<div class="section" id="accessing-geometry-surface-scatter">
+<h3>Accessing Geometry (Surface Scatter)<a class="headerlink" href="#accessing-geometry-surface-scatter" title="Permalink to this headline">¶</a></h3>
+<p>This example will show how to create new 3D objects at every selected vertex in the viewer.
+Start by creating a sphere and selecting some vertices on it:</p>
+<img alt="_images/scatterObjects_01.png" src="_images/scatterObjects_01.png" />
+<p>The nukescripts package comes with handy module called <strong>snap3d</strong> which contains a whole bunch of shortcuts to commonly used tasks. Let&#8217;s use getSelection to gain access to all selected vertices in the active viewer:</p>
+<div class="highlight-python"><pre>vsel = nukescripts.snap3d.getSelection()
+for v in vsel:
+    print v
+
+# Result:
+&lt;nukescripts.snap3d.VertexInfo instance at 0x1193b2878&gt;
+&lt;nukescripts.snap3d.VertexInfo instance at 0x1193b2830&gt;
+&lt;nukescripts.snap3d.VertexInfo instance at 0x1193b28c0&gt;
+&lt;nukescripts.snap3d.VertexInfo instance at 0x1193b2710&gt;</pre>
+</div>
+<p>the VertexInfo object let&#8217;s us access the vertex position:</p>
+<div class="highlight-python"><pre>vsel = nukescripts.snap3d.getSelection()
+for v in vsel:
+    print v.position
+
+# Result:
+{0, 0.207912, 0.978148}
+{0.203368, 0.207912, 0.956773}
+{0, 0.669131, 0.743145}
+{0.154509, 0.669131, 0.726905}</pre>
+</div>
+<p>There, all the hard work is already done, all we need to do is to create the objects we want and assign the values returned by the <strong>VertexInfo</strong> object:</p>
+<div class="highlight-python"><pre>vsel = nukescripts.snap3d.getSelection()
+for v in vsel:
+    obj = nuke.nodes.Card2()
+    obj['translate'].setValue( v.position )</pre>
+</div>
+<p>This will create a Card2 object on each selected vertex. Let&#8217;s create a <strong>Scene</strong> node and connect them all up as we go. For this I will use <strong>enumerate()</strong> to get the index for each iteration which I can use as the input number for the <strong>Scene</strong>:</p>
+<div class="highlight-python"><pre>vsel = nukescripts.snap3d.getSelection()
+sc = nuke.nodes.Scene()
+for i, v in enumerate( vsel ):
+    obj = nuke.nodes.Card2()
+    obj['translate'].setValue( v.position )
+    sc.setInput( i, obj)</pre>
+</div>
+<p>To make this more flexible, let&#8217;s not hard code the <strong>Card2</strong> object but define the type of object we want to scatter in a variable:</p>
+<div class="highlight-python"><pre>objType = 'Card2'
+vsel = nukescripts.snap3d.getSelection()
+sc = nuke.nodes.Scene()
+
+for i, v in enumerate( vsel ):
+    obj = eval( 'nuke.nodes.%s()' % objType )
+    obj['translate'].setValue( v.position )
+    sc.setInput( i, obj)</pre>
+</div>
+<p>And lastly, we will connect the viewer to the new Scene node so we see the result immediately:</p>
+<div class="highlight-python"><pre>objType = 'Card2'
+vsel = nukescripts.snap3d.getSelection()
+sc = nuke.nodes.Scene()
+
+for i, v in enumerate( vsel ):
+    obj = eval( 'nuke.nodes.%s()' % objType )
+    obj['translate'].setValue( v.position )
+    sc.setInput( i, obj)
+
+nuke.connectViewer( 1, sc )</pre>
+</div>
+<img alt="_images/scatterObjects_02.png" src="_images/scatterObjects_02.png" />
+<p>To put this functionality into the snap menu we need to wrap up the code into a function and assign it to the <strong>Axis/Snap</strong> menu:</p>
+<div class="highlight-python"><pre>def scatterObjects():
+    objType = 'Card2'
+    vsel = nukescripts.snap3d.getSelection()
+    sc = nuke.nodes.Scene()
+
+    for i, v in enumerate( vsel ):
+        obj = eval( 'nuke.nodes.%s()' % objType )
+        obj['translate'].setValue( v.position )
+        sc.setInput( i, obj)
+
+    nuke.connectViewer( 1, sc )
+
+nuke.menu( 'Axis' ).addCommand( 'Snap/Scatter Objects', lambda: scatterObjects() )</pre>
+</div>
+<img alt="_images/scatterObjects_03.png" src="_images/scatterObjects_03.png" />
+<p>When running a function like this from the Snap menu, we can access the node the script is run from with <strong>nuke.thisNode()</strong>.
+So let&#8217;s add another line just before connecting the viewer to connect the current node to the <strong>Scene</strong> as well:</p>
+<div class="highlight-python"><pre>def scatterObjects():
+    objType = 'Card2'
+    vsel = nukescripts.snap3d.getSelection()
+    sc = nuke.nodes.Scene()
+
+    for i, v in enumerate( vsel ):
+        obj = eval( 'nuke.nodes.%s()' % objType )
+        obj['translate'].setValue( v.position )
+        sc.setInput( i, obj)
+
+    sc.setInput( i+1, nuke.thisNode() )
+    nuke.connectViewer( 1, sc )
+
+nuke.menu( 'Axis' ).addCommand( 'Snap/Scatter Objects', lambda: scatterObjects() )</pre>
+</div>
+<p>Run this from the new &#8220;Scatter Objects&#8221; menu entry again to see the new node connection.
+In order to control the newly create objects, let&#8217;s create a couple of user knobs in the Scene node so the user can adjust the size and position of the new objects:</p>
+<div class="highlight-python"><pre>def scatterObjects():
+    vsel = nukescripts.snap3d.getSelection()
+    sc = nuke.nodes.Scene()
+    # add user knobs to control new nodes:
+    offsetKnob = nuke.XYZ_Knob( 'offset' )
+    sc.addKnob( offsetKnob )
+    scaleKnob = nuke.Double_Knob( 'scale' )
+    scaleKnob.setValue( 1 ) # set the initial value for scale to 1
+    sc.addKnob( scaleKnob )</pre>
+</div>
+<p>Instead of just assigning the respective vertex position to each new object, we can now create expressions to link everything to the master Scene node:</p>
+<div class="highlight-python"><pre>for i, v in enumerate( vsel ):
+    obj = eval( 'nuke.nodes.%s()' % objType )
+    # assign expressions to link to scene node's user knobs using the respective vertex position as the initial translation
+    obj['translate'].setExpression( '%s + %s.offset' % ( v.position.x, sc.name() ), 0 )
+    obj['translate'].setExpression( '%s + %s.offset' % ( v.position.y, sc.name() ), 1 )
+    obj['translate'].setExpression( '%s + %s.offset' % ( v.position.z, sc.name() ), 2 )
+    obj['uniform_scale'].setExpression( '%s.scale' % sc.name() )
+    sc.setInput( i, obj)</pre>
+</div>
+<p>Now for one last tweak:</p>
+<p>Let&#8217;s give the user control over what kind of objects will be created at each selected vertex. To do this we use NUKE&#8217;s panel code to create a simple panel with a dropdown menu to offer the use a the choices:</p>
+<div class="highlight-python"><pre># pop up a panel to ask for the desired object type
+# the dictionary maps the name in the panel to the actual class used
+typeDict = dict( Axis='Axis', Card='Card2', Sphere='Sphere', Cylinder='Cylinder', Cube='Cube' )
+
+# create the initial panel and give it a title
+p = nuke.Panel( 'Pick object type to scatter' )
+
+# add a drop down list with the dictionary's keys as choices
+p.addEnumerationPulldown( 'object', ' '.join( typeDict.keys() ) )
+
+# adjust the panel's width a bit
+p.setWidth( 250 )
+
+# if the use confirms the dialog, return the respective node class
+if p.show():
+        objType = typeDict[ p.value( 'object' ) ]
+else:
+        return</pre>
+</div>
+<p>And here is the complete code:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts  
+   
+def scatterObjects():
+    '''
+    Places an object on each selected vertex. The new Scene node gets user knobs to control the new objects.
+    args:
+        obj  -  class of object to scatter (default = Card2)
+    '''
+    # pop up a panel to ask for the desired object type
+    # the dictionary maps the name in the panel to the actual class used
+    typeDict = dict( Axis='Axis', Card='Card2', Sphere='Sphere', Cylinder='Cylinder', Cube='Cube' )
+    
+    # create the initial panel and give it a title
+    p = nuke.Panel( 'Pick object type to scatter' )
+    
+    # add a drop down list with the dictionary's keys as choices
+    p.addEnumerationPulldown( 'object', ' '.join( typeDict.keys() ) )
+    
+    # adjust the panel's width a bit
+    p.setWidth( 250 )
+    
+    # if the user confirms the dialogsave the choice for later, otherwise do nothing
+    if p.show():
+        objType = typeDict[ p.value( 'object' ) ]
+    else:
+        return
+    
+    
+    vsel = nukescripts.snap3d.getSelection()
+    sc = nuke.nodes.Scene()
+    # add user knobs to control new nodes:
+    offsetKnob = nuke.XYZ_Knob( 'offset' )
+    sc.addKnob( offsetKnob )
+    scaleKnob = nuke.Double_Knob( 'scale' )
+    scaleKnob.setValue( 1 )
+    sc.addKnob( scaleKnob )
+
+    for i, v in enumerate( vsel ):
+        obj = eval( 'nuke.nodes.%s()' % objType )
+        # assign expressions to link to scene node's user knobs
+        obj['translate'].setExpression( '%s + %s.offset' % ( v.position.x, sc.name() ), 0 )
+        obj['translate'].setExpression( '%s + %s.offset' % ( v.position.y, sc.name() ), 1 ) 
+        obj['translate'].setExpression( '%s + %s.offset' % ( v.position.z, sc.name() ), 2 ) 
+        obj['uniform_scale'].setExpression( '%s.scale' % sc.name() ) 
+        sc.setInput( i, obj)
+
+    sc.setInput( i+1, nuke.thisNode() )
+    nuke.connectViewer( 1, sc )
+
+
+
+</pre>
+</div>
+<p>Don&#8217;t forget to put a line in your menu.py to add this to the actual snap menu, eg:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Axis' ).addCommand( 'Snap/Scatter Objects', lambda: scatterObjects() )</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3D</a><ul>
+<li><a class="reference internal" href="#getting-basic-selection-information">Getting basic selection information</a></li>
+<li><a class="reference internal" href="#working-with-the-current-selection">Working with the current selection</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#extending-the-snap-menu">Extending the snap menu</a></li>
+<li><a class="reference internal" href="#accessing-geometry-surface-scatter">Accessing Geometry (Surface Scatter)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

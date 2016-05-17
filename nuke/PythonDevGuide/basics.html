@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Nuke as a Python Module" href="nuke_as_python_module.html" />
+    <link rel="prev" title="Start-up Scripts" href="startup.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="nuke_as_python_module.html" title="Nuke as a Python Module"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="startup.html" title="Start-up Scripts"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>This chapter covers some basic examples to get you started with NUKE&#8217;s Python API.</p>
+<p>As you will soon notice after trying to enter a few scripts yourself, the scripts are case-sensitive and only work if you enter them exactly right. There’s a bit of flexibility when it comes to quotation marks and spaces though. You can use both single and double quotes in your statements, and you don’t necessarily need to add a space before the brackets like we have done in the following examples.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you copy and paste example scripts from this user guide into a text editor, line indentations may not be preserved. If this is the case, correct the indentations manually.</p>
+</div>
+<div class="section" id="creating-nodes-and-setting-their-controls">
+<h2>Creating Nodes and Setting Their Controls<a class="headerlink" href="#creating-nodes-and-setting-their-controls" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to create nodes and set their controls using Python.</p>
+<div class="section" id="creating-a-node-in-the-user-interface">
+<h3>Creating a Node in the User Interface<a class="headerlink" href="#creating-a-node-in-the-user-interface" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When creating a node in the user interface such as in response to menu or toolbar action, you should use the syntax:</p>
+<div class="highlight-python"><pre>nuke.createNode( "nodename" )</pre>
+</div>
+<p>where <em>nodename</em> is the name of the node you want to create.</p>
+<p>This syntax creates a new node in the user interface, hooks it up to any user-selected nodes in the Node Graph, and opens the node&#8217;s properties panel.  In addition, any knob defaults are also set on the new node.</p>
+<p>If you wanted to create a Blur node using this statement, you would enter:</p>
+<div class="highlight-python"><pre>nuke.createNode ("Blur")</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may encounter problems if you attempt to use the <strong>nuke.nodes.nodename(...)</strong> or <strong>nuke.createNode(...)</strong> statements to call a file that does exist in your [NUKE directory]/plugins folder but is <strong>not</strong> normally used to create a node or called directly. For example, entering nuke.nodes.drop() or nuke.createNode(&#8220;drop&#8221;) causes NUKE to try and call the drop.tcl file, but because no node called Drop exists, this may result in a crash.
+In general, any files in the plugins directory whose name does not start with a capital letter do not create nodes and should not be used with the nuke.nodes.nodename or nuke.createNode statements.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="creating-a-node-for-scripting">
+<h3>Creating a Node for Scripting<a class="headerlink" href="#creating-a-node-for-scripting" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>When creating a node for use in scripting, batch rendering, or some other background process, you should use the syntax:</p>
+<div class="highlight-python"><pre>nuke.nodes.nodename(...)</pre>
+</div>
+<p>where <em>nodename</em> is the name of the node you want to create.</p>
+<p>This syntax creates a new node object.  It does not connect the node to other nodes in the Node Graph, open the node&#8217;s properties panel, or run any knob defaults.</p>
+<p>For example, to add a Blur node, enter:</p>
+<div class="highlight-python"><pre>nuke.nodes.Blur()</pre>
+</div>
+<p>You can only use this statement if you know the name of the node you want to create and can enter it explicitly in the statement.</p>
+<p>Note that when you have a node selected and create a node this way, the new node is <strong>not</strong> automatically connected to the selected node. If you want the node to be connected, you can use the <strong>setInput()</strong> function, for instance:</p>
+<div class="highlight-python"><pre>nuke.nodes.Blur().setInput(0, nuke.selectedNode())</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using the <strong>nuke.nodes.nodename (...)</strong> statement to create nodes, you can add optional named arguments inside the parenthesis, separated by commas. You can use these arguments to set control values for the node, rename the node, set the node&#8217;s inputs, and (in the case of Read nodes) specify where to load an image from. Setting control values, renaming nodes, and creating Read nodes are described below, whereas setting a node’s inputs is discussed later in this chapter, under “Connecting Nodes and Setting Their Inputs”.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="setting-controls-at-node-creation">
+<h3>Setting Controls at Node Creation<a class="headerlink" href="#setting-controls-at-node-creation" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>To set controls for a node at its creation time, use the following syntax:</p>
+<div class="highlight-python"><pre>nuke.nodes.nodename (control=value)</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>nodename</em> is the name of the node you want to add</li>
+<li><em>control</em> is the name of the control whose value you want to set</li>
+<li><em>value</em> is the value you want to give to the control.</li>
+</ul>
+</dd>
+</dl>
+<p>For example, if you wanted to create a Blur node and set its size control to 10, you would need to enter:</p>
+<div class="highlight-python"><pre>nuke.nodes.Blur(size=10)</pre>
+</div>
+<p>You can check the results in the Blur node’s properties panel, where the value in the size field should be set to 10.</p>
+<p>To create a node and rename it, enter</p>
+<blockquote>
+<div><div class="highlight-python"><pre>nuke.nodes.nodename (name="newname")</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>nodename</em> is the name of the node you want to add</li>
+<li><em>newname</em> is the name that you want to give to the node.</li>
+</ul>
+</dd>
+</dl>
+<p>For example, if you wanted to create a Camera node but call it Projection_Cam, you would enter:</p>
+<div class="highlight-python"><pre>nuke.nodes.Camera (name="Projection_Cam")</pre>
+</div>
+</div></blockquote>
+<p>To create a Read node pointing to a file, enter</p>
+<blockquote>
+<div><div class="highlight-python"><pre>nuke.nodes.Read (file="filepath\filename.ext")</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>filepathfilename.ext</em> represents the path to the image you want to read in.</li>
+</ul>
+</dd>
+</dl>
+<p>For example, if you wanted to read in myimage.cin from C:Temp, you would enter <strong>nuke.nodes.Read (file=&#8221;C:Tempmyimage.cin&#8221;)</strong>.</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The format and other Read node controls may not be set up when using this syntax.</p>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="assigning-variables">
+<h2>Assigning Variables<a class="headerlink" href="#assigning-variables" title="Permalink to this headline">¶</a></h2>
+<p>Since you are likely to want to play with the node after creating it, it makes sense to assign the node to a variable. Then, in your subsequent statements, you can use the variable to refer to the node.</p>
+<p>To add a node and assign it to a variable, enter</p>
+<blockquote>
+<div><div class="highlight-python"><pre>variable=nuke.nodes.nodename (...)</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>variable</em> represents any character or string of characters you want to use as the variable, and <em>nodename</em> the name of the node you want to create.</li>
+</ul>
+</dd>
+</dl>
+<p>For example, you could enter:</p>
+<div class="highlight-python"><pre>b=nuke.nodes.Blur()</pre>
+</div>
+<p>Here, you are adding a Blur node and deciding to call it <strong>b</strong> in your subsequent statements. Of course, you could call it anything you like. If you were adding several Blur nodes to your script, you might want to call them b1, b2, and b3, for example.
+Now, say you created a Blur node and then decided to set its size control to 10. If you have assigned the node to a variable (for example, b), you can do this by entering:</p>
+<div class="highlight-python"><pre>b["size"].setValue(10)</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="getting-the-node-object-for-existing-nodes">
+<h2>Getting the Node Object for Existing Nodes<a class="headerlink" href="#getting-the-node-object-for-existing-nodes" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you need access to the node object for an existing node in the Node Graph.</p>
+<p>To get access to a node via its name, use the following syntax:</p>
+<div class="highlight-python"><pre>nuke.toNode( "dagnodename" )</pre>
+</div>
+<p>where <em>dagnodename</em> is the name of the node as it appears in the Node Graph.  For example, if you had a node in the Node Graph called &#8216;Blur1&#8217;, you would use the following to get access to its node object:</p>
+<div class="highlight-python"><pre>myblurNode = nuke.toNode( 'Blur1' )</pre>
+</div>
+</div>
+<div class="section" id="accessing-selected-nodes-in-the-node-graph">
+<h2>Accessing Selected Nodes in the Node Graph<a class="headerlink" href="#accessing-selected-nodes-in-the-node-graph" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you need access to the selected node(s) in the Node Graph.</p>
+<p>To get the currently selected node, use the following:</p>
+<div class="highlight-python"><pre>selectedNode = nuke.selectedNode()</pre>
+</div>
+<p>If several nodes are selected, NUKE returns the bottom-most node (the output node).</p>
+<p>To access all the selected nodes, use:</p>
+<blockquote>
+<div>selectedNodes = nuke.selectedNodes()</div></blockquote>
+<p>This gives you a list of all the nodes currently selected in the Node Graph.</p>
+</div>
+<div class="section" id="adding-controls-to-nodes">
+<span id="addingparamstonodes-ref-label"></span><h2>Adding Controls to Nodes<a class="headerlink" href="#adding-controls-to-nodes" title="Permalink to this headline">¶</a></h2>
+<p>We’ve now looked at setting control values for the existing controls of a node. But what should you do if you want to add a completely new control to a node? You need to use, for example, the following statements:</p>
+<div class="highlight-python"><pre>b = nuke.nodes.nodename (...)
+k = nuke.Array_Knob("name", "label")
+b.addKnob(k)</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>nodename</em> represents the name of the node to which you want to add a new control.</li>
+<li><em>name</em> represents a unique name you give the control to reference it using scripts and expressions.</li>
+<li><em>label</em> represents the label shown next to the control in the node’s properties panel.</li>
+</ul>
+</dd>
+</dl>
+<p>Let’s say you enter the following lines:</p>
+<div class="highlight-python"><pre>b = nuke.nodes.Blur ()
+k = nuke.Array_Knob("myctrl", "My Control")
+b.addKnob(k)</pre>
+</div>
+<p>Using these statements, you add a Blur node and assign it to the variable b. You then create an input field control, decide to call it “myctrl” in references and “My Control” on the user interface, and assign the control to the variable k. Finally, you add the control (k) to the Blur node’s (b) properties panel.</p>
+<img alt="_images/python_add_knob.jpg" src="_images/python_add_knob.jpg" />
+<p>If you wanted to create a slider control rather than an input field, you’d need to use the following statements (replacing Array_Knob with WH_Knob):</p>
+<div class="highlight-python"><pre>b = nuke.nodes.Blur ()
+k = nuke.WH_Knob("myctrl", "My Control")
+b.addKnob(k)</pre>
+</div>
+<p>The following lines, instead, would produce a checkbox control:</p>
+<div class="highlight-python"><pre>b = nuke.nodes.Blur ()
+k = nuke.Boolean_Knob("myctrl", "My Control")
+b.addKnob(k)</pre>
+</div>
+<p>Now you have a control, but it has no tooltip. Let’s add one. Enter the following statement:</p>
+<div class="highlight-python"><pre>k.setTooltip('My tooltip')</pre>
+</div>
+<p>This adds a tool tip with the words <em>My tooltip</em> to the control created earlier and assigned to variable k.</p>
+<img alt="_images/python_add_knob_tooltip.jpg" src="_images/python_add_knob_tooltip.jpg" />
+<p>To see the tooltip, you may need to close and reopen the node’s properties panel.</p>
+</div>
+<div class="section" id="showing-and-hiding-a-nodes-properties-panel">
+<h2>Showing and Hiding a Node’s Properties Panel<a class="headerlink" href="#showing-and-hiding-a-nodes-properties-panel" title="Permalink to this headline">¶</a></h2>
+<p>Use the <strong>showControlPanel()</strong> and <strong>hideControlPanel()</strong> functions to set whether you want the properties panel of a node to be open. For example, to show the properties panel of a new Blur node, you can enter:</p>
+<div class="highlight-python"><pre>n = nuke.toNode("Blur1")
+n.showControlPanel()</pre>
+</div>
+<p>By default, when creating a node with the user-interface <strong>nuke.createNode(..)</strong> syntax, the properties panel is open. To stop the properties panel appearing when creating a node, use the <strong>inpanel</strong> argument to <strong>createNode()</strong>:</p>
+<div class="highlight-python"><pre>nuke.createNode( "Blur", inpanel = False )</pre>
+</div>
+<p>This creates a Blur node without opening its properties panel.</p>
+</div>
+<div class="section" id="connecting-nodes-and-setting-their-inputs">
+<h2>Connecting Nodes and Setting Their Inputs<a class="headerlink" href="#connecting-nodes-and-setting-their-inputs" title="Permalink to this headline">¶</a></h2>
+<p>You can use a script to set an input for a node.</p>
+<p>Let’s imagine you want to add two Read nodes and a Merge node (in this case, an over node) to your node tree, and connect the Read nodes to the over node’s A and B inputs (numbers 1 and 0), like this:</p>
+<img alt="_images/merge_node.jpg" src="_images/merge_node.jpg" />
+<p>You add the Read nodes and the over node and specify the over node’s inputs using, for example, the following statements:</p>
+<div class="highlight-python"><pre>r1 = nuke.nodes.Read (file="filepath\filename.ext")
+r2 = nuke.nodes.Read (file="filepath\filename.ext")
+m = nuke.nodes.Merge (inputs=[r2, r1])</pre>
+</div>
+<p>where <em>filepathfilename.ext</em> represents the locations and names of the images you want to read in.</p>
+<p>The last statement creates a Merge node and sets r2 (the second Read node) and r1 (the first Read node) as its inputs.</p>
+</div>
+<div class="section" id="setting-default-values-for-controls">
+<h2>Setting Default Values for Controls<a class="headerlink" href="#setting-default-values-for-controls" title="Permalink to this headline">¶</a></h2>
+<p>You can set default values for controls in any nodes that belong to the same class. After a default value is set, all controls with matching names default to this value. To set a default value, use the following statement:</p>
+<div class="highlight-python"><pre>nuke.knobDefault()</pre>
+</div>
+<p>For example, if you want the size control on all Blur nodes to default to 20, you can use the following statement:</p>
+<div class="highlight-python"><pre>nuke.knobDefault("Blur.size", "20")</pre>
+</div>
+<p>If you then wanted the last frame value of the frame range controls in the Project Settings to default to frame 200, you could use the following statement:</p>
+<div class="highlight-python"><pre>nuke.knobDefault("Root.last_frame", "200")</pre>
+</div>
+<p>Note that you need to start the node class with a capital letter (for example, Root rather than root).</p>
+<p>You can also use the knobDefault function to specify file-format-specific controls. These are controls that are added to Read, Write, and other file-format-dependent nodes when the file name is changed. To specify file-format-specific defaults, use the class name, followed by the file format extension and the control name, all separated by periods. For example:</p>
+<div class="highlight-python"><pre>nuke.knobDefault("Read.exr.compression", "2")
+
+nuke.knobDefault("Read.exr.disable_mmap", "True")</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Knob defaults do not run by default for nodes created using the <strong>nuke.nodes.nodename()</strong> syntax. It is also important that you add these statements in your init.py file rather than menu.py. This ensures that they are set for command-line start-up as well as the graphical user interface (GUI). If these statements are not processed until menu.py (GUI start-up), then nodes created from the command line NUKE Python prompt (that is, starting as nuke -t) do not have the defaults applied.</p>
+</div>
+</div>
+<div class="section" id="rendering-with-the-write-node">
+<h2>Rendering with the Write Node<a class="headerlink" href="#rendering-with-the-write-node" title="Permalink to this headline">¶</a></h2>
+<p>Let’s imagine you’ve added a Write1 node into your script. Now, you want to render every other frame of the frames from 1 to 35.</p>
+<p>To render a single Write node, enter:</p>
+<div class="highlight-python"><pre>nuke.execute ("name",start,end,incr)</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>name</em> represents the name of the Write node, for example Write1</li>
+<li><em>start</em> represents the first frame you want to render</li>
+<li><em>end</em> represents the last frame you want to render</li>
+<li><em>incr</em> represents the increment you want to use when rendering. For example, if you used 3 here, NUKE would render every third frame.</li>
+</ul>
+</dd>
+</dl>
+<p>In our example, you would enter:</p>
+<div class="highlight-python"><pre>nuke.execute ("Write1",1,35,2)</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>nuke.execute ("Write1",start=1,end=35,incr=2)</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instead of <strong>nuke.execute(name,start,end,incr)</strong>, you can also use <strong>nuke.render (name,start,end,incr)</strong>. Both statements perform the same action.</p>
+</div>
+<p>To render multiple Write nodes or ranges, enter:</p>
+<div class="highlight-python"><pre>nuke.executeMultiple ((variable,), ([start,end,incr],))</pre>
+</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>variable</em> represents the variables of the Write nodes</li>
+<li><em>start</em> represents the first frames you want to render</li>
+<li><em>end</em> represents the last frames you want to render</li>
+<li><em>incr</em> represents the increments you want to use when rendering. For example, if you used 3 here, NUKE would render every third frame.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="flipbooking-with-external-applications">
+<h2>Flipbooking with External Applications<a class="headerlink" href="#flipbooking-with-external-applications" title="Permalink to this headline">¶</a></h2>
+<p>Nuke Studio&#8217;s player is NUKE’s default application for flipbooking (replacing Framecycler), but you can also use other applications for this, for example RV or Framecycler. In order to do so, you must implement a custom Python class.</p>
+<p>Our example of how to do this is based on RV, which is also used in the flipbooking application example :doc:flipbook. Do the following:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Locate the flipbookingExample.py file and edit it to suit your circumstances, as it won&#8217;t work out of the box.</p>
+</li>
+<li><p class="first">Save the modified file in your .nuke directory, naming it myflipbook.py, for example.</p>
+</li>
+<li><p class="first">In your init.py (or menu.py) file, add the following line:</p>
+<div class="highlight-python"><pre>from myflipbook import *</pre>
+</div>
+</li>
+</ol>
+</div></blockquote>
+<p>For further details:, refer to the nukescripts.flipbooking.FlipbookApplication module in the Python Scripting documentation.</p>
+</div>
+<div class="section" id="listing-a-nodes-controls">
+<h2>Listing a Node’s Controls<a class="headerlink" href="#listing-a-nodes-controls" title="Permalink to this headline">¶</a></h2>
+<p>If necessary, you can have NUKE list all the controls in a node’s properties panel.</p>
+<p>To list a node’s controls, enter:</p>
+<div class="highlight-python"><pre>for i in range (getNumKnobs()):
+    print knob (i).name()</pre>
+</div>
+<p>Make sure you enter this compound statement on two separate lines and indent the second line.</p>
+<p>For example, to list the controls of the Blur node you added earlier and assigned to variable b, you would enter:</p>
+<div class="highlight-python"><pre>for i in range (b.getNumKnobs()):
+    print b.knob (i).name()</pre>
+</div>
+<p>As a result, NUKE lists the Blur node’s controls, displaying them in the output pane of the Script Editor.</p>
+</div>
+<div class="section" id="undoing-and-redoing-actions">
+<h2>Undoing and Redoing Actions<a class="headerlink" href="#undoing-and-redoing-actions" title="Permalink to this headline">¶</a></h2>
+<p>To undo actions, enter:</p>
+<div class="highlight-python"><pre>nuke.undo()</pre>
+</div>
+<p>To redo actions, enter:</p>
+<div class="highlight-python"><pre>nuke.redo()</pre>
+</div>
+</div>
+<div class="section" id="frame-navigation">
+<h2>Frame Navigation<a class="headerlink" href="#frame-navigation" title="Permalink to this headline">¶</a></h2>
+<p>To use the frame navigation buttons of the currently active Viewer, enter the following statement:</p>
+<div class="highlight-python"><pre>nuke.activeViewer().frameControl(i)</pre>
+</div>
+<p>where <em>i</em> is an integer that indicates the frame navigation button you want to execute. You can replace <em>i</em> with the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>-6</em> to go to the first frame.</li>
+<li><em>-5</em> to play the sequence backward.</li>
+<li><em>-4</em> to go to the previous keyframe.</li>
+<li><em>-3</em> to step back by increment.</li>
+<li><em>-2</em> to go back to the previous keyframe or increment, whichever is closer.</li>
+<li><em>-1</em> to step back one frame.</li>
+<li><em>0</em> to stop playback.</li>
+<li><em>+1</em> to step forward one frame.</li>
+<li><em>+2</em> to go to the next keyframe or increment, whichever is closer.</li>
+<li><em>+3</em> to step forward by increment.</li>
+<li><em>+4</em> to go to the next keyframe.</li>
+<li><em>+5</em> to play the sequence forward.</li>
+<li><em>+6</em> to go to the last frame.</li>
+</ul>
+</div></blockquote>
+<p>You can also assign these buttons to a hotkey. For example, to assign the play button to the Up arrow key, do the following:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Create a file called menu.py in your plug-in path directory if one doesn’t already exist.  For more information on plug-in path directories, see <em>Loading Gizmos, NDK Plug-ins, and TCL scripts</em> in the <em>Configuring Nuke</em> chapter of the Nuke User Guide.</p>
+</li>
+<li><p class="first">Add the following entry in your menu.py:</p>
+<div class="highlight-python"><pre>def play():
+  v = nuke.activeViewer()
+  if v:
+    v.play( 1 )
+
+menubar = nuke.menu("Nuke");
+m = menubar.addMenu("&amp;File")
+m.addCommand("@;Play", "play()", "Up")</pre>
+</div>
+</li>
+</ol>
+<p>This assigns the hotkey to an invisible menu item (<strong>&#64;</strong> before the name of the menu item makes the item invisible).</p>
+</div></blockquote>
+</div>
+<div class="section" id="setting-frame-ranges">
+<h2>Setting Frame Ranges<a class="headerlink" href="#setting-frame-ranges" title="Permalink to this headline">¶</a></h2>
+<p>To set a single frame range, use</p>
+<blockquote>
+<div><div class="highlight-python"><pre>nuke.FrameRange()</pre>
+</div>
+<p>This can only be used to store one frame range. You can set the frame range using, for example:</p>
+<div class="highlight-python"><pre>frange = nuke.FrameRange("1-100×2")</pre>
+</div>
+<p>The 1-100x2 syntax in the above statement sets the frame range to 1, 3, 5, 7, 9, 11...99. For more examples of the syntax that you can use, see <em>Defining Frame Ranges</em> in the <em>Managing Scripts</em> chapter of the Nuke Getting Started Guide.</p>
+<p>If the frame range is not valid, an exception is thrown.</p>
+<p>To iterate all frames in the frame range you defined above, you can use:</p>
+<div class="highlight-python"><pre>for f in frange:
+  print f</pre>
+</div>
+<p>You can also use the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>frange.setFirst(int)</strong> to set the first frame.</li>
+<li><strong>frange.setLast(int)</strong> to set the last frame.</li>
+<li><strong>frange.setIncrement(int)</strong> to set the increment.</li>
+<li><strong>frange.first()</strong> to get the first frame.</li>
+<li><strong>frange.last()</strong> to get the last frame.</li>
+<li><strong>frange.increment()</strong> to get the increment.</li>
+<li><strong>frange.frames()</strong> to get the number of frames in the frame range.</li>
+<li><strong>frange.getFrame(int)</strong> to get the frame at a specific index.</li>
+<li><strong>frange.isInRange(int)</strong> to return True if a frame is in the frame range, or False if it’s not.</li>
+<li><strong>frange.minFrame()</strong> to return the smallest frame number in the frame range.</li>
+<li><strong>frange.maxFrame()</strong> to return the largest frame number in the frame range.</li>
+<li><strong>frange.stepFrame()</strong> to return the absolute increment between one frame and another. For example, if the real increment in the frame range was -3, this would return 3.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<dl class="docutils">
+<dt>To store multiple frame ranges, use:</dt>
+<dd><div class="first highlight-python"><pre>nuke.FrameRanges()</pre>
+</div>
+<p>When using nuke.FrameRanges(), you can define the frame ranges in the following ways:</p>
+<ul>
+<li><p class="first">by listing the frames to include, for example:</p>
+<div class="highlight-python"><pre>franges = nuke.FrameRanges( [1, 2, 3, 6, 7, 8] )</pre>
+</div>
+</li>
+<li><p class="first">by using a single string, for example:</p>
+<div class="highlight-python"><pre>franges = nuke.FrameRanges( "1-100 2-300×2" )</pre>
+</div>
+</li>
+<li><p class="first">by using multiple strings, for example:</p>
+<div class="highlight-python"><pre>franges = nuke.FrameRanges( [ "1-10×1", "15-18×1 30-40×2" ] )</pre>
+</div>
+</li>
+<li><p class="first">by using multiple nuke.FrameRange() calls, for example:</p>
+<div class="highlight-python"><pre>franges = nuke.FrameRanges( [ nuke.FrameRange(1,100,5), nuke.FrameRange(200,250,3)] )</pre>
+</div>
+</li>
+</ul>
+<p class="last">For more examples of the syntax that you can use when defining frame ranges in NUKE, see <em>Defining Frame Ranges</em> in the <em>Managing Scripts</em> chapter of the Nuke Getting Started Guide.</p>
+</dd>
+</dl>
+<p>To iterate all the frame ranges stored (in this case, using the franges variable), you can use:</p>
+<div class="highlight-python"><pre>for r in franges:
+  for f in r:
+    print f</pre>
+</div>
+<p>This prints all the frames stored in the frame ranges.</p>
+<dl class="docutils">
+<dt>You can also use the following methods:</dt>
+<dd><ul class="first last simple">
+<li><strong>franges.size()</strong> to return the number of frame ranges stored.</li>
+<li><strong>franges.add()</strong> to add another frame range to the stored frame ranges.</li>
+<li><strong>franges.minFrame()</strong> to get the smallest frame number in the stored frame ranges.</li>
+<li><strong>franges.maxFrame()</strong> to get the largest frame number in the stored frame ranges.</li>
+<li><strong>franges.clear()</strong> to reset all the stored frame ranges.</li>
+<li><strong>franges.compact()</strong> to optimize the way the frame ranges are expressed, removing any duplicates.</li>
+<li><strong>franges.toFrameList()</strong> to list all frames in the stored frame ranges.</li>
+<li><strong>franges.getRange()</strong> to get a frame range in the stored frame ranges.</li>
+</ul>
+</dd>
+</dl>
+<p>The <strong>franges.compact()</strong> method can be used to optimize the way the stored frame ranges are expressed. Where possible, it removes duplicate frame ranges and expresses the stored frame ranges in a more compact way. Here are two examples:</p>
+<p>Example 1:</p>
+<div class="highlight-python"><pre>franges1 = nuke.FrameRanges("10-7x-1 1-5×1 3-7×1")
+franges1.compact()
+print "Ranges1: " + franges</pre>
+</div>
+<p>This returns the following:
+Ranges1: 1-10×1</p>
+<p>Example 2:</p>
+<div class="highlight-python"><pre>franges2 = nuke.FrameRanges("10-7x-1 6-8×1 1-4×1 2-3×1")
+franges2.compact()
+print "Ranges2: " + franges2</pre>
+</div>
+<p>This returns the following:
+Ranges2: 1-4×1 6-10×1</p>
+</div>
+<div class="section" id="marking-frame-numbers-in-file-names">
+<h2>Marking Frame Numbers in File Names<a class="headerlink" href="#marking-frame-numbers-in-file-names" title="Permalink to this headline">¶</a></h2>
+<p>In NUKE, frame numbers in file names can be indicated using both hashes (#) and the printf style (%04d). Because of this, you may find it useful to use the
+<strong>nukescripts.replaceHashes()</strong> function to replace a sequence of hashes with the equivalent printf style formatting. This makes it easy to do frame number substitutions like the following:</p>
+<div class="highlight-python"><pre>filename = nukescripts.replaceHashes( node['file'].value() ) % nuke.frame()</pre>
+</div>
+</div>
+<div class="section" id="copying-an-animation-curve-between-nodes">
+<h2>Copying an Animation Curve Between Nodes<a class="headerlink" href="#copying-an-animation-curve-between-nodes" title="Permalink to this headline">¶</a></h2>
+<p>To copy an animation curve from one node to another, for example, from Blur1 to Blur2, you can do the following:</p>
+<div class="highlight-python"><pre># The following statements create the two Blur nodes (Blur1 and Blur2) and assign them to variables b1 and b2.
+b1 = nuke.nodes.Blur()
+b2 = nuke.nodes.Blur()
+# The following assigns the size control of the Blur1 node to the variable k1.
+k1 = b1['size']
+# The following three statements animate the control assigned to k1. At frame 30, its value is set to 10. At frame 40, it’s set to 20.
+k1.setAnimated()
+k1.setValue(10, time = 30)
+k1.setValue(20, time = 40)
+# The following assigns the size control of the Blur2 node to the variable k2.
+k2 = b2['size']
+# The following copies the animation curve from k1 (size on Blur1) to k2 (size on Blur2).
+k2.copyAnimations(k1.animations())</pre>
+</div>
+</div>
+<div class="section" id="overriding-the-creation-of-a-particular-node">
+<h2>Overriding the Creation of a Particular Node<a class="headerlink" href="#overriding-the-creation-of-a-particular-node" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, you may want to override the creation of a particular node. For example, NUKE includes two versions of the Merge node: Merge and Merge2. By default, Merge2 is inserted when you select Merge &gt; Merge from the toolbar. However, if you’d prefer to use Merge, you can override the creation of the node so that NUKE creates the Merge node by default. To do so, follow these steps:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Create a file called menu.py in your plug-in path directory if one doesn’t already exist.  For more information on plug-in path directories, see <em>Loading Gizmos, NDK Plug-ins, and TCL scripts</em> in the <em>Configuring Nuke</em> chapter of the Nuke User Guide.</p>
+</li>
+<li><p class="first">Add the following entry:</p>
+<div class="highlight-python"><pre>class MyCustomNodes():
+   def __getattr__(self, args):
+      if args == "Merge2": args = "Merge"
+      return nuke.NodeConstructor(args)
+nuke.nodes = MyCustomNodes()</pre>
+</div>
+</li>
+</ol>
+<p>You can also do the same using the <strong>nuke.createNode</strong> statement rather than the <strong>nuke.nodes.nodename</strong> statement. In this case, add the following entry instead of the entry described in step 2:</p>
+<div class="highlight-python"><pre>def createMyCustomNodes(node, knobs = "", inpanel = True):
+   if node == "Merge2": node = "Merge"
+   return nukeOriginalCreateNode(node = node, knobs = knobs, inpanel = inpanel)
+nuke.createNode = createMyCustomNodes</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="getting-information-on-the-nuke-environment-you-are-running">
+<h2>Getting Information on the NUKE Environment You Are Running<a class="headerlink" href="#getting-information-on-the-nuke-environment-you-are-running" title="Permalink to this headline">¶</a></h2>
+<p>In the NUKE module, there is an object called <strong>env</strong>. This object gives you information about the particular NUKE environment you are running. You can access it in a dictionary form: <strong>nuke.env[&#8220;key&#8221;]</strong>.</p>
+<p>Currently, you can use the following statements to get the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>nuke.env [&#8220;PluginExtension&#8221;]</strong>. This returns the file extension for plug-ins. The extension can be .dll on Windows, .so on Linux, and .dylib on Mac.</li>
+<li><strong>nuke.env [&#8220;NukeVersionMajor&#8221;]</strong>. This returns the first number in the version number of NUKE. For example, if you were running NUKE 6.2v1, this would return 6.</li>
+<li><strong>nuke.env [&#8220;NukeVersionMinor&#8221;]</strong>. This returns the second number in the version number of NUKE. For example, if you were running NUKE 6.2v1, this would return 2.</li>
+<li><strong>nuke.env [&#8220;NukeVersionRelease&#8221;]</strong>. This returns the number after the letter v in the version number of NUKE. For example, if you were running NUKE 6.2v1, this would return 1.</li>
+<li><strong>nuke.env [&#8220;NukeVersionPhase&#8221;]</strong>. This returns the last string in the version number of a NUKE beta. For example, if you were running NUKE 6.2v1b3, this would return b.</li>
+<li><strong>nuke.env [&#8220;NukeVersionPhaseNumber&#8221;]</strong>. This returns the last number in the version number of a NUKE beta. For example, if you were running NUKE 6.2v1b3, this would return 3.</li>
+<li><strong>nuke.env [&#8220;NukeVersionDate&#8221;]</strong>. This returns the date the version of NUKE you are running was built.</li>
+<li><strong>nuke.env [&#8220;NukeVersionString&#8221;]</strong>. This returns the entire version number of NUKE.</li>
+<li><strong>nuke.env [&#8220;threads&#8221;]</strong>. This returns the number of threads that are spawned when rendering.</li>
+<li><strong>nuke.env [&#8220;numCPUs&#8221;]</strong>. This returns the number of detected CPUs.</li>
+<li><strong>nuke.env [&#8220;gui&#8221;]</strong>. This returns True if you are using the graphical user interface of NUKE, and False if you are running NUKE from a terminal or command prompt.</li>
+<li><strong>nuke.env [&#8220;ExecutablePath&#8221;]</strong>. This returns the full path to NUKE’s executable.</li>
+<li><strong>nuke.env [&#8220;ple&#8221;]</strong>. This returns True if you are running the Personal Learning Edition of NUKE, and False if you are running the commercial version.</li>
+<li><strong>nuke.env [&#8220;WIN32&#8221;]</strong>. This returns True if you are running NUKE on Windows, and False if you are not.</li>
+<li><strong>nuke.env [&#8220;MACOS&#8221;]</strong>. This returns True if you are running NUKE on a Mac, and False if you are not.</li>
+<li><strong>nuke.env[&#8220;LINUX&#8221;]</strong>. This returns True if you are running NUKE on Linux, and False if you are not.</li>
+<li><strong>nuke.env [&#8220;64bit&#8221;]</strong>. This returns True if you are running a 64-bit NUKE.</li>
+</ul>
+</div></blockquote>
+<p>To find out what’s in the NUKE “global environment”, you can also use the following statement:</p>
+<div class="highlight-python"><pre>print nuke.env</pre>
+</div>
+<p>Some of the items are read-only (for example, ‘64-bit’ and ‘ple’), while others can be set (for example, ‘threads’).</p>
+</div>
+<div class="section" id="accessing-node-metadata">
+<h2>Accessing Node Metadata<a class="headerlink" href="#accessing-node-metadata" title="Permalink to this headline">¶</a></h2>
+<p>To get a Python dictionary with all the metadata for a node (in this case, Read1), use:</p>
+<div class="highlight-python"><pre>nuke.toNode("Read1").metadata()</pre>
+</div>
+<p>If you’re interested in the metadata at a particular frame or in a particular view, you can also specify these as optional arguments:</p>
+<div class="highlight-python"><pre>nuke.toNode("Read1").metadata("key", frame, "view")</pre>
+</div>
+<p>For example, say you have loaded a stereo pair of images in one Read node. If you want to find out the file modification time at frame 93 in the left view, you can do the following:</p>
+<div class="highlight-python"><pre>nuke.toNode("Read1").metadata("input/mtime", 93, "left")</pre>
+</div>
+<p>Similarly, the following gets you the file size at frame 95 in the right view:</p>
+<div class="highlight-python"><pre>nuke.toNode("Read1").metadata("input/filesize", 95, "right")</pre>
+</div>
+<p>To get the value for a particular key in the metadata, use:</p>
+<div class="highlight-python"><pre>nuke.toNode("Read1").metadata("key")</pre>
+</div>
+<p>For example, <strong>nuke.toNode(&#8220;Read1&#8221;).metadata(&#8220;input/ctime&#8221;)</strong> will return the value for the key called <em>input/ctime</em>.</p>
+</div>
+<div class="section" id="creating-dialogs-and-panels">
+<h2>Creating Dialogs and Panels<a class="headerlink" href="#creating-dialogs-and-panels" title="Permalink to this headline">¶</a></h2>
+<p>You can create modal dialogs and non-modal panels. Modal dialogs pop up in their own window and will not let the user do anything outside the dialog until the dialog is closed. Non-modal panels float above everything else and can be docked into panes and saved with window layouts.</p>
+<p>Dialogs and panels can be invoked at start-up or when the user selects a menu item that calls the panel.</p>
+<div class="section" id="creating-modal-dialogs">
+<h3>Creating Modal Dialogs<a class="headerlink" href="#creating-modal-dialogs" title="Permalink to this headline">¶</a></h3>
+<p>To create a modal dialog with <strong>OK</strong> and <strong>Cancel</strong> buttons, read through the following instructions and have a look at the Python dialog example below.</p>
+<dl class="docutils">
+<dt>To create a modal dialog:</dt>
+<dd><ol class="first arabic">
+<li><p class="first">Create a file called menu.py in your plug-in path directory if one doesn’t already exist.  For more information on plug-in path directories, see <em>Loading Gizmos, NDK Plug-ins, and TCL scripts</em> in the <em>Configuring Nuke</em> chapter of the Nuke User Guide.</p>
+</li>
+<li><p class="first">In the menu.py file, write a Python class that extends the PythonPanel class. Use the following statements:</p>
+<div class="highlight-python"><pre>class ClassName( nukescripts.PythonPanel ):
+  def __init__( self ):
+    nukescripts.PythonPanel.__init__( self, "title", "ID" )</pre>
+</div>
+</li>
+</ol>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>ClassName</em> is the name of your Python class.</li>
+<li><em>title</em> is the window title of your dialog.</li>
+<li><em>ID</em> is a unique ID for the dialog. Using an ID when creating a modal dialog is optional. If you do use one, we recommend using a reverse domain name system, for example, <em>uk.co.thefoundry.mydialog</em>.</li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="3">
+<li>Use <strong>addKnob()</strong> to add controls to your dialog. You can also use <strong>removeKnob()</strong> to remove a control, <strong>knobs()</strong> to return a list of the controls on the dialog, <strong>writeKnobs()</strong> to save control values in a string, and <strong>readKnobs()</strong> to restore them from a string.  Any controls that can be added using the <strong>Manage User Knobs</strong> dialog can also be added to a dialog. This includes the following: Unsigned_Knob, Boolean_Knob, Int_Knob, ColorChip_Knob, String_Knob, EvalString_Knob, Multiline_Eval_String_Knob, File_Knob, BBox_Knob, Double_Knob, WH_Knob, Channel_Knob, Script_Knob, PyScript_Knob, ChannelMask_Knob, Enumeration_Knob, Tab_Knob, Font_Knob, Text_Knob, Axis_Knob, XYZ_Knob, Scale_Knob, XY_Knob, Format_Knob, LookupCurves_Knob, Keyer_Knob, Color_Knob, AColor_Knob, Eyedropper_Knob, Transform2d_Knob, Link_Knob, Box3_Knob, Help_Knob, Range_Knob, Pulldown_Knob, Bitmask_Knob, Histogram_Knob, and UV_Knob.</li>
+</ol>
+<p>4.  Write another function and use showModalDialog() to display the dialog. This adds <strong>OK</strong> and <strong>Cancel</strong> buttons to your dialog and makes the dialog modal.
+You can also use the hide statement to hide the dialog.</p>
+<p class="last">5.  Create a menu item that calls the previous function. For more information on how to do this, see <em>To define a menu or toolbar option</em> in the <em>Configuring Nuke</em> chapter of the Nuke User Guide.
+Alternatively, if you want to call the dialog at start-up, you can call the function after defining it.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="python-dialog-example">
+<h3>Python Dialog Example<a class="headerlink" href="#python-dialog-example" title="Permalink to this headline">¶</a></h3>
+<p>This example creates a modal dialog that has a <strong>Frame</strong> control and <strong>OK</strong> and <strong>Cancel</strong> buttons. The <strong>Frame</strong> control sets the frame to go to on the timeline. However, entering a new value for the <strong>Frame</strong> control does not change the current frame. The current frame is only changed when the user hits <strong>OK</strong>.</p>
+<img alt="_images/modal_dialog.jpg" src="_images/modal_dialog.jpg" />
+<p>Here’s the example with comments:</p>
+<div class="highlight-python"><pre>import nukescripts
+if nuke.env["gui"]:
+# The following defines a new class called ModalFramePanel.
+   class ModalFramePanel( nukescripts.PythonPanel ):
+# The following function creates a dialog titled 'Go to Frame' with the optional ID uk.co.thefoundry.FramePanel. It aso adds an integer control called
+'frame' to the dialog. This control is set to the value nuke.frame() which is the
+current frame on the timeline.
+      def __init__( self ):
+         nukescripts.PythonPanel.__init__( self, "Go to Frame", "uk.co.thefoundry.FramePanel" )
+         self.frame = nuke.Int_Knob( "frame", "Frame:" )
+         self.addKnob( self.frame )
+         self.frame.setValue( nuke.frame() )
+# The next function shows the dialog as a modal dialog. Doing this automatically adds the 'OK' and 'Cancel' buttons to the dialog.
+      def showModalDialog( self ):
+         result = nukescripts.PythonPanel.showModalDialog( self )
+         if result:
+            nuke.frame( self.frame.value() )
+# The following function is called testModalPanel and tests whether the dialog works.
+   def testModalPanel():
+      return ModalFramePanel().showModalDialog()
+# This last line calls the test function that then displays the dialog.
+   testModalPanel()
+# If you want to add the dialog to a menu item, you can also do the following:
+menubar = nuke.menu("Nuke")
+menubar.addCommand("&amp;File/Show My Panel", testModalPanel)</pre>
+</div>
+</div>
+<div class="section" id="creating-non-modal-panels">
+<h3>Creating Non-Modal Panels<a class="headerlink" href="#creating-non-modal-panels" title="Permalink to this headline">¶</a></h3>
+<p>To create a dockable panel that can be saved with window layouts, read through the following instructions and have a look at the non-modal panel example below.</p>
+<p>To create a non-modal panel:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Create a file called menu.py in your plug-in path directory if one doesn’t already exist.  For more information on plug-in path directories, see <em>Loading Gizmos, NDK Plug-ins, and TCL scripts</em> in the <em>Configuring Nuke</em> chapter of the Nuke User Guide.</p>
+</li>
+<li><p class="first">In the menu.py file, write a Python class that extends the PythonPanel::class. Use the following statements:</p>
+<div class="highlight-python"><pre>class ClassName( nukescripts.PythonPanel ):
+  def __init__( self ):
+    nukescripts.PythonPanel.__init__( self, "title", "ID" )</pre>
+</div>
+</li>
+</ol>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><em>ClassName</em> is the name of your Python class.</li>
+<li><em>title</em> is the window title of your panel.</li>
+<li><em>ID</em> is a unique ID for the dialog used for saving the panel in window layouts. We recommend using a reverse domain name system to avoid clashes, for example, uk.co.thefoundry.mypanel.</li>
+</ul>
+</dd>
+</dl>
+<p>3.  Use <strong>addKnob()</strong> to add controls to your panel. You can also use <strong>removeKnob()</strong> to remove a control, <strong>knobs()</strong> to return a list of the controls on the panel, <strong>writeKnobs()</strong> to save control values in a string, and <strong>readKnobs()</strong> to restore them from a string.
+Any controls that can be added using the <strong>Manage User Knobs</strong> dialog can also be added to a panel. This includes the following: Unsigned_Knob, Boolean_Knob, Int_Knob, Colorchip_Knob, String_Knob, EvalString_Knob, Multiline_Eval_String_Knob, File_Knob, BBox_Knob, Double_Knob, WH_Knob, Channel_Knob, Script_Knob, PyScript_Knob, ChannelMask_Knob, Enumeration_Knob, Tab_Knob, Font_Knob, Text_Knob, Axis_Knob, XYZ_Knob, Scale_Knob, XY_Knob, Format_Knob, LookupCurves_Knob, Keyer_Knob, Color_Knob, AColor_Knob, Eyedropper_Knob, Transform2d_Knob, Link_Knob, Box3_Knob, Help_Knob, Range_Knob, Pulldown_Knob, Bitmask_Knob, Histogram_Knob, and UV_Knob.</p>
+<p>4.  Write a second function that creates the panel when the user selects it from a content menu or restores a layout containing it. Use <strong>addToPane()</strong> to add the panel into the pane.
+To get the pane, you should use <strong>nuke.thisPane()</strong>. This is only valid when executing a content menu command or when restoring a panel in a window layout.
+To display the panel without adding it to the content menus and having the users select it from there, you can use the <strong>show()</strong> statement.</p>
+<p>5.  Create a menu item that calls the previous function. For example, you can add the menu item to the <strong>Pane</strong> menu. This way, your panel will be placed in the content menus where the panel will appear in a submenu called <strong>Pane</strong>.
+Alternatively, if you want to call the panel at start-up, you can call the function after defining it.</p>
+<ol class="arabic" start="6">
+<li><p class="first">If you want your dialog to be saved with window layouts, you need to register your panel for that. In order for this to work at start-up, you must register your panel using a file called init.py because this file is read before the layout is restored. In your init.py file, enter:</p>
+<div class="highlight-python"><pre>**nukescripts.registerPanel(ID, function)**</pre>
+</div>
+</li>
+</ol>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>ID</em> is the unique ID of the panel, for example uk.co.thefoundry.mypanel.</li>
+<li><em>function</em> is your Python function that creates the panel.</li>
+</ul>
+</div></blockquote>
+<p>NUKE then saves the ID in the layout file and tries to call the function when the layout is restored.
+If you want to unregister your panel, you can use <strong>nukescripts.unregisterPanel (ID, function)</strong>.</p>
+</div></blockquote>
+</div>
+<div class="section" id="non-modal-panel-example">
+<h3>Non-Modal Panel Example<a class="headerlink" href="#non-modal-panel-example" title="Permalink to this headline">¶</a></h3>
+<p>This example creates a panel that you can add to a pane by selecting <strong>Pane</strong> &gt; <strong>Frame Panel</strong> from a content menu. The panel appears as a tab in that pane and can also be floated. The tab is called <strong>Go to Frame</strong>. It includes a <strong>Frame</strong> control that allows the user to set the current frame on the timeline.</p>
+<p>Here’s the example with comments:</p>
+<div class="highlight-python"><pre>import nukescripts
+# The following first defines a new class called FramePanel.
+class FramePanel( nukescripts.PythonPanel ):
+# The following is a function that creates the panel. The panel is given the
+title 'Go to Frame' and the ID uk.co.thefoundry.FramePanel. The ID is used
+for saving window layouts that contain this panel. An integer control called 'frame'
+is also added to the panel. Its value is set to nuke.frame(), which is the
+current frame on the timeline.
+  def __init__( self ):
+    nukescripts.PythonPanel.__init__( self, "Go to Frame", "uk.co.thefoundry.FramePanel" )
+    self.frame = nuke.Int_Knob( "frame", "Frame:" )
+    self.addKnob( self.frame )
+    self.frame.setValue( nuke.frame() )
+# This function tells NUKE to change the current frame on the timeline if the user changes the value of the 'frame' control.
+  def knobChanged( self, knob ):
+    if knob == self.frame:
+      nuke.frame( self.frame.value() )
+# The next function (called testPanel) is called to create the panel when the user selects it from a content menu or restores a layout containing it. The function can either create a new panel or return a singleton if only one such panel is allowed to exist.
+def testPanel():
+  return FramePanel().addToPane()
+# Next, the testPanel function is added to the content menus where it will appear under Pane &gt; Frame Panel.
+menu = nuke.menu( "Pane" )
+menu.addCommand( "Frame Panel", testPanel )
+# Finally, the panel’s unique ID is registered for window layout restoration. The testPanel function is called to create the panel that should go into the pane with the unique ID.
+nukescripts.registerPanel( "uk.co.thefoundry.FramePanel", testPanel )</pre>
+</div>
+</div>
+</div>
+<div class="section" id="creating-progress-bar-dialogs">
+<h2>Creating Progress Bar Dialogs<a class="headerlink" href="#creating-progress-bar-dialogs" title="Permalink to this headline">¶</a></h2>
+<p>For lengthy tasks, you can create progress bar dialogs in the following manner:</p>
+<div class="highlight-python"><pre>import threading
+import time
+def selfDestruct():
+  task = nuke.ProgressTask("Self Destructing")
+  task.setMessage("Deleting files")
+  for i in xrange( 0, 100 ):
+    if task.isCancelled():
+      nuke.executeInMainThread( nuke.message, args=( "Phew!" ) )
+      break;
+    task.setProgress(i)
+    time.sleep( 0.5 )
+threading.Thread( None, selfDestruct ).start()</pre>
+</div>
+<p>This creates a progress bar dialog with the major message <em>Self Destructing</em> and the minor message <em>Deleting files</em>. The isCancelled method returns True if the user has pressed the <strong>Cancel</strong> button.</p>
+<dl class="docutils">
+<dt>There are a few important things to note here:</dt>
+<dd><ul class="first last simple">
+<li>You need to have the loop, because otherwise you&#8217;ll never find out if the task was cancelled.</li>
+<li>You mustn&#8217;t run this loop in NUKE&#8217;s main thread (for example, by typing it into the Script Editor) because that hangs NUKE until the loop has finished.</li>
+<li>Therefore, you need to start a new thread to do your lengthy processing. This way, NUKE doesn&#8217;t hang.</li>
+<li>However, you can&#8217;t call <strong>nuke.message</strong> from a thread, so you need to use <strong>nuke.executeInMainThread()</strong> in order to display the message.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="clearing-out-the-current-nuke-nk-script">
+<h2>Clearing out the Current NUKE (.nk) Script<a class="headerlink" href="#clearing-out-the-current-nuke-nk-script" title="Permalink to this headline">¶</a></h2>
+<p>To clear out the current NUKE script without opening a new NUKE window, use the following statement:</p>
+<div class="highlight-python"><pre>nuke.scriptClear()</pre>
+</div>
+</div>
+<div class="section" id="creating-views-for-a-stereoscopic-project">
+<h2>Creating Views for a Stereoscopic Project<a class="headerlink" href="#creating-views-for-a-stereoscopic-project" title="Permalink to this headline">¶</a></h2>
+<p>To create a new view for a stereoscopic or multi-view project, use the following statement:</p>
+<div class="highlight-python"><pre>nuke.Root().addView("name")</pre>
+</div>
+<p>where <em>name</em> is the name of the new view.</p>
+<p>For example, to add a view called &#8216;left&#8217;, you should use the following:</p>
+<div class="highlight-python"><pre>nuke.Root().addView("left")</pre>
+</div>
+</div>
+<div class="section" id="adjusting-control-values-in-stereo-projects">
+<h2>Adjusting Control Values in Stereo Projects<a class="headerlink" href="#adjusting-control-values-in-stereo-projects" title="Permalink to this headline">¶</a></h2>
+<p>When you have created multiple views in your project, you can adjust node controls separately for each view. To do so, you need to use the setValue statement, which takes a view argument.</p>
+<p>For example, if you have created views called &#8216;left&#8217; and &#8216;right&#8217; in your project, you can do the following:</p>
+<div class="highlight-python"><pre>n = nuke.nodes.Blur()
+n['size'].splitView()
+n['size'].setValue(10, view = "left")
+n['size'].setValue(20, view = "right")</pre>
+</div>
+<p>This adds a Blur node into your script, splits the Size control off, and gives the left view the value 10 and the right view the value 20.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a><ul>
+<li><a class="reference internal" href="#creating-nodes-and-setting-their-controls">Creating Nodes and Setting Their Controls</a><ul>
+<li><a class="reference internal" href="#creating-a-node-in-the-user-interface">Creating a Node in the User Interface</a></li>
+<li><a class="reference internal" href="#creating-a-node-for-scripting">Creating a Node for Scripting</a></li>
+<li><a class="reference internal" href="#setting-controls-at-node-creation">Setting Controls at Node Creation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#assigning-variables">Assigning Variables</a></li>
+<li><a class="reference internal" href="#getting-the-node-object-for-existing-nodes">Getting the Node Object for Existing Nodes</a></li>
+<li><a class="reference internal" href="#accessing-selected-nodes-in-the-node-graph">Accessing Selected Nodes in the Node Graph</a></li>
+<li><a class="reference internal" href="#adding-controls-to-nodes">Adding Controls to Nodes</a></li>
+<li><a class="reference internal" href="#showing-and-hiding-a-nodes-properties-panel">Showing and Hiding a Node’s Properties Panel</a></li>
+<li><a class="reference internal" href="#connecting-nodes-and-setting-their-inputs">Connecting Nodes and Setting Their Inputs</a></li>
+<li><a class="reference internal" href="#setting-default-values-for-controls">Setting Default Values for Controls</a></li>
+<li><a class="reference internal" href="#rendering-with-the-write-node">Rendering with the Write Node</a></li>
+<li><a class="reference internal" href="#flipbooking-with-external-applications">Flipbooking with External Applications</a></li>
+<li><a class="reference internal" href="#listing-a-nodes-controls">Listing a Node’s Controls</a></li>
+<li><a class="reference internal" href="#undoing-and-redoing-actions">Undoing and Redoing Actions</a></li>
+<li><a class="reference internal" href="#frame-navigation">Frame Navigation</a></li>
+<li><a class="reference internal" href="#setting-frame-ranges">Setting Frame Ranges</a></li>
+<li><a class="reference internal" href="#marking-frame-numbers-in-file-names">Marking Frame Numbers in File Names</a></li>
+<li><a class="reference internal" href="#copying-an-animation-curve-between-nodes">Copying an Animation Curve Between Nodes</a></li>
+<li><a class="reference internal" href="#overriding-the-creation-of-a-particular-node">Overriding the Creation of a Particular Node</a></li>
+<li><a class="reference internal" href="#getting-information-on-the-nuke-environment-you-are-running">Getting Information on the NUKE Environment You Are Running</a></li>
+<li><a class="reference internal" href="#accessing-node-metadata">Accessing Node Metadata</a></li>
+<li><a class="reference internal" href="#creating-dialogs-and-panels">Creating Dialogs and Panels</a><ul>
+<li><a class="reference internal" href="#creating-modal-dialogs">Creating Modal Dialogs</a></li>
+<li><a class="reference internal" href="#python-dialog-example">Python Dialog Example</a></li>
+<li><a class="reference internal" href="#creating-non-modal-panels">Creating Non-Modal Panels</a></li>
+<li><a class="reference internal" href="#non-modal-panel-example">Non-Modal Panel Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-progress-bar-dialogs">Creating Progress Bar Dialogs</a></li>
+<li><a class="reference internal" href="#clearing-out-the-current-nuke-nk-script">Clearing out the Current NUKE (.nk) Script</a></li>
+<li><a class="reference internal" href="#creating-views-for-a-stereoscopic-project">Creating Views for a Stereoscopic Project</a></li>
+<li><a class="reference internal" href="#adjusting-control-values-in-stereo-projects">Adjusting Control Values in Stereo Projects</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="startup.html"
+                        title="previous chapter">Start-up Scripts</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nuke_as_python_module.html"
+                        title="next chapter">Nuke as a Python Module</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="nuke_as_python_module.html" title="Nuke as a Python Module"
+             >next</a></li>
+        <li class="right" >
+          <a href="startup.html" title="Start-up Scripts"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

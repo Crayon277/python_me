@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Callbacks &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Stereo" href="stereo.html" />
+    <link rel="prev" title="Using the Command-line" href="command_line.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="stereo.html" title="Stereo"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="command_line.html" title="Using the Command-line"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="callbacks">
+<span id="callbacks-ref-label"></span><h1>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h1>
+<p>Using the <strong>nuke.add...()</strong> functions described below, you can call Python functions automatically when various events (such as creating a node or loading a script) happen in NUKE.</p>
+<p>You can use all the <strong>nuke.add...()</strong> functions in your <strong>init.py</strong> or <strong>menu.py</strong> files. This way, the code is considered part of your NUKE environment and does not vary from script to script.</p>
+<p>All the <strong>nuke.add...()</strong> functions take the same arguments, for example:</p>
+<div class="highlight-python"><pre>nuke.addOnCreate (callable, args=( ), kwargs={}, nodeClass='*')</pre>
+</div>
+<p>Where:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>callable</strong> is a Python callable, such as the name of a defined function.</p>
+</li>
+<li><p class="first"><strong>args</strong> is the list of arguments. These should be in parenthesis. For example:</p>
+<div class="highlight-python"><pre>nuke.addOnCreate(nuke.tprint, ('what to print')).</pre>
+</div>
+</li>
+<li><p class="first"><strong>kwargs</strong> is a list of arguments given as keyword+value pairs. For example:</p>
+<div class="highlight-python"><pre>nuke.addOnCreate( nuke.tprint, ( 'a', 'b' ), { 'sep': ',' } )</pre>
+</div>
+</li>
+<li><p class="first"><strong>nodeClass</strong> the code is only called if <strong>nuke.thisNode().nodeClass()</strong> equals this string. For example:</p>
+<div class="highlight-python"><pre>nuke.addOnCreate(nuke.tprint, ('Creating Write'), nodeClass='Write')</pre>
+</div>
+</li>
+</ul>
+<p>The default value of &#8216;*&#8217; means that this is called for all nodes.</p>
+</div></blockquote>
+<p>During the callback, there is a context node (the affected node), which is examined using <strong>nuke.thisNode()</strong>. For knobChanged, there is also a context knob which you can get using <strong>nuke.thisKnob()</strong>.</p>
+<p>For many of the <strong>nuke.add...()</strong> functions, such as onCreate, there are also knobs with the same name. These knobs fall into two categories:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>Visible knobs</strong> - These are the knobs that the artists are expected to edit. They can be seen on the Python tab of some Properties panels. The visible knobs include onScriptLoad, onScriptSave, onScriptClose, beforeRender, beforeFrameRender, afterRender, and afterFrameRender.</li>
+<li><strong>Hidden knobs</strong> - These are not visible in any Properties panels, but can be set using Python. These are intended to allow you to define the behavior of gizmos. Artists should not set these knobs, as the user settings override any saved gizmo settings. Hidden knobs include onCreate, onDestroy, knobChanged, updateUI, and autolabel.</li>
+</ul>
+</div></blockquote>
+<p>If there are many callbacks registered, code attached to knobs is always called first before the <strong>nuke.add...()</strong> functions. (For example, code put in the onCreate knob is called before the <strong>nuke.addOnCreate()</strong> function.) In most cases, it is then followed by all the <strong>nuke.add...()</strong> functions with a matching <em>nodeClass</em> in the order they were added, and finally the &#8216;*&#8217; ones, also in the order they were added. Note that the <strong>addAutolabel()</strong> and <strong>addFilenameFilter()</strong> functions are exceptions to this rule, however, as they are called in reverse order.</p>
+<p>All the add callbacks calls have a corresponding remove callback call.</p>
+<div class="section" id="onusercreate">
+<h2>OnUserCreate<a class="headerlink" href="#onusercreate" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addOnUserCreate(function)
+nuke.removeOnUserCreate(function)</pre>
+</div>
+<p>This is executed whenever a node is created by the user using the NUKE graphical user interface (GUI). It is also called at start-up on the Root and Viewer nodes. It is not called when loading existing scripts, pasting nodes, or undoing a delete.</p>
+<p>You can use this code to change the default values of knobs, to add user knobs, and to perform other actions to preset nodes as users see them.</p>
+<p><strong>nuke.addOnUserCreate</strong> is run immediately after the knobs are set to their default values (including knobDefault values). It is run before <strong>onCreate</strong>. If <strong>nuke.addOnUserCreate()</strong> is not used, <strong>nuke.tcl(&#8220;OnCreate&#8221;)</strong> is called for backward compatibility.</p>
+</div>
+<div class="section" id="oncreate">
+<h2>onCreate<a class="headerlink" href="#oncreate" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>node.knob('onCreate')
+nuke.addOnCreate(function)
+nuke.removeOnCreate(function)</pre>
+</div>
+<p>This is executed when any node is created, for example, when loading a script, pasting a node, selecting a menu item, or undoing a delete.
+Note that if an <strong>onCreate</strong> function is defined before a script is loaded, it is run for each node. This is because the nodes are created while the script is loaded.
+When a group (including the root) is created with a number of inner nodes, onCreate is called first on the inner nodes, then on the group itself. For root, this is run when any script is loaded (see <strong>onScriptLoad</strong> below) or when <strong>File</strong> &gt; <strong>New</strong> is selected. For the preferences and Python knob panels, this is run when they are created.</p>
+<p>For example, the following code makes the creation of every node print OnCreate called for [node name] in the terminal:</p>
+<div class="highlight-python"><pre>nuke.addOnCreate(lambda: nuke.tprint("OnCreate called for "+nuke.thisNode().name()))
+onScriptLoad
+root.knob('onScriptLoad'), nuke.addOnScriptLoad(function), nuke.removeOnScriptLoad(function)</pre>
+</div>
+</div>
+<div class="section" id="onscriptload">
+<h2>onScriptLoad<a class="headerlink" href="#onscriptload" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>root.knob('onScriptLoad')
+nuke.addOnScriptLoad(function)
+nuke.removeOnScriptLoad(function)</pre>
+</div>
+<p>This is executed when any script is loaded, immediately after the <strong>onCreate</strong> for the root. Note that it is NOT run for new scripts.</p>
+<p>The <strong>onScriptLoad</strong> knob is visible in the <strong>Project Settings</strong> &gt; <strong>Python</strong> tab.</p>
+<img alt="_images/pythonCallbacks.png" src="_images/pythonCallbacks.png" />
+</div>
+<div class="section" id="onscriptsave">
+<h2>onScriptSave<a class="headerlink" href="#onscriptsave" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>root.knob('onScriptSave')
+nuke.addOnScriptSave(function)
+nuke.removeOnScriptSave(function)</pre>
+</div>
+<p>These are run when the user tries to save a script. If this changes the script name, that is the name the script is saved under.
+The onScriptSave knob is visible in the <strong>Project Settings</strong> &gt; <strong>Python</strong> tab.</p>
+<img alt="_images/pythonCallbacks.png" src="_images/pythonCallbacks.png" />
+</div>
+<div class="section" id="onscriptclose">
+<h2>onScriptClose<a class="headerlink" href="#onscriptclose" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>root.knob('onScriptClose')
+nuke.addOnScriptClose(function)
+nuke.removeOnScriptClose(function)</pre>
+</div>
+<p>These are run when the user exits NUKE or closes a script, and by the <strong>scriptClear()</strong> function. They are run immediately before the <strong>onDestroy</strong> for the root.</p>
+<p>The onScriptClose knob is visible in the <strong>Project Settings</strong> &gt; <strong>Python</strong> tab.</p>
+<img alt="_images/pythonCallbacks.png" src="_images/pythonCallbacks.png" />
+</div>
+<div class="section" id="ondestroy">
+<h2>onDestroy<a class="headerlink" href="#ondestroy" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>node.knob('onDestroy')
+nuke.addOnDestroy(function)
+nuke.removeOnDestroy(function)</pre>
+</div>
+<p>These are executed when any node is deleted, including when the creation of a node is undone. They are called on the root when a script is closed, or when the user exits NUKE. They are NOT run for the <strong>Preferences</strong> or Python knob panels, or if NUKE crashes.</p>
+<p>For groups and the root, this is run before all the children.</p>
+</div>
+<div class="section" id="knobchanged">
+<h2>knobChanged<a class="headerlink" href="#knobchanged" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>node.knob('knobChanged')
+nuke.addKnobChanged(function)
+nuke.removeKnobChanged(function)</pre>
+</div>
+<p>These are executed when the user changes the value of any knob when the control panel is open. They are not called recursively. You can find the knob that was changed by using <strong>nuke.thisKnob()</strong>.</p>
+<p><em>knobChanged</em> allows you to make gizmos with knobs that have effects like enabling, disabling, or presetting other knobs.
+To access the knob that was changed, use <strong>nuke.thisKnob()</strong>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The purpose of <strong>knobChanged</strong> is to update the control panel appearance. You cannot use it &#8216;track&#8217; knobs (for example, to keep a database up-to-date with the values of all the knobs), as it is not called when the <strong>Properties</strong> panel is closed. To track knobs, use <strong>updateUI</strong> as described below.</p>
+</div>
+<p>When the user opens or closes the properties panel, or when they change the input connections while the panel is open, you can call <strong>knobChanged</strong> with the dummy knobs named <strong>showPanel</strong> and <strong>inputChange</strong>. If you are disabling, or otherwise altering values of knobs on changes, you probably need to respond to <strong>showPanel</strong> to get the panel into the correct state for the current settings when it is opened. For example, you could do:</p>
+<div class="highlight-python"><pre># if slider is zero, disable the checkmark:
+n = nuke.thisNode()
+k = nuke.thisKnob()
+if k.name()=="slider" or k.name()=="showPanel":
+  n['checkmark'].setEnable(n['slider'].getValue()!=0)</pre>
+</div>
+<p>You can use <strong>nuke.addKnobChanged</strong> to gang the gain and gamma sliders of the selected ColorCorrect node so that, if the user adjusts one slider, the other is automatically set to the same value. To gang the sliders, use the following code:</p>
+<div class="highlight-python"><pre>def gangGammaGainSliders():
+ n = nuke.thisNode()
+ k = nuke.thisKnob()
+ if k.name() == "gamma":
+   n['gain'].setValue(k.value())
+ elif k.name() == "gain":
+   n['gamma'].setValue(k.value())
+nuke.addKnobChanged(gangGammaGainSliders, nodeClass="ColorCorrect")</pre>
+</div>
+</div>
+<div class="section" id="updateui">
+<h2>updateUI<a class="headerlink" href="#updateui" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>node.knob('updateUI')
+nuke.addUpdateUI(function)
+nuke.removeUpdateUI(function)</pre>
+</div>
+<p>These are run on every node after any changes to the script. This is done as a low-priority process during idle time and thus NUKE may have already started calculating the image for the Viewer before <strong>updateUI</strong> is called. Therefore, <strong>updateUI</strong> should not make the kind of changes to the script that change the image (otherwise, the Viewer would have to restart).</p>
+<p><strong>updateUI</strong> runs just before <strong>autolabel</strong> and after <strong>knobChanged</strong>. To avoid running this on every node, NUKE examines what <strong>updateUI</strong> looks at (such as the frame or view number) to decide whether or not to run it. If the function does not refer to the frame or view number, NUKE only calls it when the knob values on the node are changed, and not if the frame or view changes.</p>
+</div>
+<div class="section" id="autolabel">
+<span id="autolabel-ref-label"></span><h2>autolabel<a class="headerlink" href="#autolabel" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>node.knob('autolabel')
+nuke.addAutolabel(function)
+nuke.removeAutolabel(function)</pre>
+</div>
+<p>These are run immediately after <strong>updateUI</strong> and return the string to draw the node in the Node Graph. If the <em>autolabel</em> knob is not blank and returns anything other than None, the return value is displayed on the node. Otherwise, the <strong>nuke.addAutolabel()</strong> functions are called in reverse order and the first one to return anything other than None is used. If all of them return None, then <strong>nuke.thisNode().name()</strong> is used.</p>
+<p>For backward compatibility, NUKE does <strong>addAutolabel(__main__.autolabel)</strong> on start-up.</p>
+</div>
+<div class="section" id="beforerender">
+<h2>beforeRender<a class="headerlink" href="#beforerender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>write.knob('beforeRender')
+nuke.addBeforeRender(function)
+nuke.removeBeforeRender(function)</pre>
+</div>
+<p>These are run prior to starting rendering in <strong>execute()</strong>. If they throw an exception, the render aborts. They can be used to create the destination directory or communicate with your render farm, for example.
+The <strong>beforeRender</strong> knob (before render on the GUI) is visible on the Write node&#8217;s <strong>Render</strong> tab.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">By default, NUKE doesn&#8217;t create directories when rendering files. If you have a Write node whose file control points to a directory that doesn&#8217;t exist, the render fails. However, you can change this behavior by using the function <strong>nuke.addBeforeRender()</strong> to register a function that creates the necessary directory prior to rendering the first frame. Here&#8217;s an example of how to do so:</p>
+</div>
+<ol class="arabic">
+<li><p class="first">Create a file called <strong>init.py</strong> in your plug-in path directory (if one doesn&#8217;t already exist).</p>
+</li>
+<li><p class="first">Open the <strong>init.py</strong> file in a text editor and add an entry in the following format:</p>
+<div class="highlight-python"><pre>def createWriteDir():
+  import nuke, os, errno
+  file = nuke.filename(nuke.thisNode())
+  dir = os.path.dirname( file )
+  osdir = nuke.callbacks.filenameFilter( dir )
+  # cope with the directory existing already by ignoring that exception
+  try:
+    os.makedirs( osdir )
+  except OSError, e:
+    if e.errno != errno.EEXIST:
+      raise
+nuke.addBeforeRender(createWriteDir)</pre>
+</div>
+</li>
+</ol>
+<img alt="_images/pythonCallbacks1.png" src="_images/pythonCallbacks1.png" />
+</div>
+<div class="section" id="beforeframerender">
+<h2>beforeFrameRender<a class="headerlink" href="#beforeframerender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>write.knob('beforeFrameRender')
+nuke.addBeforeFrameRender(function)
+nuke.removeBeforeFrameRender(function)</pre>
+</div>
+<p>These are run prior to starting rendering of each individual frame. If they throw an exception, the render aborts. They can be used to create the destination directory or communicate with your render farm, for example.
+The <strong>beforeFrameRender</strong> knob (before each frame on the GUI) is visible on the Write node&#8217;s <strong>Render</strong> tab.</p>
+<img alt="_images/pythonCallbacks1.png" src="_images/pythonCallbacks1.png" />
+</div>
+<div class="section" id="afterframerender">
+<h2>afterFrameRender<a class="headerlink" href="#afterframerender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>write.knob('afterFrameRender')
+nuke.addAfterFrameRender(function)
+nuke.removeAfterFrameRender(function)</pre>
+</div>
+<p>These are run after each frame is finished rendering. They are not called if the render aborts. If they throw an exception, the render aborts. They can be used to copy each frame to a digital video recorder (DVR), for example.
+The <strong>afterFrameRender</strong> knob (after each frame on the GUI) is visible on the Write node&#8217;s <strong>Render</strong> tab.</p>
+<img alt="_images/pythonCallbacks1.png" src="_images/pythonCallbacks1.png" />
+</div>
+<div class="section" id="afterrender">
+<h2>afterRender<a class="headerlink" href="#afterrender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>write.knob('afterRender')
+nuke.addAfterRender(function)
+nuke.removeAfterRender(function)</pre>
+</div>
+<p>These are run after rendering of all frames is finished. If they throw an error, the render aborts. They are useful for finishing up a copy to a digital video recorder (DVR) or for communicating with a render farm, for example.
+The <strong>afterRender</strong> knob (after render on the GUI) is visible on the Write node&#8217;s <strong>Render</strong> tab.</p>
+<img alt="_images/pythonCallbacks1.png" src="_images/pythonCallbacks1.png" />
+</div>
+<div class="section" id="afterbackgroundrender">
+<h2>afterBackgroundRender<a class="headerlink" href="#afterbackgroundrender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addAfterBackgroundRender(function)
+nuke.removeAfterBackgroundRender(function)</pre>
+</div>
+<p>Add code to execute after any background renders.
+The call must be in the form of:</p>
+<div class="highlight-python"><pre>def foo(context):
+  pass</pre>
+</div>
+<dl class="docutils">
+<dt>The context object that is passed in is a dictionary containing the following elements:</dt>
+<dd><ul class="first last simple">
+<li><strong>id</strong> - The identifier for the task that&#8217;s ended.</li>
+</ul>
+</dd>
+</dl>
+<p>Please be aware that the current NUKE context does not make sense in the callback, for example <strong>nuke.thisNode</strong> returns a random node.</p>
+</div>
+<div class="section" id="afterbackgroundframerender">
+<h2>afterBackgroundFrameRender<a class="headerlink" href="#afterbackgroundframerender" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addBackgroundFrameRender(function)
+nuke.removeAfterBackgroundFrameRender(function)</pre>
+</div>
+<p>Add code to execute after each frame of a background render.
+The call must be in the form of:</p>
+<div class="highlight-python"><pre>def foo(context):
+  pass</pre>
+</div>
+<dl class="docutils">
+<dt>The context object that is passed in is a dictionary containing the following elements:</dt>
+<dd><ul class="first last simple">
+<li><strong>id</strong> - The identifier for the task that&#8217;s making progress.</li>
+<li><strong>frame</strong> - The current frame number being rendered.</li>
+<li><strong>numFrames</strong> - The total number of frames to be rendered</li>
+<li><strong>frameProgress</strong> - The number of frames rendered so far.</li>
+</ul>
+</dd>
+</dl>
+<p>Please be aware that the current NUKE context does not make sense in the callback, for example <em>nuke.thisNode</em> returns a random node.</p>
+</div>
+<div class="section" id="filenamefilter">
+<h2>filenameFilter<a class="headerlink" href="#filenamefilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addFilenameFilter(function)
+nuke.removeFilenameFilter(function)</pre>
+</div>
+<p>This adds a filter function that processes any file names that are in the NUKE script before passing the script to the system. These filters can be used to remove differences between operating systems or to insert required portions of path names. This callback must be a single string argument, and can either return a new string or None (which is the same as returning the string unchanged). For filenames that are not for a specific node, such as plug-in names, this function is called with <strong>nuke.thisNode()</strong> set to the root node. All the functions passed to <strong>nuke.addFilenameFilter</strong> are called in reverse order (the one added last is called first).</p>
+<p>For backward compatibility, if no functions have been added, NUKE runs <strong>main.filenameFix(s)</strong>. The default version of this function in turn calls <strong>nuke.tcl(&#8216;filename_fix&#8217;,s)</strong>.</p>
+<p>The example below uses the filename filter to map between Windows paths and Linux paths on a shared Windows and Linux mixed environment. For instance, the workstations are on Windows and access a shared drive mounted as &#8216;y:&#8217;.  On Linux this corresponds to the mount point &#8216;/mnt/y/&#8217;:</p>
+<div class="highlight-python"><pre>import nuke
+
+def myFilenameFilter(filename):
+    if nuke.env['LINUX']:
+        filename = filename.replace( 'y:', '/mnt/y' )
+        filename = filename.replace( 'x:', '/mnt/x' )
+    else:
+        filename = filename.replace( '/mnt/y', 'y:' )
+        filename = filename.replace( '/mnt/x', 'x:' )
+
+    return filename
+
+nuke.addFilenameFilter(myFilenameFilter)</pre>
+</div>
+</div>
+<div class="section" id="validatefilename">
+<h2>validateFilename<a class="headerlink" href="#validatefilename" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addValidateFilename(function)
+nuke.removeValidateFilename(function)</pre>
+</div>
+<p>Add a function to validate a filename in Write nodes. The first argument is the filename and should return a Boolean as to whether the filename is valid or not. If a callback is provided, it controls whether the <strong>Render</strong> button of Write nodes, and the <strong>Execute</strong> button of WriteGeo nodes, is enabled or not.</p>
+</div>
+<div class="section" id="autosavefilter">
+<h2>autoSaveFilter<a class="headerlink" href="#autosavefilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addAutoSaveFilter(function)
+nuke.removeAutoSaveFilter(function)</pre>
+</div>
+<p>Add a function to modify the autosave filename before NUKE saves the current script on an autosave timeout.</p>
+<p>The filter function should be in the form:</p>
+<div class="highlight-python"><pre>def myAutoSaveFilter(filename):
+  return filename</pre>
+</div>
+<p>The first argument to the filter is the current autosave filename. The filter returns the filename to save the autosave to, or <strong>None</strong> if no autosave is required.</p>
+<p>See <a class="reference internal" href="#callbacksautosave-ref-label"><em>Using Autosave Callbacks to Implement a Rolling Autosave</em></a> for an example of using the autosave filters.</p>
+</div>
+<div class="section" id="autosaverestorefilter">
+<h2>autoSaveRestoreFilter<a class="headerlink" href="#autosaverestorefilter" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>nuke.addAutoSaveRestoreFilter(function)
+nuke.removeAutoSaveRestoreFilter(function)</pre>
+</div>
+<p>Add a function to modify the autosave restore filename before NUKE attempts to restores the autosave file.</p>
+<p>The filter function should be in the form:</p>
+<div class="highlight-python"><pre>def myAutoSaveRestoreFilter(filename):
+  return filename</pre>
+</div>
+<p>The first argument to the filter is the current autosave filename. This function returns the filename to load autosave from or <strong>None</strong> if the autosave file is not required. If the autosave restore filter returns <strong>None</strong> this also suppresses the NUKE dialog that asks the user if they want to restore a found autosave.</p>
+<p>See <a class="reference internal" href="#callbacksautosave-ref-label"><em>Using Autosave Callbacks to Implement a Rolling Autosave</em></a> for an example of using the autosave filters.</p>
+</div>
+<div class="section" id="autosavedeletefilter">
+<h2>autoSaveDeleteFilter<a class="headerlink" href="#autosavedeletefilter" title="Permalink to this headline">¶</a></h2>
+<p>Add a function to modify the autosave filename before NUKE attempts delete the autosave file.</p>
+<p>The filter function should be in the form:</p>
+<div class="highlight-python"><pre>def myAutoSaveDeleteFilter(filename):
+  return filename</pre>
+</div>
+<p>The first argument to the filter is the current autosave filename. This function returns the filename to delete or returns None if no file requires deletion.</p>
+<p>See <a class="reference internal" href="#callbacksautosave-ref-label"><em>Using Autosave Callbacks to Implement a Rolling Autosave</em></a> for an example of using the autosave filters.</p>
+<div class="section" id="using-autosave-callbacks-to-implement-a-rolling-autosave">
+<span id="callbacksautosave-ref-label"></span><h3>Using Autosave Callbacks to Implement a Rolling Autosave<a class="headerlink" href="#using-autosave-callbacks-to-implement-a-rolling-autosave" title="Permalink to this headline">¶</a></h3>
+<p>The example below uses the three autosave callbacks to implement a &#8216;rolling autosave&#8217;. Every time the autosave is invoked, a new autosave is created numbered from 1-9 (wrapping around to 0). For example: autosave, autosave1, autosave2 ... autosave9.</p>
+<div class="highlight-python"><pre>import nuke
+import glob
+import time
+import os
+
+### Example that implements a rolling autosave using the autoSaveFilter callbacks
+###
+## autosaves roll from 0-9 eg myfile.autosave, myfile.autosave1, myfile.autosave2...
+#
+## To use just add 'import nukescripts.autosave' in your init.py
+
+
+def onAutoSave(filename):
+
+  ## ignore untiled autosave
+  if nuke.root().name() == 'Root':
+    return filename
+
+  fileNo = 0
+  files = getAutoSaveFiles(filename)
+
+  if len(files) &gt; 0 :
+    lastFile = files[-1]
+    # get the last file number
+
+    if len(lastFile) &gt; 0:
+      try:
+        fileNo = int(lastFile[-1:])
+      except:
+        pass
+
+      fileNo = fileNo + 1
+
+  if ( fileNo &gt; 9 ):
+    fileNo = 0
+
+  if ( fileNo != 0 ):
+    filename = filename + str(fileNo)
+
+  return filename
+
+
+def onAutoSaveRestore(filename):
+
+  files = getAutoSaveFiles(filename)
+
+  if len(files) &gt; 0:
+    filename = files[-1]
+
+  return filename
+
+def onAutoSaveDelete(filename):
+
+  ## only delete untiled autosave
+  if nuke.root().name() == 'Root':
+    return filename
+
+  # return None here to not delete auto save file
+  return None
+
+  
+def getAutoSaveFiles(filename):
+  date_file_list = []
+  files = glob.glob(filename + '[1-9]')
+  files.extend( glob.glob(filename) )
+
+  for file in files:
+      # retrieves the stats for the current file as a tuple
+      # (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime)
+      # the tuple element mtime at index 8 is the last-modified-date
+      stats = os.stat(file)
+      # create tuple (year yyyy, month(1-12), day(1-31), hour(0-23), minute(0-59), second(0-59),
+      # weekday(0-6, 0 is monday), Julian day(1-366), daylight flag(-1,0 or 1)) from seconds since epoch
+      # note:  this tuple can be sorted properly by date and time
+      lastmod_date = time.localtime(stats[8])
+      #print image_file, lastmod_date   # test
+      # create list of tuples ready for sorting by date
+      date_file_tuple = lastmod_date, file
+      date_file_list.append(date_file_tuple)
+   
+  date_file_list.sort()
+  return [ filename for _, filename in date_file_list ]
+
+
+nuke.addAutoSaveFilter( onAutoSave )
+nuke.addAutoSaveRestoreFilter( onAutoSaveRestore )
+nuke.addAutoSaveDeleteFilter( onAutoSaveDelete )
+
+### As an example to remove the callbacks use this code
+#nuke.removeAutoSaveFilter( onAutoSave )
+#nuke.removeAutoSaveRestoreFilter( onAutoSaveRestore )
+#nuke.removeAutoSaveDeleteFilter( onAutoSaveDelete )
+</pre>
+</div>
+</div>
+<div class="section" id="using-callbacks-on-root-to-add-stereo-setup">
+<span id="stereocallback-ref-label"></span><h3>Using Callbacks on Root to Add Stereo Setup<a class="headerlink" href="#using-callbacks-on-root-to-add-stereo-setup" title="Permalink to this headline">¶</a></h3>
+<p>To add a script that sets up new projects as a stereo/multi view project you can do something like this:</p>
+<div class="highlight-python"><pre># if necessary import the module that holds the script you want to run on startup:
+import examples
+# prepping the argument for this particular script
+views = [('L', (0,.5,0)), ('R',(.5,0,0)), ('M',(.5,.5,0))]
+# add script to the callback
+nuke.addOnUserCreate( examples.setUpMultiView, views, nodeClass='Root' )</pre>
+</div>
+<p>For details on the <strong>setupMultiView</strong> script, check <a class="reference internal" href="stereo.html#stereosetup-ref-label"><em>Setting Up Stereo</em></a></p>
+<p>The <strong>onUserCreate</strong> callback is triggered every time a node is created by the user the first time (whereas the <strong>onCreate</strong> callback is created every time a node is created, even when it&#8217;s copied or loaded from disk). Since the root is a node, we can use the <strong>nodeClass</strong> filter to make sure this script is only run when the root node is created.</p>
+<p>With the above entry in your <strong>menu.py</strong> or <strong>init.py</strong>, new nuke scripts now have three views called L (green), R (red), and M (yellow):</p>
+<img alt="_images/setUpMultiView_02.png" src="_images/setUpMultiView_02.png" />
+</div>
+</div>
+<div class="section" id="default-colorspaces">
+<h2>Default Colorspaces<a class="headerlink" href="#default-colorspaces" title="Permalink to this headline">¶</a></h2>
+<p>As of NUKE 10 you can dynamically replace the default colorspaces used on Read and Write Nodes in the DAG.</p>
+<p>The default colorspace is the one the file-specific Reader and Writer objects tell NUKE is the best match for the file which is being read or written and it can be selected in one of several ways:</p>
+<ul class="simple">
+<li>the file may store the colorspace by name in metadata or the fileheader, Reader may use this to set the colorspace by name</li>
+<li>the file may contain data of a specific type, 8-bit, 16-bit, floating point or log space data and ask NUKE to use the corresponding colorspace for that type from the Project Settings</li>
+<li>the Reader/Writer, having deep knowledge of NUKE, may request a built-in LUT type by ID, for example REDLog, AlexaLog, ProTune or Gamma2.2 (see the DataType enum in DDImage/LUT.h for a full list)</li>
+</ul>
+<p>Thanks to the support of OpenColorIO (OCIO) configs in NUKE it is now easier to introduce a colorspace that NUKE&#8217;s shipped Readers and Writers cannot map to, and therefore easier to get NUKE in an error state due to un-matched colorspaces, especially with custom OCIO configs. These callbacks will help you avoids such error with custom made configurations.</p>
+<p>In the same way as all the other callbacks you can add and remove callbacks using the following API:</p>
+<div class="highlight-python"><pre>nuke.addDefaultColorspaceMapper(function)
+nuke.removeDefaultColorspaceMapper(function)</pre>
+</div>
+<p>The function must be of the form:</p>
+<div class="highlight-python"><pre>def myDefaultColorspaceMapper(colorspaceName, dataTypeHint) :
+  # ... map colorspace name to desired colorspace ...
+  return colorspaceName</pre>
+</div>
+<dl class="docutils">
+<dt>The objects passed in are:</dt>
+<dd><ul class="first last simple">
+<li><strong>name</strong> - The current colorspace name that has been requested by the Reader/Writer, which may be set to one of NUKE&#8217;s defaults or any other existing or not colorspace whether it exists or not.</li>
+<li><strong>dataTypeHint</strong> - As above, this will be a value which represents one of 3 aspects<ul>
+<li>nuke.INVALID - The colorspace has been set by name and by name only</li>
+<li>a value linked to project setting, see below - The colorspaceName will be initially set to the corresponding project setting value, note that because these callbacks are chained, you cannot rely on the colorspace matching the corresponding project-setting colorspace as previously executed callbacks may have changed it</li>
+<li>an ID of a built-in NUKE LUT, see below - The colorspaceName will be the first value in the list of colorspaces</li>
+</ul>
+</li>
+</ul>
+</dd>
+</dl>
+<p>Project setting linked data-type hint values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>nuke.INT8</strong> - colospace name will be set to the colorspace name in the &#8216;8-bit files&#8217; knob in project settings</li>
+<li><strong>nuke.INT16</strong> - colospace name will be set to the colorspace name  in the &#8216;16-bit files&#8217; knob in project settings</li>
+<li><strong>nuke.MONITOR</strong> - colospace name will be set to the colorspace name in the &#8216;monitor&#8217; knob in project settings. Used for displays, for examples viewers and postage stamps</li>
+<li><strong>nuke.FLOAT</strong> - colospace name will be set to the colorspace name in the &#8216;float files&#8217; knob in project settings</li>
+<li><strong>nuke.LOG</strong> - colospace name will be set to the colorspace name in the &#8216;log files&#8217; knob in project settings</li>
+</ul>
+</div></blockquote>
+<dl class="docutils">
+<dt>Other data-type values which map to builtin LUTs are those in DDImage/LUT.h, back-compatibility with Reader and Writers:</dt>
+<dd><ul class="first last simple">
+<li><strong>nuke.VIEWER</strong> - unused</li>
+<li><strong>6</strong> - equivalent to DD::Image::LUT::GAMMA1_8</li>
+<li><strong>7</strong> - equivalent to DD::Image::LUT::GAMMA2_2</li>
+<li><strong>8</strong> - equivalent to DD::Image::LUT::GAMMA2_4</li>
+<li><strong>9</strong> - equivalent to DD::Image::LUT::PANALOG</li>
+<li><strong>10</strong> - equivalent to DD::Image::LUT::REDLOG</li>
+<li><strong>11</strong> - equivalent to DD::Image::LUT::VIPERLOG</li>
+<li><strong>12</strong> - equivalent to DD::Image::LUT::ALEXAV3LOGC</li>
+<li><strong>13</strong> - equivalent to DD::Image::LUT::PLOGLIN</li>
+<li><strong>14</strong> - equivalent to DD::Image::LUT::SLOG</li>
+<li><strong>15</strong> - equivalent to DD::Image::LUT::SLOG1</li>
+<li><strong>16</strong> - equivalent to DD::Image::LUT::SLOG2</li>
+<li><strong>17</strong> - equivalent to DD::Image::LUT::SLOG3</li>
+<li><strong>18</strong> - equivalent to DD::Image::LUT::CLOG</li>
+<li><strong>19</strong> - equivalent to DD::Image::LUT::PROTUNE</li>
+</ul>
+</dd>
+</dl>
+<p>Foe example, if you wanted to support the ACES 1.0.1 preview config, you could add the following custom callback to ensure the correction function for R3D files:</p>
+<div class="highlight-python"><pre>import nuke
+
+def r3d_aces101_default_colorspace(name, dataTypeHint) :
+  """ finds appropriate R3D colorspaces in the aces 101 config """
+
+  usePrefs = (dataTypeHint &gt;= 0) and (dataTypeHint &lt;= nuke.FLOAT) #  5 = LUT::FLOAT
+  if usePrefs:
+    return name
+
+  assert "/" not in name, "family name unexpectedly found in colorspace name"
+  allColorspaces = nuke.colorspaces.getColorspaceList( nuke.thisNode().knob('colorspace') )[1:]
+  exactMatch = name in allColorspaces
+  if exactMatch:
+    # if there's an exact name-match in the config use that
+    return name
+
+  nukeRedLog = (dataTypeHint == 10) # LUT::REDLOG
+  if nukeRedLog:
+    # first use the Nuke-side data-type hint
+    aces101RedLog = "Input - RED - Curve - REDlogFilm"
+    if aces101RedLog in allColorspaces :
+      # we have the aces101 specific RED-log space, return that
+      return aces101RedLog
+
+  if name == "rec709":
+    acesRec709 = "Output - Rec.709"
+    if acesRec709 in allColorspaces:
+      return acesRec709
+  elif name == "REDSpace":
+    acesRedSpace = "Input - RED - REDlogFilm - REDcolor4"
+    if acesRedSpace in allColorspaces:
+      return acesRedSpace
+
+
+# add the mapper function to NUKE
+nuke.addDefaultColorspaceMapper( r3d_aces101_default_colorspace )</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Callbacks</a><ul>
+<li><a class="reference internal" href="#onusercreate">OnUserCreate</a></li>
+<li><a class="reference internal" href="#oncreate">onCreate</a></li>
+<li><a class="reference internal" href="#onscriptload">onScriptLoad</a></li>
+<li><a class="reference internal" href="#onscriptsave">onScriptSave</a></li>
+<li><a class="reference internal" href="#onscriptclose">onScriptClose</a></li>
+<li><a class="reference internal" href="#ondestroy">onDestroy</a></li>
+<li><a class="reference internal" href="#knobchanged">knobChanged</a></li>
+<li><a class="reference internal" href="#updateui">updateUI</a></li>
+<li><a class="reference internal" href="#autolabel">autolabel</a></li>
+<li><a class="reference internal" href="#beforerender">beforeRender</a></li>
+<li><a class="reference internal" href="#beforeframerender">beforeFrameRender</a></li>
+<li><a class="reference internal" href="#afterframerender">afterFrameRender</a></li>
+<li><a class="reference internal" href="#afterrender">afterRender</a></li>
+<li><a class="reference internal" href="#afterbackgroundrender">afterBackgroundRender</a></li>
+<li><a class="reference internal" href="#afterbackgroundframerender">afterBackgroundFrameRender</a></li>
+<li><a class="reference internal" href="#filenamefilter">filenameFilter</a></li>
+<li><a class="reference internal" href="#validatefilename">validateFilename</a></li>
+<li><a class="reference internal" href="#autosavefilter">autoSaveFilter</a></li>
+<li><a class="reference internal" href="#autosaverestorefilter">autoSaveRestoreFilter</a></li>
+<li><a class="reference internal" href="#autosavedeletefilter">autoSaveDeleteFilter</a><ul>
+<li><a class="reference internal" href="#using-autosave-callbacks-to-implement-a-rolling-autosave">Using Autosave Callbacks to Implement a Rolling Autosave</a></li>
+<li><a class="reference internal" href="#using-callbacks-on-root-to-add-stereo-setup">Using Callbacks on Root to Add Stereo Setup</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#default-colorspaces">Default Colorspaces</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="command_line.html"
+                        title="previous chapter">Using the Command-line</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="stereo.html"
+                        title="next chapter">Stereo</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="stereo.html" title="Stereo"
+             >next</a></li>
+        <li class="right" >
+          <a href="command_line.html" title="Using the Command-line"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

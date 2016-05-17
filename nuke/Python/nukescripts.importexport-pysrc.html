@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.importexport</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;importexport
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.importexport-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.importexport-module.html">Module nukescripts.importexport</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 The Foundry Visionmongers Ltd.  All Rights Reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Module os=os-module.html"><a title="os" class="py-name" href="#" onclick="return doclink('link-1', 'os', 'link-1');">os</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="import_boujou"></a><div id="import_boujou-def"><a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="import_boujou-toggle" onclick="return toggle('import_boujou');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.importexport-module.html#import_boujou">import_boujou</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="import_boujou-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="import_boujou-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">  <tt class="py-docstring">'''</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">  Nuke 5.0 Py import_boujou. Demonstrates the use of addKnob.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">  Function called from the "import Boujou camera track" user knob of a</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">  Boujou Camera gizmo.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">  read data from a Boujou text file:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">  format is: FRAME TX TY TZ RX RY RZ VFOV</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">  this version will read fewer columns</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">  modified by Frank R&#252;ter June 30th 2006 to work with Nuke 4.5</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">  Instead of writing out an obj like the old version this one creates</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">  lowres cylinders for each point found in your boujou export. Those</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">  are stuffed into a group which is hooked up to a render node along</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">  with the resulting camera.  It has size, colour and render</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">  parameters to control those proxies.  Keep in mind that there is a</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">  limit for scene nodes of 1000 inputs so try to keep your point</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-docstring">  export from Boujou below that ;).</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">  '''</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">  <tt class="py-comment"># call a panel that asks the user for the camera txt file</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Method nuke.Gizmo.filename()=nuke.Gizmo-class.html#filename,Function nuke.filename()=nuke-module.html#filename"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-2', 'filename', 'link-2');">filename</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-3', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Function nuke.getFilename()=nuke-module.html#getFilename"><a title="nuke.getFilename" class="py-name" href="#" onclick="return doclink('link-4', 'getFilename', 'link-4');">getFilename</a></tt><tt class="py-op">(</tt><tt class="py-string">"Boujou Text File"</tt><tt class="py-op">,</tt> <tt class="py-string">"*.txt"</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-comment"># create the camera if one is not selected</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-name">newCam</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-5', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method nuke.Group.selectedNode()=nuke.Group-class.html#selectedNode,Function nuke.selectedNode()=nuke-module.html#selectedNode"><a title="nuke.Group.selectedNode
+nuke.selectedNode" class="py-name" href="#" onclick="return doclink('link-6', 'selectedNode', 'link-6');">selectedNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">newCam</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method nuke.Knob.Class()=nuke.Knob-class.html#Class,Method nuke.Node.Class()=nuke.Node-class.html#Class"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-7', 'Class', 'link-7');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-string">"Camera"</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">      <tt class="py-name">newCam</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-8', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt class="py-name">Camera</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-name">newCam</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method nuke.AnimationCurve.knob()=nuke.AnimationCurve-class.html#knob,Method nuke.LinkableKnobInfo.knob()=nuke.LinkableKnobInfo-class.html#knob,Method nuke.Node.knob()=nuke.Node-class.html#knob,Function nuke.knob()=nuke-module.html#knob"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-9', 'knob', 'link-9');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"label"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method nuke.Array_Knob.setValue()=nuke.Array_Knob-class.html#setValue,Method nuke.Boolean_Knob.setValue()=nuke.Boolean_Knob-class.html#setValue,Method nuke.Channel_Knob.setValue()=nuke.Channel_Knob-class.html#setValue,Method nuke.Disable_Knob.setValue()=nuke.Disable_Knob-class.html#setValue,Method nuke.EditableEnumeration_Knob.setValue()=nuke.EditableEnumeration_Knob-class.html#setValue,Method nuke.Enumeration_Knob.setValue()=nuke.Enumeration_Knob-class.html#setValue,Method nuke.File_Knob.setValue()=nuke.File_Knob-class.html#setValue,Method nuke.Font_Knob.setValue()=nuke.Font_Knob-class.html#setValue,Method nuke.Format_Knob.setValue()=nuke.Format_Knob-class.html#setValue,Method nuke.FreeType_Knob.setValue()=nuke.FreeType_Knob-class.html#setValue,Method nuke.Int_Knob.setValue()=nuke.Int_Knob-class.html#setValue,Method nuke.Knob.setValue()=nuke.Knob-class.html#setValue,Method nuke.Link_Knob.setValue()=nuke.Link_Knob-class.html#setValue,Method nuke.MultiView_Knob.setValue()=nuke.MultiView_Knob-class.html#setValue,Method nuke.Obsolete_Knob.setValue()=nuke.Obsolete_Knob-class.html#setValue,Method nuke.Password_Knob.setValue()=nuke.Password_Knob-class.html#setValue,Method nuke.Radio_Knob.setValue()=nuke.Radio_Knob-class.html#setValue,Method nuke.Script_Knob.setValue()=nuke.Script_Knob-class.html#setValue,Method nuke.String_Knob.setValue()=nuke.String_Knob-class.html#setValue,Method nuke.Tab_Knob.setValue()=nuke.Tab_Knob-class.html#setValue,Method nuke.Text_Knob.setValue()=nuke.Text_Knob-class.html#setValue,Method nuke.Unsigned_Knob.setValue()=nuke.Unsigned_Knob-class.html#setValue"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-10', 'setValue', 'link-10');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-string">"BoujouCamera\n"</tt><tt class="py-op">+</tt><tt id="link-11" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-11', 'filename', 'link-2');">filename</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-name">file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-12', 'filename', 'link-2');">filename</a></tt><tt class="py-op">,</tt> <tt class="py-string">"r"</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">      <tt class="py-keyword">pass</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="import_script"></a><div id="import_script-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="import_script-toggle" onclick="return toggle('import_script');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.importexport-module.html#import_script">import_script</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="import_script-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="import_script-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-13" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-13', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Variable nuke.env=nuke-module.html#env"><a title="nuke.env" class="py-name" href="#" onclick="return doclink('link-14', 'env', 'link-14');">env</a></tt><tt class="py-op">[</tt><tt class="py-string">'nc'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">      <tt class="py-name">spec</tt> <tt class="py-op">=</tt> <tt class="py-string">"*.nk; *.nknc; *.gizmo; *.gznc"</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">      <tt class="py-name">spec</tt> <tt class="py-op">=</tt> <tt class="py-string">"*.nk; *.gizmo"</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-15', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="nuke.getFilename" class="py-name" href="#" onclick="return doclink('link-16', 'getFilename', 'link-4');">getFilename</a></tt><tt class="py-op">(</tt><tt class="py-string">"Import Script"</tt><tt class="py-op">,</tt> <tt class="py-name">spec</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">"script"</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-17', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function nuke.nodePaste()=nuke-module.html#nodePaste"><a title="nuke.nodePaste" class="py-name" href="#" onclick="return doclink('link-18', 'nodePaste', 'link-18');">nodePaste</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="export_nodes_as_script"></a><div id="export_nodes_as_script-def"><a name="L58"></a><tt class="py-lineno">58</tt> <a class="py-toggle" href="#" id="export_nodes_as_script-toggle" onclick="return toggle('export_nodes_as_script');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.importexport-module.html#export_nodes_as_script">export_nodes_as_script</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="export_nodes_as_script-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="export_nodes_as_script-expanded"><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">  <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-19" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-19', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="nuke.env" class="py-name" href="#" onclick="return doclink('link-20', 'env', 'link-14');">env</a></tt><tt class="py-op">[</tt><tt class="py-string">'nc'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">      <tt class="py-name">nukeExt</tt> <tt class="py-op">=</tt> <tt class="py-string">".nknc"</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">      <tt class="py-name">nukeExt</tt> <tt class="py-op">=</tt> <tt class="py-string">".nk"</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-21', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="nuke.getFilename" class="py-name" href="#" onclick="return doclink('link-22', 'getFilename', 'link-4');">getFilename</a></tt><tt class="py-op">(</tt><tt class="py-string">"Export Nodes As Script"</tt><tt class="py-op">,</tt> <tt class="py-string">"*"</tt> <tt class="py-op">+</tt> <tt class="py-name">nukeExt</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">"script"</tt><tt class="py-op">,</tt> <tt class="py-string">"save"</tt><tt class="py-op">,</tt> <tt class="py-name">extension</tt><tt class="py-op">=</tt><tt class="py-name">nukeExt</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">s</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">      <tt id="link-23" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-23', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Function nuke.nodeCopy()=nuke-module.html#nodeCopy"><a title="nuke.nodeCopy" class="py-name" href="#" onclick="return doclink('link-24', 'nodeCopy', 'link-24');">nodeCopy</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">  <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:20 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

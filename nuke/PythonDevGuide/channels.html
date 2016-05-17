@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with Channels and Layers &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Manipulating the Node Graph" href="dag.html" />
+    <link rel="prev" title="Metadata" href="metadata.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="dag.html" title="Manipulating the Node Graph"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="metadata.html" title="Metadata"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="working-with-channels-and-layers">
+<h1>Working with Channels and Layers<a class="headerlink" href="#working-with-channels-and-layers" title="Permalink to this headline">¶</a></h1>
+<p>This chapter describes how to access and create channels and layers (also called channel sets).</p>
+<div class="section" id="reading-channels">
+<h2>Reading Channels<a class="headerlink" href="#reading-channels" title="Permalink to this headline">¶</a></h2>
+<p>To get all the channels that exist in the current NUKE script:</p>
+<div class="highlight-python"><pre>nuke.channels()
+
+# Result:
+['rgba.red', 'rgba.green', 'rgba.blue', 'rgba.alpha', 'depth.Z', 'forward.u', 'forward.v', 'backward.u', 'backward.v', 'disparityL.x', 'disparityL.y', 'disparityR.x', 'disparityR.y', 'mask.a', 'rotopaint_mask.a']</pre>
+</div>
+<p>To only get the layer names:</p>
+<div class="highlight-python"><pre>nuke.layers()
+
+# Result:
+['rgb', 'rgba', 'alpha', 'depth', 'motion', 'forward', 'backward', 'disparity', 'disparityL', 'disparityR', 'mask', 'rotopaint_mask']</pre>
+</div>
+<p>To get the selected node&#8217;s channels:</p>
+<div class="highlight-python"><pre>node = nuke.selectedNode()
+print node.channels()
+
+# Result:
+['rgba.red', 'rgba.green', 'rgba.blue', 'rgba.alpha']</pre>
+</div>
+</div>
+<div class="section" id="adding-new-channels">
+<h2>Adding New Channels<a class="headerlink" href="#adding-new-channels" title="Permalink to this headline">¶</a></h2>
+<p>To add new channels:</p>
+<div class="highlight-python"><pre>nuke.Layer( 'customLayer', ['red', 'green', 'blue'] )</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the layer doesn&#8217;t yet exist, it is created.</p>
+</div>
+<img alt="_images/channels_01.png" src="_images/channels_01.png" />
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not add channels to the default layers, as this change is not saved with the NUKE script.</p>
+</div>
+<p>You can also rename an existing custom layer:</p>
+<div class="highlight-python"><pre>nuke.Layer( 'customLayer' ).setName( 'myLayer' )</pre>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not rename the default layers, as this causes an error when reloading the script!</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="autocomp">
+<span id="autocomp-ref-label"></span><h3>autoComp<a class="headerlink" href="#autocomp" title="Permalink to this headline">¶</a></h3>
+<p>This example checks the channels in an exr file and tries to combine the secondary passes to a beauty render.</p>
+<img alt="_images/autoComp_01.png" src="_images/autoComp_01.png" />
+<img alt="_images/autoComp_02.png" src="_images/autoComp_02.png" />
+<p>You can use <a class="reference download internal" href="_downloads/sphere.exr"><tt class="xref download docutils literal"><span class="pre">the</span> <span class="pre">sample</span> <span class="pre">exr</span></tt></a> for this example.</p>
+<p>To get started, create a function called <strong>autoComp</strong>, which takes a single <em>node</em> argument. This argument provides the node that carries the secondary channels or &#8220;AOVs&#8221; (&#8220;Arbitrary Output Variable&#8221;).
+Our first deed it to grab the node&#8217;s channels:</p>
+<div class="highlight-python"><pre>def autoComp( node ):
+    channels = node.channels()</pre>
+</div>
+<p><strong>node.channels()</strong> returns all the channels the node is holding. It&#8217;s a list of channel names like <em>[&#8216;rgba.red&#8217;, &#8216;rgba.green&#8217;, &#8216;rgba.blue&#8217;]</em>, and so on.
+To get the layer names, we can split the channel names using the dot as the delimiter and take the first part of the result:</p>
+<div class="highlight-python"><pre>layers = [c.split('.')[0] for c in channels]</pre>
+</div>
+<p>However, this leaves us with many duplicate layer names. To get rid of all the duplicates, just convert the result to a <strong>set</strong> and then back to a <strong>list</strong>:</p>
+<div class="highlight-python"><pre>layers = list( set([c.split('.')[0] for c in channels]) )</pre>
+</div>
+<p>Now sort the list for convenience, so the code looks like this:</p>
+<div class="highlight-python"><pre>def autoComp( node ):
+    channels = node.channels()
+    layers = list( set([c.split('.')[0] for c in channels]) )
+    layers.sort()</pre>
+</div>
+<p>With all the available layers and channels at the ready, we can now build a simple UI to let the user map the available buffers to the correct pass in the comp.
+Create a panel with the title <strong>Map AOVs</strong> and assign three dropdown menus to it:</p>
+<ul class="simple">
+<li><strong>texture</strong> - The layer assigned to this is assumed to hold the flat texture color.</li>
+<li><strong>diffuse</strong> - The layer assigned here contains the diffuse lighting information.</li>
+<li><strong>specular</strong> - The layer assigned here contains the specular information.</li>
+</ul>
+<p>Each dropdown menu gets the list of layers we found as values. In this case, the values are a TCL style list, delimited by white spaces (hence the <strong>&#8216; &#8216;.join()</strong> method):</p>
+<div class="highlight-python"><pre>p = nuke.Panel( 'Map AOVs' )
+p.addEnumerationPulldown( 'texture', ' '.join( layers ) )
+p.addEnumerationPulldown( 'diffuse', ' '.join( layers ) )
+p.addEnumerationPulldown( 'specular', ' '.join( layers ) )</pre>
+</div>
+<p>The user also needs to specify which channel carries the information for depth, so add another dropdown menu called <strong>depth</strong> and assign the channel list as values:</p>
+<div class="highlight-python"><pre>p.addEnumerationPulldown( 'depth', ' '.join( channels ) )</pre>
+</div>
+<p>Lastly, we add two checkboxes to set whether we want to normalize the depth buffer (turn it on by default) or invert it (leave it off by default):</p>
+<div class="highlight-python"><pre>p.addBooleanCheckBox( 'normalise depth', True)
+p.addBooleanCheckBox( 'invert depth', False )</pre>
+</div>
+<p>That&#8217;s our simple panel done.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more control and flexibility with custom UIs, have a look at <a class="reference internal" href="custom_panels.html#pythonpanel-ref-label"><em>Python Panels</em></a>.</p>
+</div>
+<p>To open the panel, use the <strong>show()</strong> method. This opens the panel in modal mode (non-modal mode is not available for the simple panel code). It also returns True if the panel was closed using the <strong>Ok</strong> button or False if it was canceled:</p>
+<div class="highlight-python"><pre>if not p.show():
+    return</pre>
+</div>
+<img alt="_images/autoComp_03.png" src="_images/autoComp_03.png" />
+<p>If the panel was canceled, the code stops here. Otherwise, we store the chosen panel values in variables using <strong>value()</strong> and the respective names we assigned above.</p>
+<img alt="_images/autoComp_04.png" src="_images/autoComp_04.png" />
+<div class="highlight-python"><pre>texture = p.value( 'texture' )
+diffuse = p.value( 'diffuse' )
+spec = p.value( 'specular' )
+depth = p.value( 'depth' )
+normZ = p.value( 'normalise depth' )
+invertZ = p.value( 'invert depth' )</pre>
+</div>
+<p>Now it&#8217;s time to build the node tree with all the information we got from the panel.</p>
+<p>First, let&#8217;s shuffle the <strong>texure</strong>, <strong>diffuse</strong>, and <strong>specular</strong> buffers into rgb for easier processing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is not necessary from a compositing point of view, as you could merge all these layers/buffers inline, but for the sake of transparency we use Shuffle nodes.</p>
+</div>
+<p>To create a Shuffle node, we use <strong>nuke.nodes</strong>, set the node&#8217;s label to <em>texture</em>, and connect the node to the node we are operating on:</p>
+<div class="highlight-python"><pre>shuffleNode = nuke.nodes.Shuffle( label='texture', inputs=[node] )</pre>
+</div>
+<p>Now, we set the <strong>in</strong> knob to read the layer that was specified in the panel to contain the texture information:</p>
+<div class="highlight-python"><pre>shuffleNode['in'].setValue( layer )</pre>
+</div>
+<p>Next, we turn on the Shuffle node&#8217;s postage stamp and attach a Dot node that helps us keep a reasonably tidy layout:</p>
+<div class="highlight-python"><pre>shuffleNode['postage_stamp'].setValue( True )
+nuke.nodes.Dot( inputs=[ shuffleNode ] )</pre>
+</div>
+<p>We have to do all this for the <strong>diffuse</strong> and <strong>specular</strong> layers too, so let&#8217;s turn the above lines into a function that we can re-use:</p>
+<div class="highlight-python"><pre>def shuffleLayer( node, layer ):
+    shuffleNode = nuke.nodes.Shuffle( label=layer, inputs=[node] )
+    shuffleNode['in'].setValue( layer )
+    shuffleNode['postage_stamp'].setValue( True )
+    return nuke.nodes.Dot( inputs=[ shuffleNode ] )</pre>
+</div>
+<p>Back in the <strong>autoComp</strong> function (and right after storing the panel values in variables), call the new function to create a Shuffle node for each of the required layers:</p>
+<div class="highlight-python"><pre>texNode = shuffleLayer( node, texture )
+diffNode = shuffleLayer( node, diffuse )
+specNode = shuffleLayer( node, spec )</pre>
+</div>
+<p>Here is the code so far:</p>
+<div class="highlight-python"><pre>def shuffleLayer( node, layer ):
+    '''
+    Shuffle a given layer into rgba
+    args:
+       node  - node to attach a Shuffle node to
+       layer - layer to shuffle into rgba
+    '''
+    shuffleNode = nuke.nodes.Shuffle( label=layer, inputs=[node] )
+    shuffleNode['in'].setValue( layer )
+    shuffleNode['postage_stamp'].setValue( True )
+    return nuke.nodes.Dot( inputs=[ shuffleNode ] )
+
+def autoComp( node ):
+    channels = node.channels()
+    layers = list( set([c.split('.')[0] for c in channels]) )
+    layers.sort()
+    # CREATE SIMPLE PANEL TO MAP THE BUFFERS
+    p = nuke.Panel( 'Map AOVs' )
+    p.addEnumerationPulldown( 'texture', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'diffuse', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'specular', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'depth', ' '.join( channels ) )
+    p.addBooleanCheckBox( 'normalise depth', True)
+    p.addBooleanCheckBox( 'invert depth', False )
+    if not p.show():
+        return
+    # STORE PANEL RESULt IN VARIABLES FOR EASE OF USE
+    texture = p.value( 'texture' )
+    diffuse = p.value( 'diffuse' )
+    spec = p.value( 'specular' )
+    depth = p.value( 'depth' )
+    normZ = p.value( 'normalise depth' )
+    invertZ = p.value( 'invert depth' )
+    # CREATE SHUFFLE NODES
+    texNode = shuffleLayer( node, texture )
+    diffNode = shuffleLayer( node, diffuse )
+    specNode = shuffleLayer( node, spec )</pre>
+</div>
+<p>If you run the code at this point, you get the three Shuffle nodes that output the layers specified in the panel into <em>rgba</em>:</p>
+<img alt="_images/autoComp_05.png" src="_images/autoComp_05.png" />
+<p>Now let&#8217;s attach a <strong>Multiply</strong> node to the <strong>diffuse</strong> buffer so the user can tweak it, and merge the result with the <strong>texture</strong> Shuffle node:</p>
+<div class="highlight-python"><pre>mergeDiff = nuke.nodes.Merge2( operation='multiply', inputs=[ texNode, nuke.nodes.Multiply( inputs=[diffNode] ) ], output='rgb' )</pre>
+</div>
+<p>This is what the above line does:</p>
+<ul class="simple">
+<li>Creates a node of the class <strong>Merge2</strong>.</li>
+<li>Sets its operation knob to <strong>multiply</strong>.</li>
+<li>Connects its input 0 (<strong>B</strong> pipe) to the <strong>texture</strong> node and input 1 (<strong>A</strong> pipe) to the newly created <strong>Multiply</strong> node.</li>
+<li>Connects the new <strong>Multiply</strong> node to the <strong>diffuse</strong> node.</li>
+<li>Sets the <strong>Merge* node&#8217;s output to **rgb</strong>, so the original alpha channel is left intact.</li>
+</ul>
+<p>Create another pair of <strong>Multiply</strong> and <strong>Merge</strong> nodes - this time for the <strong>specular</strong> node - and connect the Merge node to the Merge created above:</p>
+<div class="highlight-python"><pre>result = nuke.nodes.Merge2( operation='plus', inputs=[ mergeDiff, nuke.nodes.Multiply( inputs=[specNode] ) ], output='rgb' )</pre>
+</div>
+<img alt="_images/autoComp_06.png" src="_images/autoComp_06.png" />
+<p>Now let&#8217;s check whether the user requested to normalize the depth. If yes, we run the <a class="reference internal" href="image_data.html#getminmax-ref-label"><em>getMinMax</em></a> function and use its output in a <strong>Grade</strong> node:</p>
+<div class="highlight-python"><pre>if normZ:
+    black, white = examples.getMinMax( node, depth )
+    result = nuke.nodes.Grade( channels=depth, blackpoint=black, whitepoint=white, white_clamp=True, label='normalise depth', inputs=[result] )</pre>
+</div>
+<p>We also check if the user requested to invert the depth channel. If yes, we append an <strong>Invert</strong> node, with <strong>channels</strong> set to <strong>depth</strong>:</p>
+<div class="highlight-python"><pre>if invertZ:
+    result = nuke.nodes.Invert( channels=depth, inputs=[result] )</pre>
+</div>
+<p>Finally, we add a <strong>Grade</strong> node to lift the blacks in the image a little bit through the depth channel:</p>
+<div class="highlight-python"><pre>g = nuke.nodes.Grade( inputs=[result] )
+g['black'].setValue( 0.05 )
+g['mask'].setValue( depth )</pre>
+</div>
+<p>Here&#8217;s the resulting node tree:</p>
+<img alt="_images/autoComp_02.png" src="_images/autoComp_02.png" />
+<p>And the final code:</p>
+<div class="highlight-python"><pre>import examples
+import nuke
+
+def shuffleLayer( node, layer ):
+    '''
+    Shuffle a given layer into rgba
+    args:
+       node  - node to attach a Shuffle node to
+       layer - layer to shuffle into rgba
+    '''
+    shuffleNode = nuke.nodes.Shuffle( label=layer, inputs=[node] )
+    shuffleNode['in'].setValue( layer )
+    shuffleNode['postage_stamp'].setValue( True )
+    return nuke.nodes.Dot( inputs=[ shuffleNode ] )
+
+def autoComp( node ):
+    channels = node.channels()
+    layers = list( set([c.split('.')[0] for c in channels]) )
+    layers.sort()
+    # CREATE SIMPLE PANEL TO MAP THE BUFFERS
+    p = nuke.Panel( 'Map AOVs' )
+    p.addEnumerationPulldown( 'texture', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'diffuse', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'specular', ' '.join( layers ) )
+    p.addEnumerationPulldown( 'depth', ' '.join( channels ) )
+    p.addBooleanCheckBox( 'normalise depth', True)
+    p.addBooleanCheckBox( 'invert depth', False )
+    if not p.show():
+        return
+    # STORE PANEL RESULt IN VARIABLES FOR EASE OF USE
+    texture = p.value( 'texture' )
+    diffuse = p.value( 'diffuse' )
+    spec = p.value( 'specular' )
+    depth = p.value( 'depth' )
+    normZ = p.value( 'normalise depth' )
+    invertZ = p.value( 'invert depth' )
+    # CREATE SHUFFLE NODES
+    texNode = shuffleLayer( node, texture )
+    diffNode = shuffleLayer( node, diffuse )
+    specNode = shuffleLayer( node, spec )
+    
+    mergeDiff = nuke.nodes.Merge2( operation='multiply', inputs=[ texNode, nuke.nodes.Multiply( inputs=[diffNode] ) ], output='rgb' )
+    result = nuke.nodes.Merge2( operation='plus', inputs=[ mergeDiff, nuke.nodes.Multiply( inputs=[specNode] ) ], output='rgb' )
+    
+    if normZ:
+        black, white = examples.getMinMax( node, depth )
+        result = nuke.nodes.Grade( channels=depth, blackpoint=black, whitepoint=white, white_clamp=True, label='normalise depth', inputs=[result] )
+    if invertZ:
+        result = nuke.nodes.Invert( channels=depth, inputs=[result] )
+    
+    g = nuke.nodes.Grade( inputs=[result] ) 
+    g['black'].setValue( 0.05 )
+    g['mask'].setValue( depth )
+    
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Working with Channels and Layers</a><ul>
+<li><a class="reference internal" href="#reading-channels">Reading Channels</a></li>
+<li><a class="reference internal" href="#adding-new-channels">Adding New Channels</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#autocomp">autoComp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="metadata.html"
+                        title="previous chapter">Metadata</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dag.html"
+                        title="next chapter">Manipulating the Node Graph</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="dag.html" title="Manipulating the Node Graph"
+             >next</a></li>
+        <li class="right" >
+          <a href="metadata.html" title="Metadata"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

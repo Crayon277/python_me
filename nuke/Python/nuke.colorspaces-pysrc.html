@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nuke.colorspaces</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nuke-module.html">Package&nbsp;nuke</a> ::
+        Module&nbsp;colorspaces
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nuke.colorspaces-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nuke.colorspaces-module.html">Module nuke.colorspaces</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">A collection of tools and functions to help manage LUTs and color configuration</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">_nuke_color</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> <tt class="py-comment"># bring the libnuke PythonAPI for color into scope</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module nuke.callbacks=nuke.callbacks-module.html"><a title="nuke.callbacks" class="py-name" href="#" onclick="return doclink('link-0', 'callbacks', 'link-0');">callbacks</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module types=types-module.html"><a title="types" class="py-name" href="#" onclick="return doclink('link-1', 'types', 'link-1');">types</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-2', 'nuke', 'link-2');">nuke</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable nuke.colorspaces.defaultLUTMappers=nuke.colorspaces-module.html#defaultLUTMappers,Variable nuke.defaultLUTMappers=nuke-module.html#defaultLUTMappers"><a title="nuke.colorspaces.defaultLUTMappers
+nuke.defaultLUTMappers" class="py-name" href="#" onclick="return doclink('link-3', 'defaultLUTMappers', 'link-3');">defaultLUTMappers</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> <tt class="py-comment"># dictionary of all mappers</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="_attemptColorspaceNameMatch"></a><div id="_attemptColorspaceNameMatch-def"><a name="L12"></a><tt class="py-lineno"> 12</tt> <a class="py-toggle" href="#" id="_attemptColorspaceNameMatch-toggle" onclick="return toggle('_attemptColorspaceNameMatch');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#_attemptColorspaceNameMatch">_attemptColorspaceNameMatch</a><tt class="py-op">(</tt><tt class="py-param">colorspaceName</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="_attemptColorspaceNameMatch-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_attemptColorspaceNameMatch-expanded"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">  <tt class="py-docstring">""" Look through all options in the colorpsace knob, and see if we have an</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">  exact match to one of the items. """</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">  <tt class="py-name">allColorspaces</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Function nuke.colorspaces.getColorspaceList()=nuke.colorspaces-module.html#getColorspaceList"><a title="nuke.colorspaces.getColorspaceList" class="py-name" href="#" onclick="return doclink('link-4', 'getColorspaceList', 'link-4');">getColorspaceList</a></tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-5', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Function nuke.thisNode()=nuke-module.html#thisNode"><a title="nuke.thisNode" class="py-name" href="#" onclick="return doclink('link-6', 'thisNode', 'link-6');">thisNode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">'colorspace'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">colorspaceName</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allColorspaces</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="_lookUpDataTypeDefaultSettings"></a><div id="_lookUpDataTypeDefaultSettings-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="_lookUpDataTypeDefaultSettings-toggle" onclick="return toggle('_lookUpDataTypeDefaultSettings');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#_lookUpDataTypeDefaultSettings">_lookUpDataTypeDefaultSettings</a><tt class="py-op">(</tt><tt class="py-param">colorspaceName</tt><tt class="py-op">,</tt> <tt class="py-param">dataTypeHint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_lookUpDataTypeDefaultSettings-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_lookUpDataTypeDefaultSettings-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">  Nuke's default handling of colorspace lookups.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">  Maps applicable dataTypeHint values to knobs on the Preferecne panel</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">  Possible values for dataTypeHint are</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">    Nuke inbuilt data-type hints (map to knobs)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.MONITOR == 0</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.VIEWER  == 1</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.INT8    == 2</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.INT16   == 3</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.LOG     == 4</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">      nuke.FLOAT   == 5</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">    Other numeric values which map to those in DDImage/LUT.h</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">      6  == DD::Image::LUT::GAMMA1_8</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">      7  == DD::Image::LUT::GAMMA2_2</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">      8  == DD::Image::LUT::GAMMA2_4</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">      9  == DD::Image::LUT::PANALOG</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">      10 == DD::Image::LUT::REDLOG</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">      11 == DD::Image::LUT::VIPERLOG</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">      12 == DD::Image::LUT::ALEXAV3LOGC</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">      13 == DD::Image::LUT::PLOGLIN</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">      14 == DD::Image::LUT::SLOG</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">      15 == DD::Image::LUT::SLOG1</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">      16 == DD::Image::LUT::SLOG2</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">      17 == DD::Image::LUT::SLOG3</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">      18 == DD::Image::LUT::CLOG</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">      19 == DD::Image::LUT::PROTUNE</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  <tt class="py-keyword">def</tt> <tt class="py-def-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-param">knobName</tt> <tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-7" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-7', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-8', 'root', 'link-8');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt> <tt class="py-name">knobName</tt> <tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-9', 'value', 'link-9');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">  <tt class="py-name">retString</tt> <tt class="py-op">=</tt> <tt class="py-name">colorspaceName</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">dataTypeHint</tt>   <tt class="py-op">==</tt> <tt id="link-10" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-10', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable nuke.MONITOR=nuke-module.html#MONITOR"><a title="nuke.MONITOR" class="py-name" href="#" onclick="return doclink('link-11', 'MONITOR', 'link-11');">MONITOR</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  0 = LUT::MONITOR</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-name">retString</tt> <tt class="py-op">=</tt>  <tt class="py-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-string">"monitorLut"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">dataTypeHint</tt> <tt class="py-op">==</tt> <tt id="link-12" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-12', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Variable nuke.VIEWER=nuke-module.html#VIEWER"><a title="nuke.VIEWER" class="py-name" href="#" onclick="return doclink('link-13', 'VIEWER', 'link-13');">VIEWER</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  1 = LUT::VIEWER</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">dataTypeHint</tt> <tt class="py-op">==</tt> <tt id="link-14" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-14', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable nuke.INT8=nuke-module.html#INT8"><a title="nuke.INT8" class="py-name" href="#" onclick="return doclink('link-15', 'INT8', 'link-15');">INT8</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  2 = LUT::INT8</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-name">retString</tt> <tt class="py-op">=</tt>  <tt class="py-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-string">"int8Lut"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">dataTypeHint</tt> <tt class="py-op">==</tt> <tt id="link-16" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-16', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable nuke.INT16=nuke-module.html#INT16"><a title="nuke.INT16" class="py-name" href="#" onclick="return doclink('link-17', 'INT16', 'link-17');">INT16</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  3 = LUT::INT16</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-name">retString</tt> <tt class="py-op">=</tt>  <tt class="py-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-string">"int16Lut"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">dataTypeHint</tt> <tt class="py-op">==</tt> <tt id="link-18" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-18', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Variable nuke.LOG=nuke-module.html#LOG"><a title="nuke.LOG" class="py-name" href="#" onclick="return doclink('link-19', 'LOG', 'link-19');">LOG</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  4 = LUT::LOG</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-name">retString</tt> <tt class="py-op">=</tt>  <tt class="py-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-string">"logLut"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">  <tt class="py-keyword">elif</tt> <tt class="py-name">dataTypeHint</tt> <tt class="py-op">==</tt> <tt id="link-20" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-20', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Variable nuke.FLOAT=nuke-module.html#FLOAT"><a title="nuke.FLOAT" class="py-name" href="#" onclick="return doclink('link-21', 'FLOAT', 'link-21');">FLOAT</a></tt><tt class="py-op">:</tt> <tt class="py-comment">#  5 = LUT::FLOAT</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-name">retString</tt> <tt class="py-op">=</tt>  <tt class="py-name">getKnobValue</tt><tt class="py-op">(</tt> <tt class="py-string">"floatLut"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">retString</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="_nukeDefaultColorSpaceMapper"></a><div id="_nukeDefaultColorSpaceMapper-def"><a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="_nukeDefaultColorSpaceMapper-toggle" onclick="return toggle('_nukeDefaultColorSpaceMapper');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#_nukeDefaultColorSpaceMapper">_nukeDefaultColorSpaceMapper</a><tt class="py-op">(</tt><tt class="py-param">colorspaceName</tt><tt class="py-op">,</tt> <tt class="py-param">dataTypeHint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_nukeDefaultColorSpaceMapper-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_nukeDefaultColorSpaceMapper-expanded"><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">  Allows colorspaces selections to be altered before use on Readers and Writers</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">colorspaceName</tt> <tt class="py-op">==</tt> <tt class="py-string">"."</tt> <tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">RuntimeError</tt><tt class="py-op">(</tt> <tt class="py-string">"Nuke has provided invalid colorspace name"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">  <tt class="py-name">retName</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name" targets="Function nuke.colorspaces._lookUpDataTypeDefaultSettings()=nuke.colorspaces-module.html#_lookUpDataTypeDefaultSettings"><a title="nuke.colorspaces._lookUpDataTypeDefaultSettings" class="py-name" href="#" onclick="return doclink('link-22', '_lookUpDataTypeDefaultSettings', 'link-22');">_lookUpDataTypeDefaultSettings</a></tt><tt class="py-op">(</tt><tt class="py-name">colorspaceName</tt><tt class="py-op">,</tt> <tt class="py-name">dataTypeHint</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">  <tt class="py-comment"># TODO: find best name in colosrpace</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">retName</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="addDefaultColorspaceMapper"></a><div id="addDefaultColorspaceMapper-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="addDefaultColorspaceMapper-toggle" onclick="return toggle('addDefaultColorspaceMapper');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#addDefaultColorspaceMapper">addDefaultColorspaceMapper</a><tt class="py-op">(</tt><tt class="py-param">call</tt><tt class="py-op">,</tt> <tt class="py-param">args</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-param">kwargs</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">nodeClass</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="addDefaultColorspaceMapper-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="addDefaultColorspaceMapper-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">  Add a function to modify default colorspaces before Nuke passes them to</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">  Readers or Writers.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">  Functions should have the same positional argument as in the definition of</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt class="py-docstring">  defaultLUTMapper()</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">  All added functions are called in backwards order.</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">  <tt id="link-23" class="py-name"><a title="nuke.callbacks" class="py-name" href="#" onclick="return doclink('link-23', 'callbacks', 'link-0');">callbacks</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Function nuke.callbacks._addCallback()=nuke.callbacks-module.html#_addCallback"><a title="nuke.callbacks._addCallback" class="py-name" href="#" onclick="return doclink('link-24', '_addCallback', 'link-24');">_addCallback</a></tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="nuke.colorspaces.defaultLUTMappers
+nuke.defaultLUTMappers" class="py-name" href="#" onclick="return doclink('link-25', 'defaultLUTMappers', 'link-3');">defaultLUTMappers</a></tt><tt class="py-op">,</tt> <tt class="py-name">call</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-name">kwargs</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="removeDefaultColorspaceMapper"></a><div id="removeDefaultColorspaceMapper-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="removeDefaultColorspaceMapper-toggle" onclick="return toggle('removeDefaultColorspaceMapper');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#removeDefaultColorspaceMapper">removeDefaultColorspaceMapper</a><tt class="py-op">(</tt><tt class="py-param">call</tt><tt class="py-op">,</tt> <tt class="py-param">args</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-param">kwargs</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">nodeClass</tt><tt class="py-op">=</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="removeDefaultColorspaceMapper-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="removeDefaultColorspaceMapper-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">  Remove a previously-added callback with the same arguments.</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">  <tt id="link-26" class="py-name"><a title="nuke.callbacks" class="py-name" href="#" onclick="return doclink('link-26', 'callbacks', 'link-0');">callbacks</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Function nuke.callbacks._removeCallback()=nuke.callbacks-module.html#_removeCallback"><a title="nuke.callbacks._removeCallback" class="py-name" href="#" onclick="return doclink('link-27', '_removeCallback', 'link-27');">_removeCallback</a></tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="nuke.colorspaces.defaultLUTMappers
+nuke.defaultLUTMappers" class="py-name" href="#" onclick="return doclink('link-28', 'defaultLUTMappers', 'link-3');">defaultLUTMappers</a></tt><tt class="py-op">,</tt> <tt class="py-name">call</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-name">kwargs</tt><tt class="py-op">,</tt> <tt class="py-name">nodeClass</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="_doColorSpaceCallbacks"></a><div id="_doColorSpaceCallbacks-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="_doColorSpaceCallbacks-toggle" onclick="return toggle('_doColorSpaceCallbacks');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#_doColorSpaceCallbacks">_doColorSpaceCallbacks</a><tt class="py-op">(</tt> <tt class="py-param">colorspace</tt><tt class="py-op">,</tt> <tt class="py-param">dataTypeHint</tt><tt class="py-op">,</tt> <tt class="py-param">callbacks</tt><tt class="py-op">,</tt> <tt class="py-param">errorMsg</tt> <tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="_doColorSpaceCallbacks-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="_doColorSpaceCallbacks-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">  Perform the colorspace callbacks</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">  expects a string or 'None' to be returned.</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">funcData</tt> <tt class="py-keyword">in</tt> <tt id="link-29" class="py-name"><a title="nuke.callbacks" class="py-name" href="#" onclick="return doclink('link-29', 'callbacks', 'link-0');">callbacks</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-name">func</tt> <tt class="py-op">=</tt> <tt class="py-name">funcData</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">funcData</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">    <tt class="py-name">kwargs</tt> <tt class="py-op">=</tt> <tt class="py-name">funcData</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">func</tt><tt class="py-op">(</tt><tt class="py-name">colorspace</tt><tt class="py-op">,</tt> <tt class="py-name">dataTypeHint</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">s</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">      <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt> <tt class="py-name">errorMsg</tt> <tt class="py-op">+</tt> <tt class="py-string">". Got type %s"</tt><tt class="py-op">%</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">type</tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">s</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">      <tt class="py-name">colorspace</tt> <tt class="py-op">=</tt> <tt class="py-name">s</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">colorspace</tt> </tt>
+</div><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="defaultColorspaceMapper"></a><div id="defaultColorspaceMapper-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="defaultColorspaceMapper-toggle" onclick="return toggle('defaultColorspaceMapper');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#defaultColorspaceMapper">defaultColorspaceMapper</a><tt class="py-op">(</tt><tt class="py-param">colorspace</tt><tt class="py-op">,</tt> <tt class="py-param">dataTypeHint</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="defaultColorspaceMapper-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="defaultColorspaceMapper-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">  Called by libnuke.</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">  Calls into Node-level callbacks first, then global callbacks</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">  Arguments:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">      colorspace   - the name string of the initial colorspace</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">      dataTypeHint - sometimes Readers/Writer request the default for a</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">                     particular data-type, i.e. int8, in16, float, etc.</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-docstring">  Return:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-docstring">      The return should be the transformed/modified colorspace name.</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-docstring">      None is the same as returning the string unchanged.</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">  <tt class="py-keyword">import</tt> <tt class="py-name">__main__</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">  <tt class="py-comment"># Do Nuke's in built mapping first.</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">  <tt class="py-name">colorspace</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name" targets="Function nuke.colorspaces._nukeDefaultColorSpaceMapper()=nuke.colorspaces-module.html#_nukeDefaultColorSpaceMapper"><a title="nuke.colorspaces._nukeDefaultColorSpaceMapper" class="py-name" href="#" onclick="return doclink('link-30', '_nukeDefaultColorSpaceMapper', 'link-30');">_nukeDefaultColorSpaceMapper</a></tt><tt class="py-op">(</tt><tt class="py-name">colorspace</tt><tt class="py-op">,</tt> <tt class="py-name">dataTypeHint</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">  <tt class="py-comment"># Then do callbacks registered for this Node type</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">  <tt class="py-name">colorspaceCbs</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="nuke.colorspaces.defaultLUTMappers
+nuke.defaultLUTMappers" class="py-name" href="#" onclick="return doclink('link-31', 'defaultLUTMappers', 'link-3');">defaultLUTMappers</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method nuke.GlobalsEnvironment.get()=nuke.GlobalsEnvironment-class.html#get,Method nukescripts.renderdialog.DialogState.get()=nukescripts.renderdialog.DialogState-class.html#get"><a title="nuke.GlobalsEnvironment.get
+nukescripts.renderdialog.DialogState.get" class="py-name" href="#" onclick="return doclink('link-32', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-33', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Function nuke.thisClass()=nuke-module.html#thisClass"><a title="nuke.thisClass" class="py-name" href="#" onclick="return doclink('link-34', 'thisClass', 'link-34');">thisClass</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">colorspaceCbs</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-name">nodeErrMsg</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> <tt class="py-string">"Colorspace Filter on Node '%s' returned invalid type,"</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                   <tt class="py-string">"expected string or None"</tt><tt class="py-op">%</tt><tt class="py-op">(</tt> <tt id="link-35" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-35', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt class="py-name">theClass</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-name">colorspace</tt> <tt class="py-op">=</tt> <tt id="link-36" class="py-name" targets="Function nuke.colorspaces._doColorSpaceCallbacks()=nuke.colorspaces-module.html#_doColorSpaceCallbacks"><a title="nuke.colorspaces._doColorSpaceCallbacks" class="py-name" href="#" onclick="return doclink('link-36', '_doColorSpaceCallbacks', 'link-36');">_doColorSpaceCallbacks</a></tt><tt class="py-op">(</tt> <tt class="py-name">colorspace</tt><tt class="py-op">,</tt> <tt class="py-name">dataTypeHint</tt><tt class="py-op">,</tt> <tt class="py-name">colorspaceCbs</tt><tt class="py-op">,</tt> <tt class="py-name">nodeErrMsg</tt> <tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">  <tt class="py-comment"># Do global manipulations afterwards</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">  <tt class="py-name">globalCbs</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="nuke.colorspaces.defaultLUTMappers
+nuke.defaultLUTMappers" class="py-name" href="#" onclick="return doclink('link-37', 'defaultLUTMappers', 'link-3');">defaultLUTMappers</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="nuke.GlobalsEnvironment.get
+nukescripts.renderdialog.DialogState.get" class="py-name" href="#" onclick="return doclink('link-38', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">'*'</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">globalCbs</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-name">globalErrMsg</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> <tt class="py-string">"Global Colorspace Filter returned invalid type,"</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                   <tt class="py-string">"expected string or None"</tt> <tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">    <tt class="py-name">colorspace</tt> <tt class="py-op">=</tt> <tt id="link-39" class="py-name"><a title="nuke.colorspaces._doColorSpaceCallbacks" class="py-name" href="#" onclick="return doclink('link-39', '_doColorSpaceCallbacks', 'link-36');">_doColorSpaceCallbacks</a></tt><tt class="py-op">(</tt> <tt class="py-name">colorspace</tt><tt class="py-op">,</tt> <tt class="py-name">dataTypeHint</tt><tt class="py-op">,</tt> <tt class="py-name">globalCbs</tt><tt class="py-op">,</tt> <tt class="py-name">globalErrMsg</tt> <tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">         </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">colorspace</tt> </tt>
+</div><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="getColorspaceList"></a><div id="getColorspaceList-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="getColorspaceList-toggle" onclick="return toggle('getColorspaceList');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nuke.colorspaces-module.html#getColorspaceList">getColorspaceList</a><tt class="py-op">(</tt><tt class="py-param">colorspaceKnob</tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+</div><div id="getColorspaceList-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="getColorspaceList-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-docstring">  Get a list of all colorspaces listed in an enumeration knob.</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"><tt class="py-docstring">  This will strip family names if the knob has the STRIP_CASCADE_PREFIX flag set.</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">   </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">  <tt class="py-name">allColorspaces</tt> <tt class="py-op">=</tt> <tt class="py-name">colorspaceKnob</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Variable PySide.QtGui.QAbstractItemDelegate.EndEditHint.values=PySide.QtGui.QAbstractItemDelegate.EndEditHint-class.html#values,Variable PySide.QtGui.QDialog.DialogCode.values=PySide.QtGui.QDialog.DialogCode-class.html#values,Variable PySide.QtGui.QFrame.Shadow.values=PySide.QtGui.QFrame.Shadow-class.html#values,Variable PySide.QtGui.QFrame.Shape.values=PySide.QtGui.QFrame.Shape-class.html#values,Variable PySide.QtGui.QFrame.StyleMask.values=PySide.QtGui.QFrame.StyleMask-class.html#values,Variable PySide.QtGui.QPaintDevice.PaintDeviceMetric.values=PySide.QtGui.QPaintDevice.PaintDeviceMetric-class.html#values,Variable PySide.QtGui.QPlainTextEdit.LineWrapMode.values=PySide.QtGui.QPlainTextEdit.LineWrapMode-class.html#values,Variable PySide.QtGui.QWidget.RenderFlag.values=PySide.QtGui.QWidget.RenderFlag-class.html#values,Method nuke.EditableEnumeration_Knob.values()=nuke.EditableEnumeration_Knob-class.html#values,Method nuke.Enumeration_Knob.values()=nuke.Enumeration_Knob-class.html#values,Method nuke.GlobalsEnvironment.values()=nuke.GlobalsEnvironment-class.html#values,Method nuke.Radio_Knob.values()=nuke.Radio_Knob-class.html#values"><a title="PySide.QtGui.QAbstractItemDelegate.EndEditHint.values
+PySide.QtGui.QDialog.DialogCode.values
+PySide.QtGui.QFrame.Shadow.values
+PySide.QtGui.QFrame.Shape.values
+PySide.QtGui.QFrame.StyleMask.values
+PySide.QtGui.QPaintDevice.PaintDeviceMetric.values
+PySide.QtGui.QPlainTextEdit.LineWrapMode.values
+PySide.QtGui.QWidget.RenderFlag.values
+nuke.EditableEnumeration_Knob.values
+nuke.Enumeration_Knob.values
+nuke.GlobalsEnvironment.values
+nuke.Radio_Knob.values" class="py-name" href="#" onclick="return doclink('link-40', 'values', 'link-40');">values</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">  <tt class="py-name">strippedColorspaces</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">colorspaceKnob</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method _curveknob.Layer.getFlag()=_curveknob.Layer-class.html#getFlag,Method _curveknob.Shape.getFlag()=_curveknob.Shape-class.html#getFlag,Method _curveknob.Stroke.getFlag()=_curveknob.Stroke-class.html#getFlag,Method _curvelib.Flag.getFlag()=_curvelib.Flag-class.html#getFlag,Method nuke.Knob.getFlag()=nuke.Knob-class.html#getFlag"><a title="_curveknob.Layer.getFlag
+_curveknob.Shape.getFlag
+_curveknob.Stroke.getFlag
+_curvelib.Flag.getFlag
+nuke.Knob.getFlag" class="py-name" href="#" onclick="return doclink('link-41', 'getFlag', 'link-41');">getFlag</a></tt><tt class="py-op">(</tt><tt id="link-42" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-42', 'nuke', 'link-2');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Variable nuke.STRIP_CASCADE_PREFIX=nuke-module.html#STRIP_CASCADE_PREFIX"><a title="nuke.STRIP_CASCADE_PREFIX" class="py-name" href="#" onclick="return doclink('link-43', 'STRIP_CASCADE_PREFIX', 'link-43');">STRIP_CASCADE_PREFIX</a></tt><tt class="py-op">)</tt> <tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">allColorspaces</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">strippedColorspace</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allColorspaces</tt><tt class="py-op">:</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">      <tt class="py-comment"># Strip up until the last '/', which represents the family name</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">      <tt class="py-name">strippedColorspace</tt> <tt class="py-op">=</tt> <tt class="py-name">strippedColorspace</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'/'</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">      <tt class="py-name">strippedColorspaces</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method _curveknob.Layer.append()=_curveknob.Layer-class.html#append,Method _curveknob.Shape.append()=_curveknob.Shape-class.html#append,Method _curveknob.Stroke.append()=_curveknob.Stroke-class.html#append"><a title="_curveknob.Layer.append
+_curveknob.Shape.append
+_curveknob.Stroke.append" class="py-name" href="#" onclick="return doclink('link-44', 'append', 'link-44');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">strippedColorspace</tt><tt class="py-op">)</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">strippedColorspaces</tt> </tt>
+</div><a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Render Farm Integration (Concept) &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Performance Profiling" href="performance.html" />
+    <link rel="prev" title="Threading" href="threading.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="performance.html" title="Performance Profiling"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="threading.html" title="Threading"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="render-farm-integration-concept">
+<h1>Render Farm Integration (Concept)<a class="headerlink" href="#render-farm-integration-concept" title="Permalink to this headline">¶</a></h1>
+<p>Every render manager works in a different manner and facilities&#8217; requirements for their pipeline integration vary, so here is a very brief example describing the basic concept of integrating a render manager.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can find more information on this on <a class="reference external" href="http://www.nukepedia.com/written-tutorials/">Nukepedia</a> (look for &#8220;Render Manager&#8221;).</p>
+</div>
+<p>Here is a simple panel example for collecting information that might be relevant to a render farm submission:</p>
+<div class="highlight-python"><pre>p = nuke.Panel( 'submit to farm' )
+
+p.addSingleLineInput( 'first', nuke.root().firstFrame() )
+p.addSingleLineInput( 'last', nuke.root().lastFrame() )
+
+p.addEnumerationPulldown( 'threads', '1 2 4 8' )
+p.addSingleLineInput( 'batch size', '10' )
+p.addBooleanCheckBox( 'local render', 0 )
+
+p.show()</pre>
+</div>
+<img alt="_images/renderMan_01.png" src="_images/renderMan_01.png" />
+<p>You could then collect the user input in variables and build the required command for the submission. This snippet just generates pseudo code, which could be tweaked to create a valid submission command:</p>
+<div class="highlight-python"><pre>if p.show():
+    args = dict( first = p.value('first'),
+        last = p.value('last'),
+        threads = p.value('threads'),
+        batchSize = p.value('batch size'),
+        local = p.value('local'))
+
+    application = 'echo'
+    #args = [ application, first, last, threads, batchSize, local ]
+    cmdString = application + ' -range %(first)s-%(last)s -threads %(threads)s -batch %(batchSize)s' % args
+
+    subprocess.Popen( cmdString.split() )</pre>
+</div>
+<p>The above could then be wrapped into a function and placed in NUKE&#8217;s Render menu:</p>
+<div class="highlight-python"><pre>def submitToFarm():
+    p = nuke.Panel( 'submit to farm' )
+
+    p.addSingleLineInput( 'first', nuke.root().firstFrame() )
+    p.addSingleLineInput( 'last', nuke.root().lastFrame() )
+
+    p.addEnumerationPulldown( 'threads', '1 2 4 8' )
+    p.addSingleLineInput( 'batch size', '10' )
+    p.addBooleanCheckBox( 'local render', 0 )
+
+    if p.show():
+        args = dict( first = p.value('first'),
+            last = p.value('last'),
+            threads = p.value('threads'),
+            batchSize = p.value('batch size'),
+            local = p.value('local'))
+
+        application = 'echo'
+        #args = [ application, first, last, threads, batchSize, local ]
+        cmdString = application + ' -range %(first)s-%(last)s -threads %(threads)s -batch %(batchSize)s' % args
+
+        subprocess.Popen( cmdString.split() )
+
+nuke.menu( 'Nuke' ).addCommand( 'Render/Send to Farm', submitToFarm )</pre>
+</div>
+<img alt="_images/renderMan_02.png" src="_images/renderMan_02.png" />
+<p>You can use <a class="reference internal" href="custom_panels.html#pythonpanel-ref-label"><em>Python Panels</em></a> to create more complex panels and non-modal panels that can be docked to the UI and saved with layouts.
+You could also add custom knobs to the Write nodes to launch a network render. See <a class="reference internal" href="basics.html#addingparamstonodes-ref-label"><em>Adding Controls to Nodes</em></a> for details on this.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="threading.html"
+                        title="previous chapter">Threading</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="next chapter">Performance Profiling</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="performance.html" title="Performance Profiling"
+             >next</a></li>
+        <li class="right" >
+          <a href="threading.html" title="Threading"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

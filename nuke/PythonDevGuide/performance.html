@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Performance Profiling &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Installing Plug-ins" href="installing_plugins.html" />
+    <link rel="prev" title="Render Farm Integration (Concept)" href="render_farm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installing_plugins.html" title="Installing Plug-ins"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="render_farm.html" title="Render Farm Integration (Concept)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="performance-profiling">
+<span id="performance-profiling-ref-label"></span><h1>Performance Profiling<a class="headerlink" href="#performance-profiling" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="using-performance-timers">
+<h2>Using Performance Timers<a class="headerlink" href="#using-performance-timers" title="Permalink to this headline">¶</a></h2>
+<p>When performance timing is enabled in Nuke, it is possible to access profiling information for individual nodes via Python. This will tell you how much of the processing time has been spent within each node. It can help you to debug slow-running scripts, and to find out where the worst bottlenecks lie.</p>
+<p>Note that enabling performance timing will tend to slow down Nuke&#8217;s processing, due to the extra overhead of starting and stopping the timers frequently and the need to synchronize the working threads more often. So in general Nuke will run more slowly with performance timing enabled, but it should still give you an accurate picture of where the processing time is being spent in your script.</p>
+<p>To enable performance timing, either run Nuke from the command line with the &#8220;-P&#8221; option, or use the Python call:</p>
+<div class="highlight-python"><pre>nuke.startPerformanceTimers()</pre>
+</div>
+<p>to start the performance timers.</p>
+<p>You can also call:</p>
+<div class="highlight-python"><pre>nuke.usingPerformanceTimers()</pre>
+</div>
+<p>to check whether or not performance timing has been enabled.</p>
+<p>To turn off the performance timers, you can call:</p>
+<div class="highlight-python"><pre>nuke.stopPerformanceTimers()</pre>
+</div>
+<p>or, to reset all timers to zero, use:</p>
+<div class="highlight-python"><pre>nuke.resetPerformanceTimers().</pre>
+</div>
+</div>
+<div class="section" id="a-note-on-nuke-s-architecture">
+<h2>A Note on Nuke&#8217;s Architecture<a class="headerlink" href="#a-note-on-nuke-s-architecture" title="Permalink to this headline">¶</a></h2>
+<p>When a node in Nuke is asked to render something, there are four main stages to its processing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>store</strong>    - the first thing the node does is store the values the user has selected on its knobs.</li>
+<li><strong>validate</strong> - this is where the node tells Nuke about the output it produces, for example which channels it can produce and what size the output will be.</li>
+<li><strong>request</strong>  - this is where the node works out what data it will need from its inputs in order to produce its output (for example channels needed, region required).</li>
+<li><strong>engine</strong>   - this is where the node does most of its work, and actually generates its output. This will usually be where most of the processing time is spent!</li>
+</ul>
+</div></blockquote>
+<p>For more information about processing in Nuke, see the <a class="reference external" href="http://docs.thefoundry.co.uk/nuke/80/ndkdevguide/">NDK Dev Guide</a>.</p>
+</div>
+<div class="section" id="obtaining-performance-timings-via-python">
+<h2>Obtaining Performance Timings via Python<a class="headerlink" href="#obtaining-performance-timings-via-python" title="Permalink to this headline">¶</a></h2>
+<p>Nuke&#8217;s performance timers collect information on each of these four stages of processing, which can be accessed using Python. In addition, when performance timing is active, timing information will be displayed in the node graph. Also, the nodes themselves will be colored according to the proportion of the total processing time that was spent in each one, from green (fast nodes) through to red (slow nodes).</p>
+<p>The function <strong>nuke.Node.performanceInfo()</strong> will print the timing information for a particular node. For example, the following code snippet can be used to print timing information for each node currently in the tree (including nodes which are inside Groups):</p>
+<div class="highlight-python"><pre>for n in nuke.allNodes(recurseGroups = True):
+  print n.fullName()
+  print n.performanceInfo()</pre>
+</div>
+<p>The output from this will look similar to the following output, for a simple tree consisting of <em>Checkerboard -&gt; Blur -&gt; Defocus -&gt; Viewer</em>:</p>
+<div class="highlight-python"><pre>Defocus1
+{'callCount': 10228, 'timeTakenWall': 28524348, 'timeTakenCPU': 624512794}
+Blur1
+{'callCount': 9607, 'timeTakenWall': 9906815, 'timeTakenCPU': 151406143}
+Viewer1
+{'callCount': 0, 'timeTakenWall': 0, 'timeTakenCPU': 0}
+CheckerBoard1
+{'callCount': 34396, 'timeTakenWall': 3923322, 'timeTakenCPU': 29982254}</pre>
+</div>
+<p>As you can see from the above, <strong>nuke.Node.performanceInfo()</strong> returns a dictionary containing the following performance statistics:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>callCount</strong> tells you the number of times this part of the processing has been called.</li>
+<li><strong>timeTakenWall</strong> is the time taken as it would be measured by a clock on the wall, i.e. the actual time a user would have to wait for the processing to complete. This time is measured in microseconds.</li>
+<li><strong>timeTakenCPU</strong>:<ul>
+<li>On Linux, this is the time the CPU spent executing the processing code, and again is measured in microseconds. It is an aggregate over all CPU threads so, for example, for the multi-threaded <strong>engine</strong> processing this will typically be much larger than the wall time. If the average CPU time per thread (<strong>timeTakenCPU</strong> divided by the number of threads used) is much shorter than the wall time, this suggests that the CPU threads have spent a lot of time not executing code - for example, waiting on locks - and could indicate a performance problem.</li>
+<li>On Mac and Windows, the CPU time is not currently available; on Mac, this value will be the similar to the wall time.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>The timings above were obtained on a Linux machine, running Nuke with 24 threads. If we look again at the timings for the two most expensive nodes, the <em>Blur</em> and the <em>Defocus</em>:</p>
+<div class="highlight-python"><pre>Defocus1
+{'callCount': 10228, 'timeTakenWall': 28524348, 'timeTakenCPU': 624512794}
+Blur1
+{'callCount': 9607, 'timeTakenWall': 9906815, 'timeTakenCPU': 151406143}</pre>
+</div>
+<p>we can see that while the Blur node&#8217;s CPU time is fairly close to being 24 times as long as its wall time, the Defocus node&#8217;s CPU time is only two-thirds as long as we might expect. This shows us that the engine threads are all being kept busy by the Blur node, while in the Defocus node they are spending a considerable amount of their time waiting in this script... and we have identified a possible target for performance improvements in a future release of Nuke!</p>
+</div>
+<div class="section" id="other-performance-statistics">
+<h2>Other Performance Statistics<a class="headerlink" href="#other-performance-statistics" title="Permalink to this headline">¶</a></h2>
+<p>By default, <strong>nuke.Node.performanceInfo()</strong> will give you the timings for the <strong>engine</strong> part of the processing, which is usually the most expensive. You can request a performance profile for a different part of the processing by passing in one of the following arguments:</p>
+<div class="highlight-python"><pre>nuke.PROFILE_STORE
+nuke.PROFILE_VALIDATE
+nuke.PROFILE_REQUEST
+nuke.PROFILE_ENGINE</pre>
+</div>
+<p>For example, to obtain all the timings for the Defocus node in the tree above, you could use:</p>
+<div class="highlight-python"><pre>n = nuke.toNode("Defocus1")
+print "Defocus1"
+print "Store"
+print n.performanceInfo(nuke.PROFILE_STORE)
+print "Validate"
+print n.performanceInfo(nuke.PROFILE_VALIDATE)
+print "Request"
+print n.performanceInfo(nuke.PROFILE_REQUEST)
+print "Engine"
+print n.performanceInfo(nuke.PROFILE_ENGINE)</pre>
+</div>
+<p>to obtain:</p>
+<div class="highlight-python"><pre># Result: Defocus1
+Store
+{'callCount': 108, 'timeTakenWall': 6571, 'timeTakenCPU': 6563}
+Validate
+{'callCount': 53, 'timeTakenWall': 1451, 'timeTakenCPU': 1445}
+Request
+{'callCount': 108, 'timeTakenWall': 1017, 'timeTakenCPU': 1009}
+Engine
+{'callCount': 10228, 'timeTakenWall': 28524348, 'timeTakenCPU': 624512794}</pre>
+</div>
+<p>As expected, we can see that for the Defocus, most of the time is spent in the <strong>engine</strong> processing, while <strong>store</strong>, <strong>validate</strong> and <strong>request</strong> are all relatively fast. If this wasn&#8217;t the case, or if the <strong>callCount</strong> showed that <strong>store</strong>, <strong>validate</strong> or <strong>request</strong> were being called a large number of times, this could indicate a problem that might be affecting performance.</p>
+<p>Note that some nodes will have valid reasons for spending longer in the <strong>store</strong>, <strong>validate</strong> or <strong>request</strong> phases than our Defocus example. For instance, readers are likely to spend longer in <strong>validate</strong>, as they will need to open files; this will be particularly slow if those files are on a network. The ScanlineRender node is another example that has a lot to do in <strong>validate</strong>, while the <strong>store</strong> stage will be slow for a RotoPaint, which needs to bake curves. Nodes with slow expressions on their knobs can also spend a long time evaluating these during the <strong>store</strong> phase.</p>
+</div>
+<div class="section" id="writing-performance-information-to-an-xml-file">
+<h2>Writing Performance Information to an XML File<a class="headerlink" href="#writing-performance-information-to-an-xml-file" title="Permalink to this headline">¶</a></h2>
+<p>Finally, note that the above performance information will automatically be written to an XML file when Nuke is run with <strong>&#8220;-Pf &lt;filename&gt;&#8221;</strong>, along with some information about your system. In this mode, performance timers will be started before a render and the timings output to the requested file in XML format once the render is complete. When Nuke is run in this mode, calling:</p>
+<div class="highlight-python"><pre>nuke.performanceProfileFilename()</pre>
+</div>
+<p>will return the full path to the XML profile file.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Performance Profiling</a><ul>
+<li><a class="reference internal" href="#using-performance-timers">Using Performance Timers</a></li>
+<li><a class="reference internal" href="#a-note-on-nuke-s-architecture">A Note on Nuke&#8217;s Architecture</a></li>
+<li><a class="reference internal" href="#obtaining-performance-timings-via-python">Obtaining Performance Timings via Python</a></li>
+<li><a class="reference internal" href="#other-performance-statistics">Other Performance Statistics</a></li>
+<li><a class="reference internal" href="#writing-performance-information-to-an-xml-file">Writing Performance Information to an XML File</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="render_farm.html"
+                        title="previous chapter">Render Farm Integration (Concept)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installing_plugins.html"
+                        title="next chapter">Installing Plug-ins</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installing_plugins.html" title="Installing Plug-ins"
+             >next</a></li>
+        <li class="right" >
+          <a href="render_farm.html" title="Render Farm Integration (Concept)"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

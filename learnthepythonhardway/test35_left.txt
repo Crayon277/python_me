@@ -1,0 +1,4 @@
+left
+taunt bear
+open door
+50

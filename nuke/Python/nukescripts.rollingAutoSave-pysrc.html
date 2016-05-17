@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.rollingAutoSave</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;rollingAutoSave
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.rollingAutoSave-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.rollingAutoSave-module.html">Module nukescripts.rollingAutoSave</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">glob</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable _curvelib.AnimCurveKey.time=_curvelib.AnimCurveKey-class.html#time"><a title="_curvelib.AnimCurveKey.time" class="py-name" href="#" onclick="return doclink('link-1', 'time', 'link-1');">time</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module os=os-module.html"><a title="os" class="py-name" href="#" onclick="return doclink('link-2', 'os', 'link-2');">os</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-comment">### Example that implements a rolling autosave using the autoSaveFilter callbacks</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-comment">###</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-comment">## autosaves roll from 0-9 eg myfile.autosave, myfile.autosave1, myfile.autosave2...</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-comment">## To use just add 'import nukescripts.autosave' in your init.py</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="onAutoSave"></a><div id="onAutoSave-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="onAutoSave-toggle" onclick="return toggle('onAutoSave');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.rollingAutoSave-module.html#onAutoSave">onAutoSave</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="onAutoSave-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="onAutoSave-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">  <tt class="py-comment">## ignore untiled autosave</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-3', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-4', 'root', 'link-4');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-5');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'Root'</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-6" class="py-name" targets="Method nuke.Gizmo.filename()=nuke.Gizmo-class.html#filename,Function nuke.filename()=nuke-module.html#filename"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-6', 'filename', 'link-6');">filename</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">  <tt class="py-name">fileNo</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">  <tt class="py-name">files</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Function nukescripts.rollingAutoSave.getAutoSaveFiles()=nukescripts.rollingAutoSave-module.html#getAutoSaveFiles"><a title="nukescripts.rollingAutoSave.getAutoSaveFiles" class="py-name" href="#" onclick="return doclink('link-7', 'getAutoSaveFiles', 'link-7');">getAutoSaveFiles</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-8', 'filename', 'link-6');">filename</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">files</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt> <tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-name">lastFile</tt> <tt class="py-op">=</tt> <tt class="py-name">files</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-comment"># get the last file number</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">lastFile</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">fileNo</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">lastFile</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">      <tt class="py-name">fileNo</tt> <tt class="py-op">=</tt> <tt class="py-name">fileNo</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-op">(</tt> <tt class="py-name">fileNo</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">9</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-name">fileNo</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-op">(</tt> <tt class="py-name">fileNo</tt> <tt class="py-op">!=</tt> <tt class="py-number">0</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt id="link-9" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-9', 'filename', 'link-6');">filename</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-10', 'filename', 'link-6');">filename</a></tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">fileNo</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-11" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-11', 'filename', 'link-6');">filename</a></tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="onAutoSaveRestore"></a><div id="onAutoSaveRestore-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="onAutoSaveRestore-toggle" onclick="return toggle('onAutoSaveRestore');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.rollingAutoSave-module.html#onAutoSaveRestore">onAutoSaveRestore</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="onAutoSaveRestore-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="onAutoSaveRestore-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">  <tt class="py-name">files</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="nukescripts.rollingAutoSave.getAutoSaveFiles" class="py-name" href="#" onclick="return doclink('link-12', 'getAutoSaveFiles', 'link-7');">getAutoSaveFiles</a></tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-13', 'filename', 'link-6');">filename</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">files</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt id="link-14" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-14', 'filename', 'link-6');">filename</a></tt> <tt class="py-op">=</tt> <tt class="py-name">files</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt id="link-15" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-15', 'filename', 'link-6');">filename</a></tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="onAutoSaveDelete"></a><div id="onAutoSaveDelete-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="onAutoSaveDelete-toggle" onclick="return toggle('onAutoSaveDelete');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.rollingAutoSave-module.html#onAutoSaveDelete">onAutoSaveDelete</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="onAutoSaveDelete-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="onAutoSaveDelete-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">  <tt class="py-comment">## only delete untiled autosave</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-16" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-16', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-17', 'root', 'link-4');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-18', 'name', 'link-5');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'Root'</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-19" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-19', 'filename', 'link-6');">filename</a></tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">  <tt class="py-comment"># return None here to not delete auto save file</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="getAutoSaveFiles"></a><div id="getAutoSaveFiles-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="getAutoSaveFiles-toggle" onclick="return toggle('getAutoSaveFiles');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.rollingAutoSave-module.html#getAutoSaveFiles">getAutoSaveFiles</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getAutoSaveFiles-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="getAutoSaveFiles-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">  <tt class="py-name">date_file_list</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">  <tt class="py-name">files</tt> <tt class="py-op">=</tt> <tt class="py-name">glob</tt><tt class="py-op">.</tt><tt class="py-name">glob</tt><tt class="py-op">(</tt><tt id="link-20" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-20', 'filename', 'link-6');">filename</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'[1-9]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">  <tt class="py-name">files</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt> <tt class="py-name">glob</tt><tt class="py-op">.</tt><tt class="py-name">glob</tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-21', 'filename', 'link-6');">filename</a></tt><tt class="py-op">)</tt> <tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">file</tt> <tt class="py-keyword">in</tt> <tt class="py-name">files</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">      <tt class="py-comment"># retrieves the stats for the current file as a tuple</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">      <tt class="py-comment"># (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">      <tt class="py-comment"># the tuple element mtime at index 8 is the last-modified-date</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">      <tt class="py-name">stats</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-22', 'os', 'link-2');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">stat</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">      <tt class="py-comment"># create tuple (year yyyy, month(1-12), day(1-31), hour(0-23), minute(0-59), second(0-59),</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">      <tt class="py-comment"># weekday(0-6, 0 is monday), Julian day(1-366), daylight flag(-1,0 or 1)) from seconds since epoch</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">      <tt class="py-comment"># note:  this tuple can be sorted properly by date and time</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">      <tt class="py-name">lastmod_date</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="_curvelib.AnimCurveKey.time" class="py-name" href="#" onclick="return doclink('link-23', 'time', 'link-1');">time</a></tt><tt class="py-op">.</tt><tt class="py-name">localtime</tt><tt class="py-op">(</tt><tt class="py-name">stats</tt><tt class="py-op">[</tt><tt class="py-number">8</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">      <tt class="py-comment">#print image_file, lastmod_date   # test</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">      <tt class="py-comment"># create list of tuples ready for sorting by date</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">      <tt class="py-name">date_file_tuple</tt> <tt class="py-op">=</tt> <tt class="py-name">lastmod_date</tt><tt class="py-op">,</tt> <tt class="py-name">file</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">      <tt class="py-name">date_file_list</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method _curveknob.Layer.append()=_curveknob.Layer-class.html#append,Method _curveknob.Shape.append()=_curveknob.Shape-class.html#append,Method _curveknob.Stroke.append()=_curveknob.Stroke-class.html#append"><a title="_curveknob.Layer.append
+_curveknob.Shape.append
+_curveknob.Stroke.append" class="py-name" href="#" onclick="return doclink('link-24', 'append', 'link-24');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">date_file_tuple</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">  <tt class="py-name">date_file_list</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-op">[</tt> <tt id="link-25" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-25', 'filename', 'link-6');">filename</a></tt> <tt class="py-keyword">for</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-26', 'filename', 'link-6');">filename</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">date_file_list</tt> <tt class="py-op">]</tt> </tt>
+</div><a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line"><tt id="link-27" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-27', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Function nuke.callbacks.addAutoSaveFilter()=nuke.callbacks-module.html#addAutoSaveFilter"><a title="nuke.callbacks.addAutoSaveFilter" class="py-name" href="#" onclick="return doclink('link-28', 'addAutoSaveFilter', 'link-28');">addAutoSaveFilter</a></tt><tt class="py-op">(</tt> <tt id="link-29" class="py-name" targets="Function nukescripts.rollingAutoSave.onAutoSave()=nukescripts.rollingAutoSave-module.html#onAutoSave"><a title="nukescripts.rollingAutoSave.onAutoSave" class="py-name" href="#" onclick="return doclink('link-29', 'onAutoSave', 'link-29');">onAutoSave</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"><tt id="link-30" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-30', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Function nuke.callbacks.addAutoSaveRestoreFilter()=nuke.callbacks-module.html#addAutoSaveRestoreFilter"><a title="nuke.callbacks.addAutoSaveRestoreFilter" class="py-name" href="#" onclick="return doclink('link-31', 'addAutoSaveRestoreFilter', 'link-31');">addAutoSaveRestoreFilter</a></tt><tt class="py-op">(</tt> <tt id="link-32" class="py-name" targets="Function nukescripts.rollingAutoSave.onAutoSaveRestore()=nukescripts.rollingAutoSave-module.html#onAutoSaveRestore"><a title="nukescripts.rollingAutoSave.onAutoSaveRestore" class="py-name" href="#" onclick="return doclink('link-32', 'onAutoSaveRestore', 'link-32');">onAutoSaveRestore</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"><tt id="link-33" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-33', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Function nuke.callbacks.addAutoSaveDeleteFilter()=nuke.callbacks-module.html#addAutoSaveDeleteFilter"><a title="nuke.callbacks.addAutoSaveDeleteFilter" class="py-name" href="#" onclick="return doclink('link-34', 'addAutoSaveDeleteFilter', 'link-34');">addAutoSaveDeleteFilter</a></tt><tt class="py-op">(</tt> <tt id="link-35" class="py-name" targets="Function nukescripts.rollingAutoSave.onAutoSaveDelete()=nukescripts.rollingAutoSave-module.html#onAutoSaveDelete"><a title="nukescripts.rollingAutoSave.onAutoSaveDelete" class="py-name" href="#" onclick="return doclink('link-35', 'onAutoSaveDelete', 'link-35');">onAutoSaveDelete</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line"><tt class="py-comment">### As an example to remove the callbacks use this code</tt> </tt>
+<a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"><tt class="py-comment">#nuke.removeAutoSaveFilter( onAutoSave )</tt> </tt>
+<a name="L91"></a><tt class="py-lineno">91</tt>  <tt class="py-line"><tt class="py-comment">#nuke.removeAutoSaveRestoreFilter( onAutoSaveRestore )</tt> </tt>
+<a name="L92"></a><tt class="py-lineno">92</tt>  <tt class="py-line"><tt class="py-comment">#nuke.removeAutoSaveDeleteFilter( onAutoSaveDelete )</tt> </tt>
+<a name="L93"></a><tt class="py-lineno">93</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

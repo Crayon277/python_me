@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to NUKE Python Developer’s Guide &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="#" />
+    <link rel="next" title="Introduction" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="intro.html" title="Introduction"
+             accesskey="N">next</a></li>
+        <li><a href="#">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-nuke-python-developer-s-guide">
+<h1>Welcome to NUKE Python Developer&#8217;s Guide<a class="headerlink" href="#welcome-to-nuke-python-developer-s-guide" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html#info">Info</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="startup.html">Start-up Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="startup.html#evaluation-order">Evaluation Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html#menu-py">menu.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html#init-py">init.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#creating-nodes-and-setting-their-controls">Creating Nodes and Setting Their Controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#creating-a-node-in-the-user-interface">Creating a Node in the User Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#creating-a-node-for-scripting">Creating a Node for Scripting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#setting-controls-at-node-creation">Setting Controls at Node Creation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#assigning-variables">Assigning Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#getting-the-node-object-for-existing-nodes">Getting the Node Object for Existing Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#accessing-selected-nodes-in-the-node-graph">Accessing Selected Nodes in the Node Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#adding-controls-to-nodes">Adding Controls to Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#showing-and-hiding-a-nodes-properties-panel">Showing and Hiding a Node’s Properties Panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#connecting-nodes-and-setting-their-inputs">Connecting Nodes and Setting Their Inputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#setting-default-values-for-controls">Setting Default Values for Controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#rendering-with-the-write-node">Rendering with the Write Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#flipbooking-with-external-applications">Flipbooking with External Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#listing-a-nodes-controls">Listing a Node’s Controls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#undoing-and-redoing-actions">Undoing and Redoing Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#frame-navigation">Frame Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#setting-frame-ranges">Setting Frame Ranges</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#marking-frame-numbers-in-file-names">Marking Frame Numbers in File Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#copying-an-animation-curve-between-nodes">Copying an Animation Curve Between Nodes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#overriding-the-creation-of-a-particular-node">Overriding the Creation of a Particular Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#getting-information-on-the-nuke-environment-you-are-running">Getting Information on the NUKE Environment You Are Running</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#accessing-node-metadata">Accessing Node Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#creating-dialogs-and-panels">Creating Dialogs and Panels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#creating-modal-dialogs">Creating Modal Dialogs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#python-dialog-example">Python Dialog Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#creating-non-modal-panels">Creating Non-Modal Panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#non-modal-panel-example">Non-Modal Panel Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#creating-progress-bar-dialogs">Creating Progress Bar Dialogs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#clearing-out-the-current-nuke-nk-script">Clearing out the Current NUKE (.nk) Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#creating-views-for-a-stereoscopic-project">Creating Views for a Stereoscopic Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#adjusting-control-values-in-stereo-projects">Adjusting Control Values in Stereo Projects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="nuke_as_python_module.html">Nuke as a Python Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="nuke_as_python_module.html#licensing">Licensing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="animation.html">Animation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#setting-keys">Setting Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#detecting-keys">Detecting Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="animation.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="animation.html#baking-animation">Baking Animation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Using the Command-line</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#running-nuke-in-python-mode">Running NUKE in Python Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#using-command-line-arguments">Using Command-line Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#modifying-existing-nuke-scripts">Modifying Existing NUKE Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#executing-frame-ranges">Executing Frame Ranges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="callbacks.html">Callbacks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#onusercreate">OnUserCreate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#oncreate">onCreate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#onscriptload">onScriptLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#onscriptsave">onScriptSave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#onscriptclose">onScriptClose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#ondestroy">onDestroy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#knobchanged">knobChanged</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#updateui">updateUI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#autolabel">autolabel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#beforerender">beforeRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#beforeframerender">beforeFrameRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#afterframerender">afterFrameRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#afterrender">afterRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#afterbackgroundrender">afterBackgroundRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#afterbackgroundframerender">afterBackgroundFrameRender</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#filenamefilter">filenameFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#validatefilename">validateFilename</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#autosavefilter">autoSaveFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#autosaverestorefilter">autoSaveRestoreFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#autosavedeletefilter">autoSaveDeleteFilter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="callbacks.html#using-autosave-callbacks-to-implement-a-rolling-autosave">Using Autosave Callbacks to Implement a Rolling Autosave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="callbacks.html#using-callbacks-on-root-to-add-stereo-setup">Using Callbacks on Root to Add Stereo Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="callbacks.html#default-colorspaces">Default Colorspaces</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stereo.html">Stereo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html#multi-view-knob-values">Multi View Knob Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stereo.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="stereo.html#creating-converting-a-stereo-camera">Creating/Converting a Stereo Camera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stereo.html#setting-up-stereo">Setting Up Stereo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rotopaint.html">Roto and RotoPaint</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rotopaint.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rotopaint.html#painttrajectory">paintTrajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rotopaint.html#trackshape">trackShape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rotopaint.html#path-controller">path Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rotopaint.html#trackcv">trackCV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image_data.html">Accessing Image Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="image_data.html#using-the-curvetool">Using the CurveTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_data.html#using-the-sample-method">Using the Sample Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_data.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="image_data.html#getminmax">getMinMax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image_data.html#using-sample">Using Sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_panels.html">Custom Panels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#simple-panel-commands">Simple Panel Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#simple-panel-object">Simple Panel Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#python-panels">Python Panels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custom_panels.html#shapepanel">ShapePanel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_panels.html#shapeandcvpanel">ShapeAndCVPanel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_panels.html#search-and-replace-panel">Search and Replace Panel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_panels.html#extending-nuke-with-pyside">Extending NUKE with PySide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#my-first-pyside-window">My First PySide Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#dockable-pyside-widgets">Dockable PySide Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#a-web-browser-panel-example">A Web browser panel example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#migrating-from-pyqt-applications">Migrating from PyQt Applications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_panels.html#extending-nuke-with-pyqt">Extending NUKE with PyQt</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#mac-osx">Mac OSX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#linux">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#windows">Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#environment-setup">Environment Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#my-first-pyqt-window">My First PyQt Window</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#pyside-and-pyqt-knobs">PySide and PyQt Knobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_panels.html#migrating-from-qt-applications-nuke-6-2">Migrating from Qt Applications - NUKE 6.2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_ui.html">Customizing the UI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_ui.html#creating-a-custom-menu">Creating a Custom Menu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_ui.html#creating-a-custom-toolbar">Creating a Custom Toolbar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_ui.html#creating-a-custom-menu-item">Creating a Custom Menu Item</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_ui.html#assigning-a-hotkey">Assigning a Hotkey</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_ui.html#defining-knob-defaults">Defining Knob Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flipbook.html">Custom Flipbooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flipbook.html#using-tweak-software-s-rv-as-the-default-flipbook-application">Using Tweak Software&#8217;s RV as the Default Flipbook Application</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metadata.html">Metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#reading-metadata">Reading Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#setting-metadata">Setting Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="metadata.html#createmetadatcam">createMetaDatCam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="channels.html">Working with Channels and Layers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="channels.html#reading-channels">Reading Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channels.html#adding-new-channels">Adding New Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channels.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="channels.html#autocomp">autoComp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dag.html">Manipulating the Node Graph</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dag.html#getting-and-setting-node-positions">Getting and Setting Node Positions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dag.html#controlling-the-node-graph-s-pan-and-zoom">Controlling the Node Graph&#8217;s Pan and Zoom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dag.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dag.html#a-circle-made-of-dot-nodes">A Circle Made of Dot Nodes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html#a-spiral">A Spiral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dag.html#controlling-the-distance-between-nodes">Controlling the Distance between Nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Formats</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#reading-formats">Reading Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#adding-a-new-format">Adding a New Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#setting-formats">Setting Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">Math</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="math.html#using-matrix">Using matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math.html#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="math.html#paintpoints">paintPoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="asset.html">Asset Management Systems / Pipeline Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="asset.html#custom-script-save-workflow">Custom Script Save Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html#custom-script-load-workflow">Custom Script Load Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html#custom-write-node">Custom Write Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html#custom-read-node">Custom Read Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asset.html#custom-udim-parsing-function">Custom UDIM Parsing function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="threading.html">Threading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="threading.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="threading.html#mirrornodes">MirrorNodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="render_farm.html">Render Farm Integration (Concept)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="performance.html">Performance Profiling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#using-performance-timers">Using Performance Timers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#a-note-on-nuke-s-architecture">A Note on Nuke&#8217;s Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#obtaining-performance-timings-via-python">Obtaining Performance Timings via Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#other-performance-statistics">Other Performance Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance.html#writing-performance-information-to-an-xml-file">Writing Performance Information to an XML File</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installing_plugins.html">Installing Plug-ins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing_plugins.html#home-directory">Home Directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing_plugins.html#custom-plug-in-repository">Custom Plug-in Repository</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="samples.html">Sample Scripts</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="next chapter">Introduction</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="intro.html" title="Introduction"
+             >next</a></li>
+        <li><a href="#">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

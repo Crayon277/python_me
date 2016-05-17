@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.clientserver</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;clientserver
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.clientserver-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.clientserver-module.html">Module nukescripts.clientserver</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2009 The Foundry Visionmongers Ltd.  All Rights Reserved.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">socket</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Module threading=threading-module.html"><a title="threading" class="py-name" href="#" onclick="return doclink('link-0', 'threading', 'link-0');">threading</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-1', 'nuke', 'link-1');">nuke</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package nukescripts=nukescripts-module.html"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-2', 'nukescripts', 'link-2');">nukescripts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Module nuke.utils=nuke.utils-module.html,Module nukescripts.utils=nukescripts.utils-module.html"><a title="nuke.utils
+nukescripts.utils" class="py-name" href="#" onclick="return doclink('link-3', 'utils', 'link-3');">utils</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable nukescripts.clientserver.HOST=nukescripts.clientserver-module.html#HOST"><a title="nukescripts.clientserver.HOST" class="py-name" href="#" onclick="return doclink('link-4', 'HOST', 'link-4');">HOST</a></tt><tt class="py-op">=</tt><tt class="py-string">'localhost'</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable nukescripts.clientserver.PORT=nukescripts.clientserver-module.html#PORT"><a title="nukescripts.clientserver.PORT" class="py-name" href="#" onclick="return doclink('link-5', 'PORT', 'link-5');">PORT</a></tt><tt class="py-op">=</tt><tt class="py-number">50007</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="client"></a><div id="client-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="client-toggle" onclick="return toggle('client');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.clientserver.client-class.html">client</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="client-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="client-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">  Example of running an IPV6 socket client to create nodes in Nuke.</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">  from nukescripts import clientserver</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">  c = clientserver.client()</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">  c.send("Blur")</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="client.__init__"></a><div id="client.__init__-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="client.__init__-toggle" onclick="return toggle('client.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver.client-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="nukescripts.clientserver.HOST" class="py-name" href="#" onclick="return doclink('link-6', 'HOST', 'link-4');">HOST</a></tt><tt class="py-op">,</tt> <tt class="py-param">port</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="nukescripts.clientserver.PORT" class="py-name" href="#" onclick="return doclink('link-7', 'PORT', 'link-5');">PORT</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="client.__init__-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="client.__init__-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">res</tt> <tt class="py-keyword">in</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">getaddrinfo</tt><tt class="py-op">(</tt><tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">AF_UNSPEC</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">SOCK_STREAM</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">AI_PASSIVE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">      <tt class="py-name">af</tt><tt class="py-op">,</tt> <tt class="py-name">socktype</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">,</tt> <tt class="py-name">canonname</tt><tt class="py-op">,</tt> <tt class="py-name">sa</tt> <tt class="py-op">=</tt> <tt class="py-name">res</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">socket</tt><tt class="py-op">(</tt><tt class="py-name">af</tt><tt class="py-op">,</tt> <tt class="py-name">socktype</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method nuke.Knob.error()=nuke.Knob-class.html#error,Method nuke.Node.error()=nuke.Node-class.html#error,Function nuke.error()=nuke-module.html#error,Class sre_constants.error=sre_constants.error-class.html"><a title="nuke.Knob.error
+nuke.Node.error
+nuke.error
+sre_constants.error" class="py-name" href="#" onclick="return doclink('link-8', 'error', 'link-8');">error</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">sa</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="nuke.Knob.error
+nuke.Node.error
+nuke.error
+sre_constants.error" class="py-name" href="#" onclick="return doclink('link-9', 'error', 'link-8');">error</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method nukescripts.clientserver.client.close()=nukescripts.clientserver.client-class.html#close"><a title="nukescripts.clientserver.client.close" class="py-name" href="#" onclick="return doclink('link-10', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">      <tt class="py-keyword">break</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">RuntimeError</tt><tt class="py-op">,</tt> <tt class="py-string">"Unable to initialise client."</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="client.send"></a><div id="client.send-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="client.send-toggle" onclick="return toggle('client.send');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver.client-class.html#send">send</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">msg</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="client.send-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="client.send-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method nukescripts.clientserver.client.send()=nukescripts.clientserver.client-class.html#send"><a title="nukescripts.clientserver.client.send" class="py-name" href="#" onclick="return doclink('link-11', 'send', 'link-11');">send</a></tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="client.close"></a><div id="client.close-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="client.close-toggle" onclick="return toggle('client.close');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver.client-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="client.close-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="client.close-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="nukescripts.clientserver.client.close" class="py-name" href="#" onclick="return doclink('link-12', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="server"></a><div id="server-def"><a name="L45"></a><tt class="py-lineno">45</tt> <a class="py-toggle" href="#" id="server-toggle" onclick="return toggle('server');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.clientserver.server-class.html">server</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="server-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="server-expanded"><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">  <tt class="py-docstring">"""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"><tt class="py-docstring">  Example of running an IPV6 socket server on a separate thread inside Nuke.</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"><tt class="py-docstring">  The default command is to create the named node.</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"><tt class="py-docstring">  from nukescripts import clientserver</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"><tt class="py-docstring">  clientserver.threaded_server()</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"><tt class="py-docstring">  """</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="server.__init__"></a><div id="server.__init__-def"><a name="L54"></a><tt class="py-lineno">54</tt> <a class="py-toggle" href="#" id="server.__init__-toggle" onclick="return toggle('server.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver.server-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">host</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="nukescripts.clientserver.HOST" class="py-name" href="#" onclick="return doclink('link-13', 'HOST', 'link-4');">HOST</a></tt><tt class="py-op">,</tt> <tt class="py-param">port</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="nukescripts.clientserver.PORT" class="py-name" href="#" onclick="return doclink('link-14', 'PORT', 'link-5');">PORT</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="server.__init__-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="server.__init__-expanded"><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">res</tt> <tt class="py-keyword">in</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">getaddrinfo</tt><tt class="py-op">(</tt><tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">AF_UNSPEC</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">SOCK_STREAM</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">AI_PASSIVE</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">      <tt class="py-name">af</tt><tt class="py-op">,</tt> <tt class="py-name">socktype</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">,</tt> <tt class="py-name">canonname</tt><tt class="py-op">,</tt> <tt class="py-name">sa</tt> <tt class="py-op">=</tt> <tt class="py-name">res</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">socket</tt><tt class="py-op">(</tt><tt class="py-name">af</tt><tt class="py-op">,</tt> <tt class="py-name">socktype</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="nuke.Knob.error
+nuke.Node.error
+nuke.error
+sre_constants.error" class="py-name" href="#" onclick="return doclink('link-15', 'error', 'link-8');">error</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">      <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">bind</tt><tt class="py-op">(</tt><tt class="py-name">sa</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">listen</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">      <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="nuke.Knob.error
+nuke.Node.error
+nuke.error
+sre_constants.error" class="py-name" href="#" onclick="return doclink('link-16', 'error', 'link-8');">error</a></tt><tt class="py-op">,</tt> <tt class="py-name">msg</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="nukescripts.clientserver.client.close" class="py-name" href="#" onclick="return doclink('link-17', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-keyword">continue</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">      <tt class="py-keyword">break</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">RuntimeError</tt><tt class="py-op">,</tt> <tt class="py-string">"Unable to initialise server."</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt>
+<a name="server.start"></a><div id="server.start-def"><a name="L73"></a><tt class="py-lineno">73</tt> <a class="py-toggle" href="#" id="server.start-toggle" onclick="return toggle('server.start');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver.server-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="server.start-collapsed" style="display:none;" pad="++" indent="++++++"></div><div id="server.start-expanded"><a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">conn</tt><tt class="py-op">,</tt> <tt class="py-name">addr</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method nukescripts.panels.PythonPanel.accept()=nukescripts.panels.PythonPanel-class.html#accept"><a title="nukescripts.panels.PythonPanel.accept" class="py-name" href="#" onclick="return doclink('link-18', 'accept', 'link-18');">accept</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-string">"Connection from "</tt><tt class="py-op">,</tt> <tt class="py-name">addr</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt class="py-keyword">while</tt> <tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">      <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt class="py-name">recv</tt><tt class="py-op">(</tt><tt class="py-number">1024</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">data</tt><tt class="py-op">:</tt> <tt class="py-keyword">break</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">      <tt class="py-keyword">print</tt> <tt class="py-string">"Command "</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">      <tt id="link-19" class="py-name"><a title="nuke.utils
+nukescripts.utils" class="py-name" href="#" onclick="return doclink('link-19', 'utils', 'link-3');">utils</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Function nuke.executeInMain.executeInMainThread()=nuke.executeInMain-module.html#executeInMainThread"><a title="nuke.executeInMain.executeInMainThread" class="py-name" href="#" onclick="return doclink('link-20', 'executeInMainThread', 'link-20');">executeInMainThread</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-21', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Function nuke.createNode()=nuke-module.html#createNode"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-22', 'createNode', 'link-22');">createNode</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">    <tt class="py-name">conn</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="nukescripts.clientserver.client.close" class="py-name" href="#" onclick="return doclink('link-23', 'close', 'link-10');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line"> </tt>
+<a name="start_server"></a><div id="start_server-def"><a name="L83"></a><tt class="py-lineno">83</tt> <a class="py-toggle" href="#" id="start_server-toggle" onclick="return toggle('start_server');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver-module.html#start_server">start_server</a><tt class="py-op">(</tt><tt class="py-param">host</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="nukescripts.clientserver.HOST" class="py-name" href="#" onclick="return doclink('link-24', 'HOST', 'link-4');">HOST</a></tt><tt class="py-op">,</tt> <tt class="py-param">port</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="nukescripts.clientserver.PORT" class="py-name" href="#" onclick="return doclink('link-25', 'PORT', 'link-5');">PORT</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="start_server-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="start_server-expanded"><a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">  <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name" targets="Class nukescripts.clientserver.server=nukescripts.clientserver.server-class.html"><a title="nukescripts.clientserver.server" class="py-name" href="#" onclick="return doclink('link-26', 'server', 'link-26');">server</a></tt><tt class="py-op">(</tt><tt class="py-name">host</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">  <tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method nukescripts.clientserver.server.start()=nukescripts.clientserver.server-class.html#start,Function nukescripts.openurl.start()=nukescripts.openurl-module.html#start,Method nukescripts.pyQtAppUtils.pyQtAppHelper.start()=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html#start,Method nukescripts.pyWxAppUtils.pyWxAppHelper.start()=nukescripts.pyWxAppUtils.pyWxAppHelper-class.html#start"><a title="nukescripts.clientserver.server.start
+nukescripts.openurl.start
+nukescripts.pyQtAppUtils.pyQtAppHelper.start
+nukescripts.pyWxAppUtils.pyWxAppHelper.start" class="py-name" href="#" onclick="return doclink('link-27', 'start', 'link-27');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"> </tt>
+<a name="threaded_server"></a><div id="threaded_server-def"><a name="L87"></a><tt class="py-lineno">87</tt> <a class="py-toggle" href="#" id="threaded_server-toggle" onclick="return toggle('threaded_server');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.clientserver-module.html#threaded_server">threaded_server</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="threaded_server-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="threaded_server-expanded"><a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">  <tt id="link-28" class="py-name" targets="Method nuke.BBox_Knob.t()=nuke.BBox_Knob-class.html#t,Method nuke.Box.t()=nuke.Box-class.html#t,Method nuke.Box3_Knob.t()=nuke.Box3_Knob-class.html#t,Method nuke.Format.t()=nuke.Format-class.html#t"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-28', 't', 'link-28');">t</a></tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="threading" class="py-name" href="#" onclick="return doclink('link-29', 'threading', 'link-0');">threading</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Class threading.Thread=threading.Thread-class.html"><a title="threading.Thread" class="py-name" href="#" onclick="return doclink('link-30', 'Thread', 'link-30');">Thread</a></tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name" targets="Function nukescripts.clientserver.start_server()=nukescripts.clientserver-module.html#start_server"><a title="nukescripts.clientserver.start_server" class="py-name" href="#" onclick="return doclink('link-31', 'start_server', 'link-31');">start_server</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line">  <tt id="link-32" class="py-name"><a title="nuke.BBox_Knob.t
+nuke.Box.t
+nuke.Box3_Knob.t
+nuke.Format.t" class="py-name" href="#" onclick="return doclink('link-32', 't', 'link-28');">t</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="nukescripts.clientserver.server.start
+nukescripts.openurl.start
+nukescripts.pyQtAppUtils.pyQtAppHelper.start
+nukescripts.pyWxAppUtils.pyWxAppHelper.start" class="py-name" href="#" onclick="return doclink('link-33', 'start', 'link-27');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno">90</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Formats &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Math" href="math.html" />
+    <link rel="prev" title="Manipulating the Node Graph" href="dag.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="math.html" title="Math"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="dag.html" title="Manipulating the Node Graph"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="formats">
+<span id="formats-ref-label"></span><h1>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how to handle formats.</p>
+<div class="section" id="reading-formats">
+<h2>Reading Formats<a class="headerlink" href="#reading-formats" title="Permalink to this headline">¶</a></h2>
+<p>You can get all the formats in the current NUKE session using <strong>nuke.formats()</strong>, which returns each format object:</p>
+<div class="highlight-python"><pre>scriptFormats = nuke.formats()</pre>
+</div>
+<p>The format object has all sorts of handy methods, such as the following:</p>
+<div class="highlight-python"><pre>for f in scriptFormats:
+        print f.name()
+        print f.width()
+        print f.height()
+        print f.pixelAspect()
+        print 10*'-'</pre>
+</div>
+<div class="highlight-python"><pre># Result:
+PC_Video
+640
+480
+1.0
+----------
+NTSC
+720
+486
+0.910000026226
+----------
+PAL
+720
+576
+1.09000003338
+----------
+HD
+1920
+1080
+1.0
+...</pre>
+</div>
+<p>For more methods, check out <strong>dir(nuke.Format)</strong>:</p>
+<div class="highlight-python"><pre>dir(nuke.Format)
+# Result:
+['__class__', '__delattr__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'add', 'fromUV', 'height', 'name', 'pixelAspect', 'scaled', 'setHeight', 'setName', 'setPixelAspect', 'setWidth', 'toUV', 'width']</pre>
+</div>
+<p>The node object also has a <strong>format()</strong> method to retrieve its current format. With a node in the Node Graph selected, try:</p>
+<div class="highlight-python"><pre>node = nuke.selectedNode()
+nodeFormat = node.format()
+print nodeFormat.name()</pre>
+</div>
+<p>When having to convert normalized texture space to pixel values of a certain format, <strong>fromUV</strong> and <strong>toUV</strong> are very handy.
+The following always gives you the center of the format in pixel coordinates:</p>
+<div class="highlight-python"><pre>nodeFormat.fromUV( .5, .5 )
+# Result:
+[1024.0, 778.0]</pre>
+</div>
+<p>While this gives you the normalized texture coordinates based on pixel coordinates:</p>
+<blockquote>
+<div>nodeFormat.toUV( 1024, 788 )
+# Result:
+[0.5, 0.50642675161361694]</div></blockquote>
+</div>
+<div class="section" id="adding-a-new-format">
+<h2>Adding a New Format<a class="headerlink" href="#adding-a-new-format" title="Permalink to this headline">¶</a></h2>
+<p>To add a new format, you define its parameters as a string using TCl syntax (which basically means the values are delimited by white spaces), then create a new <strong>Format</strong> object. You need to define at least the width, height, and name to create a new format:</p>
+<div class="highlight-python"><pre>square2k = '2048 2048 square 2k'
+nuke.addFormat( square2k )</pre>
+</div>
+<p>This makes the new format available:</p>
+<ul class="simple">
+<li>in all the <strong>format</strong> menus throughout the UI</li>
+<li>through the Python API.</li>
+</ul>
+<img alt="_images/formats_01.png" src="_images/formats_01.png" />
+<p>To add a bounding box or set the pixel aspect ratio, set the respective values between the height and name arguments:</p>
+<div class="highlight-python"><pre>nuke.addFormat( '2048 2048 48 48 2000 2000 2 square 2k (bbox anamorphic)' )</pre>
+</div>
+<img alt="_images/formats_02.png" src="_images/formats_02.png" />
+</div>
+<div class="section" id="setting-formats">
+<h2>Setting Formats<a class="headerlink" href="#setting-formats" title="Permalink to this headline">¶</a></h2>
+<p>To set a node&#8217;s format, simply use the usual knob methods to assign the format by name:</p>
+<div class="highlight-python"><pre>n = nuke.createNode( 'CheckerBoard2' )
+n['format'].setValue( 'square 2k' )</pre>
+</div>
+<dl class="docutils">
+<dt>The same applies when setting the root format::</dt>
+<dd>nuke.root()[&#8216;format&#8217;].setValue( &#8216;square 2k&#8217; )</dd>
+</dl>
+<p>To set a format for the root&#8217;s proxy knob, you need to first set the root to use the <em>format</em> as the proxy type:</p>
+<div class="highlight-python"><pre># DEFINE BASE AND PROXY FORMATS
+square2k = '2048 2048 square 2k'
+square1k = '1024 1024 square 1k'
+
+# ADD FORMATS TO SESSION
+for f in ( square2k, square1k ):
+    nuke.addFormat( f )
+
+# SET THE ROOT TO USE BOTH BASE AND PROXY FORMATS
+root = nuke.root()
+root['format'].setValue( 'square 2k' )
+root['proxy_type'].setValue( 'format' )
+root['proxy_format'].setValue( 'square 1k' )</pre>
+</div>
+<img alt="_images/formats_03.png" src="_images/formats_03.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Formats</a><ul>
+<li><a class="reference internal" href="#reading-formats">Reading Formats</a></li>
+<li><a class="reference internal" href="#adding-a-new-format">Adding a New Format</a></li>
+<li><a class="reference internal" href="#setting-formats">Setting Formats</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="dag.html"
+                        title="previous chapter">Manipulating the Node Graph</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="math.html"
+                        title="next chapter">Math</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="math.html" title="Math"
+             >next</a></li>
+        <li class="right" >
+          <a href="dag.html" title="Manipulating the Node Graph"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

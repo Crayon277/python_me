@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.toolsets</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;toolsets
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.toolsets-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.toolsets-module.html">Module nukescripts.toolsets</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module os=os-module.html"><a title="os" class="py-name" href="#" onclick="return doclink('link-0', 'os', 'link-0');">os</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-1', 'nuke', 'link-1');">nuke</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Package nukescripts=nukescripts-module.html"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-2', 'nukescripts', 'link-2');">nukescripts</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="CreateToolsetsPanel"></a><div id="CreateToolsetsPanel-def"><a name="L5"></a><tt class="py-lineno">  5</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel-toggle" onclick="return toggle('CreateToolsetsPanel');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html">CreateToolsetsPanel</a><tt class="py-op">(</tt><tt class="py-base-class">nukescripts</tt><tt class="py-op">.</tt><tt class="py-base-class">PythonPanel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CreateToolsetsPanel-expanded"><a name="CreateToolsetsPanel.__init__"></a><div id="CreateToolsetsPanel.__init__-def"><a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel.__init__-toggle" onclick="return toggle('CreateToolsetsPanel.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CreateToolsetsPanel.__init__-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="nukescripts" class="py-name" href="#" onclick="return doclink('link-3', 'nukescripts', 'link-2');">nukescripts</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Class nukescripts.panels.PythonPanel=nukescripts.panels.PythonPanel-class.html"><a title="nukescripts.panels.PythonPanel" class="py-name" href="#" onclick="return doclink('link-4', 'PythonPanel', 'link-4');">PythonPanel</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method nuke.AColor_Knob.__init__()=nuke.AColor_Knob-class.html#__init__,Method nuke.AnimationKey.__init__()=nuke.AnimationKey-class.html#__init__,Method nuke.Axis_Knob.__init__()=nuke.Axis_Knob-class.html#__init__,Method nuke.BBox_Knob.__init__()=nuke.BBox_Knob-class.html#__init__,Method nuke.Boolean_Knob.__init__()=nuke.Boolean_Knob-class.html#__init__,Method nuke.Box.__init__()=nuke.Box-class.html#__init__,Method nuke.Box3_Knob.__init__()=nuke.Box3_Knob-class.html#__init__,Method nuke.CascadingEnumeration_Knob.__init__()=nuke.CascadingEnumeration_Knob-class.html#__init__,Method nuke.ChannelMask_Knob.__init__()=nuke.ChannelMask_Knob-class.html#__init__,Method nuke.Channel_Knob.__init__()=nuke.Channel_Knob-class.html#__init__,Method nuke.ColorChip_Knob.__init__()=nuke.ColorChip_Knob-class.html#__init__,Method nuke.Color_Knob.__init__()=nuke.Color_Knob-class.html#__init__,Method nuke.Disable_Knob.__init__()=nuke.Disable_Knob-class.html#__init__,Method nuke.Double_Knob.__init__()=nuke.Double_Knob-class.html#__init__,Method nuke.EditableEnumeration_Knob.__init__()=nuke.EditableEnumeration_Knob-class.html#__init__,Method nuke.Enumeration_Knob.__init__()=nuke.Enumeration_Knob-class.html#__init__,Method nuke.EvalString_Knob.__init__()=nuke.EvalString_Knob-class.html#__init__,Method nuke.Eyedropper_Knob.__init__()=nuke.Eyedropper_Knob-class.html#__init__,Method nuke.File_Knob.__init__()=nuke.File_Knob-class.html#__init__,Method nuke.Font_Knob.__init__()=nuke.Font_Knob-class.html#__init__,Method nuke.Format.__init__()=nuke.Format-class.html#__init__,Method nuke.Format_Knob.__init__()=nuke.Format_Knob-class.html#__init__,Method nuke.FrameRange.__init__()=nuke.FrameRange-class.html#__init__,Method nuke.FrameRanges.__init__()=nuke.FrameRanges-class.html#__init__,Method nuke.FreeType_Knob.__init__()=nuke.FreeType_Knob-class.html#__init__,Method nuke.Help_Knob.__init__()=nuke.Help_Knob-class.html#__init__,Method nuke.Histogram_Knob.__init__()=nuke.Histogram_Knob-class.html#__init__,Method nuke.IArray_Knob.__init__()=nuke.IArray_Knob-class.html#__init__,Method nuke.Info.__init__()=nuke.Info-class.html#__init__,Method nuke.Int_Knob.__init__()=nuke.Int_Knob-class.html#__init__,Method nuke.Keyer_Knob.__init__()=nuke.Keyer_Knob-class.html#__init__,Method nuke.Knob.__init__()=nuke.Knob-class.html#__init__,Method nuke.Link_Knob.__init__()=nuke.Link_Knob-class.html#__init__,Method nuke.LookupCurves_Knob.__init__()=nuke.LookupCurves_Knob-class.html#__init__,Method nuke.MultiView_Knob.__init__()=nuke.MultiView_Knob-class.html#__init__,Method nuke.Multiline_Eval_String_Knob.__init__()=nuke.Multiline_Eval_String_Knob-class.html#__init__,Method nuke.Obsolete_Knob.__init__()=nuke.Obsolete_Knob-class.html#__init__,Method nuke.Password_Knob.__init__()=nuke.Password_Knob-class.html#__init__,Method nuke.Pulldown_Knob.__init__()=nuke.Pulldown_Knob-class.html#__init__,Method nuke.PyCustom_Knob.__init__()=nuke.PyCustom_Knob-class.html#__init__,Method nuke.PyScript_Knob.__init__()=nuke.PyScript_Knob-class.html#__init__,Method nuke.PythonCustomKnob.__init__()=nuke.PythonCustomKnob-class.html#__init__,Method nuke.PythonKnob.__init__()=nuke.PythonKnob-class.html#__init__,Method nuke.Radio_Knob.__init__()=nuke.Radio_Knob-class.html#__init__,Method nuke.Range_Knob.__init__()=nuke.Range_Knob-class.html#__init__,Method nuke.Scale_Knob.__init__()=nuke.Scale_Knob-class.html#__init__,Method nuke.SceneView_Knob.__init__()=nuke.SceneView_Knob-class.html#__init__,Method nuke.Script_Knob.__init__()=nuke.Script_Knob-class.html#__init__,Method nuke.String_Knob.__init__()=nuke.String_Knob-class.html#__init__,Method nuke.Text_Knob.__init__()=nuke.Text_Knob-class.html#__init__,Method nuke.Transform2d_Knob.__init__()=nuke.Transform2d_Knob-class.html#__init__,Method nuke.UV_Knob.__init__()=nuke.UV_Knob-class.html#__init__,Method nuke.Unsigned_Knob.__init__()=nuke.Unsigned_Knob-class.html#__init__,Method nuke.View.__init__()=nuke.View-class.html#__init__,Method nuke.ViewView_Knob.__init__()=nuke.ViewView_Knob-class.html#__init__,Method nuke.WH_Knob.__init__()=nuke.WH_Knob-class.html#__init__,Method nuke.XYZ_Knob.__init__()=nuke.XYZ_Knob-class.html#__init__,Method nuke.XY_Knob.__init__()=nuke.XY_Knob-class.html#__init__,Method nukescripts.applymaterial.ObjectNameChooserDialog.__init__()=nukescripts.applymaterial.ObjectNameChooserDialog-class.html#__init__,Method nukescripts.blinkscripteditor.InputHighlighter.__init__()=nukescripts.blinkscripteditor.InputHighlighter-class.html#__init__,Method nukescripts.blinkscripteditor.LineNumberArea.__init__()=nukescripts.blinkscripteditor.LineNumberArea-class.html#__init__,Method nukescripts.blinkscripteditor.ScriptInputArea.__init__()=nukescripts.blinkscripteditor.ScriptInputArea-class.html#__init__,Method nukescripts.camerapresets.CameraFilmBackPresets.__init__()=nukescripts.camerapresets.CameraFilmBackPresets-class.html#__init__,Method nukescripts.cameratracker.LinkableImportPanel.__init__()=nukescripts.cameratracker.LinkableImportPanel-class.html#__init__,Method nukescripts.captureViewer.CaptureViewer.__init__()=nukescripts.captureViewer.CaptureViewer-class.html#__init__,Method nukescripts.clientserver.client.__init__()=nukescripts.clientserver.client-class.html#__init__,Method nukescripts.clientserver.server.__init__()=nukescripts.clientserver.server-class.html#__init__,Method nukescripts.flipbooking.FlipbookApplication.__init__()=nukescripts.flipbooking.FlipbookApplication-class.html#__init__,Method nukescripts.flipbooking.FlipbookFactory.__init__()=nukescripts.flipbooking.FlipbookFactory-class.html#__init__,Method nukescripts.flipbooking.FlipbookLUTPathRegistry.__init__()=nukescripts.flipbooking.FlipbookLUTPathRegistry-class.html#__init__,Method nukescripts.framecycler.FramecyclerFlipbook.__init__()=nukescripts.framecycler.FramecyclerFlipbook-class.html#__init__,Method nukescripts.framerangepanel.FrameRangePanel.__init__()=nukescripts.framerangepanel.FrameRangePanel-class.html#__init__,Method nukescripts.hardwareinfo.HardwareInfo.__init__()=nukescripts.hardwareinfo.HardwareInfo-class.html#__init__,Method nukescripts.nodepresets.CreateNodePresetsPanel.__init__()=nukescripts.nodepresets.CreateNodePresetsPanel-class.html#__init__,Method nukescripts.nodepresets.PresetsDeletePanel.__init__()=nukescripts.nodepresets.PresetsDeletePanel-class.html#__init__,Method nukescripts.nodepresets.PresetsLoadPanel.__init__()=nukescripts.nodepresets.PresetsLoadPanel-class.html#__init__,Method nukescripts.nodepresets.UserPresetsDeletePanel.__init__()=nukescripts.nodepresets.UserPresetsDeletePanel-class.html#__init__,Method nukescripts.nodepresets.UserPresetsLoadPanel.__init__()=nukescripts.nodepresets.UserPresetsLoadPanel-class.html#__init__,Method nukescripts.nukeprofiler.NukeProfiler.__init__()=nukescripts.nukeprofiler.NukeProfiler-class.html#__init__,Method nukescripts.panels.PythonPanel.__init__()=nukescripts.panels.PythonPanel-class.html#__init__,Method nukescripts.panels.WidgetKnob.__init__()=nukescripts.panels.WidgetKnob-class.html#__init__,Method nukescripts.precomp.PrecompOptions.__init__()=nukescripts.precomp.PrecompOptions-class.html#__init__,Method nukescripts.precomp.PrecompOptionsDialog.__init__()=nukescripts.precomp.PrecompOptionsDialog-class.html#__init__,Method nukescripts.psd.BreakoutThreadClass.__init__()=nukescripts.psd.BreakoutThreadClass-class.html#__init__,Method nukescripts.psd.Layer.__init__()=nukescripts.psd.Layer-class.html#__init__,Method nukescripts.pyAppUtils.pyAppHelper.__init__()=nukescripts.pyAppUtils.pyAppHelper-class.html#__init__,Method nukescripts.pyQtAppUtils.pyQtAppHelper.__init__()=nukescripts.pyQtAppUtils.pyQtAppHelper-class.html#__init__,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.__init__()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#__init__,Method nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.__init__()=nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog-class.html#__init__,Method nukescripts.pyQtExamples.webBrowser.WebBrowserPanel.__init__()=nukescripts.pyQtExamples.webBrowser.WebBrowserPanel-class.html#__init__,Method nukescripts.pyQtExamples.webBrowser.WebBrowserWidget.__init__()=nukescripts.pyQtExamples.webBrowser.WebBrowserWidget-class.html#__init__,Method nukescripts.pyWxAppUtils.pyWxAppHelper.__init__()=nukescripts.pyWxAppUtils.pyWxAppHelper-class.html#__init__,Method nukescripts.renderdialog.DialogState.__init__()=nukescripts.renderdialog.DialogState-class.html#__init__,Method nukescripts.renderdialog.ExecuteDialog.__init__()=nukescripts.renderdialog.ExecuteDialog-class.html#__init__,Method nukescripts.renderdialog.FlipbookDialog.__init__()=nukescripts.renderdialog.FlipbookDialog-class.html#__init__,Method nukescripts.renderdialog.RenderDialog.__init__()=nukescripts.renderdialog.RenderDialog-class.html#__init__,Method nukescripts.renderdialog.ViewerCaptureDialog.__init__()=nukescripts.renderdialog.ViewerCaptureDialog-class.html#__init__,Method nukescripts.renderdialog.ViewerCaptureDialogThread.__init__()=nukescripts.renderdialog.ViewerCaptureDialogThread-class.html#__init__,Method nukescripts.scripteditorknob.ScriptEditor.__init__()=nukescripts.scripteditorknob.ScriptEditor-class.html#__init__,Method nukescripts.scripteditorknob.ScriptEditorWidgetKnob.__init__()=nukescripts.scripteditorknob.ScriptEditorWidgetKnob-class.html#__init__,Method nukescripts.snap3d.VertexInfo.__init__()=nukescripts.snap3d.VertexInfo-class.html#__init__,Method nukescripts.snap3d.VertexSelection.__init__()=nukescripts.snap3d.VertexSelection-class.html#__init__,Method nukescripts.toolsets.CreateToolsetsPanel.__init__()=nukescripts.toolsets.CreateToolsetsPanel-class.html#__init__,Method nukescripts.trackerlinkingdialog.LinkToTrackPanel.__init__()=nukescripts.trackerlinkingdialog.LinkToTrackPanel-class.html#__init__,Method nukescripts.udim.UDIMErrorDialog.__init__()=nukescripts.udim.UDIMErrorDialog-class.html#__init__,Method nukescripts.udim.UDIMFile.__init__()=nukescripts.udim.UDIMFile-class.html#__init__,Method nukescripts.udim.UDIMOptionsDialog.__init__()=nukescripts.udim.UDIMOptionsDialog-class.html#__init__"><a title="nuke.AColor_Knob.__init__
+nuke.AnimationKey.__init__
+nuke.Axis_Knob.__init__
+nuke.BBox_Knob.__init__
+nuke.Boolean_Knob.__init__
+nuke.Box.__init__
+nuke.Box3_Knob.__init__
+nuke.CascadingEnumeration_Knob.__init__
+nuke.ChannelMask_Knob.__init__
+nuke.Channel_Knob.__init__
+nuke.ColorChip_Knob.__init__
+nuke.Color_Knob.__init__
+nuke.Disable_Knob.__init__
+nuke.Double_Knob.__init__
+nuke.EditableEnumeration_Knob.__init__
+nuke.Enumeration_Knob.__init__
+nuke.EvalString_Knob.__init__
+nuke.Eyedropper_Knob.__init__
+nuke.File_Knob.__init__
+nuke.Font_Knob.__init__
+nuke.Format.__init__
+nuke.Format_Knob.__init__
+nuke.FrameRange.__init__
+nuke.FrameRanges.__init__
+nuke.FreeType_Knob.__init__
+nuke.Help_Knob.__init__
+nuke.Histogram_Knob.__init__
+nuke.IArray_Knob.__init__
+nuke.Info.__init__
+nuke.Int_Knob.__init__
+nuke.Keyer_Knob.__init__
+nuke.Knob.__init__
+nuke.Link_Knob.__init__
+nuke.LookupCurves_Knob.__init__
+nuke.MultiView_Knob.__init__
+nuke.Multiline_Eval_String_Knob.__init__
+nuke.Obsolete_Knob.__init__
+nuke.Password_Knob.__init__
+nuke.Pulldown_Knob.__init__
+nuke.PyCustom_Knob.__init__
+nuke.PyScript_Knob.__init__
+nuke.PythonCustomKnob.__init__
+nuke.PythonKnob.__init__
+nuke.Radio_Knob.__init__
+nuke.Range_Knob.__init__
+nuke.Scale_Knob.__init__
+nuke.SceneView_Knob.__init__
+nuke.Script_Knob.__init__
+nuke.String_Knob.__init__
+nuke.Text_Knob.__init__
+nuke.Transform2d_Knob.__init__
+nuke.UV_Knob.__init__
+nuke.Unsigned_Knob.__init__
+nuke.View.__init__
+nuke.ViewView_Knob.__init__
+nuke.WH_Knob.__init__
+nuke.XYZ_Knob.__init__
+nuke.XY_Knob.__init__
+nukescripts.applymaterial.ObjectNameChooserDialog.__init__
+nukescripts.blinkscripteditor.InputHighlighter.__init__
+nukescripts.blinkscripteditor.LineNumberArea.__init__
+nukescripts.blinkscripteditor.ScriptInputArea.__init__
+nukescripts.camerapresets.CameraFilmBackPresets.__init__
+nukescripts.cameratracker.LinkableImportPanel.__init__
+nukescripts.captureViewer.CaptureViewer.__init__
+nukescripts.clientserver.client.__init__
+nukescripts.clientserver.server.__init__
+nukescripts.flipbooking.FlipbookApplication.__init__
+nukescripts.flipbooking.FlipbookFactory.__init__
+nukescripts.flipbooking.FlipbookLUTPathRegistry.__init__
+nukescripts.framecycler.FramecyclerFlipbook.__init__
+nukescripts.framerangepanel.FrameRangePanel.__init__
+nukescripts.hardwareinfo.HardwareInfo.__init__
+nukescripts.nodepresets.CreateNodePresetsPanel.__init__
+nukescripts.nodepresets.PresetsDeletePanel.__init__
+nukescripts.nodepresets.PresetsLoadPanel.__init__
+nukescripts.nodepresets.UserPresetsDeletePanel.__init__
+nukescripts.nodepresets.UserPresetsLoadPanel.__init__
+nukescripts.nukeprofiler.NukeProfiler.__init__
+nukescripts.panels.PythonPanel.__init__
+nukescripts.panels.WidgetKnob.__init__
+nukescripts.precomp.PrecompOptions.__init__
+nukescripts.precomp.PrecompOptionsDialog.__init__
+nukescripts.psd.BreakoutThreadClass.__init__
+nukescripts.psd.Layer.__init__
+nukescripts.pyAppUtils.pyAppHelper.__init__
+nukescripts.pyQtAppUtils.pyQtAppHelper.__init__
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.__init__
+nukescripts.pyQtExamples.pyQtRender2.pyQtRenderDialog.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserPanel.__init__
+nukescripts.pyQtExamples.webBrowser.WebBrowserWidget.__init__
+nukescripts.pyWxAppUtils.pyWxAppHelper.__init__
+nukescripts.renderdialog.DialogState.__init__
+nukescripts.renderdialog.ExecuteDialog.__init__
+nukescripts.renderdialog.FlipbookDialog.__init__
+nukescripts.renderdialog.RenderDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialog.__init__
+nukescripts.renderdialog.ViewerCaptureDialogThread.__init__
+nukescripts.scripteditorknob.ScriptEditor.__init__
+nukescripts.scripteditorknob.ScriptEditorWidgetKnob.__init__
+nukescripts.snap3d.VertexInfo.__init__
+nukescripts.snap3d.VertexSelection.__init__
+nukescripts.toolsets.CreateToolsetsPanel.__init__
+nukescripts.trackerlinkingdialog.LinkToTrackPanel.__init__
+nukescripts.udim.UDIMErrorDialog.__init__
+nukescripts.udim.UDIMFile.__init__
+nukescripts.udim.UDIMOptionsDialog.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'Create ToolSet'</tt><tt class="py-op">,</tt> <tt class="py-string">'uk.co.thefoundry.CreateToolset'</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-comment"># CREATE KNOBS</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-comment"># Loop through and find all user folders</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">userFolders</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">d</tt> <tt class="py-keyword">in</tt> <tt id="link-6" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-6', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Function nuke.pluginPath()=nuke-module.html#pluginPath"><a title="nuke.pluginPath" class="py-name" href="#" onclick="return doclink('link-7', 'pluginPath', 'link-7');">pluginPath</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-8" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-8', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method nukescripts.flipbooking.FlipbookApplication.path()=nukescripts.flipbooking.FlipbookApplication-class.html#path,Method nukescripts.framecycler.FramecyclerFlipbook.path()=nukescripts.framecycler.FramecyclerFlipbook-class.html#path,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#path,Variable sys.path=sys-module.html#path"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-9', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">".nuke"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">d</tt><tt class="py-op">:</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">          <tt class="py-name">dircontents</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-10', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-string">"ToolSets"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dircontents</tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">            <tt class="py-name">fullPath</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-11', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-12', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">,</tt> <tt class="py-string">"ToolSets"</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method nukescripts.toolsets.CreateToolsetsPanel.buildFolderList()=nukescripts.toolsets.CreateToolsetsPanel-class.html#buildFolderList"><a title="nukescripts.toolsets.CreateToolsetsPanel.buildFolderList" class="py-name" href="#" onclick="return doclink('link-13', 'buildFolderList', 'link-13');">buildFolderList</a></tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-14', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Class nuke.CascadingEnumeration_Knob=nuke.CascadingEnumeration_Knob-class.html"><a title="nuke.CascadingEnumeration_Knob" class="py-name" href="#" onclick="return doclink('link-15', 'CascadingEnumeration_Knob', 'link-15');">CascadingEnumeration_Knob</a></tt><tt class="py-op">(</tt><tt class="py-string">'menuItemChoice'</tt><tt class="py-op">,</tt><tt class="py-string">'ToolSets menu'</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'root'</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">userFolders</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method nuke.Knob.setTooltip()=nuke.Knob-class.html#setTooltip"><a title="nuke.Knob.setTooltip" class="py-name" href="#" onclick="return doclink('link-16', 'setTooltip', 'link-16');">setTooltip</a></tt><tt class="py-op">(</tt><tt class="py-string">"The menu location that the ToolSet will appear in. Specify 'root' to place the ToolSet in the main ToolSets menu."</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-17', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Class nuke.String_Knob=nuke.String_Knob-class.html"><a title="nuke.String_Knob" class="py-name" href="#" onclick="return doclink('link-18', 'String_Knob', 'link-18');">String_Knob</a></tt><tt class="py-op">(</tt><tt class="py-string">'itemName'</tt><tt class="py-op">,</tt> <tt class="py-string">'Menu item:'</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method _curveknob.Layer.setFlag()=_curveknob.Layer-class.html#setFlag,Method _curveknob.Shape.setFlag()=_curveknob.Shape-class.html#setFlag,Method _curveknob.Stroke.setFlag()=_curveknob.Stroke-class.html#setFlag,Method _curvelib.Flag.setFlag()=_curvelib.Flag-class.html#setFlag,Method nuke.Knob.setFlag()=nuke.Knob-class.html#setFlag"><a title="_curveknob.Layer.setFlag
+_curveknob.Shape.setFlag
+_curveknob.Stroke.setFlag
+_curvelib.Flag.setFlag
+nuke.Knob.setFlag" class="py-name" href="#" onclick="return doclink('link-19', 'setFlag', 'link-19');">setFlag</a></tt><tt class="py-op">(</tt><tt class="py-number">0x00001000</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="nuke.Knob.setTooltip" class="py-name" href="#" onclick="return doclink('link-20', 'setTooltip', 'link-16');">setTooltip</a></tt><tt class="py-op">(</tt><tt class="py-string">"ToolSet name. Use the '/' character to create a new submenu for this ToolSet, eg to create a ToolSet named 'Basic3D' and place it in a new submenu '3D', type '3D/Basic3D'. Once created the 3D menu will appear in the ToolSet menu."</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-21', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Class nuke.PyScript_Knob=nuke.PyScript_Knob-class.html"><a title="nuke.PyScript_Knob" class="py-name" href="#" onclick="return doclink('link-22', 'PyScript_Knob', 'link-22');">PyScript_Knob</a></tt> <tt class="py-op">(</tt><tt class="py-string">'create'</tt><tt class="py-op">,</tt> <tt class="py-string">'Create'</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-comment">#self.okButton.setToolTip("Create a ToolSet from the currently selected nodes with the given name")</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="_curveknob.Layer.setFlag
+_curveknob.Shape.setFlag
+_curveknob.Stroke.setFlag
+_curvelib.Flag.setFlag
+nuke.Knob.setFlag" class="py-name" href="#" onclick="return doclink('link-23', 'setFlag', 'link-19');">setFlag</a></tt><tt class="py-op">(</tt><tt class="py-number">0x00001000</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-24', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="nuke.PyScript_Knob" class="py-name" href="#" onclick="return doclink('link-25', 'PyScript_Knob', 'link-22');">PyScript_Knob</a></tt> <tt class="py-op">(</tt><tt class="py-string">'cancel'</tt><tt class="py-op">,</tt> <tt class="py-string">'Cancel'</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-comment"># ADD KNOBS</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method nuke.Node.addKnob()=nuke.Node-class.html#addKnob,Method nuke.PanelNode.addKnob()=nuke.PanelNode-class.html#addKnob,Method nukescripts.panels.PythonPanel.addKnob()=nukescripts.panels.PythonPanel-class.html#addKnob,Method nukescripts.renderdialog.ExecuteDialog.addKnob()=nukescripts.renderdialog.ExecuteDialog-class.html#addKnob"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-26', 'addKnob', 'link-26');">addKnob</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-27', 'addKnob', 'link-26');">addKnob</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-28', 'addKnob', 'link-26');">addKnob</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="nuke.Node.addKnob
+nuke.PanelNode.addKnob
+nukescripts.panels.PythonPanel.addKnob
+nukescripts.renderdialog.ExecuteDialog.addKnob" class="py-name" href="#" onclick="return doclink('link-29', 'addKnob', 'link-26');">addKnob</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">  <tt class="py-comment"># BUILD A LIST Of PRE_CREATED FOLDER LOCATIONS</tt> </tt>
+<a name="CreateToolsetsPanel.buildFolderList"></a><div id="CreateToolsetsPanel.buildFolderList-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel.buildFolderList-toggle" onclick="return toggle('CreateToolsetsPanel.buildFolderList');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html#buildFolderList">buildFolderList</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fullPath</tt><tt class="py-op">,</tt> <tt class="py-param">menuPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel.buildFolderList-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CreateToolsetsPanel.buildFolderList-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-name">filecontents</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-30', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-31" class="py-name" targets="Module nukescripts.group=nukescripts.group-module.html"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-31', 'group', 'link-31');">group</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">filecontents</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-32" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-32', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-33', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-34', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-35', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt id="link-36" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-36', 'group', 'link-31');">group</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">userFolders</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method _curveknob.Layer.append()=_curveknob.Layer-class.html#append,Method _curveknob.Shape.append()=_curveknob.Shape-class.html#append,Method _curveknob.Stroke.append()=_curveknob.Stroke-class.html#append"><a title="_curveknob.Layer.append
+_curveknob.Shape.append
+_curveknob.Stroke.append" class="py-name" href="#" onclick="return doclink('link-37', 'append', 'link-37');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">menuPath</tt> <tt class="py-op">+</tt> <tt id="link-38" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-38', 'group', 'link-31');">group</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="nukescripts.toolsets.CreateToolsetsPanel.buildFolderList" class="py-name" href="#" onclick="return doclink('link-39', 'buildFolderList', 'link-13');">buildFolderList</a></tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt> <tt class="py-op">+</tt> <tt class="py-string">'/'</tt> <tt class="py-op">+</tt> <tt id="link-40" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-40', 'group', 'link-31');">group</a></tt><tt class="py-op">,</tt> <tt class="py-name">menuPath</tt> <tt class="py-op">+</tt> <tt id="link-41" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-41', 'group', 'link-31');">group</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="CreateToolsetsPanel.createPreset"></a><div id="CreateToolsetsPanel.createPreset-def"><a name="L44"></a><tt class="py-lineno"> 44</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel.createPreset-toggle" onclick="return toggle('CreateToolsetsPanel.createPreset');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html#createPreset">createPreset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel.createPreset-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CreateToolsetsPanel.createPreset-expanded"><a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-42" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-42', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Function nuke.createToolset()=nuke-module.html#createToolset"><a title="nuke.createToolset" class="py-name" href="#" onclick="return doclink('link-43', 'createToolset', 'link-43');">createToolset</a></tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-44', 'value', 'link-44');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method nukescripts.panels.PythonPanel.finishModalDialog()=nukescripts.panels.PythonPanel-class.html#finishModalDialog"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-45', 'finishModalDialog', 'link-45');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">True</tt> <tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="CreateToolsetsPanel.getPresetPath"></a><div id="CreateToolsetsPanel.getPresetPath-def"><a name="L48"></a><tt class="py-lineno"> 48</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel.getPresetPath-toggle" onclick="return toggle('CreateToolsetsPanel.getPresetPath');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html#getPresetPath">getPresetPath</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel.getPresetPath-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CreateToolsetsPanel.getPresetPath-expanded"><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-46', 'value', 'link-44');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"root"</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method nuke.Array_Knob.setValue()=nuke.Array_Knob-class.html#setValue,Method nuke.Boolean_Knob.setValue()=nuke.Boolean_Knob-class.html#setValue,Method nuke.Channel_Knob.setValue()=nuke.Channel_Knob-class.html#setValue,Method nuke.Disable_Knob.setValue()=nuke.Disable_Knob-class.html#setValue,Method nuke.EditableEnumeration_Knob.setValue()=nuke.EditableEnumeration_Knob-class.html#setValue,Method nuke.Enumeration_Knob.setValue()=nuke.Enumeration_Knob-class.html#setValue,Method nuke.File_Knob.setValue()=nuke.File_Knob-class.html#setValue,Method nuke.Font_Knob.setValue()=nuke.Font_Knob-class.html#setValue,Method nuke.Format_Knob.setValue()=nuke.Format_Knob-class.html#setValue,Method nuke.FreeType_Knob.setValue()=nuke.FreeType_Knob-class.html#setValue,Method nuke.Int_Knob.setValue()=nuke.Int_Knob-class.html#setValue,Method nuke.Knob.setValue()=nuke.Knob-class.html#setValue,Method nuke.Link_Knob.setValue()=nuke.Link_Knob-class.html#setValue,Method nuke.MultiView_Knob.setValue()=nuke.MultiView_Knob-class.html#setValue,Method nuke.Obsolete_Knob.setValue()=nuke.Obsolete_Knob-class.html#setValue,Method nuke.Password_Knob.setValue()=nuke.Password_Knob-class.html#setValue,Method nuke.Radio_Knob.setValue()=nuke.Radio_Knob-class.html#setValue,Method nuke.Script_Knob.setValue()=nuke.Script_Knob-class.html#setValue,Method nuke.String_Knob.setValue()=nuke.String_Knob-class.html#setValue,Method nuke.Tab_Knob.setValue()=nuke.Tab_Knob-class.html#setValue,Method nuke.Text_Knob.setValue()=nuke.Text_Knob-class.html#setValue,Method nuke.Unsigned_Knob.setValue()=nuke.Unsigned_Knob-class.html#setValue"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-47', 'setValue', 'link-47');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuPath</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-48', 'setValue', 'link-47');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-49', 'value', 'link-44');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"/"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="CreateToolsetsPanel.knobChanged"></a><div id="CreateToolsetsPanel.knobChanged-def"><a name="L54"></a><tt class="py-lineno"> 54</tt> <a class="py-toggle" href="#" id="CreateToolsetsPanel.knobChanged-toggle" onclick="return toggle('CreateToolsetsPanel.knobChanged');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets.CreateToolsetsPanel-class.html#knobChanged">knobChanged</a><tt class="py-op">(</tt> <tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">knob</tt> <tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CreateToolsetsPanel.knobChanged-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="CreateToolsetsPanel.knobChanged-expanded"><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-50" class="py-name" targets="Method nuke.AnimationCurve.knob()=nuke.AnimationCurve-class.html#knob,Method nuke.LinkableKnobInfo.knob()=nuke.LinkableKnobInfo-class.html#knob,Method nuke.Node.knob()=nuke.Node-class.html#knob,Function nuke.knob()=nuke-module.html#knob"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-50', 'knob', 'link-50');">knob</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">okButton</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method nukescripts.nodepresets.CreateNodePresetsPanel.createPreset()=nukescripts.nodepresets.CreateNodePresetsPanel-class.html#createPreset,Method nukescripts.toolsets.CreateToolsetsPanel.createPreset()=nukescripts.toolsets.CreateToolsetsPanel-class.html#createPreset"><a title="nukescripts.nodepresets.CreateNodePresetsPanel.createPreset
+nukescripts.toolsets.CreateToolsetsPanel.createPreset" class="py-name" href="#" onclick="return doclink('link-51', 'createPreset', 'link-51');">createPreset</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-52" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-52', 'knob', 'link-50');">knob</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cancelButton</tt><tt class="py-op">:</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="nukescripts.panels.PythonPanel.finishModalDialog" class="py-name" href="#" onclick="return doclink('link-53', 'finishModalDialog', 'link-45');">finishModalDialog</a></tt><tt class="py-op">(</tt> <tt class="py-name">False</tt> <tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-keyword">elif</tt> <tt id="link-54" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-54', 'knob', 'link-50');">knob</a></tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">menuItemChoice</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name" targets="Method nukescripts.nodepresets.CreateNodePresetsPanel.getPresetPath()=nukescripts.nodepresets.CreateNodePresetsPanel-class.html#getPresetPath,Method nukescripts.toolsets.CreateToolsetsPanel.getPresetPath()=nukescripts.toolsets.CreateToolsetsPanel-class.html#getPresetPath"><a title="nukescripts.nodepresets.CreateNodePresetsPanel.getPresetPath
+nukescripts.toolsets.CreateToolsetsPanel.getPresetPath" class="py-name" href="#" onclick="return doclink('link-55', 'getPresetPath', 'link-55');">getPresetPath</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-comment"># NUKESCRIPT FUNCTIONS</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="addToolsetsPanel"></a><div id="addToolsetsPanel-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="addToolsetsPanel-toggle" onclick="return toggle('addToolsetsPanel');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#addToolsetsPanel">addToolsetsPanel</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="addToolsetsPanel-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="addToolsetsPanel-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">  <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-56" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-56', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Function nuke.nodesSelected()=nuke-module.html#nodesSelected"><a title="nuke.nodesSelected" class="py-name" href="#" onclick="return doclink('link-57', 'nodesSelected', 'link-57');">nodesSelected</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">    <tt class="py-name">res</tt> <tt class="py-op">=</tt> <tt id="link-58" class="py-name" targets="Class nukescripts.toolsets.CreateToolsetsPanel=nukescripts.toolsets.CreateToolsetsPanel-class.html"><a title="nukescripts.toolsets.CreateToolsetsPanel" class="py-name" href="#" onclick="return doclink('link-58', 'CreateToolsetsPanel', 'link-58');">CreateToolsetsPanel</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method nukescripts.cameratracker.LinkableImportPanel.showModalDialog()=nukescripts.cameratracker.LinkableImportPanel-class.html#showModalDialog,Method nukescripts.panels.PythonPanel.showModalDialog()=nukescripts.panels.PythonPanel-class.html#showModalDialog"><a title="nukescripts.cameratracker.LinkableImportPanel.showModalDialog
+nukescripts.panels.PythonPanel.showModalDialog" class="py-name" href="#" onclick="return doclink('link-59', 'showModalDialog', 'link-59');">showModalDialog</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">    <tt class="py-comment"># now force a rebuild of the menu</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">    <tt id="link-60" class="py-name" targets="Function nukescripts.toolsets.refreshToolsetsMenu()=nukescripts.toolsets-module.html#refreshToolsetsMenu"><a title="nukescripts.toolsets.refreshToolsetsMenu" class="py-name" href="#" onclick="return doclink('link-60', 'refreshToolsetsMenu', 'link-60');">refreshToolsetsMenu</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt id="link-61" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-61', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Function nuke.message()=nuke-module.html#message"><a title="nuke.message" class="py-name" href="#" onclick="return doclink('link-62', 'message', 'link-62');">message</a></tt><tt class="py-op">(</tt><tt class="py-string">"No nodes are selected"</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">res</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="deleteToolset"></a><div id="deleteToolset-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="deleteToolset-toggle" onclick="return toggle('deleteToolset');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#deleteToolset">deleteToolset</a><tt class="py-op">(</tt><tt class="py-param">rootPath</tt><tt class="py-op">,</tt> <tt class="py-param">fileName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="deleteToolset-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="deleteToolset-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-63" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-63', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-64" class="py-name" targets="Function nuke.ask()=nuke-module.html#ask"><a title="nuke.ask" class="py-name" href="#" onclick="return doclink('link-64', 'ask', 'link-64');">ask</a></tt><tt class="py-op">(</tt><tt class="py-string">'Are you sure you want to delete ToolSet %s?'</tt> <tt class="py-op">%</tt><tt class="py-name">fileName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt id="link-65" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-65', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Method _curveknob.CurveWidget.remove()=_curveknob.CurveWidget-class.html#remove,Method _curveknob.Layer.remove()=_curveknob.Layer-class.html#remove,Method _curveknob.Shape.remove()=_curveknob.Shape-class.html#remove,Method _curveknob.Stroke.remove()=_curveknob.Stroke-class.html#remove,Method _curvelib.AnimAttributes.remove()=_curvelib.AnimAttributes-class.html#remove"><a title="_curveknob.CurveWidget.remove
+_curveknob.Layer.remove
+_curveknob.Shape.remove
+_curveknob.Stroke.remove
+_curvelib.AnimAttributes.remove" class="py-name" href="#" onclick="return doclink('link-66', 'remove', 'link-66');">remove</a></tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-comment"># if this was the last file in this directory, the folder will need to be deleted.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-comment"># Walk the directory tree from the root and recursively delete empty directories</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">    <tt id="link-67" class="py-name" targets="Function nukescripts.toolsets.checkForEmptyToolsetDirectories()=nukescripts.toolsets-module.html#checkForEmptyToolsetDirectories"><a title="nukescripts.toolsets.checkForEmptyToolsetDirectories" class="py-name" href="#" onclick="return doclink('link-67', 'checkForEmptyToolsetDirectories', 'link-67');">checkForEmptyToolsetDirectories</a></tt><tt class="py-op">(</tt><tt class="py-name">rootPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">    <tt class="py-comment"># now force a rebuild of the menu</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt id="link-68" class="py-name"><a title="nukescripts.toolsets.refreshToolsetsMenu" class="py-name" href="#" onclick="return doclink('link-68', 'refreshToolsetsMenu', 'link-60');">refreshToolsetsMenu</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="checkForEmptyToolsetDirectories"></a><div id="checkForEmptyToolsetDirectories-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="checkForEmptyToolsetDirectories-toggle" onclick="return toggle('checkForEmptyToolsetDirectories');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#checkForEmptyToolsetDirectories">checkForEmptyToolsetDirectories</a><tt class="py-op">(</tt><tt class="py-param">currPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="checkForEmptyToolsetDirectories-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="checkForEmptyToolsetDirectories-expanded"><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">  <tt class="py-name">removed</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">  <tt class="py-keyword">while</tt> <tt class="py-name">removed</tt> <tt class="py-op">==</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-name">removed</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-69" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-69', 'root', 'link-69');">root</a></tt><tt class="py-op">,</tt> <tt class="py-name">dirs</tt><tt class="py-op">,</tt> <tt class="py-name">files</tt> <tt class="py-keyword">in</tt> <tt id="link-70" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-70', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">walk</tt><tt class="py-op">(</tt><tt class="py-name">currPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">files</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> <tt class="py-keyword">and</tt> <tt class="py-name">dirs</tt> <tt class="py-op">==</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt id="link-71" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-71', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">rmdir</tt><tt class="py-op">(</tt><tt id="link-72" class="py-name"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-72', 'root', 'link-69');">root</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-name">removed</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="refreshToolsetsMenu"></a><div id="refreshToolsetsMenu-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="refreshToolsetsMenu-toggle" onclick="return toggle('refreshToolsetsMenu');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#refreshToolsetsMenu">refreshToolsetsMenu</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="refreshToolsetsMenu-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="refreshToolsetsMenu-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">  <tt id="link-73" class="py-name" targets="Function nuke.toolbar()=nuke-module.html#toolbar"><a title="nuke.toolbar" class="py-name" href="#" onclick="return doclink('link-73', 'toolbar', 'link-73');">toolbar</a></tt> <tt class="py-op">=</tt> <tt id="link-74" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-74', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Method nuke.Menu.menu()=nuke.Menu-class.html#menu,Method nuke.MenuBar.menu()=nuke.MenuBar-class.html#menu,Method nuke.ToolBar.menu()=nuke.ToolBar-class.html#menu,Function nuke.menu()=nuke-module.html#menu,Variable nukescripts.pyQtExamples.webBrowser.menu=nukescripts.pyQtExamples.webBrowser-module.html#menu"><a title="nuke.Menu.menu
+nuke.MenuBar.menu
+nuke.ToolBar.menu
+nuke.menu
+nukescripts.pyQtExamples.webBrowser.menu" class="py-name" href="#" onclick="return doclink('link-75', 'menu', 'link-75');">menu</a></tt><tt class="py-op">(</tt><tt class="py-string">"Nodes"</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">  <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt id="link-76" class="py-name"><a title="nuke.toolbar" class="py-name" href="#" onclick="return doclink('link-76', 'toolbar', 'link-73');">toolbar</a></tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Method nuke.Menu.findItem()=nuke.Menu-class.html#findItem,Method nuke.MenuBar.findItem()=nuke.MenuBar-class.html#findItem,Method nuke.ToolBar.findItem()=nuke.ToolBar-class.html#findItem"><a title="nuke.Menu.findItem
+nuke.MenuBar.findItem
+nuke.ToolBar.findItem" class="py-name" href="#" onclick="return doclink('link-77', 'findItem', 'link-77');">findItem</a></tt><tt class="py-op">(</tt><tt class="py-string">"ToolSets"</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">m</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name" targets="Method nuke.Menu.clearMenu()=nuke.Menu-class.html#clearMenu,Method nuke.MenuBar.clearMenu()=nuke.MenuBar-class.html#clearMenu,Method nuke.ToolBar.clearMenu()=nuke.ToolBar-class.html#clearMenu"><a title="nuke.Menu.clearMenu
+nuke.MenuBar.clearMenu
+nuke.ToolBar.clearMenu" class="py-name" href="#" onclick="return doclink('link-78', 'clearMenu', 'link-78');">clearMenu</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt id="link-79" class="py-name" targets="Function nukescripts.toolsets.createToolsetsMenu()=nukescripts.toolsets-module.html#createToolsetsMenu"><a title="nukescripts.toolsets.createToolsetsMenu" class="py-name" href="#" onclick="return doclink('link-79', 'createToolsetsMenu', 'link-79');">createToolsetsMenu</a></tt><tt class="py-op">(</tt><tt id="link-80" class="py-name"><a title="nuke.toolbar" class="py-name" href="#" onclick="return doclink('link-80', 'toolbar', 'link-73');">toolbar</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="createToolsetsMenu"></a><div id="createToolsetsMenu-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="createToolsetsMenu-toggle" onclick="return toggle('createToolsetsMenu');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#createToolsetsMenu">createToolsetsMenu</a><tt class="py-op">(</tt><tt class="py-param">toolbar</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="createToolsetsMenu-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="createToolsetsMenu-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">  <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt id="link-81" class="py-name"><a title="nuke.toolbar" class="py-name" href="#" onclick="return doclink('link-81', 'toolbar', 'link-73');">toolbar</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name" targets="Method nuke.Menu.addMenu()=nuke.Menu-class.html#addMenu,Method nuke.MenuBar.addMenu()=nuke.MenuBar-class.html#addMenu,Method nuke.ToolBar.addMenu()=nuke.ToolBar-class.html#addMenu"><a title="nuke.Menu.addMenu
+nuke.MenuBar.addMenu
+nuke.ToolBar.addMenu" class="py-name" href="#" onclick="return doclink('link-82', 'addMenu', 'link-82');">addMenu</a></tt><tt class="py-op">(</tt><tt class="py-string">"ToolSets"</tt><tt class="py-op">,</tt> <tt class="py-string">"ToolbarToolsets.png"</tt><tt class="py-op">)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">  <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name" targets="Method nuke.Menu.addCommand()=nuke.Menu-class.html#addCommand,Method nuke.MenuBar.addCommand()=nuke.MenuBar-class.html#addCommand,Method nuke.ToolBar.addCommand()=nuke.ToolBar-class.html#addCommand"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-83', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt class="py-string">"Create"</tt><tt class="py-op">,</tt> <tt class="py-string">"nukescripts.toolsets.addToolsetsPanel()"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt id="link-84" class="py-name" targets="Method nuke.MenuItem.icon()=nuke.MenuItem-class.html#icon"><a title="nuke.MenuItem.icon" class="py-name" href="#" onclick="return doclink('link-84', 'icon', 'link-84');">icon</a></tt><tt class="py-op">=</tt><tt class="py-string">"ToolsetCreate.png"</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">  <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-85', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt class="py-string">"-"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-86" class="py-name" targets="Function nukescripts.toolsets.populateToolsetsMenu()=nukescripts.toolsets-module.html#populateToolsetsMenu"><a title="nukescripts.toolsets.populateToolsetsMenu" class="py-name" href="#" onclick="return doclink('link-86', 'populateToolsetsMenu', 'link-86');">populateToolsetsMenu</a></tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-87', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt class="py-string">"-"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-88" class="py-name" targets="Method nuke.Box3_Knob.n()=nuke.Box3_Knob-class.html#n"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-88', 'n', 'link-88');">n</a></tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="nuke.Menu.addMenu
+nuke.MenuBar.addMenu
+nuke.ToolBar.addMenu" class="py-name" href="#" onclick="return doclink('link-89', 'addMenu', 'link-82');">addMenu</a></tt><tt class="py-op">(</tt><tt class="py-string">"Delete"</tt><tt class="py-op">,</tt> <tt class="py-string">"ToolsetDelete.png"</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt id="link-90" class="py-name"><a title="nukescripts.toolsets.populateToolsetsMenu" class="py-name" href="#" onclick="return doclink('link-90', 'populateToolsetsMenu', 'link-86');">populateToolsetsMenu</a></tt><tt class="py-op">(</tt><tt id="link-91" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-91', 'n', 'link-88');">n</a></tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="traversePluginPaths"></a><div id="traversePluginPaths-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="traversePluginPaths-toggle" onclick="return toggle('traversePluginPaths');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#traversePluginPaths">traversePluginPaths</a><tt class="py-op">(</tt><tt class="py-param">m</tt><tt class="py-op">,</tt> <tt class="py-param">delete</tt><tt class="py-op">,</tt> <tt class="py-param">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-param">isLocal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="traversePluginPaths-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="traversePluginPaths-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">  <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-92" class="py-name" targets="Function nuke.delete()=nuke-module.html#delete"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-92', 'delete', 'link-92');">delete</a></tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">isLocal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">  <tt class="py-name">excludePaths</tt> <tt class="py-op">=</tt> <tt id="link-93" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-93', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Function nuke.getToolsetExcludePaths()=nuke-module.html#getToolsetExcludePaths"><a title="nuke.getToolsetExcludePaths" class="py-name" href="#" onclick="return doclink('link-94', 'getToolsetExcludePaths', 'link-94');">getToolsetExcludePaths</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt class="py-name">d</tt> <tt class="py-keyword">in</tt> <tt id="link-95" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-95', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="nuke.pluginPath" class="py-name" href="#" onclick="return doclink('link-96', 'pluginPath', 'link-7');">pluginPath</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-name">d</tt> <tt class="py-op">=</tt> <tt class="py-name">d</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\\'</tt><tt class="py-op">,</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-name">ignore</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">excludePaths</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">      <tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\\'</tt><tt class="py-op">,</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">d</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-name">ignore</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">break</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">ignore</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">      <tt class="py-keyword">continue</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt class="py-name">isLocal</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">".nuke"</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">      <tt class="py-keyword">continue</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isLocal</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">".nuke"</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">      <tt class="py-keyword">continue</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt id="link-97" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-97', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-98', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">      <tt class="py-name">dircontents</tt> <tt class="py-op">=</tt> <tt id="link-99" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-99', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">d</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-string">"ToolSets"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dircontents</tt><tt class="py-op">:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">fullPath</tt> <tt class="py-op">=</tt> <tt class="py-string">"/"</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">d</tt><tt class="py-op">,</tt> <tt class="py-string">"ToolSets"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-100" class="py-name" targets="Function nukescripts.toolsets.createToolsetMenuItems()=nukescripts.toolsets-module.html#createToolsetMenuItems"><a title="nukescripts.toolsets.createToolsetMenuItems" class="py-name" href="#" onclick="return doclink('link-100', 'createToolsetMenuItems', 'link-100');">createToolsetMenuItems</a></tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt id="link-101" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-101', 'delete', 'link-92');">delete</a></tt><tt class="py-op">,</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-name">isLocal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">          <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"> </tt>
+<a name="populateToolsetsMenu"></a><div id="populateToolsetsMenu-def"><a name="L135"></a><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="populateToolsetsMenu-toggle" onclick="return toggle('populateToolsetsMenu');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#populateToolsetsMenu">populateToolsetsMenu</a><tt class="py-op">(</tt><tt class="py-param">m</tt><tt class="py-op">,</tt> <tt class="py-param">delete</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="populateToolsetsMenu-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="populateToolsetsMenu-expanded"><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">  <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">  <tt class="py-name">allToolsetsList</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">  <tt class="py-comment"># first build the menu for toolsets in shared locations</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-102" class="py-name" targets="Function nukescripts.toolsets.traversePluginPaths()=nukescripts.toolsets-module.html#traversePluginPaths"><a title="nukescripts.toolsets.traversePluginPaths" class="py-name" href="#" onclick="return doclink('link-102', 'traversePluginPaths', 'link-102');">traversePluginPaths</a></tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt id="link-103" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-103', 'delete', 'link-92');">delete</a></tt><tt class="py-op">,</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-104" class="py-name"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-104', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt class="py-string">"-"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">  <tt class="py-comment"># now do toolsets in the local .nuke</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt id="link-105" class="py-name"><a title="nukescripts.toolsets.traversePluginPaths" class="py-name" href="#" onclick="return doclink('link-105', 'traversePluginPaths', 'link-102');">traversePluginPaths</a></tt><tt class="py-op">(</tt><tt class="py-name">m</tt><tt class="py-op">,</tt> <tt id="link-106" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-106', 'delete', 'link-92');">delete</a></tt><tt class="py-op">,</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">    <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="createToolsetMenuItems"></a><div id="createToolsetMenuItems-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="createToolsetMenuItems-toggle" onclick="return toggle('createToolsetMenuItems');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.toolsets-module.html#createToolsetMenuItems">createToolsetMenuItems</a><tt class="py-op">(</tt><tt class="py-param">m</tt><tt class="py-op">,</tt> <tt class="py-param">rootPath</tt><tt class="py-op">,</tt> <tt class="py-param">fullPath</tt><tt class="py-op">,</tt> <tt class="py-param">delete</tt><tt class="py-op">,</tt> <tt class="py-param">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-param">isLocal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="createToolsetMenuItems-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="createToolsetMenuItems-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">  <tt class="py-name">filecontents</tt> <tt class="py-op">=</tt> <tt class="py-name">sorted</tt><tt class="py-op">(</tt><tt id="link-107" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-107', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">=</tt><tt class="py-name">str</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">  <tt class="py-name">excludePaths</tt> <tt class="py-op">=</tt> <tt id="link-108" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-108', 'nuke', 'link-1');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-109" class="py-name"><a title="nuke.getToolsetExcludePaths" class="py-name" href="#" onclick="return doclink('link-109', 'getToolsetExcludePaths', 'link-94');">getToolsetExcludePaths</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">  <tt class="py-comment"># First list all directories</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">  <tt class="py-name">retval</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">filecontents</tt> <tt class="py-op">!=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-110" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-110', 'group', 'link-31');">group</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">filecontents</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">      <tt class="py-name">newPath</tt> <tt class="py-op">=</tt> <tt class="py-string">"/"</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt id="link-111" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-111', 'group', 'link-31');">group</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">      <tt class="py-name">ignore</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">newPath</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">".svn"</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-name">ignore</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">excludePaths</tt><tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">          <tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\\'</tt><tt class="py-op">,</tt> <tt class="py-string">'/'</tt><tt class="py-op">)</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt class="py-name">newPath</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">            <tt class="py-name">ignore</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">            <tt class="py-keyword">break</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-112" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-112', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-113" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-113', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">newPath</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ignore</tt><tt class="py-op">:</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-name">menuName</tt> <tt class="py-op">=</tt> <tt id="link-114" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-114', 'group', 'link-31');">group</a></tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isLocal</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">menuName</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">          <tt class="py-name">menuName</tt> <tt class="py-op">=</tt> <tt class="py-string">"[user] "</tt> <tt class="py-op">+</tt> <tt class="py-name">menuName</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isLocal</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">          <tt class="py-name">allToolsetsList</tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="_curveknob.Layer.append
+_curveknob.Shape.append
+_curveknob.Stroke.append" class="py-name" href="#" onclick="return doclink('link-115', 'append', 'link-37');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">menuName</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt id="link-116" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-116', 'n', 'link-88');">n</a></tt> <tt class="py-op">=</tt> <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="nuke.Menu.addMenu
+nuke.MenuBar.addMenu
+nuke.ToolBar.addMenu" class="py-name" href="#" onclick="return doclink('link-117', 'addMenu', 'link-82');">addMenu</a></tt><tt class="py-op">(</tt><tt class="py-name">menuName</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-name">retval</tt> <tt class="py-op">=</tt> <tt id="link-118" class="py-name"><a title="nukescripts.toolsets.createToolsetMenuItems" class="py-name" href="#" onclick="return doclink('link-118', 'createToolsetMenuItems', 'link-100');">createToolsetMenuItems</a></tt><tt class="py-op">(</tt><tt id="link-119" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-119', 'n', 'link-88');">n</a></tt><tt class="py-op">,</tt> <tt class="py-name">rootPath</tt><tt class="py-op">,</tt> <tt class="py-string">"/"</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt id="link-120" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-120', 'group', 'link-31');">group</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-121" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-121', 'delete', 'link-92');">delete</a></tt><tt class="py-op">,</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">,</tt> <tt class="py-name">isLocal</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-comment"># if we are deleting, and the sub directory is now empty, delete the directory also</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-122" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-122', 'delete', 'link-92');">delete</a></tt> <tt class="py-keyword">and</tt> <tt id="link-123" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-123', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">)</tt><tt class="py-op">==</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">          <tt id="link-124" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-124', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt class="py-name">rmdir</tt><tt class="py-op">(</tt><tt class="py-name">fullPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">    <tt class="py-comment"># Now list individual files</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-125" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-125', 'group', 'link-31');">group</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">filecontents</tt><tt class="py-op">:</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">      <tt class="py-name">fullFileName</tt> <tt class="py-op">=</tt> <tt class="py-string">"/"</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">fullPath</tt><tt class="py-op">,</tt> <tt id="link-126" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-126', 'group', 'link-31');">group</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-127" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-127', 'os', 'link-0');">os</a></tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-128', 'path', 'link-9');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">fullFileName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-name">extPos</tt> <tt class="py-op">=</tt> <tt id="link-129" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-129', 'group', 'link-31');">group</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">".nk"</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">extPos</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> <tt class="py-keyword">and</tt> <tt class="py-name">extPos</tt> <tt class="py-op">==</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt id="link-130" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-130', 'group', 'link-31');">group</a></tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">3</tt><tt class="py-op">:</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">          <tt id="link-131" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-131', 'group', 'link-31');">group</a></tt> <tt class="py-op">=</tt> <tt id="link-132" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-132', 'group', 'link-31');">group</a></tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'.nk'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">          <tt class="py-keyword">if</tt> <tt id="link-133" class="py-name"><a title="nuke.delete" class="py-name" href="#" onclick="return doclink('link-133', 'delete', 'link-92');">delete</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">            <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-134', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt id="link-135" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-135', 'group', 'link-31');">group</a></tt><tt class="py-op">,</tt> <tt class="py-string">'nukescripts.toolsets.deleteToolset("%s", "%s")'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">rootPath</tt><tt class="py-op">,</tt> <tt class="py-name">fullFileName</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">            <tt class="py-name">retval</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">          <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">            <tt class="py-comment"># get the filename below toolsets</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">            <tt class="py-name">i</tt> <tt class="py-op">=</tt> <tt class="py-name">fullFileName</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">"ToolSets/"</tt><tt class="py-op">)</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">i</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">              <tt class="py-name">subfilename</tt> <tt class="py-op">=</tt> <tt class="py-name">fullFileName</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">              <tt class="py-comment"># should never happen, but just in case ...</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">              <tt class="py-name">subfilename</tt> <tt class="py-op">=</tt> <tt class="py-name">fullfilename</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">isLocal</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">subfilename</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allToolsetsList</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">              <tt class="py-comment"># if we've already appended [user] to the menu name, don't need it on the filename</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">              <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">i</tt> <tt class="py-op">!=</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-name">subfilename</tt><tt class="py-op">[</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-string">"ToolSets/"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">"/"</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">:</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">                <tt id="link-136" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-136', 'group', 'link-31');">group</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"[user] "</tt> <tt class="py-op">+</tt> <tt id="link-137" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-137', 'group', 'link-31');">group</a></tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isLocal</tt><tt class="py-op">:</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">              <tt class="py-name">allToolsetsList</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="_curveknob.Layer.append
+_curveknob.Shape.append
+_curveknob.Stroke.append" class="py-name" href="#" onclick="return doclink('link-138', 'append', 'link-37');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">subfilename</tt><tt class="py-op">)</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">            <tt class="py-name">m</tt><tt class="py-op">.</tt><tt id="link-139" class="py-name"><a title="nuke.Menu.addCommand
+nuke.MenuBar.addCommand
+nuke.ToolBar.addCommand" class="py-name" href="#" onclick="return doclink('link-139', 'addCommand', 'link-83');">addCommand</a></tt><tt class="py-op">(</tt><tt id="link-140" class="py-name"><a title="nukescripts.group" class="py-name" href="#" onclick="return doclink('link-140', 'group', 'link-31');">group</a></tt><tt class="py-op">,</tt> <tt class="py-string">'nuke.loadToolset("%s")'</tt> <tt class="py-op">%</tt> <tt class="py-name">fullFileName</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">            <tt class="py-name">retval</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">  <tt class="py-keyword">return</tt> <tt class="py-name">retval</tt> </tt>
+</div><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

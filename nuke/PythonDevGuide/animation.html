@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Animation &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Using the Command-line" href="command_line.html" />
+    <link rel="prev" title="Nuke as a Python Module" href="nuke_as_python_module.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="command_line.html" title="Using the Command-line"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="nuke_as_python_module.html" title="Nuke as a Python Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="animation">
+<h1>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h1>
+<p>This topic covers how to access animation.</p>
+<div class="section" id="setting-keys">
+<h2>Setting Keys<a class="headerlink" href="#setting-keys" title="Permalink to this headline">¶</a></h2>
+<p>In order to set keys, a knob must be set to accept animation:</p>
+<div class="highlight-python"><pre>node = nuke.createNode( 'Blur' )
+k = node['size']
+k.setAnimated()</pre>
+</div>
+<p>Once this is done, the regular <tt class="docutils literal"><span class="pre">setValue</span></tt> and <tt class="docutils literal"><span class="pre">setValueAt</span></tt> methods set keys:</p>
+<div class="highlight-python"><pre>k.setValue( 5 )</pre>
+</div>
+<p>The above example sets a keyframe at the current frame with a value of 5. The following example sets two more keys at frame 10 and 100 with values of 55 and 66 respectively:</p>
+<div class="highlight-python"><pre>k.setValueAt( 55, 10 )
+k.setValueAt( 66, 100 )</pre>
+</div>
+<p>If the knob is an array knob, this sets the first field/channel to 77 and the second to 88 at frame 100:</p>
+<div class="highlight-python"><pre>k.setValueAt( 77, 100, 0 )
+k.setValueAt( 88, 100, 1 )</pre>
+</div>
+</div>
+<div class="section" id="detecting-keys">
+<h2>Detecting Keys<a class="headerlink" href="#detecting-keys" title="Permalink to this headline">¶</a></h2>
+<p>To determine if a knob is animated, you could use the following:</p>
+<div class="highlight-python"><pre>node = nuke.createNode( 'Blur' )
+k = node['size']
+k.isAnimated()</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">isAnimated()</span></tt> returns <em>True</em> if there is any sort of animation in the knob, including expressions. The following shows you if the knob has an expression:</p>
+<div class="highlight-python"><pre>k.hasExpression()</pre>
+</div>
+<p>To get to a knob&#8217;s animation curve:</p>
+<div class="highlight-python"><pre>animCurve = k.animation( 0 ) #ANIMATION IN THE FIRST FIELD (X VALUE)
+animCurve = k.animation( 1 ) #ANIMATION IN THE SECOND FIELD (Y VALUE)</pre>
+</div>
+<p>Or to get all the animation curves that might be inside a knob:</p>
+<div class="highlight-python"><pre>allCurves = k.animations()</pre>
+</div>
+<p>To print all the keys and their respective values for a given animation curve:</p>
+<div class="highlight-python"><pre>for key in animCurve.keys():
+    xValue = key.x
+    yValue = key.y
+    print 'ket at %s has value %s' % ( xValue, yValue )
+
+# Result:
+ket at 1.0 has value 5.0
+ket at 10.0 has value 55.0
+ket at 100.0 has value 77.0</pre>
+</div>
+<p>To clear all keys in all animation curves in a knob:</p>
+<div class="highlight-python"><pre>for curve in k.animations():
+    curve.clear()</pre>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="baking-animation">
+<h3>Baking Animation<a class="headerlink" href="#baking-animation" title="Permalink to this headline">¶</a></h3>
+<p>This script bakes all knobs that carry expressions into keyframed animation.
+Let&#8217;s start by creating the main function that gets the frame range and loops through selected nodes:</p>
+<div class="highlight-python"><pre>def bakeSelectedNodes():
+    ret = nuke.getFramesAndViews( 'bake curves in selected nodes?', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()) )</pre>
+</div>
+<p>This pops up a simple panel to get the requested views and frame range.</p>
+<img alt="_images/bakeKnobs_01.png" src="_images/bakeKnobs_01.png" />
+<p>Next, check if the return value is useful to us and if so, store the requested frame range and views. The <strong>FrameRange</strong> object is very handy to convert a string like &#8220;1-100&#8221; to a valid frame range:</p>
+<div class="highlight-python"><pre>def bakeSelectedNodes():
+    ret = nuke.getFramesAndViews( 'bake curves in selected nodes?', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()) )
+    if not ret:
+        return
+    fRange = nuke.FrameRange( ret[0] )
+    views = ret[1]</pre>
+</div>
+<p>Now loop through the selected nodes and run <strong>bakeExpressionKnobs</strong> on each one, which we have yet to write:</p>
+<div class="highlight-python"><pre>def bakeSelectedNodes():
+    ret = nuke.getFramesAndViews( 'bake curves in selected nodes?', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()) )
+    if not ret:
+        return
+    fRange = nuke.FrameRange( ret[0] )
+    views = ret[1]
+
+    for n in nuke.selectedNodes():
+        bakeExpressionKnobs( n, fRange.first(), fRange.last(), fRange.increment(), views )</pre>
+</div>
+<p>Put this function aside until we have finished writing the <strong>backExpreesionKnobs</strong> function. But before we do that, let&#8217;s create two little helper functions:</p>
+<ul>
+<li><p class="first"><strong>getCurves</strong> - returns all animation curves for a given knob. It operates on a single knob, loops through the requested views, and collects all animation curves and then returns them:</p>
+<div class="highlight-python"><pre>def getCurves( knob, views ):
+    curves = []
+    for v in views:
+        curves.extend( knob.animations( v ) )
+    return curves</pre>
+</div>
+</li>
+<li><p class="first"><strong>bakeCurve</strong> - bakes an expression curve into a keyframed curve. This loops through the given range of frames and sets keys on the curve for the value at that frame. In the last line, the expression itself is removed and swapped for the <em>curves</em> which tells NUKE that the keyframe values should be used:</p>
+<div class="highlight-python"><pre>def bakeCurve( curve, first, last, inc ):
+    for f in xrange( first, last, inc ):
+        curve.setKey( f, curve.evaluate( f ) )
+    curve.setExpression( 'curve' )</pre>
+</div>
+</li>
+</ul>
+<p>With our little helpers in place, we can now write the missing piece which identifies all knobs with expressions and operates on them.
+Create a new function called <strong>bakeExpressionKnobs</strong> and assign 5 arguments:</p>
+<ul>
+<li><p class="first"><strong>node</strong> - the node to examine for expression knobs</p>
+</li>
+<li><p class="first"><strong>first</strong> - the first frame to set a keyframe on</p>
+</li>
+<li><p class="first"><strong>last</strong> - the last frame to set a keyframe on</p>
+</li>
+<li><p class="first"><strong>inc</strong> - the increment to use for the frame range</p>
+</li>
+<li><p class="first"><strong>views</strong> - the views to examine:</p>
+<div class="highlight-python"><pre>def bakeExpressionKnobs( node, first, last, inc, views ):
+    expKnobs = [ k for k in node.knobs().values() if k.hasExpression() ]</pre>
+</div>
+</li>
+</ul>
+<p>This is a good example of why Python&#8217;s list comprehension is awesome - in a single line we can grab all knobs that have expressions in them.
+Now we loop through the found expression knobs and run <strong>getCurves</strong> on them to get all animation curves that may be inside the knob:</p>
+<div class="highlight-python"><pre>allCurves = []
+for k in expKnobs:
+    allCurves += getCurves( k, views )</pre>
+</div>
+<p>After collecting all the curves, we now simply pull the trigger on each of them using the <strong>bakeCurves</strong> function:</p>
+<div class="highlight-python"><pre>for c in allCurves:
+    bakeCurve( c, first, last, inc )</pre>
+</div>
+<p>This is the complete <strong>bakeExpressionKnobs()</strong> function:</p>
+<div class="highlight-python"><pre>def bakeExpressionKnobs( node, first, last, inc, views ):
+    '''bake all knobs in node that carry expressions'''
+    # GET ALL KNOBS WITH EXPRESSIONS IN THEM
+    expKnobs = [ k for k in node.knobs().values() if k.hasExpression() ]
+
+    # GET ALL CURVES INSIDE THAT KNOB INCLUDING SPLIT FIELDS AND VIEWS
+    allCurves = []
+    for k in expKnobs:
+        allCurves += getCurves( k, views )
+
+    # BAKE ALL CURVES
+    for c in allCurves:
+        bakeCurve( c, first, last, inc )</pre>
+</div>
+<p>And here is the whole thing.</p>
+<div class="highlight-python"><pre>import nuke
+
+def bakeCurve( curve, first, last, inc ):
+    '''bake an expresison curve into a keyframes curve'''
+    for f in xrange( first, last, inc ):
+        curve.setKey( f, curve.evaluate( f ) )
+    curve.setExpression( 'curve' )
+
+####################################################
+def getCurves( knob, views ):
+    '''return a list of all animation curves found in the given knob'''
+    curves = []
+    for v in views:
+        curves.extend( knob.animations( v ) )
+    return curves
+
+####################################################
+def bakeExpressionKnobs( node, first, last, inc, views ):  
+    '''bake all knobs in node that carry expressions'''
+    # GET ALL KNOBS WITH EXPRESSIONS IN THEM
+    expKnobs = [ k for k in node.knobs().values() if k.hasExpression() ]
+
+    # GET ALL CURVES INSIDE THAT KNOB INCLUDING SPLIT FIELDS AND VIEWS
+    allCurves = []
+    for k in expKnobs:
+        allCurves += getCurves( k, views )
+
+    # BAKE ALL CURVES
+    for c in allCurves:
+        bakeCurve( c, first, last, inc )
+
+####################################################
+def bakeDependentNodes():
+    '''Add this to onUserDestroy callback - not yet implemented'''
+    parentNode = nuke.thisNode() # THIS IS GIVEN TO US BY THE CALLBACK, i.e. WHEN A NODE IS DELETED - WELL, NOT YET
+    depNodes  = parentNode.dependent( nuke.EXPRESSIONS )
+    
+    ret = nuke.getFramesAndViews( 'bake curves in dependent nodes?', '%s-%s' % (parentNode.firstFrame(), parentNode.lastFrame()) )
+    if not ret:
+        return
+    fRange = nuke.FrameRange( ret[0] )
+    views = ret[1]
+
+    for n in depNodes:
+        bakeExpressionKnobs( n, fRange.first(), fRange.last(), fRange.increment(), views )
+        
+
+####################################################
+def bakeSelectedNodes():
+    '''bake selected nodes' knobs that carry expressions'''
+    ret = nuke.getFramesAndViews( 'bake curves in selected nodes?', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()) )
+    if not ret:
+        return
+    fRange = nuke.FrameRange( ret[0] )
+    views = ret[1]
+
+    for n in nuke.selectedNodes():
+        bakeExpressionKnobs( n, fRange.first(), fRange.last(), fRange.increment(), views )
+</pre>
+</div>
+<p>Select nodes that carry expressions and run:</p>
+<div class="highlight-python"><pre>bakeSelectedNodes()</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Animation</a><ul>
+<li><a class="reference internal" href="#setting-keys">Setting Keys</a></li>
+<li><a class="reference internal" href="#detecting-keys">Detecting Keys</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#baking-animation">Baking Animation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nuke_as_python_module.html"
+                        title="previous chapter">Nuke as a Python Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="command_line.html"
+                        title="next chapter">Using the Command-line</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="command_line.html" title="Using the Command-line"
+             >next</a></li>
+        <li class="right" >
+          <a href="nuke_as_python_module.html" title="Nuke as a Python Module"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

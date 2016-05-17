@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing Plug-ins &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Sample Scripts" href="samples.html" />
+    <link rel="prev" title="Performance Profiling" href="performance.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="samples.html" title="Sample Scripts"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="performance.html" title="Performance Profiling"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-plug-ins">
+<span id="installingplugins-ref-label"></span><h1>Installing Plug-ins<a class="headerlink" href="#installing-plug-ins" title="Permalink to this headline">¶</a></h1>
+<p>There are a few different ways to install plug-ins, gizmos, and Python scripts so NUKE can see them. The easiest way is to use your home directory&#8217;s ~/.nuke folder, which is created the first time NUKE launches. However, this is not feasible in a multi-user environment. In this case, a custom plug-in directory is preferable. You can set one up using the NUKE_PATH environment variable.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is not a good idea to place custom plug-ins in NUKE&#8217;s install directory, as there may be permission and security issues and the plug-ins will not be available across different versions of NUKE.</p>
+</div>
+<p>Here are the details:</p>
+<div class="section" id="home-directory">
+<h2>Home Directory<a class="headerlink" href="#home-directory" title="Permalink to this headline">¶</a></h2>
+<p>On <a class="reference external" href="http://www.nukepedia.com/video-tutorials/22/video/">Nukepedia</a>, you can watch a video tutorial about installing plug-ins in the home directory.</p>
+<p>As mentioned above, the ~/.nuke directory is created when NUKE launches (if it doesn&#8217;t already exist). The path to this directory is added to NUKE&#8217;s plug-in path. You can view the plug-in path as follows:</p>
+<div class="highlight-python"><pre>nuke.pluginPath()
+# Result:
+['/Users/frank/.nuke', '/Library/Application Support/NUKE/6.2/plugins', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/user', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/icons', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins']</pre>
+</div>
+<p>Everything in the listed directories can be accessed from within NUKE. Without custom UI code in place, you can use the <strong>Other &gt; All Plugins &gt; Update</strong> option to force load everything in those directories into the <strong>Other &gt; All Plugins</strong> menu.</p>
+<img alt="_images/plugins_01.png" src="_images/plugins_01.png" />
+<img alt="_images/plugins_02.png" src="_images/plugins_02.png" />
+<p>This approach is fine for quick debugging or testing, but is not an acceptable workflow solution. What you want to do once you have your custom gizmo or plug-in in the ~/.nuke directory, is to create a <a class="reference internal" href="startup.html#menupy-ref-label"><em>menu.py</em></a> file, which is automatically run when NUKE launches in interactive mode. Then, create a custom menu item in that file for the new gizmo or plug-in:</p>
+<div class="highlight-python"><pre>nuke.menu( 'Nodes' ).addCommand( 'Other/MyGizmo', lambda: nuke.createNode( 'MyGizmo' ) )</pre>
+</div>
+<p>Here, the second <em>MyGizmo</em> is the file name of the custom plug-in or gizmo (for example, <em>~/.nuke/MyGizmo.gizmo</em>).</p>
+<p>A similar approach can be taken with Python scripts. Let&#8217;s say you have a file called ~/.nuke/myFunctions.py, which contains a function called <em>doCoolStuff()</em>. You can import the module in your <a class="reference internal" href="startup.html#menupy-ref-label"><em>menu.py</em></a>, then assign the callable to a custom menu item:</p>
+<div class="highlight-python"><pre>import myFunctions
+nuke.menu( 'Nuke' ).addCommand( 'My Cool Functions/do cool stuff', myFunctions.doCoolStuff )</pre>
+</div>
+<p>To organize custom files better, you can create sub-directories for each type (for example, &#8220;gizmos&#8221;, &#8220;plugins&#8221;, &#8220;python&#8221;, and so on) and add them to NUKE&#8217;s plug-in path at start-up:</p>
+<div class="highlight-python"><pre>nuke.pluginAddPath( '.gizmos' )
+nuke.pluginAddPath( '.python' )
+nuke.pluginAddPath( '.plugins' )</pre>
+</div>
+<p>The above code is best placed in a file called <a class="reference internal" href="startup.html#initpy-ref-label"><em>init.py</em></a>, which is automatically read every time NUKE launches (both in interactive and command-line mode). You can use both absolute and relative paths. With the above relative paths saved into a file called <em>~/.nuke/init.py</em>, after relaunching NUKE, you can run <tt class="docutils literal"><span class="pre">nuke.pluginPath()</span></tt> again to make sure the new directories are now read:</p>
+<div class="highlight-python"><pre>nuke.pluginPath()
+# Result:
+['/Users/frank/.nuke/.gizmos', '/Users/frank/.nuke/.python', '/Users/frank/.nuke/.plugins', '/Users/frank/.nuke', '/Library/Application Support/NUKE/6.2/plugins', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/user', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/icons', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins']</pre>
+</div>
+<p>Note that <tt class="docutils literal"><span class="pre">nuke.pluginAddPath</span></tt> prefixes paths to the start of the plug-in path. If you want to append them to the end of the path instead, use <tt class="docutils literal"><span class="pre">nuke.pluginAppendPath</span></tt>. For details, see <a class="reference internal" href="startup.html#evaluationorder-ref-label"><em>Evaluation Order</em></a>.</p>
+</div>
+<div class="section" id="custom-plug-in-repository">
+<h2>Custom Plug-in Repository<a class="headerlink" href="#custom-plug-in-repository" title="Permalink to this headline">¶</a></h2>
+<p>To use a custom plug-in directory that is shared across a network, you can either use the <tt class="docutils literal"><span class="pre">nuke.pluginAddPath</span></tt> function in each user&#8217;s ~/.nuke/init.py file or use the environment variable NUKE_PATH.</p>
+<p>Here is how to do that in a bash shell under Linux or Mac OS X:</p>
+<img alt="_images/plugins_03.png" src="_images/plugins_03.png" />
+<p>Then, in NUKE:</p>
+<div class="highlight-python"><pre>nuke.pluginPath()
+# Result:
+['/Users/frank/.nuke', '/Volumes/Library/NukePlugins', '/Library/Application Support/NUKE/6.2/plugins', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/user', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/icons', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins']</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The ~/.nuke directory is always at the start of the plug-in path. This way, any default and facility settings can always be overwritten on a per-user basis.</p>
+</div>
+<p>You can now create any sub-directories you may need for organizing your custom tools and use an <a class="reference internal" href="startup.html#initpy-ref-label"><em>init.py</em></a> file to include them in the plug-in path:</p>
+<img alt="_images/plugins_04.png" src="_images/plugins_04.png" />
+<p>From the init.py file:</p>
+<div class="highlight-python"><pre>nuke.pluginAddPath( './gizmos' )
+nuke.pluginAddPath( './python' )
+nuke.pluginAddPath( './plugins' )</pre>
+</div>
+<p>In NUKE:</p>
+<div class="highlight-python"><pre>nuke.pluginPath()
+# Result:
+['/Users/frank/.nuke', '/Volumes/Library/NukePlugins/gizmos', '/Volumes/Library/NukePlugins/python', '/Volumes/Library/NukePlugins/plugins', '/Volumes/Library/NukePlugins', '/Library/Application Support/NUKE/6.2/plugins', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/user', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins/icons', '/Applications/Nuke6.2v3/NukeX6.2v3.app/../Nuke6.2v3.app/Contents/MacOS/plugins']</pre>
+</div>
+<p>On that level, you can also create user directories where everyone can park their custom code that is only accessible to the author. Let&#8217;s say you add a sub-directory called <em>Users</em> for this purpose, which contains sub-directories for each user&#8217;s login name:</p>
+<img alt="_images/plugins_05.png" src="_images/plugins_05.png" />
+<p>You can now place the following code in your top level init.py file to check for the current user when NUKE starts up and only include the respective user directory if it exists:</p>
+<div class="highlight-python"><pre>import os
+
+user = os.getenv('USER')
+userPath = os.path.join( '/Library/NukePlugins/Users', user )
+if os.path.isdir( userPath ):
+    nuke.pluginAddPath( userPath )</pre>
+</div>
+<p>You can also source project-specific tools in the same way. In this example, we assume all show directories live in /projects and we have set an environment variable called SHOW, which tells us the current show&#8217;s name. We then look for the /nuke directory inside the current show directory and add that to the plug-in path:</p>
+<img alt="_images/plugins_06.png" src="_images/plugins_06.png" />
+<div class="highlight-python"><pre>curShow = os.getenv('SHOW')
+showPath = os.path.join( '/projects', curShow, 'nuke' )
+if os.path.isdir( showPath ):
+    nuke.pluginAddPath( showPath )</pre>
+</div>
+<p>You can now place all the show-specific code in each show&#8217;s /nuke directory, and use <a class="reference internal" href="startup.html#menupy-ref-label"><em>menu.py</em></a> and <a class="reference internal" href="startup.html#initpy-ref-label"><em>init.py</em></a> to further define the structure.</p>
+<p>If you want to load all the tools for all the shows (it can be quite handy to quickly grab custom tools from another show when you&#8217;re in a pinch), you can use code like this:</p>
+<div class="highlight-python"><pre>baseDir = '/projects'
+shows = os.listdir( baseDir )
+for s in shows:
+    showPath = os.path.join( baseDir, s, 'nuke' )
+    if os.path.isdir( showPath ):
+        nuke.pluginAddPath( showPath )</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing Plug-ins</a><ul>
+<li><a class="reference internal" href="#home-directory">Home Directory</a></li>
+<li><a class="reference internal" href="#custom-plug-in-repository">Custom Plug-in Repository</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="performance.html"
+                        title="previous chapter">Performance Profiling</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="samples.html"
+                        title="next chapter">Sample Scripts</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="samples.html" title="Sample Scripts"
+             >next</a></li>
+        <li class="right" >
+          <a href="performance.html" title="Performance Profiling"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

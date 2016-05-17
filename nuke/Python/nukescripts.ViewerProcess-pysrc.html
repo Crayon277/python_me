@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.ViewerProcess</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;ViewerProcess
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.ViewerProcess-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.ViewerProcess-module.html">Module nukescripts.ViewerProcess</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ocionuke</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Module os=os-module.html"><a title="os" class="py-name" href="#" onclick="return doclink('link-1', 'os', 'link-1');">os</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="_setOCIOConfig"></a><div id="_setOCIOConfig-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="_setOCIOConfig-toggle" onclick="return toggle('_setOCIOConfig');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#_setOCIOConfig">_setOCIOConfig</a><tt class="py-op">(</tt><tt class="py-param">configPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_setOCIOConfig-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_setOCIOConfig-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">  <tt class="py-docstring">'''</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">  Set the OCIO Config to use the specified config path, unless</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">  the OCIO environment variable is defined, in which case that will</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">  override configPath. Otherwise if configPath is None then the nuke</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">  default config is used. If configPath doesn't exist an IOError is raised.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">  '''</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">  <tt class="py-name">rootNode</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-2', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-3', 'root', 'link-3');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">  <tt class="py-name">ocioConfigKnob</tt> <tt class="py-op">=</tt> <tt class="py-name">rootNode</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method nuke.AnimationCurve.knob()=nuke.AnimationCurve-class.html#knob,Method nuke.LinkableKnobInfo.knob()=nuke.LinkableKnobInfo-class.html#knob,Method nuke.Node.knob()=nuke.Node-class.html#knob,Function nuke.knob()=nuke-module.html#knob"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-4', 'knob', 'link-4');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"OCIO_config"</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">  <tt class="py-comment"># When the OCIO env var is set the OCIO knobs are disabled</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">  <tt class="py-name">canChangeConfig</tt> <tt class="py-op">=</tt> <tt class="py-name">ocioConfigKnob</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method nuke.Knob.enabled()=nuke.Knob-class.html#enabled,Method nuke.LinkableKnobInfo.enabled()=nuke.LinkableKnobInfo-class.html#enabled"><a title="nuke.Knob.enabled
+nuke.LinkableKnobInfo.enabled" class="py-name" href="#" onclick="return doclink('link-5', 'enabled', 'link-5');">enabled</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">canChangeConfig</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-comment"># The root node handles checking whether the OCIO envvar needs to be used</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-comment"># or not. This check is performed whenever the OCIO knobs are changed, so</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-comment"># isn't needed here.</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">useDefaultNukeConfig</tt> <tt class="py-op">=</tt> <tt class="py-name">configPath</tt> <tt class="py-op">==</tt> <tt class="py-string">""</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">useDefaultNukeConfig</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">      <tt class="py-name">ocioConfigKnob</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method nuke.Array_Knob.setValue()=nuke.Array_Knob-class.html#setValue,Method nuke.Boolean_Knob.setValue()=nuke.Boolean_Knob-class.html#setValue,Method nuke.Channel_Knob.setValue()=nuke.Channel_Knob-class.html#setValue,Method nuke.Disable_Knob.setValue()=nuke.Disable_Knob-class.html#setValue,Method nuke.EditableEnumeration_Knob.setValue()=nuke.EditableEnumeration_Knob-class.html#setValue,Method nuke.Enumeration_Knob.setValue()=nuke.Enumeration_Knob-class.html#setValue,Method nuke.File_Knob.setValue()=nuke.File_Knob-class.html#setValue,Method nuke.Font_Knob.setValue()=nuke.Font_Knob-class.html#setValue,Method nuke.Format_Knob.setValue()=nuke.Format_Knob-class.html#setValue,Method nuke.FreeType_Knob.setValue()=nuke.FreeType_Knob-class.html#setValue,Method nuke.Int_Knob.setValue()=nuke.Int_Knob-class.html#setValue,Method nuke.Knob.setValue()=nuke.Knob-class.html#setValue,Method nuke.Link_Knob.setValue()=nuke.Link_Knob-class.html#setValue,Method nuke.MultiView_Knob.setValue()=nuke.MultiView_Knob-class.html#setValue,Method nuke.Obsolete_Knob.setValue()=nuke.Obsolete_Knob-class.html#setValue,Method nuke.Password_Knob.setValue()=nuke.Password_Knob-class.html#setValue,Method nuke.Radio_Knob.setValue()=nuke.Radio_Knob-class.html#setValue,Method nuke.Script_Knob.setValue()=nuke.Script_Knob-class.html#setValue,Method nuke.String_Knob.setValue()=nuke.String_Knob-class.html#setValue,Method nuke.Tab_Knob.setValue()=nuke.Tab_Knob-class.html#setValue,Method nuke.Text_Knob.setValue()=nuke.Text_Knob-class.html#setValue,Method nuke.Unsigned_Knob.setValue()=nuke.Unsigned_Knob-class.html#setValue"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-6', 'setValue', 'link-6');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-string">"nuke-default"</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt id="link-7" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-7', 'os', 'link-1');">os</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method nukescripts.flipbooking.FlipbookApplication.path()=nukescripts.flipbooking.FlipbookApplication-class.html#path,Method nukescripts.framecycler.FramecyclerFlipbook.path()=nukescripts.framecycler.FramecyclerFlipbook-class.html#path,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#path,Variable sys.path=sys-module.html#path"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-8', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Function nuke.exists()=nuke-module.html#exists"><a title="nuke.exists" class="py-name" href="#" onclick="return doclink('link-9', 'exists', 'link-9');">exists</a></tt><tt class="py-op">(</tt><tt class="py-name">configPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">ocioConfigKnob</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="nuke.Array_Knob.setValue
+nuke.Boolean_Knob.setValue
+nuke.Channel_Knob.setValue
+nuke.Disable_Knob.setValue
+nuke.EditableEnumeration_Knob.setValue
+nuke.Enumeration_Knob.setValue
+nuke.File_Knob.setValue
+nuke.Font_Knob.setValue
+nuke.Format_Knob.setValue
+nuke.FreeType_Knob.setValue
+nuke.Int_Knob.setValue
+nuke.Knob.setValue
+nuke.Link_Knob.setValue
+nuke.MultiView_Knob.setValue
+nuke.Obsolete_Knob.setValue
+nuke.Password_Knob.setValue
+nuke.Radio_Knob.setValue
+nuke.Script_Knob.setValue
+nuke.String_Knob.setValue
+nuke.Tab_Knob.setValue
+nuke.Text_Knob.setValue
+nuke.Unsigned_Knob.setValue" class="py-name" href="#" onclick="return doclink('link-10', 'setValue', 'link-6');">setValue</a></tt><tt class="py-op">(</tt><tt class="py-string">"custom"</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">customOCIOConfigPathKnob</tt> <tt class="py-op">=</tt> <tt class="py-name">rootNode</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="nuke.AnimationCurve.knob
+nuke.LinkableKnobInfo.knob
+nuke.Node.knob
+nuke.knob" class="py-name" href="#" onclick="return doclink('link-11', 'knob', 'link-4');">knob</a></tt><tt class="py-op">(</tt><tt class="py-string">"customOCIOConfigPath"</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">customOCIOConfigPathKnob</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method nuke.String_Knob.setText()=nuke.String_Knob-class.html#setText"><a title="nuke.String_Knob.setText" class="py-name" href="#" onclick="return doclink('link-12', 'setText', 'link-12');">setText</a></tt><tt class="py-op">(</tt><tt class="py-name">configPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">IOError</tt><tt class="py-op">(</tt><tt class="py-string">"Config '%s' doesn't exist"</tt> <tt class="py-op">%</tt> <tt class="py-name">configPath</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment"># Maintaining this function for backwards compatability</tt> </tt>
+<a name="getDefaultOCIOConfig"></a><div id="getDefaultOCIOConfig-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="getDefaultOCIOConfig-toggle" onclick="return toggle('getDefaultOCIOConfig');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#getDefaultOCIOConfig">getDefaultOCIOConfig</a><tt class="py-op">(</tt><tt class="py-param">ocioConfigName</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="getDefaultOCIOConfig-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="getDefaultOCIOConfig-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">  <tt id="link-13" class="py-name" targets="Function nukescripts.ViewerProcess._setOCIOConfig()=nukescripts.ViewerProcess-module.html#_setOCIOConfig"><a title="nukescripts.ViewerProcess._setOCIOConfig" class="py-name" href="#" onclick="return doclink('link-13', '_setOCIOConfig', 'link-13');">_setOCIOConfig</a></tt><tt class="py-op">(</tt><tt class="py-name">ocioConfigName</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="register_default_viewer_processes"></a><div id="register_default_viewer_processes-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="register_default_viewer_processes-toggle" onclick="return toggle('register_default_viewer_processes');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#register_default_viewer_processes">register_default_viewer_processes</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="register_default_viewer_processes-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="register_default_viewer_processes-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">  <tt class="py-comment"># The ViewerProcess_None gizmo is a pass-through -- it has no effect on the image.</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">  <tt id="link-14" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-14', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Class nuke.ViewerProcess=nuke.ViewerProcess-class.html,Module nukescripts.ViewerProcess=nukescripts.ViewerProcess-module.html"><a title="nuke.ViewerProcess
+nukescripts.ViewerProcess" class="py-name" href="#" onclick="return doclink('link-15', 'ViewerProcess', 'link-15');">ViewerProcess</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method nuke.ViewerProcess.register()=nuke.ViewerProcess-class.html#register,Method nukescripts.flipbooking.FlipbookFactory.register()=nukescripts.flipbooking.FlipbookFactory-class.html#register,Function nukescripts.flipbooking.register()=nukescripts.flipbooking-module.html#register"><a title="nuke.ViewerProcess.register
+nukescripts.flipbooking.FlipbookFactory.register
+nukescripts.flipbooking.register" class="py-name" href="#" onclick="return doclink('link-16', 'register', 'link-16');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">"None"</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-17', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Function nuke.createNode()=nuke-module.html#createNode"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-18', 'createNode', 'link-18');">createNode</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-string">"ViewerProcess_None"</tt><tt class="py-op">,</tt> <tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-comment"># The ViewerProcess_1DLUT gizmo just contains a ViewerLUT node, which</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">  <tt class="py-comment"># can apply a 1D LUT defined in the project LUTs. ViewerLUT features both</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">  <tt class="py-comment"># software (CPU) and GPU implementations.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">  <tt id="link-19" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-19', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="nuke.ViewerProcess
+nukescripts.ViewerProcess" class="py-name" href="#" onclick="return doclink('link-20', 'ViewerProcess', 'link-15');">ViewerProcess</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="nuke.ViewerProcess.register
+nukescripts.flipbooking.FlipbookFactory.register
+nukescripts.flipbooking.register" class="py-name" href="#" onclick="return doclink('link-21', 'register', 'link-16');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">"sRGB"</tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-22', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-23', 'createNode', 'link-18');">createNode</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt> <tt class="py-string">"ViewerProcess_1DLUT"</tt><tt class="py-op">,</tt> <tt class="py-string">"current sRGB"</tt> <tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">  <tt id="link-24" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-24', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="nuke.ViewerProcess
+nukescripts.ViewerProcess" class="py-name" href="#" onclick="return doclink('link-25', 'ViewerProcess', 'link-15');">ViewerProcess</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="nuke.ViewerProcess.register
+nukescripts.flipbooking.FlipbookFactory.register
+nukescripts.flipbooking.register" class="py-name" href="#" onclick="return doclink('link-26', 'register', 'link-16');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">"rec709"</tt><tt class="py-op">,</tt> <tt id="link-27" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-27', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-28', 'createNode', 'link-18');">createNode</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt> <tt class="py-string">"ViewerProcess_1DLUT"</tt><tt class="py-op">,</tt> <tt class="py-string">"current rec709"</tt> <tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">  <tt class="py-comment"># NOTE: If you change this mapping you'll need to update FlipbookDialog._getBurninWriteColorspace.</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">  <tt id="link-29" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-29', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="nuke.ViewerProcess
+nukescripts.ViewerProcess" class="py-name" href="#" onclick="return doclink('link-30', 'ViewerProcess', 'link-15');">ViewerProcess</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="nuke.ViewerProcess.register
+nukescripts.flipbooking.FlipbookFactory.register
+nukescripts.flipbooking.register" class="py-name" href="#" onclick="return doclink('link-31', 'register', 'link-16');">register</a></tt><tt class="py-op">(</tt><tt class="py-string">"rec1886"</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-32', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="nuke.createNode" class="py-name" href="#" onclick="return doclink('link-33', 'createNode', 'link-18');">createNode</a></tt><tt class="py-op">,</tt> <tt class="py-op">(</tt> <tt class="py-string">"ViewerProcess_1DLUT"</tt><tt class="py-op">,</tt> <tt class="py-string">"current Gamma2.4"</tt> <tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="unregister_viewers"></a><div id="unregister_viewers-def"><a name="L53"></a><tt class="py-lineno">53</tt> <a class="py-toggle" href="#" id="unregister_viewers-toggle" onclick="return toggle('unregister_viewers');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#unregister_viewers">unregister_viewers</a><tt class="py-op">(</tt><tt class="py-param">ocioConfigPath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unregister_viewers-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="unregister_viewers-expanded"><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">  <tt class="py-name">ocioConfig</tt> <tt class="py-op">=</tt> <tt class="py-name">ocionuke</tt><tt class="py-op">.</tt><tt class="py-name">config</tt><tt class="py-op">.</tt><tt class="py-name">loadConfig</tt><tt class="py-op">(</tt><tt class="py-name">ocioConfigPath</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">  <tt class="py-comment"># unregister all OCIO LUTS</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">  <tt class="py-comment"># For every display, loop over every view</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">  <tt class="py-name">DISPLAY_UI_FORMAT</tt> <tt class="py-op">=</tt> <tt class="py-string">"%(view)s (%(display)s)"</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">  <tt class="py-keyword">for</tt> <tt id="link-34" class="py-name" targets="Function nuke.display()=nuke-module.html#display"><a title="nuke.display" class="py-name" href="#" onclick="return doclink('link-34', 'display', 'link-34');">display</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">ocioConfig</tt><tt class="py-op">.</tt><tt class="py-name">getDisplays</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-35" class="py-name" targets="Method nuke.AnimationCurve.view()=nuke.AnimationCurve-class.html#view,Method nuke.OutputContext.view()=nuke.OutputContext-class.html#view,Method nuke.ViewerWindow.view()=nuke.ViewerWindow-class.html#view"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-35', 'view', 'link-35');">view</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">ocioConfig</tt><tt class="py-op">.</tt><tt class="py-name">getViews</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="nuke.display" class="py-name" href="#" onclick="return doclink('link-36', 'display', 'link-34');">display</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">      <tt class="py-comment"># Unregister the node</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">      <tt id="link-37" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-37', 'name', 'link-37');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">DISPLAY_UI_FORMAT</tt> <tt class="py-op">%</tt> <tt class="py-op">{</tt><tt class="py-string">'view'</tt><tt class="py-op">:</tt> <tt id="link-38" class="py-name"><a title="nuke.AnimationCurve.view
+nuke.OutputContext.view
+nuke.ViewerWindow.view" class="py-name" href="#" onclick="return doclink('link-38', 'view', 'link-35');">view</a></tt><tt class="py-op">,</tt> <tt class="py-string">"display"</tt><tt class="py-op">:</tt> <tt id="link-39" class="py-name"><a title="nuke.display" class="py-name" href="#" onclick="return doclink('link-39', 'display', 'link-34');">display</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">      <tt id="link-40" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-40', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="nuke.ViewerProcess
+nukescripts.ViewerProcess" class="py-name" href="#" onclick="return doclink('link-41', 'ViewerProcess', 'link-15');">ViewerProcess</a></tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method nuke.ViewerProcess.unregister()=nuke.ViewerProcess-class.html#unregister"><a title="nuke.ViewerProcess.unregister" class="py-name" href="#" onclick="return doclink('link-42', 'unregister', 'link-42');">unregister</a></tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-43', 'name', 'link-37');">name</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="_register_viewer_processes"></a><div id="_register_viewer_processes-def"><a name="L66"></a><tt class="py-lineno">66</tt> <a class="py-toggle" href="#" id="_register_viewer_processes-toggle" onclick="return toggle('_register_viewer_processes');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#_register_viewer_processes">_register_viewer_processes</a><tt class="py-op">(</tt><tt class="py-param">defaultLUTS</tt><tt class="py-op">,</tt> <tt class="py-param">ocioConfigName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="_register_viewer_processes-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="_register_viewer_processes-expanded"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">  <tt class="py-keyword">if</tt> <tt class="py-name">defaultLUTS</tt> <tt class="py-keyword">is</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt class="py-comment"># register the default viewer processes</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt id="link-44" class="py-name" targets="Function nukescripts.ViewerProcess.register_default_viewer_processes()=nukescripts.ViewerProcess-module.html#register_default_viewer_processes"><a title="nukescripts.ViewerProcess.register_default_viewer_processes" class="py-name" href="#" onclick="return doclink('link-44', 'register_default_viewer_processes', 'link-44');">register_default_viewer_processes</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">  <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-comment"># register OCIO viewer processes</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">    <tt class="py-name">ocionuke</tt><tt class="py-op">.</tt><tt class="py-name">viewer</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Function nukescripts.ViewerProcess.register_viewers()=nukescripts.ViewerProcess-module.html#register_viewers"><a title="nukescripts.ViewerProcess.register_viewers" class="py-name" href="#" onclick="return doclink('link-45', 'register_viewers', 'link-45');">register_viewers</a></tt><tt class="py-op">(</tt><tt class="py-name">ocioConfigName</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line"> </tt>
+<a name="register_viewers"></a><div id="register_viewers-def"><a name="L75"></a><tt class="py-lineno">75</tt> <a class="py-toggle" href="#" id="register_viewers-toggle" onclick="return toggle('register_viewers');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.ViewerProcess-module.html#register_viewers">register_viewers</a><tt class="py-op">(</tt><tt class="py-param">defaultLUTS</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-param">ocioConfigName</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="register_viewers-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="register_viewers-expanded"><a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">  <tt class="py-name">ocioConfigName</tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="os" class="py-name" href="#" onclick="return doclink('link-46', 'os', 'link-1');">os</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="nukescripts.flipbooking.FlipbookApplication.path
+nukescripts.framecycler.FramecyclerFlipbook.path
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.path
+sys.path" class="py-name" href="#" onclick="return doclink('link-47', 'path', 'link-8');">path</a></tt><tt class="py-op">.</tt><tt class="py-name">normpath</tt><tt class="py-op">(</tt><tt class="py-name">ocioConfigName</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">"\\"</tt><tt class="py-op">,</tt> <tt class="py-string">"/"</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">  <tt class="py-comment"># make sure we register the config before we begin</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">  <tt id="link-48" class="py-name"><a title="nukescripts.ViewerProcess._setOCIOConfig" class="py-name" href="#" onclick="return doclink('link-48', '_setOCIOConfig', 'link-13');">_setOCIOConfig</a></tt><tt class="py-op">(</tt><tt class="py-name">ocioConfigName</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

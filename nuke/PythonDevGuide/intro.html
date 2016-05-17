@@ -1,0 +1,134 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Start-up Scripts" href="startup.html" />
+    <link rel="prev" title="Welcome to NUKE Python Developer’s Guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="startup.html" title="Start-up Scripts"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to NUKE Python Developer’s Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Python developer&#8217;s guide.</p>
+<p>This guide aims to make you familiar with using the Python API in NUKE and using NUKE as a Python module by giving you practical examples of the use of the API.  The API is also documented in depth in the NUKE Python Reference Guide.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Throughout this guide, we&#8217;ll refer to NUKE. NUKE can be taken to mean either NUKE or NUKEX, since NUKEX is essentially the same package with options unlocked by different types of license.</p>
+</div>
+<div class="section" id="info">
+<h2>Info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h2>
+<p>Python Developer Guide. Copyright © 2014 The Foundry Visionmongers Ltd. All Rights Reserved. Use of this Developer Guide and the NUKE software is subject to an End User License Agreement (the &#8220;EULA&#8221;), the terms of which are accessible in the NUKE User Guide included in the NUKE product bundle. This Developer Guide and the NUKE software may be used or copied only in accordance with the terms of the EULA. This Developer Guide, the NUKE software and all intellectual property rights relating thereto are and shall remain the sole property of The Foundry Visionmongers Ltd. (&#8220;The Foundry&#8221;) and/or The Foundry&#8217;s licensors.</p>
+<p>The EULA can be read in the NUKE User Guide Appendices.</p>
+<p>The Foundry assumes no responsibility or liability for any errors or inaccuracies that may appear in this Developer Guide and this Developer Guide is subject to change without notice. The content of this Developer Guide is furnished for informational use only.</p>
+<p>Except as permitted by the EULA, no part of this Developer Guide may be reproduced, stored in a retrieval system or transmitted, in any form or by any means, electronic, mechanical, recording or otherwise, without the prior written permission of The Foundry. To the extent that the EULA authorizes the making of copies of this User Guide, such copies shall be reproduced with all copyright, trademark and other proprietary rights notices included herein. The EULA expressly prohibits any action that could adversely affect the property rights of The Foundry and/or The Foundry&#8217;s licensors, including, but not limited to, the removal of the following (or any other copyright, trademark or other proprietary rights notice included herein):</p>
+<p>NUKE compositing software © 2014 The Foundry Visionmongers Ltd. All Rights Reserved.</p>
+<p>NUKE is a trademark of The Foundry Visionmongers Ltd.</p>
+<p>Digital Domain® is a registered trademark of Digital Domain, Inc.</p>
+<p>In addition to those names set forth on this page, the names of other actual companies and products mentioned in this User Guide (including, but not limited to, those set forth below) may be the trademarks or service marks, or registered trademarks or service marks, of their respective owners in the United States and/or other countries. No association with any company or product is intended or inferred by the mention of its name in this User Guide.</p>
+<p>Linux® is a registered trademark of Linus Torvalds.</p>
+<p>Windows® is the registered trademark of Microsoft Corporation.</p>
+<p>Mac, Mac OS X, Shake, Final Cut Pro and QuickTime are trademarks of Apple, Inc., registered in the U.S. and other countries.</p>
+<p>Adobe® and Photoshop ® are either registered trademarks or trademarks of Adobe Systems Incorporated in the United States and/or other countries.</p>
+<p>Maya® is a registered trademark of Autodesk, Inc., in the USA and other countries.</p>
+<p>Houdini® is a registered trademark of Side Effects Software, Inc.</p>
+<p>Boujou is a trademark of 2d3 Ltd.</p>
+<p>3D-Equalizer is a trademark of Science.D.Visions.</p>
+<p>OpenGL® is a trademark or registered trademark of Silicon Graphics, Inc., in the United States and/or other countries worldwide.</p>
+<p>RenderMan® is a registered trademark of Pixar. CineonTM is a trademark of Eastman Kodak Company.</p>
+<p>Written by: Frank Reuter.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#info">Info</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to NUKE Python Developer&#8217;s Guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="startup.html"
+                        title="next chapter">Start-up Scripts</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="startup.html" title="Start-up Scripts"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to NUKE Python Developer’s Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

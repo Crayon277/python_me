@@ -1,0 +1,224 @@
+#! /Applications/Nuke9.0v3/Nuke9.0v3.app/Contents/MacOS//libnuke-9.0.3.dylib -nx
+#write_info Write1 file:"" format:"2048 1556 1" chans:":" framerange:"1 100" fps:"0" colorspace:"default" datatype:"unknown" transfer:"unknown" views:"main"
+version 9.0 v3
+define_window_layout_xml {<?xml version="1.0" encoding="UTF-8"?>
+<layout version="1.0">
+    <window x="0" y="23" w="1440" h="839" screen="0">
+        <splitter orientation="1">
+            <split size="910"/>
+            <splitter orientation="1">
+                <split size="34"/>
+                <dock id="" hideTitles="1" activePageId="Toolbar.1">
+                    <page id="Toolbar.1"/>
+                </dock>
+                <split size="872"/>
+                <splitter orientation="2">
+                    <split size="477"/>
+                    <dock id="" activePageId="Viewer.1">
+                        <page id="Viewer.1"/>
+                    </dock>
+                    <split size="336"/>
+                    <dock id="" activePageId="DAG.1" focus="true">
+                        <page id="DAG.1"/>
+                        <page id="Curve Editor.1"/>
+                        <page id="DopeSheet.1"/>
+                    </dock>
+                </splitter>
+            </splitter>
+            <split size="526"/>
+            <dock id="" activePageId="Properties.1">
+                <page id="Properties.1"/>
+                <page id="uk.co.thefoundry.scripteditor.1"/>
+            </dock>
+        </splitter>
+    </window>
+</layout>
+}
+Root {
+ inputs 0
+ name /Users/Crayon_277/Develop/NUKE/self/test_move_material/test_move_material.nk
+ project_directory "\[python \{nuke.script_directory()\}]"
+ format "2048 1556 0 0 2048 1556 1 2K_Super_35(full-ap)"
+ proxy_type scale
+ proxy_format "1024 778 0 0 1024 778 1 1K_Super_35(full-ap)"
+}
+Blur {
+ inputs 0
+ name Blur3
+ xpos 41
+ ypos 102
+ addUserKnob {20 User}
+ addUserKnob {14 myctrl l "My Control" t "this is a test\nwhat fuck" R 0 100}
+ myctrl 18
+}
+set N23c30270 [stack 0]
+Viewer {
+ frame 1
+ frame_range 1-100
+ name Viewer1
+ xpos 270
+ ypos 153
+}
+push $N23c30270
+Dot {
+ name Dot1
+ xpos 214
+ ypos 109
+}
+Roto {
+ inputs 0
+ output alpha
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 0}
+    {t x44800000 x44428000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+ toolbox {createBezier {
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 tt 4 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ toolbar_brush_hardness 0.200000003
+ toolbar_source_transform_scale {1 1}
+ toolbar_source_transform_center {1024 778}
+ name Roto1
+ label "hello world"
+ xpos -132
+ ypos -128
+}
+Blur {
+ inputs 0
+ name Blur1
+ xpos 180
+ ypos -9
+}
+Write {
+ inputs 0
+ name Write1
+ xpos 587
+ ypos -22
+}
+Blur {
+ inputs 0
+ size 20
+ name Blur5
+ xpos 696
+ ypos -197
+}
+Transform {
+ center {1024 778}
+ name Transform1
+ xpos 696
+ ypos -165
+}
+RotoPaint {
+ inputs 0
+ curves {{{v x3f99999a}
+  {f 0}
+  {n
+   {layer Root
+    {f 0}
+    {t x44800000 x44428000}
+    {a pt1x 0 pt1y 0 pt2x 0 pt2y 0 pt3x 0 pt3y 0 pt4x 0 pt4y 0 ptex00 0 ptex01 0 ptex02 0 ptex03 0 ptex10 0 ptex11 0 ptex12 0 ptex13 0 ptex20 0 ptex21 0 ptex22 0 ptex23 0 ptex30 0 ptex31 0 ptex32 0 ptex33 0 ptof1x 0 ptof1y 0 ptof2x 0 ptof2y 0 ptof3x 0 ptof3y 0 ptof4x 0 ptof4y 0 pterr 0 ptrefset 0 ptmot x40800000 ptref 0}}}}}
+ toolbox {selectAll {
+  { selectAll str 1 ssx 1 ssy 1 sf 1 }
+  { createBezier str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBezierCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createBSpline str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createEllipse str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangle str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { createRectangleCusped str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { brush str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { eraser src 2 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { clone src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { reveal src 3 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { dodge src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { burn src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { blur src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { sharpen src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+  { smear src 1 str 1 ssx 1 ssy 1 sf 1 sb 1 }
+} }
+ name RotoPaint1
+ xpos 730
+ ypos -9
+}
+Read {
+ inputs 0
+ file /Users/Crayon_277/Develop/NUKE/self/test_move_material/sucai/3.jpg
+ format "580 387 0 0 580 387 1 "
+ origset true
+ name Read2
+ xpos 422
+ ypos -219
+}
+Read {
+ inputs 0
+ file /Users/Crayon_277/Develop/NUKE/self/test_move_material/sucai/2sucai/4.jpg
+ format "540 268 0 0 540 268 1 "
+ origset true
+ name Read5
+ xpos 541
+ ypos -206
+}
+Read {
+ inputs 0
+ file /Users/Crayon_277/Develop/NUKE/5.jpg
+ format "557 720 0 0 557 720 1 "
+ origset true
+ name Read6
+ xpos -35
+ ypos -214
+}
+Blur {
+ inputs 0
+ name Blur4
+ xpos 400
+ ypos -9
+}
+Read {
+ inputs 0
+ file /Users/Crayon_277/Pictures/3.pic.jpg
+ origset true
+ name Read3
+ xpos 58
+ ypos -214
+}
+Blur {
+ name Blur2
+ xpos 290
+ ypos -9
+ addUserKnob {20 User}
+ addUserKnob {78 myctrl l "My Control" n 1}
+}
+Read {
+ inputs 0
+ file /Users/Crayon_277/Develop/NUKE/self/1.jpg
+ format "600 1036 0 0 600 1036 1 "
+ origset true
+ name Read7
+ xpos 184
+ ypos -203
+}
+Read {
+ inputs 0
+ file "\[python \{nuke.script_directory()\}]/2.jpg"
+ format "960 1280 0 0 960 1280 1 "
+ origset true
+ name Read1
+ xpos 282
+ ypos -223
+}

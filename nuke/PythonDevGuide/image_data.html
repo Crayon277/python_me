@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Accessing Image Data &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Custom Panels" href="custom_panels.html" />
+    <link rel="prev" title="Roto and RotoPaint" href="rotopaint.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_panels.html" title="Custom Panels"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="rotopaint.html" title="Roto and RotoPaint"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="accessing-image-data">
+<h1>Accessing Image Data<a class="headerlink" href="#accessing-image-data" title="Permalink to this headline">¶</a></h1>
+<p>There are generally two ways of accessing pixel values through Python:</p>
+<ul class="simple">
+<li>Create nodes that analyze the image (for example, MinColor or CurveTool), execute them, and read their resulting knob values.</li>
+<li>The <strong>sample</strong> method which lets you sample a node&#8217;s pixels directly.</li>
+</ul>
+<div class="section" id="using-the-curvetool">
+<h2>Using the CurveTool<a class="headerlink" href="#using-the-curvetool" title="Permalink to this headline">¶</a></h2>
+<p>This creates a CurveTool node, executes it, deletes it, and present the value it analyzed:</p>
+<div class="highlight-python"><pre>noise = nuke.createNode('Noise')
+noise['zoffset'].setExpression('frame*100')
+ct = nuke.createNode('CurveTool')
+
+nuke.execute(ct, nuke.frame(), nuke.frame())
+
+dat = ct['intensitydata'].value()
+
+nuke.delete(ct)
+nuke.message('average luminance is %s' % dat)</pre>
+</div>
+</div>
+<div class="section" id="using-the-sample-method">
+<h2>Using the Sample Method<a class="headerlink" href="#using-the-sample-method" title="Permalink to this headline">¶</a></h2>
+<p>This creates a Noise node, samples its red channel at x=500 and y=600, then prints the result:</p>
+<div class="highlight-python"><pre>noise = nuke.createNode('Noise')
+print noise.sample('red', 500, 600)</pre>
+</div>
+<p>This does the same:</p>
+<div class="highlight-python"><pre>print nuke.sample(noise, 'red', 500, 600)</pre>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getminmax">
+<span id="getminmax-ref-label"></span><h3>getMinMax<a class="headerlink" href="#getminmax" title="Permalink to this headline">¶</a></h3>
+<p>The <strong>getMinMax</strong> tool lets you extract a channel&#8217;s minimum and maximum values. Since currently, there is no direct method in NUKE&#8217;s Python API to do this, utilize the MinColor node&#8217;s functionality to do the work. So the workflow here involves creating a few temp nodes, executing some at the current frame (to calculate the values for us), then deleting the nodes again.</p>
+<p>To get started let&#8217;s create a test scenario:
+Create a Ramp node and attach a Grade node to it. Make sure the Grade node&#8217;s <strong>black clamp</strong> knob is disabled, then set the <strong>lift</strong> and <strong>gain</strong> knobs to arbitrary values.</p>
+<img alt="_images/getMinMax_01.png" src="_images/getMinMax_01.png" />
+<p>Create a MinColor node and attach it to the Grade node. Leave the MinColor node&#8217;s <strong>*channels</strong> knob set to the default <strong>rgba</strong> and adjust some of the other knobs. When the <strong>target</strong> knob is set to 0, and you execute the node on the current frame, the <strong>delta</strong> knob carries the minimum color in the input node&#8217;s rgba layer. You should see that the value in the <strong>delta</strong> knob is very close to the value you set in the Grade node&#8217;s <strong>lift</strong> knob, but negative (there may be a rounding error as well which shouldn&#8217;t matter much).</p>
+<img alt="_images/getMinMax_02.png" src="_images/getMinMax_02.png" />
+<p>To get the maximum value we simply invert the image first, then use a second MinColor node and the above process.</p>
+<img alt="_images/getMinMax_03.png" src="_images/getMinMax_03.png" />
+<p>Because inverting an image means subtracting it&#8217;s pixel values from 1 (1-x), we need to add 1 to the result in the <strong>delta</strong> knob to get the correct maximum value of the original image (obviously there are many different ways to do the above, so feel free to experiment).</p>
+<p>Now that we have established a way of getting our minimum and maximum values, let&#8217;s delete the MinColor and Invert nodes and write a script that does this for us...</p>
+<p>Start by grabbing Grade1 from the Node Graph (DAG), then add a MinColor node with it&#8217;s <strong>target</strong> knob set to 0 using Python:</p>
+<div class="highlight-python"><pre>srcNode = nuke.toNode('Grade1')
+nuke.nodes.MinColor(target=0)</pre>
+</div>
+<div class="line-block">
+<div class="line">The <strong>toNode()</strong> method let&#8217;s you retrieve a node from the Node Graph by name.</div>
+<div class="line">The <strong>nuke.nodes</strong> module can be used instead of the <strong>nuke.createNode()</strong> method. The difference is that <strong>createNode()</strong> behaves as if the node was created through the menus, which means it:</div>
+</div>
+<ul class="simple">
+<li>Changes the node selection to the new node.</li>
+<li>Tries to auto connect the new node.</li>
+<li>Auto-positions the new node.</li>
+<li>Hooks up the current Viewer buffer.</li>
+<li>Opens the control panel by default.</li>
+</ul>
+<p><strong>nuke.nodes</strong> does a little less hand-holding. It simply creates a node without doing or changing anything. Since we are creating temporary nodes that we intend delete again, use this to make sure the Node Graph does not change for the user after the script has run. This does mean, however, we have to manually connect the new node - easily done at the time of creation by assigning a list of input nodes as arguments:</p>
+<div class="highlight-python"><pre>srcNode = nuke.toNode('Grade1')
+nuke.nodes.MinColor(target=0, inputs=[srcNode])</pre>
+</div>
+<p>The inputs argument expects a list of nodes because some nodes take multiple inputs. This way, you can hook them all up at once.</p>
+<p>Now we should also assign an argument that defines the channels we want to analyze as we don&#8217;t want to limit ourselves to the default <strong>rgba</strong>. Also, we need to assign the new node to a variable so we can access it later in the code:</p>
+<div class="highlight-python"><pre>srcNode = nuke.toNode('Grade1')
+channel = 'rgba.red'
+MinColor = nuke.nodes.MinColor(channels=channel, target=0, inputs=[srcNode])</pre>
+</div>
+<p>The above sets the new MinColor node to analyze only the <strong>red</strong> channel in the <strong>rgba</strong> layer.</p>
+<p>Now create the Invert node and the second MinColor node as well, making sure to hook them up to their respective inputs, and set them to work on the channel we specified (you may want to delete the previously generated nodes before each test run):</p>
+<div class="highlight-python"><pre>srcNode = nuke.toNode('Grade1')
+channel = 'rgba.red'
+MinColor = nuke.nodes.MinColor(channels=channel, target=0, inputs=[srcNode])
+Inv = nuke.nodes.Invert(channels=channel, inputs=[srcNode])
+MaxColor = nuke.nodes.MinColor(channels=channel, target=0, inputs=[Inv])</pre>
+</div>
+<p>This gives you something like this:</p>
+<img alt="_images/getMinMax_04.png" src="_images/getMinMax_04.png" />
+<p>Now that we have generated the node tree, we need to execute each MinColor node to get the values we need. <strong>nuke.execute()</strong> does this for us:</p>
+<div class="highlight-python"><pre>curFrame = nuke.frame()
+nuke.execute(MinColor, curFrame, curFrame)</pre>
+</div>
+<p>As you can see, we need to provide the node to execute as well as the first and last frames as arguments. You could also use a <strong>FrameRanges</strong> object to specify the range you want to process instead, or skip it altogether to use the script ranges (see <cite>help(nuke.execute)</cite> for more info).
+After executing the MinColor node we now find the value for the minimum color in it&#8217;s <strong>pixeldelta</strong> knob. Remember to negate the value to get the actual minimum value:</p>
+<div class="highlight-python"><pre>minV = -MinColor['pixeldelta'].value()</pre>
+</div>
+<p>Now do the same for the second MinColor node connected to the Invert node (the one we stored in the <strong>MaxColor</strong> variable). Remember to add 1 to the result to get the actual maximum value:</p>
+<div class="highlight-python"><pre>nuke.execute(MaxColor, curFrame, curFrame)
+maxV = MaxColor['pixeldelta'].value() + 1</pre>
+</div>
+<p>Now all we have to do is tidy up and get rid of those three temporary nodes:</p>
+<div class="highlight-python"><pre>for n in (MinColor, MaxColor, Inv):
+nuke.delete(n)</pre>
+</div>
+<p>Here is the complete code so far:</p>
+<div class="highlight-python"><pre>srcNode = nuke.toNode('Grade1')
+channel = 'rgba.red'
+MinColor = nuke.nodes.MinColor(channels=channel, target=0, inputs=[srcNode])
+Inv = nuke.nodes.Invert(channels=channel, inputs=[srcNode])
+MaxColor = nuke.nodes.MinColor(channels=channel, target=0, inputs=[Inv])
+
+curFrame = nuke.frame()
+nuke.execute(MinColor, curFrame, curFrame)
+minV = -MinColor['pixeldelta'].value()
+
+nuke.execute(MaxColor, curFrame, curFrame)
+maxV = MaxColor['pixeldelta'].value() + 1
+
+for n in (MinColor, MaxColor, Inv):
+    nuke.delete(n)</pre>
+</div>
+<p>Let&#8217;s put the whole thing into a function definition that takes the <strong>node</strong> and <strong>channel</strong> as arguments, and set the default to analyze the depth channel:</p>
+<div class="highlight-python"><pre>import nuke
+
+def getMinMax( srcNode, channel='depth.Z' ):
+    '''
+    Return the min and max values of a given node's image as a tuple
+    args:
+       srcNode  - node to analyse
+       channels  - channels to analyse. This can either be a channel or layer name
+    '''
+    MinColor = nuke.nodes.MinColor( channels=channel, target=0, inputs=[srcNode] )
+    Inv = nuke.nodes.Invert( channels=channel, inputs=[srcNode])
+    MaxColor = nuke.nodes.MinColor( channels=channel, target=0, inputs=[Inv] )
+    
+    curFrame = nuke.frame()
+    nuke.execute( MinColor, curFrame, curFrame )
+    minV = -MinColor['pixeldelta'].value()
+    
+    nuke.execute( MaxColor, curFrame, curFrame )
+    maxV = MaxColor['pixeldelta'].value() + 1
+    
+    for n in ( MinColor, MaxColor, Inv ):
+        nuke.delete( n )
+    return minV, maxV
+</pre>
+</div>
+<p>With this function placed in a module in your plug-in path, create a Grade node with its <strong>black and white point</strong> set to the min and max values of the depth channel in the selected node, which automatically normalizes it:</p>
+<div class="highlight-python"><pre>minV, maxV = getMinMax(nuke.selectedNode())
+grade =nuke.createNode('Grade')
+grade['blackpoint'].setValue(minV)
+grade['whitepoint'].setValue(maxV)</pre>
+</div>
+<p>Or, more economically:</p>
+<div class="highlight-python"><pre>nuke.createNode('Grade', 'channels depth.Z blackpoint %s whitepoint %s' % examples.getMinMax(nuke.selectedNode()))</pre>
+</div>
+</div>
+<div class="section" id="using-sample">
+<h3>Using Sample<a class="headerlink" href="#using-sample" title="Permalink to this headline">¶</a></h3>
+<p>Here is a LUT example:</p>
+<div class="highlight-python"><pre>import nuke
+
+def getLUT( size=1024 ):
+    '''
+    Get the current viewer process node and generate a simple lut from it
+    args:
+       size  -  size of resulting lut (default=1024)
+    '''
+    vpNode = nuke.ViewerProcess.node()
+    vp = eval( 'nuke.nodes.%s()' % vpNode.Class() )
+    _copyKnobsFromScriptToScript( vpNode, vp )
+
+    ramp = nuke.nodes.Ramp()
+    ramp['p0'].setValue( (0, 0) )
+    ramp['p1'].setValue( (size, 0) )
+
+    vp.setInput(0, ramp )
+
+    saturation = nuke.nodes.Saturation( saturation = 0 )
+    saturation.setInput(0, vp )   
+    lut = [ saturation.sample("rgba.red", i+.5, 0.5) for i in xrange( 0, size )]
+
+    nuke.delete( saturation )
+    nuke.delete( ramp )
+    nuke.delete( vp )
+
+    return lut
+
+def createLutNode( lut ):
+    '''
+    Create a ColorLookup node to hold lut. The values are normalised.
+    args:
+        lut  -  list of floating point numbers
+    '''
+    lutNode = nuke.createNode( 'ColorLookup' )
+    lutKnob = lutNode['lut']
+    for i, y in enumerate( lut ):
+        x = float(i) / len(lut) 
+        lutKnob.setValueAt( y, x )
+
+def _copyKnobsFromScriptToScript( srcNode, trgNode):
+    '''
+    Copy knobs between nodes.
+    This function can also be found in the default menu.py
+    args:
+       srcNode  -  node to copy values from
+       trgNode  -  node to copy values to
+    '''
+    srcKnobs = srcNode.knobs()
+    trgKnobs = trgNode.knobs()
+    excludedKnobs = ["name", "xpos", "ypos"]
+    intersection = dict([ (item, srcKnobs[ item ]) for item in srcKnobs.keys() if item not in excludedKnobs and trgKnobs.has_key( item ) ])
+    for k in intersection.keys():
+        trgNode[ k ].fromScript( srcNode[ k ].toScript() )</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Accessing Image Data</a><ul>
+<li><a class="reference internal" href="#using-the-curvetool">Using the CurveTool</a></li>
+<li><a class="reference internal" href="#using-the-sample-method">Using the Sample Method</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#getminmax">getMinMax</a></li>
+<li><a class="reference internal" href="#using-sample">Using Sample</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="rotopaint.html"
+                        title="previous chapter">Roto and RotoPaint</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="custom_panels.html"
+                        title="next chapter">Custom Panels</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_panels.html" title="Custom Panels"
+             >next</a></li>
+        <li class="right" >
+          <a href="rotopaint.html" title="Roto and RotoPaint"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

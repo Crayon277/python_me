@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>nukescripts.nukeprofiler</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="nukescripts-module.html">Package&nbsp;nukescripts</a> ::
+        Module&nbsp;nukeprofiler
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="nukescripts.nukeprofiler-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="nukescripts.nukeprofiler-module.html">Module nukescripts.nukeprofiler</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Package nuke=nuke-module.html"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-0', 'nuke', 'link-0');">nuke</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">socket</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable sys.platform=sys-module.html#platform"><a title="sys.platform" class="py-name" href="#" onclick="return doclink('link-1', 'platform', 'link-1');">platform</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Module nukescripts.hardwareinfo=nukescripts.hardwareinfo-module.html"><a title="nukescripts.hardwareinfo" class="py-name" href="#" onclick="return doclink('link-2', 'hardwareinfo', 'link-2');">hardwareinfo</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable nukescripts.nukeprofiler.profileCategories=nukescripts.nukeprofiler-module.html#profileCategories"><a title="nukescripts.nukeprofiler.profileCategories" class="py-name" href="#" onclick="return doclink('link-3', 'profileCategories', 'link-3');">profileCategories</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-string">"ProfileStore"</tt> <tt class="py-op">:</tt> <tt id="link-4" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-4', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Variable nuke.PROFILE_STORE=nuke-module.html#PROFILE_STORE"><a title="nuke.PROFILE_STORE" class="py-name" href="#" onclick="return doclink('link-5', 'PROFILE_STORE', 'link-5');">PROFILE_STORE</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-string">"ProfileValidate"</tt> <tt class="py-op">:</tt> <tt id="link-6" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-6', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Variable nuke.PROFILE_VALIDATE=nuke-module.html#PROFILE_VALIDATE"><a title="nuke.PROFILE_VALIDATE" class="py-name" href="#" onclick="return doclink('link-7', 'PROFILE_VALIDATE', 'link-7');">PROFILE_VALIDATE</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-string">"ProfileRequest"</tt><tt class="py-op">:</tt> <tt id="link-8" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-8', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable nuke.PROFILE_REQUEST=nuke-module.html#PROFILE_REQUEST"><a title="nuke.PROFILE_REQUEST" class="py-name" href="#" onclick="return doclink('link-9', 'PROFILE_REQUEST', 'link-9');">PROFILE_REQUEST</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-string">"ProfileEngine"</tt> <tt class="py-op">:</tt> <tt id="link-10" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-10', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable nuke.PROFILE_ENGINE=nuke-module.html#PROFILE_ENGINE"><a title="nuke.PROFILE_ENGINE" class="py-name" href="#" onclick="return doclink('link-11', 'PROFILE_ENGINE', 'link-11');">PROFILE_ENGINE</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-op">}</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler"></a><div id="NukeProfiler-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="NukeProfiler-toggle" onclick="return toggle('NukeProfiler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html">NukeProfiler</a><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NukeProfiler-expanded"><a name="NukeProfiler.__init__"></a><div id="NukeProfiler.__init__-def"><a name="L16"></a><tt class="py-lineno"> 16</tt> <a class="py-toggle" href="#" id="NukeProfiler.__init__-toggle" onclick="return toggle('NukeProfiler.__init__');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.__init__-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.__init__-expanded"><a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pathToFile</tt> <tt class="py-op">=</tt> <tt id="link-12" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-12', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Function nuke.performanceProfileFilename()=nuke-module.html#performanceProfileFilename"><a title="nuke.performanceProfileFilename" class="py-name" href="#" onclick="return doclink('link-13', 'performanceProfileFilename', 'link-13');">performanceProfileFilename</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_profileDesc</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.setPathToFile"></a><div id="NukeProfiler.setPathToFile-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="NukeProfiler.setPathToFile-toggle" onclick="return toggle('NukeProfiler.setPathToFile');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#setPathToFile">setPathToFile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.setPathToFile-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.setPathToFile-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pathToFile</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name" targets="Method nuke.Gizmo.filename()=nuke.Gizmo-class.html#filename,Function nuke.filename()=nuke-module.html#filename"><a title="nuke.Gizmo.filename
+nuke.filename" class="py-name" href="#" onclick="return doclink('link-14', 'filename', 'link-14');">filename</a></tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.indentString"></a><div id="NukeProfiler.indentString-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="NukeProfiler.indentString-toggle" onclick="return toggle('NukeProfiler.indentString');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#indentString">indentString</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.indentString-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.indentString-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">"  "</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt> </tt>
+</div><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.OpenTag"></a><div id="NukeProfiler.OpenTag-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="NukeProfiler.OpenTag-toggle" onclick="return toggle('NukeProfiler.OpenTag');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#OpenTag">OpenTag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tagName</tt><tt class="py-op">,</tt> <tt class="py-param">optionsDict</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">closeTag</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.OpenTag-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.OpenTag-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-name">xmlString</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.indentString()=nukescripts.nukeprofiler.NukeProfiler-class.html#indentString"><a title="nukescripts.nukeprofiler.NukeProfiler.indentString" class="py-name" href="#" onclick="return doclink('link-15', 'indentString', 'link-15');">indentString</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">tagName</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;\n"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">closeTag</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-string">"\n"</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">dictKey</tt><tt class="py-op">,</tt> <tt class="py-name">dictValue</tt> <tt class="py-keyword">in</tt> <tt class="py-name">optionsDict</tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt>  <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.indentString" class="py-name" href="#" onclick="return doclink('link-16', 'indentString', 'link-15');">indentString</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">dictKey</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">dictValue</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;/"</tt> <tt class="py-op">+</tt> <tt class="py-name">dictKey</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;\n"</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">closeTag</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.indentString" class="py-name" href="#" onclick="return doclink('link-17', 'indentString', 'link-15');">indentString</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;/"</tt> <tt class="py-op">+</tt> <tt class="py-name">tagName</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;\n"</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">xmlString</tt> </tt>
+</div><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.CloseTag"></a><div id="NukeProfiler.CloseTag-def"><a name="L40"></a><tt class="py-lineno"> 40</tt> <a class="py-toggle" href="#" id="NukeProfiler.CloseTag-toggle" onclick="return toggle('NukeProfiler.CloseTag');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#CloseTag">CloseTag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tagName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.CloseTag-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.CloseTag-expanded"><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt> <tt class="py-op">-=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-name">closeTagString</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.indentString" class="py-name" href="#" onclick="return doclink('link-18', 'indentString', 'link-15');">indentString</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;/"</tt> <tt class="py-op">+</tt> <tt class="py-name">tagName</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;\n"</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">closeTagString</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.WriteDictInner"></a><div id="NukeProfiler.WriteDictInner-def"><a name="L45"></a><tt class="py-lineno"> 45</tt> <a class="py-toggle" href="#" id="NukeProfiler.WriteDictInner-toggle" onclick="return toggle('NukeProfiler.WriteDictInner');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#WriteDictInner">WriteDictInner</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dictToWrite</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.WriteDictInner-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.WriteDictInner-expanded"><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-name">xmlString</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">dictKey</tt><tt class="py-op">,</tt> <tt class="py-name">dictValue</tt> <tt class="py-keyword">in</tt> <tt class="py-name">dictToWrite</tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.indentString" class="py-name" href="#" onclick="return doclink('link-19', 'indentString', 'link-15');">indentString</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">dictKey</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;"</tt> <tt class="py-op">+</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">dictValue</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"&lt;/"</tt> <tt class="py-op">+</tt> <tt class="py-name">dictKey</tt> <tt class="py-op">+</tt> <tt class="py-string">"&gt;\n"</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">xmlString</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.NodeProfile"></a><div id="NukeProfiler.NodeProfile-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="NukeProfiler.NodeProfile-toggle" onclick="return toggle('NukeProfiler.NodeProfile');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#NodeProfile">NodeProfile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">nukeNode</tt><tt class="py-op">,</tt> <tt class="py-param">maxEngineVal</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.NodeProfile-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.NodeProfile-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-name">nodeTag</tt> <tt class="py-op">=</tt> <tt class="py-string">"Node"</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method nuke.Knob.Class()=nuke.Knob-class.html#Class,Method nuke.Node.Class()=nuke.Node-class.html#Class"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-20', 'Class', 'link-20');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"Group"</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">      <tt class="py-comment"># Use a different tag for Group nodes, which contain combined performance statistics for all the nodes within the group.</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">      <tt class="py-comment"># The internal nodes are also output separately so including group nodes as well means these nodes get counted twice.</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">      <tt class="py-comment"># Using a different tag makes it clear that these should be treated differently to other nodes when parsing the xml</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">      <tt class="py-comment"># for analysis or display.</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">      <tt class="py-name">nodeTag</tt> <tt class="py-op">=</tt> <tt class="py-string">"GroupNode"</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt class="py-name">nodeInfoDict</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> <tt class="py-string">"Name"</tt> <tt class="py-op">:</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method nuke.Node.fullName()=nuke.Node-class.html#fullName"><a title="nuke.Node.fullName" class="py-name" href="#" onclick="return doclink('link-21', 'fullName', 'link-21');">fullName</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"Class"</tt> <tt class="py-op">:</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-22', 'Class', 'link-20');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">}</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-comment"># Add the file path if the node is a Reader or Writer</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-23', 'Class', 'link-20');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"Read"</tt> <tt class="py-keyword">or</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="nuke.Knob.Class
+nuke.Node.Class" class="py-name" href="#" onclick="return doclink('link-24', 'Class', 'link-20');">Class</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"Write"</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">      <tt class="py-name">nodeInfoDict</tt><tt class="py-op">[</tt><tt class="py-string">"File"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">[</tt><tt class="py-string">"file"</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Variable _curvelib.AnimCurveKey.value=_curvelib.AnimCurveKey-class.html#value,Method nuke.Array_Knob.value()=nuke.Array_Knob-class.html#value,Method nuke.Axis_Knob.value()=nuke.Axis_Knob-class.html#value,Method nuke.BBox_Knob.value()=nuke.BBox_Knob-class.html#value,Method nuke.Boolean_Knob.value()=nuke.Boolean_Knob-class.html#value,Method nuke.Box3_Knob.value()=nuke.Box3_Knob-class.html#value,Method nuke.Channel_Knob.value()=nuke.Channel_Knob-class.html#value,Method nuke.Disable_Knob.value()=nuke.Disable_Knob-class.html#value,Method nuke.EditableEnumeration_Knob.value()=nuke.EditableEnumeration_Knob-class.html#value,Method nuke.Enumeration_Knob.value()=nuke.Enumeration_Knob-class.html#value,Method nuke.File_Knob.value()=nuke.File_Knob-class.html#value,Method nuke.Font_Knob.value()=nuke.Font_Knob-class.html#value,Method nuke.Format_Knob.value()=nuke.Format_Knob-class.html#value,Method nuke.IArray_Knob.value()=nuke.IArray_Knob-class.html#value,Method nuke.Int_Knob.value()=nuke.Int_Knob-class.html#value,Method nuke.Keyer_Knob.value()=nuke.Keyer_Knob-class.html#value,Method nuke.Knob.value()=nuke.Knob-class.html#value,Method nuke.Link_Knob.value()=nuke.Link_Knob-class.html#value,Method nuke.MultiView_Knob.value()=nuke.MultiView_Knob-class.html#value,Method nuke.Obsolete_Knob.value()=nuke.Obsolete_Knob-class.html#value,Method nuke.Panel.value()=nuke.Panel-class.html#value,Method nuke.Password_Knob.value()=nuke.Password_Knob-class.html#value,Method nuke.Pulldown_Knob.value()=nuke.Pulldown_Knob-class.html#value,Method nuke.Radio_Knob.value()=nuke.Radio_Knob-class.html#value,Method nuke.Scale_Knob.value()=nuke.Scale_Knob-class.html#value,Method nuke.Script_Knob.value()=nuke.Script_Knob-class.html#value,Method nuke.String_Knob.value()=nuke.String_Knob-class.html#value,Method nuke.Tab_Knob.value()=nuke.Tab_Knob-class.html#value,Method nuke.Text_Knob.value()=nuke.Text_Knob-class.html#value,Method nuke.Transform2d_Knob.value()=nuke.Transform2d_Knob-class.html#value,Method nuke.Unsigned_Knob.value()=nuke.Unsigned_Knob-class.html#value,Method nuke.View.value()=nuke.View-class.html#value,Method nuke.XYZ_Knob.value()=nuke.XYZ_Knob-class.html#value,Method nuke.XY_Knob.value()=nuke.XY_Knob-class.html#value,Function nuke.value()=nuke-module.html#value"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-25', 'value', 'link-25');">value</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-name">xmlString</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.OpenTag()=nukescripts.nukeprofiler.NukeProfiler-class.html#OpenTag"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-26', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-name">nodeTag</tt><tt class="py-op">,</tt>  <tt class="py-name">nodeInfoDict</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">catName</tt><tt class="py-op">,</tt> <tt class="py-name">catVal</tt> <tt class="py-keyword">in</tt> <tt id="link-27" class="py-name"><a title="nukescripts.nukeprofiler.profileCategories" class="py-name" href="#" onclick="return doclink('link-27', 'profileCategories', 'link-3');">profileCategories</a></tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-28', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-name">catName</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">      <tt class="py-keyword">if</tt> <tt class="py-name">catName</tt> <tt class="py-op">==</tt> <tt class="py-string">"ProfileEngine"</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt id="link-29" class="py-name" targets="Module nukescripts.info=nukescripts.info-module.html"><a title="nukescripts.info" class="py-name" href="#" onclick="return doclink('link-29', 'info', 'link-29');">info</a></tt> <tt class="py-op">=</tt> <tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method nuke.Node.performanceInfo()=nuke.Node-class.html#performanceInfo"><a title="nuke.Node.performanceInfo" class="py-name" href="#" onclick="return doclink('link-30', 'performanceInfo', 'link-30');">performanceInfo</a></tt><tt class="py-op">(</tt><tt class="py-name">catVal</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">copy</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">maxEngineVal</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">          <tt class="py-name">perfVal</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt id="link-31" class="py-name"><a title="nukescripts.info" class="py-name" href="#" onclick="return doclink('link-31', 'info', 'link-29');">info</a></tt><tt class="py-op">[</tt><tt class="py-string">"timeTakenWall"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">maxEngineVal</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">          <tt class="py-name">perfVal</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-number">1.0</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt id="link-32" class="py-name"><a title="nukescripts.info" class="py-name" href="#" onclick="return doclink('link-32', 'info', 'link-29');">info</a></tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-op">{</tt> <tt class="py-string">"ProfileEngineRelativeToMax"</tt> <tt class="py-op">:</tt> <tt class="py-name">perfVal</tt> <tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.WriteDictInner()=nukescripts.nukeprofiler.NukeProfiler-class.html#WriteDictInner"><a title="nukescripts.nukeprofiler.NukeProfiler.WriteDictInner" class="py-name" href="#" onclick="return doclink('link-33', 'WriteDictInner', 'link-33');">WriteDictInner</a></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="nukescripts.info" class="py-name" href="#" onclick="return doclink('link-34', 'info', 'link-29');">info</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">      <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.WriteDictInner" class="py-name" href="#" onclick="return doclink('link-35', 'WriteDictInner', 'link-33');">WriteDictInner</a></tt><tt class="py-op">(</tt><tt class="py-name">nukeNode</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="nuke.Node.performanceInfo" class="py-name" href="#" onclick="return doclink('link-36', 'performanceInfo', 'link-30');">performanceInfo</a></tt><tt class="py-op">(</tt><tt class="py-name">catVal</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">      <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.CloseTag()=nukescripts.nukeprofiler.NukeProfiler-class.html#CloseTag"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-37', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-name">catName</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">xmlString</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-38', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-name">nodeTag</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">xmlString</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.initProfileDesc"></a><div id="NukeProfiler.initProfileDesc-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="NukeProfiler.initProfileDesc-toggle" onclick="return toggle('NukeProfiler.initProfileDesc');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#initProfileDesc">initProfileDesc</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.initProfileDesc-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.initProfileDesc-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-name">commandLineString</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt id="link-39" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-39', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Variable nuke.rawArgs=nuke-module.html#rawArgs"><a title="nuke.rawArgs" class="py-name" href="#" onclick="return doclink('link-40', 'rawArgs', 'link-40');">rawArgs</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">      <tt class="py-name">commandLineString</tt> <tt class="py-op">+=</tt> <tt class="py-name">i</tt> <tt class="py-op">+</tt> <tt class="py-string">" "</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_profileDesc</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">      <tt class="py-string">"ScriptName"</tt> <tt class="py-op">:</tt> <tt id="link-41" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-41', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Function nuke.root()=nuke-module.html#root"><a title="nuke.root" class="py-name" href="#" onclick="return doclink('link-42', 'root', 'link-42');">root</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Variable _curveknob.Element.name=_curveknob.Element-class.html#name,Variable _curvelib.AnimCTransform.name=_curvelib.AnimCTransform-class.html#name,Variable _curvelib.AnimControlPoint.name=_curvelib.AnimControlPoint-class.html#name,Variable _curvelib.BaseCurve.name=_curvelib.BaseCurve-class.html#name,Variable _curvelib.CTransform.name=_curvelib.CTransform-class.html#name,Variable _curvelib.ControlPoint.name=_curvelib.ControlPoint-class.html#name,Method nuke.Format.name()=nuke.Format-class.html#name,Method nuke.Format_Knob.name()=nuke.Format_Knob-class.html#name,Method nuke.Knob.name()=nuke.Knob-class.html#name,Method nuke.Layer.name()=nuke.Layer-class.html#name,Method nuke.Menu.name()=nuke.Menu-class.html#name,Method nuke.MenuBar.name()=nuke.MenuBar-class.html#name,Method nuke.MenuItem.name()=nuke.MenuItem-class.html#name,Method nuke.Node.name()=nuke.Node-class.html#name,Method nuke.ToolBar.name()=nuke.ToolBar-class.html#name,Method nuke.Undo.name()=nuke.Undo-class.html#name,Method nukescripts.flipbooking.FlipbookApplication.name()=nukescripts.flipbooking.FlipbookApplication-class.html#name,Method nukescripts.framecycler.FramecyclerFlipbook.name()=nukescripts.framecycler.FramecyclerFlipbook-class.html#name,Method nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name()=nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook-class.html#name,Variable os.name=os-module.html#name"><a title="_curveknob.Element.name
+_curvelib.AnimCTransform.name
+_curvelib.AnimControlPoint.name
+_curvelib.BaseCurve.name
+_curvelib.CTransform.name
+_curvelib.ControlPoint.name
+nuke.Format.name
+nuke.Format_Knob.name
+nuke.Knob.name
+nuke.Layer.name
+nuke.Menu.name
+nuke.MenuBar.name
+nuke.MenuItem.name
+nuke.Node.name
+nuke.ToolBar.name
+nuke.Undo.name
+nukescripts.flipbooking.FlipbookApplication.name
+nukescripts.framecycler.FramecyclerFlipbook.name
+nukescripts.pyQtExamples.flipbookingExample.ExampleRVFlipbook.name
+os.name" class="py-name" href="#" onclick="return doclink('link-43', 'name', 'link-43');">name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">      <tt class="py-string">"NumThreads"</tt> <tt class="py-op">:</tt> <tt id="link-44" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-44', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Variable nuke.env=nuke-module.html#env"><a title="nuke.env" class="py-name" href="#" onclick="return doclink('link-45', 'env', 'link-45');">env</a></tt><tt class="py-op">[</tt><tt class="py-string">"threads"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">      <tt class="py-string">"TimeStored"</tt> <tt class="py-op">:</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">microsecond</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">      <tt class="py-string">"CommandLine"</tt> <tt class="py-op">:</tt> <tt class="py-name">commandLineString</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">   <tt class="py-op">}</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.writeXMLInfo"></a><div id="NukeProfiler.writeXMLInfo-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="NukeProfiler.writeXMLInfo-toggle" onclick="return toggle('NukeProfiler.writeXMLInfo');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#writeXMLInfo">writeXMLInfo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.writeXMLInfo-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.writeXMLInfo-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n"</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-string">"&lt;?xml-stylesheet type=\"text/xsl\" href=\"testStylesheet.xsl\"?&gt;\n"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.resetTimersAndStartProfile"></a><div id="NukeProfiler.resetTimersAndStartProfile-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="NukeProfiler.resetTimersAndStartProfile-toggle" onclick="return toggle('NukeProfiler.resetTimersAndStartProfile');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#resetTimersAndStartProfile">resetTimersAndStartProfile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.resetTimersAndStartProfile-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.resetTimersAndStartProfile-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">    <tt id="link-46" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-46', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Function nuke.resetPerformanceTimers()=nuke-module.html#resetPerformanceTimers"><a title="nuke.resetPerformanceTimers" class="py-name" href="#" onclick="return doclink('link-47', 'resetPerformanceTimers', 'link-47');">resetPerformanceTimers</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.initProfileDesc()=nukescripts.nukeprofiler.NukeProfiler-class.html#initProfileDesc"><a title="nukescripts.nukeprofiler.NukeProfiler.initProfileDesc" class="py-name" href="#" onclick="return doclink('link-48', 'initProfileDesc', 'link-48');">initProfileDesc</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_pathToFile</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.writeXMLInfo()=nukescripts.nukeprofiler.NukeProfiler-class.html#writeXMLInfo"><a title="nukescripts.nukeprofiler.NukeProfiler.writeXMLInfo" class="py-name" href="#" onclick="return doclink('link-49', 'writeXMLInfo', 'link-49');">writeXMLInfo</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.writeProfileDesc()=nukescripts.nukeprofiler.NukeProfiler-class.html#writeProfileDesc"><a title="nukescripts.nukeprofiler.NukeProfiler.writeProfileDesc" class="py-name" href="#" onclick="return doclink('link-50', 'writeProfileDesc', 'link-50');">writeProfileDesc</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.writeProfileDesc"></a><div id="NukeProfiler.writeProfileDesc-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="NukeProfiler.writeProfileDesc-toggle" onclick="return toggle('NukeProfiler.writeProfileDesc');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#writeProfileDesc">writeProfileDesc</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.writeProfileDesc-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.writeProfileDesc-expanded"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-51', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"PerformanceProfile"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_profileDesc</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-52', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"MachineInfo"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-53" class="py-name"><a title="nukescripts.hardwareinfo" class="py-name" href="#" onclick="return doclink('link-53', 'hardwareinfo', 'link-2');">hardwareinfo</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name" targets="Function nukescripts.hardwareinfo.PrintMachineInfoToFile()=nukescripts.hardwareinfo-module.html#PrintMachineInfoToFile"><a title="nukescripts.hardwareinfo.PrintMachineInfoToFile" class="py-name" href="#" onclick="return doclink('link-54', 'PrintMachineInfoToFile', 'link-54');">PrintMachineInfoToFile</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_indent</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-55', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"MachineInfo"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.addFrameProfileAndResetTimers"></a><div id="NukeProfiler.addFrameProfileAndResetTimers-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="NukeProfiler.addFrameProfileAndResetTimers-toggle" onclick="return toggle('NukeProfiler.addFrameProfileAndResetTimers');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#addFrameProfileAndResetTimers">addFrameProfileAndResetTimers</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.addFrameProfileAndResetTimers-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.addFrameProfileAndResetTimers-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-56', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"Frame"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt> <tt class="py-string">"Time"</tt> <tt class="py-op">:</tt> <tt id="link-57" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-57', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Method nuke.Array_Knob.frame()=nuke.Array_Knob-class.html#frame,Method nuke.OutputContext.frame()=nuke.OutputContext-class.html#frame,Function nuke.frame()=nuke-module.html#frame,Module nukescripts.frame=nukescripts.frame-module.html"><a title="nuke.Array_Knob.frame
+nuke.OutputContext.frame
+nuke.frame
+nukescripts.frame" class="py-name" href="#" onclick="return doclink('link-58', 'frame', 'link-58');">frame</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-59', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"MaxPerformance"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-comment"># Store max engine value for calculating relative performance:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-name">maxInfo</tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-60', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name" targets="Function nuke.maxPerformanceInfo()=nuke-module.html#maxPerformanceInfo"><a title="nuke.maxPerformanceInfo" class="py-name" href="#" onclick="return doclink('link-61', 'maxPerformanceInfo', 'link-61');">maxPerformanceInfo</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-name">maxEngineVal</tt> <tt class="py-op">=</tt> <tt class="py-name">maxInfo</tt><tt class="py-op">[</tt><tt class="py-string">"timeTakenWall"</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-string">"value"</tt><tt class="py-op">]</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt id="link-62" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-62', 'value', 'link-25');">value</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">maxInfo</tt><tt class="py-op">.</tt><tt class="py-name">iteritems</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.OpenTag" class="py-name" href="#" onclick="return doclink('link-63', 'OpenTag', 'link-26');">OpenTag</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.WriteDictInner" class="py-name" href="#" onclick="return doclink('link-64', 'WriteDictInner', 'link-33');">WriteDictInner</a></tt><tt class="py-op">(</tt><tt id="link-65" class="py-name"><a title="_curvelib.AnimCurveKey.value
+nuke.Array_Knob.value
+nuke.Axis_Knob.value
+nuke.BBox_Knob.value
+nuke.Boolean_Knob.value
+nuke.Box3_Knob.value
+nuke.Channel_Knob.value
+nuke.Disable_Knob.value
+nuke.EditableEnumeration_Knob.value
+nuke.Enumeration_Knob.value
+nuke.File_Knob.value
+nuke.Font_Knob.value
+nuke.Format_Knob.value
+nuke.IArray_Knob.value
+nuke.Int_Knob.value
+nuke.Keyer_Knob.value
+nuke.Knob.value
+nuke.Link_Knob.value
+nuke.MultiView_Knob.value
+nuke.Obsolete_Knob.value
+nuke.Panel.value
+nuke.Password_Knob.value
+nuke.Pulldown_Knob.value
+nuke.Radio_Knob.value
+nuke.Scale_Knob.value
+nuke.Script_Knob.value
+nuke.String_Knob.value
+nuke.Tab_Knob.value
+nuke.Text_Knob.value
+nuke.Transform2d_Knob.value
+nuke.Unsigned_Knob.value
+nuke.View.value
+nuke.XYZ_Knob.value
+nuke.XY_Knob.value
+nuke.value" class="py-name" href="#" onclick="return doclink('link-65', 'value', 'link-25');">value</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-66', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-name">key</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-67', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"MaxPerformance"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-comment"># Fill in node profile</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt id="link-68" class="py-name" targets="Method nuke.Box3_Knob.n()=nuke.Box3_Knob-class.html#n"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-68', 'n', 'link-68');">n</a></tt> <tt class="py-keyword">in</tt> <tt id="link-69" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-69', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-70" class="py-name" targets="Function nuke.allNodes()=nuke-module.html#allNodes,Function nukescripts.snap3d.allNodes()=nukescripts.snap3d-module.html#allNodes"><a title="nuke.allNodes
+nukescripts.snap3d.allNodes" class="py-name" href="#" onclick="return doclink('link-70', 'allNodes', 'link-70');">allNodes</a></tt><tt class="py-op">(</tt><tt class="py-name">recurseGroups</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-71" class="py-name" targets="Method nukescripts.nukeprofiler.NukeProfiler.NodeProfile()=nukescripts.nukeprofiler.NukeProfiler-class.html#NodeProfile"><a title="nukescripts.nukeprofiler.NukeProfiler.NodeProfile" class="py-name" href="#" onclick="return doclink('link-71', 'NodeProfile', 'link-71');">NodeProfile</a></tt><tt class="py-op">(</tt><tt id="link-72" class="py-name"><a title="nuke.Box3_Knob.n" class="py-name" href="#" onclick="return doclink('link-72', 'n', 'link-68');">n</a></tt><tt class="py-op">,</tt> <tt class="py-name">maxEngineVal</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-73', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"Frame"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-comment"># Reset performance timers after writing the profile for this frame:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt id="link-74" class="py-name"><a title="nuke" class="py-name" href="#" onclick="return doclink('link-74', 'nuke', 'link-0');">nuke</a></tt><tt class="py-op">.</tt><tt id="link-75" class="py-name"><a title="nuke.resetPerformanceTimers" class="py-name" href="#" onclick="return doclink('link-75', 'resetPerformanceTimers', 'link-47');">resetPerformanceTimers</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="NukeProfiler.endProfile"></a><div id="NukeProfiler.endProfile-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="NukeProfiler.endProfile-toggle" onclick="return toggle('NukeProfiler.endProfile');">-</a><tt class="py-line">  <tt class="py-keyword">def</tt> <a class="py-def-name" href="nukescripts.nukeprofiler.NukeProfiler-class.html#endProfile">endProfile</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NukeProfiler.endProfile-collapsed" style="display:none;" pad="+++" indent="++++++"></div><div id="NukeProfiler.endProfile-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-comment"># If in a GUI session and nothing has been rendered out to a</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-comment"># file, the profile file will not have been opened yet, so</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-comment"># check that the file exists before trying to close it:</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt> <tt class="py-op">!=</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt class="py-name">write</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="nukescripts.nukeprofiler.NukeProfiler.CloseTag" class="py-name" href="#" onclick="return doclink('link-76', 'CloseTag', 'link-37');">CloseTag</a></tt><tt class="py-op">(</tt><tt class="py-string">"PerformanceProfile"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_file</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name" targets="Method nukescripts.clientserver.client.close()=nukescripts.clientserver.client-class.html#close"><a title="nukescripts.clientserver.client.close" class="py-name" href="#" onclick="return doclink('link-77', 'close', 'link-77');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://www.thefoundry.co.uk/">Nuke Python API</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Apr 23 23:13:21 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

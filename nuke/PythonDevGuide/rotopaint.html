@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Roto and RotoPaint &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Accessing Image Data" href="image_data.html" />
+    <link rel="prev" title="Stereo" href="stereo.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_data.html" title="Accessing Image Data"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="stereo.html" title="Stereo"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="roto-and-rotopaint">
+<h1>Roto and RotoPaint<a class="headerlink" href="#roto-and-rotopaint" title="Permalink to this headline">¶</a></h1>
+<p>How to access and create roto shapes and paint strokes.</p>
+<p>When getting or setting shapes in the Roto or RotoPaint node, you need access to the node&#8217;s <strong>curves</strong> knob:</p>
+<div class="highlight-python"><pre>rpNode = nuke.toNode('RotoPaint1')
+cKnob= rpNode['curves']</pre>
+</div>
+<img alt="_images/rotoPaintPrimer_01.png" src="_images/rotoPaintPrimer_01.png" />
+<p>Access the root layer as follows:</p>
+<div class="highlight-python"><pre>root = cKnob.rootLayer</pre>
+</div>
+<p>Each layer in the <strong>curves</strong> knob is an iterator object that yields the members of that layer:</p>
+<div class="highlight-python"><pre>for shape in root:
+    print shape.name</pre>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">#</span> <span class="pre">Result:</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Layer1</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Brush2</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Bezier1</span></tt></div>
+</div>
+<p>Use the curve knob&#8217;s <strong>toElement</strong> method to access a layer by name:</p>
+<div class="highlight-python"><pre>for shape in cKnob.toElement('Layer1'):
+    print shape.name</pre>
+</div>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">#</span> <span class="pre">Result:</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Brush1</span></tt></div>
+<div class="line"><tt class="docutils literal"><span class="pre">Bezier2</span></tt></div>
+</div>
+<p>To access the control points in a shape or stroke you can use the same methodology:</p>
+<div class="highlight-python"><pre>for p in cKnob.toElement('Layer1/Brush1'):
+    print p</pre>
+</div>
+<p>There are three types of objects in the curve knob:</p>
+<ul class="simple">
+<li><strong>Shapes</strong> - Describes Beziers and B-splines.</li>
+<li><strong>Strokes</strong> - Describes paint strokes.</li>
+<li><strong>Layers</strong> - Describes the different layers.</li>
+</ul>
+<p>To create new strokes and layers you need to import the RotoPaint API from the NUKE module. It&#8217;s handy to shorten the name during import to something easier to type, for example:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp</pre>
+</div>
+<p>In here are the classes for <strong>Shape</strong>, <strong>Stroke</strong>, <strong>Layer</strong>, <strong>ShapeControlPoint</strong>, <strong>AnimControlPoints</strong>, and many more that may be required to create RotoPaint elements using Python.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Also see:</p>
+<p><a class="reference internal" href="custom_panels.html#shapepanel-ref-label"><em>ShapePanel</em></a></p>
+<p><a class="reference internal" href="math.html#paintpoints-ref-label"><em>paintPoints</em></a></p>
+<div class="section" id="painttrajectory">
+<h3>paintTrajectory<a class="headerlink" href="#painttrajectory" title="Permalink to this headline">¶</a></h3>
+<p>This script visualizes an Array_Knob&#8217;s animation path by painting a stroke along it&#8217;s trajectory.</p>
+<img alt="_images/paintTrajectory_01.png" src="_images/paintTrajectory_01.png" />
+<p>To prepare, set some keyframes on a Transform node&#8217;s <strong>translate</strong> knob so it moves around the screen. In the script editor, assign the knob to a variable and assign a frame range (let&#8217;s just use 1-100 for now):</p>
+<div class="highlight-python"><pre>knob = nuke.toNode('Transform1')['translate']
+frameRange = nuke.FrameRange('1-100')</pre>
+</div>
+<p>We need to make sure the knob for this is has at least two fields to provide <strong>x</strong> and <strong>y</strong> values, so let&#8217;s put in a quick check:</p>
+<div class="highlight-python"><pre>if knob.arraySize() != 2:
+    raise TypeError, 'knob must have array size of 2'</pre>
+</div>
+<p>If the knob is valid, let&#8217;s grab its parent node (so we can reference it a little later), create a RotoPaint node, and reference it&#8217;s <strong>curves</strong> knob (the knob that holds all shapes):</p>
+<div class="highlight-python"><pre>parentNode = knob.node()
+paintNode = nuke.createNode('RotoPaint')
+curvesKnob = paintNode['curves']</pre>
+</div>
+<p>We will need the <strong>nuke.rotopaint</strong> module for this example, and to avoid having to type it&#8217;s full name all the time, let&#8217;s import it as simply <strong>rp</strong>:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For semantic reasons, this line should go at the very top of the code.</p>
+</div>
+<p>Create a new paint stroke using the <strong>Stroke</strong> class in the <strong>rotopaint</strong> module:</p>
+<div class="highlight-python"><pre>stroke = rp.Stroke(curvesKnob)</pre>
+</div>
+<p>Next, loop through the requested frames and grab the knob&#8217;s value at each frame:</p>
+<div class="highlight-python"><pre>for f in frameRange:
+    pos = knob.valueAt(f)</pre>
+</div>
+<p>If the knob&#8217;s parent node has a <strong>center</strong> knob, you may want to offset it by that value to make sure the paint stroke sits exactly on top of the trajectory. To get the respective offset:</p>
+<div class="highlight-python"><pre>try :
+    offset = parentNode['center'].valueAt(f)
+except NameError:
+    offset = (0, 0)</pre>
+</div>
+<p>Calculate the actual <strong>x</strong> and <strong>y</strong> position for the stroke&#8217;s new control point:</p>
+<div class="highlight-python"><pre>finalPos = [ sum(p) for p in zip(pos, offset) ]</pre>
+</div>
+<p>Use the <strong>rotopaint</strong> module&#8217;s <strong>AnimControlPoint</strong> class to create a new control point and assign the calculated x and y position as arguments. Then append the new control point to the new stroke:</p>
+<div class="highlight-python"><pre>stroke.append(rp.AnimControlPoint(*finalPos))</pre>
+</div>
+<p>Then give the stroke a descriptive name that shows up in the <strong>curves</strong> knob, and finally, add it to the <strong>root</strong> layer in the list of shapes:</p>
+<div class="highlight-python"><pre>stroke.name = 'trajectory for %s.%s' %(parentNode.name(), knob.name())
+curvesKnob.rootLayer.append(stroke)</pre>
+</div>
+<p>This is the code so far:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp
+
+knob = nuke.toNode('Transform1')['translate']
+frameRange = nuke.FrameRange('1-100')
+
+if knob.arraySize() != 2:
+    raise TypeError, 'knob must have array size of 2'
+
+parentNode = knob.node()
+paintNode = nuke.createNode('RotoPaint')
+curvesKnob = paintNode['curves']
+
+stroke = rp.Stroke(curvesKnob)
+
+for f in frameRange:
+    pos = knob.valueAt(f)
+    try :
+        # IF PARENT NODE HAS "CENTER" KNOB ADD THE OFFSET TO LINE UP STROKE PROPERLY
+        offset = parentNode['center'].valueAt(f)
+    except NameError:
+        # OTHERWISE NO OFFSET IS APPLIED
+        offset =(0, 0)
+    finalPos = [ sum(p) for p in zip(pos, offset) ]
+    stroke.append(rp.AnimControlPoint(*finalPos))
+
+
+stroke.name = 'trajectory for %s.%s' %(parentNode.name(), knob.name())
+curvesKnob.rootLayer.append(stroke)</pre>
+</div>
+<p>A good place for this code would be in the <strong>animation menu</strong> so it can be called directly from the respective knob&#8217;s animation menu. To do this, let&#8217;s wrap the code into a function that takes the <strong>knob</strong> and <strong>frame range</strong> as arguments:</p>
+<div class="highlight-python"><pre>def paintTrajectory(knob, frameRange):
+    if knob.arraySize() != 2:
+        raise TypeError, 'knob must have array size of 2'
+
+    parentNode = knob.node()
+    paintNode = nuke.createNode('RotoPaint')
+    curvesKnob = paintNode['curves']
+
+    stroke = rp.Stroke(curvesKnob)
+    ctrlPoints = []
+    for f in frameRange:
+        pos = knob.valueAt(f)
+        try :
+            # IF PARENT NODE HAS "CENTER" KNOB ADD THE OFFSET TO LINE UP STROKE PROPERLY
+            offset = parentNode['center'].valueAt(f)
+        except NameError:
+            # OTHERWISE NO OFFSET IS APPLIED
+            offset =(0, 0)
+        finalPos = [ sum(p) for p in zip(pos, offset) ]
+        stroke.append(rp.AnimControlPoint(*finalPos))
+
+    stroke.name = 'trajectory for %s.%s' %(parentNode.name(), knob.name())
+    curvesKnob.rootLayer.append(stroke)</pre>
+</div>
+<p>Now create a helper function that tries to get the required frame range from the knob in question, that way we don&#8217;t have to ask the user for manual input.
+We do this by looping through the knob&#8217;s animation curves and retrieving their frame range. First initialize a <strong>FrameRanges</strong> object that holds all the knob&#8217;s frame ranges:</p>
+<div class="highlight-python"><pre>def getKnobRange(knob):
+    allRanges = nuke.FrameRanges()</pre>
+</div>
+<p>Next, loop through the curves and create a frame range object with the respective first and last frame. If no keyframes are found the curve is probably defined by an expression, in which case we just use the script&#8217;s range.
+Once we have the first and last frame, we create a frame range object and append it to the list of frame ranges we initialized above:</p>
+<div class="highlight-python"><pre>for anim in knob.animations():
+    if not anim.keys():
+        first = nuke.root().firstFrame()
+        last = nuke.root().lastFrame()
+        allRanges.add(nuke.FrameRange(first, last))
+
+    allKeys = anim.keys()
+    allRanges.add(nuke.FrameRange( allKeys[0].x, allKeys[-1].x, 1))</pre>
+</div>
+<p>Once all ranges are collected, we can use <strong>FrameRanges.minFrame()</strong> and <strong>FrameRanges.maxFrame()</strong> to get the smallest and largest frame respectively and return one overall <strong>FrameRange</strong> object:</p>
+<div class="highlight-python"><pre>return nuke.FrameRange(allRanges.minFrame(), allRanges.maxFrame(), 1)</pre>
+</div>
+<p>Here is the final code:</p>
+<div class="highlight-python"><pre>import nuke
+import nuke.rotopaint as rp
+
+def getKnobRange( knob ):
+    '''
+    Return a frame range object of the knob's animation range.
+    If the knob has no keyframes the script range is returned
+    args:
+       knob - animated knob
+    '''
+    allRanges = nuke.FrameRanges()
+    for anim in knob.animations():
+        if not anim.keys():
+            #KNOB ONLY HAS EXPRESSION WITHOUT KEYS SO USE SCRIPT RANGE
+            first = nuke.root().firstFrame()
+            last = nuke.root().lastFrame()
+            allRanges.add( nuke.FrameRange( first, last ) )
+        else:
+            # GET FIRST FRAME
+            allKeys = anim.keys()
+            allRanges.add( nuke.FrameRange(  allKeys[0].x, allKeys[-1].x, 1 ) )
+
+    return nuke.FrameRange( allRanges.minFrame(), allRanges.maxFrame(), 1 )
+
+
+def paintTrajectory( knob, frameRange ):
+    '''
+    Create a paint stroke that visualises a knob's animation path
+    args:
+        knob - Array knob with 2 fields. Presumably this is a XY_Knob but can be any
+        frameRange - Range for which to draw the trajectory.
+                     This is an iterable object containing the requested frames.
+                     Default is current script range
+    '''
+    if knob.arraySize() != 2:
+        raise TypeError, 'knob must have array size of 2'
+
+    parentNode = knob.node()
+    paintNode = nuke.createNode('RotoPaint')
+    curvesKnob = paintNode['curves']
+
+    stroke = rp.Stroke( curvesKnob )
+    ctrlPoints = []
+    for f in frameRange:
+        pos = knob.valueAt( f )
+        try :
+            # IF PARENT NODE HAS "CENTER" KNOB ADD THE OFFSET TO LINE UP STROKE PROPERLY
+            offset = parentNode['center'].valueAt( f )
+        except NameError:
+            # OTHERWISE NO OFFSET IS APPLIED
+            offset = ( 0, 0 )
+        finalPos = [ sum(p) for p in zip( pos, offset ) ]
+        stroke.append( rp.AnimControlPoint( *finalPos ) )
+
+    stroke.name = 'trajectory for %s.%s' % ( parentNode.name(), knob.name() )
+    curvesKnob.rootLayer.append( stroke )
+</pre>
+</div>
+<p>With these two functions at the ready, you can now run something like this to paint an animation path:</p>
+<div class="highlight-python"><pre>knob = nuke.toNode('Transform1')['translate']
+paintTrajectory(knob, getKnobRange(knob))</pre>
+</div>
+<p>As mentioned above, a good place for this is in NUKE&#8217;s animation menu. Any code run from inside the animation menu can use <strong>nuke.thisKnob()</strong> to reference the knob who&#8217;s animation menu is used.
+The lines below assume the code is part of the <strong>examples</strong> package and creates a new entry in the animation menu to run it on the respective knob:</p>
+<div class="highlight-python"><pre>import examples
+nuke.menu('Animation').addCommand('Paint Trajectory', lambda: examples.paintTrajectory(nuke.thisKnob(), examples.getKnobRange(nuke.thisKnob())))</pre>
+</div>
+<img alt="_images/paintTrajectory_02.png" src="_images/paintTrajectory_02.png" />
+</div>
+<div class="section" id="trackshape">
+<span id="trackshape-ref-label"></span><h3>trackShape<a class="headerlink" href="#trackshape" title="Permalink to this headline">¶</a></h3>
+<p>This script creates a Tracker node that travels along a roto shape or paint stroke.</p>
+<img alt="_images/trackShape_01.png" src="_images/trackShape_01.png" />
+<p>First import the <strong>rotopaint</strong> module from <strong>nukescripts</strong>. Again, import it as <strong>rp</strong> to save time:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp</pre>
+</div>
+<p>Then create a RotoPaint node and draw a <strong>Bezier</strong> shape.</p>
+<img alt="_images/trackShape_02.png" src="_images/trackShape_02.png" />
+<p>Now run the following lines to reference the node and the name of the shape you created:</p>
+<div class="highlight-python"><pre>node = nuke.toNode('RotoPaint1')
+shapeName = 'Bezier1'</pre>
+</div>
+<p>The <strong>curves</strong> knob holds all shapes so get that, then grab the shape object by name so we can work with it:</p>
+<div class="highlight-python"><pre>curveKnob = node['curves']
+shape = curveKnob.toElement(shapeName)</pre>
+</div>
+<p>To get to the actual cubic curve in the shape&#8217;s objects, we need to use the <strong>evaluate()</strong> method on it:</p>
+<div class="highlight-python"><pre>cubicCurve = shape.evaluate(0, nuke.frame())</pre>
+</div>
+<p>The arguments to the <strong>evaluate()</strong> method are the index of the curve you&#8217;re after and the frame you want to evaluate the curve on. Index <strong>0</strong> gets you the main shape and index <strong>1</strong> gets you the feather shape.
+You can also evaluate paint strokes this way, but since there is no feather shape on paint strokes, you&#8217;d only use the frame argument. Make sure we can evaluate both shapes and strokes:</p>
+<div class="highlight-python"><pre>if isinstance(shape, rp.Stroke):
+    cubicCurve = shape.evaluate(nuke.frame())
+elif isinstance(shape, rp.Shape):
+    cubicCurve = shape.evaluate(0, nuke.frame())</pre>
+</div>
+<p>The resulting cubic curve retrieves an x/y position anywhere along its path which we&#8217;ll use a bit later.</p>
+<p>Next, we need a frame range to operate on, so let&#8217;s prompt the user:</p>
+<div class="highlight-python"><pre>fRange = nuke.FrameRange(nuke.getInput('Track Range', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame())))</pre>
+</div>
+<img alt="_images/trackShape_03.png" src="_images/trackShape_03.png" />
+<p>Create a Tracker node to hold the resulting animation and give it a descriptive label:</p>
+<div class="highlight-python"><pre>tracker = nuke.createNode('Tracker3')
+tracker['label'].setValue('tracking %s in %s' %(shape.name, node.name()))</pre>
+</div>
+<p>Set the <strong>track1</strong> knob to accept animation:</p>
+<div class="highlight-python"><pre>t = tracker['track1']
+t.setAnimated()</pre>
+</div>
+<p>Okay, we&#8217;re all set to do the tracking. Here&#8217;s the code so far:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp
+node = nuke.toNode('RotoPaint1')
+shapeName = 'Bezier1'
+
+curveKnob = node['curves']
+shape = curveKnob.toElement(shapeName)
+if isinstance(shape, rp.Stroke):
+    # FOR PAINT STROKES WE JUST EVALUATE AS IS TO GET THE CURVE
+    cubicCurve = shape.evaluate(nuke.frame())
+elif isinstance(shape, rp.Shape):
+    # FOR SHAPES WE EVALUATE INDEX "0" WHICH IS THE MAIN CURVE ("1" WOULD BE THE FEATHER CURVE)
+    cubicCurve = shape.evaluate(0, nuke.frame())
+
+# ASK FOR THE DESIRED FRAME RANGE TO DISTRIBUTE THE RESULTING KEYFRAMES OVER
+fRange = nuke.FrameRange(nuke.getInput('Track Range', '%s-%s' %(nuke.root().firstFrame(), nuke.root().lastFrame())))
+
+# CREATE A TRACKER NODE TO HOLD THE DATA
+tracker = nuke.createNode('Tracker3')
+tracker['label'].setValue('tracking %s in %s' %(shape.name, node.name()))
+t = tracker['track1']
+t.setAnimated()</pre>
+</div>
+<p>Depending on the shape and the requested frame range, tracking the shape may take a while. It&#8217;d be handy to see the tracker move across the shape as the script progresses, so let&#8217;s write a new function that does the actual tracking, then launch it as an extra thread.
+Define a progress bar in the function so that we get some visual feedback and the user can interrupt the script, if necessary:</p>
+<div class="highlight-python"><pre>def _pointsToKeys(curve, knob, fRange):
+    task = nuke.ProgressTask('Shape Tracker')
+    task.setMessage('tracking shape')</pre>
+</div>
+<p>The arguments are:</p>
+<ul class="simple">
+<li><strong>curve</strong> - The cubic curve that is the result of our previous <strong>evaluate()</strong> method.</li>
+<li><strong>knob</strong> - The tracker knob that holds the animation.</li>
+<li><strong>fRange</strong> - The frame range we want to track.</li>
+</ul>
+<p>Start looping through the frame range and make sure the script quits if the user hits <strong>cancel</strong> in the progress bar:</p>
+<div class="highlight-python"><pre>for f in fRange:
+    if task.isCancelled():
+        nuke.executeInMainThread(nuke.message, args=("Shape Track Cancelled"))
+        break</pre>
+</div>
+<p>We&#8217;re using <strong>nuke.executeInMainThread</strong> here because we plan on running this function as a separate thread.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not run this function in the main thread, as the <strong>nuke.executeInMainThreadWithResult</strong> function freezes NUKE.</p>
+</div>
+<p>Based on the requested frame range, calculate the percentage of the current iteration. We use this for both the progress bar and for grabbing the position on the curve.</p>
+<p>Now set the progress for the progress bar using the above percentage converted to an integer (to avoid warning messages):</p>
+<div class="highlight-python"><pre>task.setProgress(int(curvePos * 100))</pre>
+</div>
+<p>Next, we get the x/y position on the curve. <strong>getPoint()</strong> allows you to extract an x/y position anywhere on the cubic curve by providing a percentage, where <strong>0</strong> is the beginning of the curve and <strong>1</strong> is the end:</p>
+<div class="highlight-python"><pre>curPoint = curve.getPoint(curvePos)</pre>
+</div>
+<p>And finally, use the current value to set a key frame on the tracker knob in the main thread (this renders the tracker&#8217;s &#8220;travel&#8221; path):</p>
+<div class="highlight-python"><pre>nuke.executeInMainThreadWithResult(knob.setValueAt, args=(curPoint.x, f, 0))
+nuke.executeInMainThreadWithResult(knob.setValueAt, args=(curPoint.y, f, 1))</pre>
+</div>
+<p>The complete code for the function should now look something like this:</p>
+<div class="highlight-python"><pre>def _pointsToKeys(curve, knob, fRange):
+    task = nuke.ProgressTask('Shape Tracker')
+    task.setMessage('tracking shape')
+    for f in fRange:
+        # TAKE CARE OF PROGRESS BAR
+        if task.isCancelled():
+            nuke.executeInMainThread(nuke.message, args=("Shape Track Cancelled"))
+            break
+
+        curvePos = float(f)/fRange.last()
+        task.setProgress(int(curvePos * 100))
+        # DO THE WORK
+        curPoint = curve.getPoint(curvePos)
+        nuke.executeInMainThreadWithResult(knob.setValueAt, args=(curPoint.x, f, 0))
+        nuke.executeInMainThreadWithResult(knob.setValueAt, args=(curPoint.y, f, 1))</pre>
+</div>
+<p>Now call this function in a separate thread at the end of the main code:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp
+node = nuke.toNode('RotoPaint1')
+shapeName = 'Bezier1'
+
+curveKnob = node['curves']
+shape = curveKnob.toElement(shapeName)
+if isinstance(shape, rp.Stroke):
+    # FOR PAINT STROKES WE JUST EVALUATE AS IS TO GET THE CURVE
+    cubicCurve = shape.evaluate(nuke.frame())
+elif isinstance(shape, rp.Shape):
+    # FOR SHAPES WE EVALUATE INDEX "0" WHICH IS THE MAIN CURVE ("1" WOULD BE THE FEATHER CURVE)
+    cubicCurve = shape.evaluate(0, nuke.frame())
+
+# ASK FOR THE DESIRED FRAME RANGE TO DISTRIBUTE THE RESULTING KEYFRAMES OVER
+fRange = nuke.FrameRange(nuke.getInput('Track Range', '%s-%s' %(nuke.root().firstFrame(), nuke.root().lastFrame())))
+
+# CREATE A TRACKER NODE TO HOLD THE DATA
+tracker = nuke.createNode('Tracker3')
+tracker['label'].setValue('tracking %s in %s' %(shape.name, node.name()))
+t = tracker['track1']
+t.setAnimated()
+
+threading.Thread(None, _pointsToKeys, args=(cubicCurve, t, fRange)).start()</pre>
+</div>
+<p>Here is the complete code wrapped into a function so we can park it somewhere in the UI. It includes some error handling at the beginning to make sure the incoming node is either a Roto or a RotoPaint node.
+It also uses the <a class="reference internal" href="custom_panels.html#shapepanel-ref-label"><em>ShapePanel</em></a> to get the shape name from the user rather than hard coding a name:</p>
+<div class="highlight-python"><pre>import examples
+import nuke.rotopaint as rp
+import nuke
+import threading
+
+def _pointsToKeys( curve, knob, fRange ):
+    '''
+    Set keys along a shape.
+    args:
+        shape - CubicCurve to define animation path
+        knob - knob to set keys on. This needs to be an Array_Knob
+        fRange  - frame range across which to set keys (first frame = start of shape, last frame = end of shape)
+    '''
+    task = nuke.ProgressTask( 'Shape Tracker' )
+    task.setMessage( 'tracking shape' )
+    for f in fRange:
+        # TAKE CARE OF PROGRESS BAR
+        if task.isCancelled():
+            nuke.executeInMainThread( nuke.message, args=( "Shape Track Cancelled" ) )
+            break
+        task.setProgress( int( float(f)/fRange.last() * 100 ) )
+        # DO THE WORK
+        curPoint = curve.getPoint( float( f )/fRange.last() )
+        nuke.executeInMainThreadWithResult( knob.setValueAt, args=(curPoint.x, f, 0) )
+        nuke.executeInMainThreadWithResult( knob.setValueAt, args=(curPoint.y, f, 1) )
+
+def trackShape( node=None ):
+    '''
+    Turn a paint stroke or roto shape into an animation path.
+    args:
+       node  -  Roto or RotoPaint node that holds the required shape
+    '''
+    # IF NO NODE IS GIVEN, USE THE CURRENTLY SELECTED NODE
+    node = node or nuke.selectedNode()
+    
+    # BAIL OUT IF THE NODE IS NOT WHAT WE NEED
+    if node.Class() not in ('Roto', 'RotoPaint'):
+        if nuke.GUI:
+            nuke.message( 'Unsupported node type. Node must be of class Roto or RotoPaint' )
+        raise TypeError, 'Unsupported node type. Node must be of class Roto or RotoPaint'
+    
+    # GET  THE KNOB THAT HOLDS ALL THE SHAPES AND POP UP A PANEL THAT LISTS STROKES AND SHAPES (NO LAYERS)
+    shPanel = examples.ShapePanel( nuke.selectedNode() )
+    if not shPanel.showModalDialog():
+        return
+    # GET SHAPE OBJECT BY NAME
+    shapeName = shPanel.elementKnob.value()
+    curveKnob = node['curves']
+    shape = curveKnob.toElement( shapeName )
+    if isinstance( shape, rp.Stroke ):
+        # FOR PAINT STROKES WE JUST EVALUATE AS IS TO GET THE CURVE
+        cubicCurve = shape.evaluate( nuke.frame() )
+    elif isinstance( shape, rp.Shape ):
+        # FOR SHAPES WE EVALUATE INDEX "0" WHICH IS THE MAIN CURVE ("1" WOULD BE THE FEATHER CURVE)
+        cubicCurve = shape.evaluate( 0, nuke.frame() )
+
+    # ASK FOR THE DESIRED FRAME RANGE TO DISTRIBUTE THE RESULTING KEYFRAMES OVER
+    fRange = nuke.FrameRange( nuke.getInput( 'Track Range', '%s-%s' % ( nuke.root().firstFrame(), nuke.root().lastFrame() ) ) )   
+    
+    # CREATE A TRACKER NODE TO HOLD THE DATA
+    tracker = nuke.createNode( 'Tracker3' )
+    tracker['label'].setValue( 'tracking %s in %s' % ( shape.name, node.name() ) )
+    t = tracker['track1']
+    t.setAnimated()
+    threading.Thread( None, _pointsToKeys, args=(cubicCurve, t, fRange) ).start()
+</pre>
+</div>
+<p>To put this into the <strong>Properties</strong> panel right-click menu, put something like this into your <strong>menu.py</strong>:</p>
+<div class="highlight-python"><pre>import examples
+nuke.menu('Properties').addCommand('Track Shape', examples.trackShape)</pre>
+</div>
+<img alt="_images/trackShape_04.png" src="_images/trackShape_04.png" />
+<img alt="_images/trackShape_01.png" src="_images/trackShape_01.png" />
+</div>
+<div class="section" id="path-controller">
+<h3>path Controller<a class="headerlink" href="#path-controller" title="Permalink to this headline">¶</a></h3>
+<p>This is basically a live version of the above <a class="reference internal" href="#trackshape-ref-label"><em>trackShape</em></a>. It uses Python code in a Transform node&#8217;s <strong>translate</strong> knob to link it to a given shape. Then a user knob is used to position the transform along the path.</p>
+<img alt="_images/animPath_01.png" src="_images/animPath_01.png" />
+<img alt="_images/animPath_02.png" src="_images/animPath_02.png" />
+<p>The <strong>path</strong> knob controls the percentage that <strong>Transform1</strong> travels along a stroke called <strong>Brush1</strong> in the RotoPaint node. This is achieved by placing Python code in the <strong>translate</strong> knob as shown below:</p>
+<img alt="_images/animPath_03.png" src="_images/animPath_03.png" />
+<p>In the <strong>x</strong> field:</p>
+<div class="highlight-python"><pre>try:
+   shape = nuke.toNode('RotoPaint1')['curves'].toElement('Brush1').evaluate(nuke.frame())
+except:
+   pass
+ret = shape.getPoint(nuke.thisNode()['path'].value()).x</pre>
+</div>
+<p>In the <strong>y</strong> field:</p>
+<div class="highlight-python"><pre>try:
+   shape = nuke.toNode('RotoPaint1')['curves'].toElement('Brush1').evaluate(nuke.frame())
+except:
+   pass
+ret = shape.getPoint(nuke.thisNode()['path'].value()).y</pre>
+</div>
+<p>The curve is evaluated to a cubic curve and the respective position is looked up.</p>
+<p>Here is the <a class="reference download internal" href="_downloads/pathAnimation.nk"><tt class="xref download docutils literal"><span class="pre">nuke</span> <span class="pre">script</span></tt></a></p>
+</div>
+<div class="section" id="trackcv">
+<span id="trackcv-ref-label"></span><h3>trackCV<a class="headerlink" href="#trackcv" title="Permalink to this headline">¶</a></h3>
+<p>This script creates a Tracker node for a shape&#8217;s control point. The first step is to create a Roto node and then draw and animate a Bezier spline in it.</p>
+<img alt="_images/trackCV_01.png" src="_images/trackCV_01.png" />
+<p>Make sure the <strong>label points</strong> checkbox in the Viewer is selected so you can see the CVs point numbers - this helps identify the one we want to create a Tracker for.</p>
+<img alt="_images/trackCV_02.png" src="_images/trackCV_02.png" />
+<p>Make sure the Roto node is selected in the Node Graph (DAG), then start the script by grabbing the selected node:</p>
+<div class="highlight-python"><pre>node = nuke.selectedNode()</pre>
+</div>
+<p>Also, define the frame range we want to track, the shape&#8217;s name, and the point number in questions. Hard code these values for now, later on we can add a panel to provide this info:</p>
+<div class="highlight-python"><pre>fRange = nuke.FrameRange('1-100')
+shapeName = 'Bezier1'
+cv = 0</pre>
+</div>
+<p>We want to see the tracker being generated as the script progresses, so run the function that does the work in an extra thread. The function is called <strong>cvTracker</strong> and it&#8217;s arguments are:</p>
+<ul class="simple">
+<li><strong>node</strong> - The Roto node.</li>
+<li><strong>shapeName</strong> - The name of the shape containing the control point.</li>
+<li><strong>cvID</strong> - The number of the control point to track.</li>
+<li><strong>fRange</strong> - The frame range to track.</li>
+</ul>
+<p>Append the line that calls the function as a threaded process:</p>
+<div class="highlight-python"><pre>threading.Thread(None, _cvTracker, args=(node, shapeName, cv, fRange)).start()</pre>
+</div>
+<p>So this is what we have so far:</p>
+<div class="highlight-python"><pre>import nuke.rotopaint as rp
+
+node = nuke.selectedNode()
+fRange = nuke.FrameRange('1-100')
+shapeName = 'Bezier1'
+cv = 0
+
+threading.Thread(None, _cvTracker, args=(node, shapeName, cv, fRange)).start()</pre>
+</div>
+<p>Now let&#8217;s write the function that does the work:</p>
+<div class="highlight-python"><pre>def _cvTracker(node, shapeName, cvID, fRange):
+    shape = node['curves'].toElement(shapeName)</pre>
+</div>
+<p>Using the <strong>toElement</strong> method, we can get the shape object by name and proceed to referencing the point we are after, in this example, point number 0:</p>
+<div class="highlight-python"><pre>shapePoint = shape[cvID]</pre>
+</div>
+<p>Let&#8217;s add some error handling in case the requested point number doesn&#8217;t exist in the given shape:</p>
+<div class="highlight-python"><pre>try:
+    shapePoint = shape[cvID]
+except IndexError:
+    nuke.message('Index %s not found in %s.%s' %())
+    return</pre>
+</div>
+<p>The <strong>ShapeControlPoint</strong> we now hold in the variable <strong>shapePoint</strong> holds all the properties, such as tangents and center, for both the main and feather curves. We just want to track the center of the main curve&#8217;s CV, so grab that:</p>
+<div class="highlight-python"><pre>animPoint = shapePoint.center</pre>
+</div>
+<p>The <strong>animPoint</strong> provides us with the x/y coordinates, so now we want to create a Tracker node to hold the animation:</p>
+<div class="highlight-python"><pre>tracker = nuke.createNode('Tracker3')</pre>
+</div>
+<p>Assign a descriptive label and set the <strong>track1</strong> knob to accept animation:</p>
+<div class="highlight-python"><pre>tracker['label'].setValue('tracking cv#%s in %s.%s' %(cvID, node.name(), shape.name))
+trackerKnob = tracker['track1']
+trackerKnob.setAnimated()</pre>
+</div>
+<p>Before we do the tracking, set up a task bar to see what&#8217;s going on and to allow the user to cancel the process:</p>
+<div class="highlight-python"><pre>task = nuke.ProgressTask('CV Tracker')
+task.setMessage('tracking CV')</pre>
+</div>
+<p>Now loop through the requested frame range. Inside the loop we do a quick check to  determine if the user hit <strong>Cancel</strong> in the progress bar:</p>
+<div class="highlight-python"><pre>for f in fRange:
+    if task.isCancelled():
+        nuke.executeInMainThread(nuke.message, args=("CV Track Cancelled"))
+        break</pre>
+</div>
+<p>Next set the task bar&#8217;s progress so we know how far away we are from the completion of the script:</p>
+<div class="highlight-python"><pre>task.setProgress(int(float(f)/fRange.last() * 100))</pre>
+</div>
+<p>Now do the actual tracking. Get the <strong>AnimationControlPoint</strong>&#8216;s position for the respective frame in the range we are iterating over:</p>
+<div class="highlight-python"><pre>pos = animPoint.getPosition(f)</pre>
+</div>
+<p>And finally, set the tracker knob to the new position. We do this in the main thread so we can see the keyframes being generated as the script runs:</p>
+<div class="highlight-python"><pre>nuke.executeInMainThreadWithResult(trackerKnob.setValueAt, args=(pos.x, f, 0)) # SET X VALUE
+nuke.executeInMainThreadWithResult(trackerKnob.setValueAt, args=(pos.y, f, 1)) # SET Y VALUE</pre>
+</div>
+<p>The entire function now looks like this:</p>
+<div class="highlight-python"><pre>def _cvTracker(node, shapeName, cvID, fRange):
+    shape = node['curves'].toElement(shapeName)
+
+    # SHAPE CONTROL POINT
+    try:
+        shapePoint = shape[cvID]
+    except IndexError:
+        nuke.message('Index %s not found in %s.%s' %())
+        return
+
+    # ANIM CONTROL POINT
+    animPoint = shapePoint.center
+
+    # CREATE A TRACKER NODE TO HOLD THE DATA
+    tracker = nuke.createNode('Tracker3')
+    tracker['label'].setValue('tracking cv#%s in %s.%s' %(cvID, node.name(), shape.name))
+    trackerKnob = tracker['track1']
+    trackerKnob.setAnimated()
+
+    # SET UP PROGRESS BAR
+    task = nuke.ProgressTask('CV Tracker')
+    task.setMessage('tracking CV')
+
+        # DO THE WORK
+    for f in fRange:
+        if task.isCancelled():
+            nuke.executeInMainThread(nuke.message, args=("CV Track Cancelled"))
+            break
+        task.setProgress(int(float(f)/fRange.last() * 100))
+
+                # GET POSITION
+        pos = animPoint.getPosition(f)
+        nuke.executeInMainThreadWithResult(trackerKnob.setValueAt, args=(pos.x, f, 0))
+        nuke.executeInMainThreadWithResult(trackerKnob.setValueAt, args=(pos.y, f, 1))</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not run this function in the main thread, as the <strong>nuke.executeInMainThreadWithResult</strong> function freezes NUKE.</p>
+</div>
+<p>To make this whole script user friendly, let&#8217;s use a little Python panel to provide the shape name, point number, and frame range.</p>
+<img alt="_images/shapeAndCVPanel_01.png" src="_images/shapeAndCVPanel_01.png" />
+<p>See <a class="reference internal" href="custom_panels.html#shapeandcvpanel-ref-label"><em>ShapeAndCVPanel</em></a> for details on how to write this panel. Make sure to import the module the panel code lives in (if applicable) and modify the main code of our tool to use the panel&#8217;s values, rather than hard coding shape name, point number, and frame range:</p>
+<div class="highlight-python"><pre>import examples
+
+node = nuke.selectedNode()
+p = examples.ShapeAndCVPanel(node)
+if p.showModalDialog():
+    fRange = nuke.FrameRange(p.fRange.value())
+    shapeName = p.shape.value()
+    cv = p.cv.value()
+    threading.Thread(None, _cvTracker, args=(node, shapeName, cv, fRange)).start()</pre>
+</div>
+<p>Now wrap up the code into a function we can place in the <strong>Properties</strong> panel&#8217;s right-click menu. We&#8217;ll also add some error handling to make sure the selected node is either a Roto or a RotoPaint node:</p>
+<div class="highlight-python"><pre>def trackCV():
+    node = nuke.selectedNode()
+
+    # BAIL OUT IF THE NODE IS NOT WHAT WE NEED
+    if node.Class() not in ('Roto', 'RotoPaint'):
+        nuke.message('Unsupported node type. Node must be of class Roto or RotoPaint')
+        return
+
+    p = examples.ShapeAndCVPanel(node)
+    if p.showModalDialog():
+        fRange = nuke.FrameRange(p.fRange.value())
+        shapeName = p.shape.value()
+        cv = p.cv.value()
+        threading.Thread(None, _cvTracker, args=(node, shapeName, cv, fRange)).start()</pre>
+</div>
+<p>The finished code with all the required import statements:</p>
+<div class="highlight-python"><pre>import examples
+import nuke
+import nukescripts
+import threading
+
+def _cvTracker( node, shapeName, cvID, fRange ):
+    shape = node['curves'].toElement( shapeName )
+   
+    # SHAPE CONTROL POINT
+    try:
+        shapePoint = shape[cvID]
+    except IndexError:
+        nuke.message( 'Index %s not found in %s.%s' % (  ) )
+        return
+
+    # ANIM CONTROL POINT
+    animPoint = shapePoint.center   
+        
+    # CREATE A TRACKER NODE TO HOLD THE DATA
+    tracker = nuke.createNode( 'Tracker3' )
+    tracker['label'].setValue( 'tracking cv#%s in %s.%s' % ( cvID, node.name(), shape.name ) )
+    trackerKnob = tracker['track1']
+    trackerKnob.setAnimated()    
+    
+    # SET UP PROGRESS BAR
+    task = nuke.ProgressTask( 'CV Tracker' )
+    task.setMessage( 'tracking CV' )
+    
+    # DO THE WORK
+    for f in fRange:
+        if task.isCancelled():
+            nuke.executeInMainThread( nuke.message, args=( "CV Track Cancelled" ) )
+            break
+        task.setProgress( int( float(f)/fRange.last() * 100 ) )
+        
+        # GET POSITION
+        pos = animPoint.getPosition( f )
+        nuke.executeInMainThreadWithResult( trackerKnob.setValueAt, args=( pos.x, f, 0 ) ) # SET X VALUE
+        nuke.executeInMainThreadWithResult( trackerKnob.setValueAt, args=( pos.y, f, 1 ) ) # SET Y VALUE
+
+def trackCV():
+    # GET THE SELECTED NODE. SINCE WE PLAN ON CALLING THIS FROM THE PROPERTIES MENU
+    # WE CAN BE SURE THAT THE SELECTED NODE IS ALWAYS THE ONE THE USER CLICKED IN
+    node = nuke.selectedNode()
+    
+    # BAIL OUT IF THE NODE IS NOT WHAT WE NEED
+    if node.Class() not in ('Roto', 'RotoPaint'):
+        nuke.message( 'Unsupported node type. Node must be of class Roto or RotoPaint' )
+        return
+   
+    p = examples.ShapeAndCVPanel( node )
+    if p.showModalDialog():
+        fRange = nuke.FrameRange( p.fRange.value() )
+        shapeName = p.shape.value()
+        cv = p.cv.value()
+        threading.Thread( None, _cvTracker, args=(node, shapeName, cv, fRange) ).start()
+</pre>
+</div>
+<p>Here is the code to place it in the <strong>Properties</strong> right-click menu:</p>
+<div class="highlight-python"><pre>nuke.menu('Properties').addCommand('Track CV', examples.trackCV)</pre>
+</div>
+<img alt="_images/trackCV_03.png" src="_images/trackCV_03.png" />
+<img alt="_images/trackCV_04.png" src="_images/trackCV_04.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Roto and RotoPaint</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#painttrajectory">paintTrajectory</a></li>
+<li><a class="reference internal" href="#trackshape">trackShape</a></li>
+<li><a class="reference internal" href="#path-controller">path Controller</a></li>
+<li><a class="reference internal" href="#trackcv">trackCV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="stereo.html"
+                        title="previous chapter">Stereo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="image_data.html"
+                        title="next chapter">Accessing Image Data</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="image_data.html" title="Accessing Image Data"
+             >next</a></li>
+        <li class="right" >
+          <a href="stereo.html" title="Stereo"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Custom Panels &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Customizing the UI" href="custom_ui.html" />
+    <link rel="prev" title="Accessing Image Data" href="image_data.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_ui.html" title="Customizing the UI"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="image_data.html" title="Accessing Image Data"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="custom-panels">
+<span id="custompanels-ref-label"></span><h1>Custom Panels<a class="headerlink" href="#custom-panels" title="Permalink to this headline">¶</a></h1>
+<p>There are a few different ways to create custom panels in NUKE:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#panelcommands-ref-label"><em>Simple Panel Commands</em></a> - for frequent tasks such as asking the user to confirm something or to get a file name.</li>
+<li><a class="reference internal" href="#panelobject-ref-label"><em>Simple Panel Object</em></a> - customizable to some extent and very easy to create. You can add a limited amount of knobs if you need a simple, but customizable panel.</li>
+<li><a class="reference internal" href="#pythonpanel-ref-label"><em>Python Panels</em></a> - more complex to create, but offer all knobs that are available in nodes as well as callbacks and some limited layout control. They can also be docked as non-modal panels and saved/restored with custom layouts.</li>
+</ul>
+<div class="section" id="simple-panel-commands">
+<span id="panelcommands-ref-label"></span><h2>Simple Panel Commands<a class="headerlink" href="#simple-panel-commands" title="Permalink to this headline">¶</a></h2>
+<p>NUKE has a variety of simple panel commands ready to be used for common tasks without having to jump through too many hoops - see below for a few examples. You can watch a video tutorial about simple panels at <a class="reference external" href="http://www.nukepedia.com/video-tutorials/36/video/">Nukepedia</a></p>
+<ul>
+<li><p class="first">Simple message:</p>
+<div class="highlight-python"><pre>nuke.message('Just saying hi')</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_01.png" src="_images/panel_01.png" />
+<ul>
+<li><p class="first">User query - give the user a &#8220;yes/no&#8221; choice:</p>
+<div class="highlight-python"><pre>if nuke.ask('Are you sure you want to create a Blur node? This may take long time...'):
+    nuke.createNode('Blur')</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_09.png" src="_images/panel_09.png" />
+<ul>
+<li><p class="first">Display window:</p>
+<div class="highlight-python"><pre>def showChannels():
+    return '\n'.join(nuke.thisNode().channels())
+
+node = nuke.selectedNode()
+nuke.display('showChannels()', node, 'show channels for %s' % node.name())</pre>
+</div>
+</li>
+</ul>
+<p>This is a non-modal panel that runs the <strong>showChannels</strong> function and uses its return value to populate the window. The node passed in as the second argument is the context node and is accessible in the function as <strong>nuke.thisNode()</strong>, which enables the update button to re-run the script without having to close the panel.</p>
+<img alt="_images/panel_02.png" src="_images/panel_02.png" />
+<ul>
+<li><p class="first">Getting user input - this gets a string from the user and assigns it to all selected nodes&#8217; labels:</p>
+<div class="highlight-python"><pre>txt = nuke.getInput('Change label', 'new label')
+if txt:
+    for n in nuke.selectedNodes():
+        n['label'].setValue(txt)</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_03.png" src="_images/panel_03.png" />
+<ul>
+<li><p class="first">Color picker - this assigns a color picked by the user to all selected nodes&#8217; tile and Viewer colors:</p>
+<div class="highlight-python"><pre>col = nuke.getColor()
+
+if col:
+    for n in nuke.selectedNodes():
+        n['tile_color'].setValue(col)
+        n['gl_color'].setValue(col)</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_04.png" src="_images/panel_04.png" />
+<ul>
+<li><p class="first">File browser - a file browser that returns the full file path:</p>
+<div class="highlight-python"><pre>filePath = nuke.getFilename('Get File Contents', '*.txt *.xml')</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_05.png" src="_images/panel_05.png" />
+<ul>
+<li><p class="first">Sequence browser - a file browser that lists image sequences:</p>
+<div class="highlight-python"><pre>seqPath = nuke.getClipname('Get Sequence')</pre>
+</div>
+</li>
+</ul>
+<img alt="_images/panel_06.png" src="_images/panel_06.png" />
+<ul>
+<li><p class="first">Get frame range and views - this is handy to ask the user for a frame range and, if in a stereo setup, for the views to operate on:</p>
+<div class="highlight-python"><pre>ret = nuke.getFramesAndViews('get range', '1-10')</pre>
+</div>
+</li>
+</ul>
+<p>The return value is a list of the string entered into the field and the requested views:</p>
+<div class="highlight-python"><pre>ret = nuke.getFramesAndViews('get range', '1-10')
+range = ret[0]
+views = ret[1]
+print 'range is', range
+print 'views are', views</pre>
+</div>
+<p>Single view script:</p>
+<img alt="_images/panel_07.png" src="_images/panel_07.png" />
+<p>Multi view script:</p>
+<img alt="_images/panel_08.png" src="_images/panel_08.png" />
+</div>
+<div class="section" id="simple-panel-object">
+<span id="panelobject-ref-label"></span><h2>Simple Panel Object<a class="headerlink" href="#simple-panel-object" title="Permalink to this headline">¶</a></h2>
+<p>See also:</p>
+<p><a class="reference internal" href="channels.html#autocomp-ref-label"><em>autoComp</em></a></p>
+<p>To create a simple panel object:</p>
+<div class="highlight-python"><pre>p = nuke.Panel('my custom panel')</pre>
+</div>
+<p>It&#8217;s a good idea to check out which knobs are available for this:</p>
+<div class="highlight-python"><pre>dir(p)
+# Result:
+['__class__', '__delattr__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'addBooleanCheckBox', 'addButton', 'addClipnameSearch', 'addEnumerationPulldown', 'addExpressionInput', 'addFilenameSearch', 'addMultilineTextInput', 'addNotepad', 'addPasswordInput', 'addRGBColorChip', 'addScriptCommand', 'addSingleLineInput', 'addTextFontPulldown', 'clear', 'execute', 'setTitle', 'setWidth', 'show', 'title', 'value', 'width']</pre>
+</div>
+<p>Add some knobs:</p>
+<div class="highlight-python"><pre>p.addClipnameSearch('clip path', '/tmp')
+p.addFilenameSearch('file path', '/tmp')
+p.addTextFontPulldown('font browser', '/myFonts/')
+p.addRGBColorChip('some pretty color', '')
+p.addExpressionInput('enter an expression', '4*25')
+p.addBooleanCheckBox('yes or no?', True)
+p.addEnumerationPulldown('my choices', 'A B C')
+p.addScriptCommand('tcl or python code', '')
+p.addSingleLineInput('just one line', 'not much space')
+p.addMultilineTextInput('multiple lines of user input text', 'lineA\nlineB')
+p.addNotepad('write something', 'some very long text could go in here. For now this is just some random default value')
+p.addPasswordInput('password', 'donttellanyone')
+p.addButton('push here')
+p.addButton('or here')
+p.addButton('or even here')</pre>
+</div>
+<p>Open the panel:</p>
+<div class="highlight-python"><pre>ret = p.show()</pre>
+</div>
+<img alt="_images/panel_10.png" src="_images/panel_10.png" />
+<p>To retrieve a value after the panel is closed:</p>
+<div class="highlight-python"><pre>print p.value('clip path')
+print p.value('file path')</pre>
+</div>
+</div>
+<div class="section" id="python-panels">
+<span id="pythonpanel-ref-label"></span><h2>Python Panels<a class="headerlink" href="#python-panels" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="shapepanel">
+<span id="shapepanel-ref-label"></span><h3>ShapePanel<a class="headerlink" href="#shapepanel" title="Permalink to this headline">¶</a></h3>
+<p>This is a small panel with two dropdown menus. The first knob controls the type of shapes displayed in the second knob.</p>
+<img alt="_images/shapePanel_01.png" src="_images/shapePanel_01.png" />
+<img alt="_images/shapePanel_02.png" src="_images/shapePanel_02.png" />
+<p>To get started, create a class and inherit <strong>nukescripts.PythonPanels</strong>. Then run its constructor and assign a title for the panel:</p>
+<div class="highlight-python"><pre>class ShapePanel(nukescripts.PythonPanel):
+    def __init__(self):
+        nukescripts.PythonPanel.__init__(self, 'RotoPaint Elements')</pre>
+</div>
+<p>Use an argument to provide the node we want to parse - assign it in the <strong>__init__</strong> argument list and store it in the class&#8217; global scope as <strong>self.rpNode</strong>:</p>
+<div class="highlight-python"><pre>class ShapePanel(nukescripts.PythonPanel):
+    def __init__(self, node):
+        nukescripts.PythonPanel.__init__(self, 'RotoPaint Elements')
+        self.rpNode = node</pre>
+</div>
+<p>To create a dropdown list use <strong>nuke.Enumeration_Knob</strong>:</p>
+<div class="highlight-python"><pre>self.typeKnob = nuke.Enumeration_Knob('element', 'element', ['Shapes', 'Strokes'])</pre>
+</div>
+<p>Once again, we reference this knob in the class&#8217; global name space so it&#8217;s easy to access later. The three arguments provided to the knob are:</p>
+<ul class="simple">
+<li><strong>element</strong> - The knob object&#8217;s name.</li>
+<li><strong>element</strong> - The knob&#8217;s label.</li>
+<li><strong>[&#8216;Shapes&#8217;, &#8216;Strokes&#8217;]</strong> - The list of items displayed in the dropdown menu.</li>
+</ul>
+<p>Create a second enumeration knob, but leave its items empty. Set them dynamically:</p>
+<div class="highlight-python"><pre>self.elementKnob = nuke.Enumeration_Knob('curve', 'curve', [])</pre>
+</div>
+<p>Now add both knobs:</p>
+<div class="highlight-python"><pre>for k in (self.typeKnob, self.elementKnob):
+    self.addKnob(k)</pre>
+</div>
+<p>This is the code so far:</p>
+<div class="highlight-python"><pre>class ShapePanel(nukescripts.PythonPanel):
+    def __init__(self, node):
+        nukescripts.PythonPanel.__init__(self, 'RotoPaint Elements')
+        self.rpNode = node
+        self.typeKnob = nuke.Enumeration_Knob('element', 'element', ['Shapes', 'Strokes'])
+        self.elementKnob = nuke.Enumeration_Knob('curve', 'curve', [])
+        for k in (self.typeKnob, self.elementKnob):
+            self.addKnob(k)</pre>
+</div>
+<p>If you now create an instance of this class, you can open it as a modal panel with the <strong>showModalDialog()</strong> method. Make sure to create a RotoPaint node called &#8220;RotoPaint1&#8221; with a few shapes and strokes in it:</p>
+<div class="highlight-python"><pre>node = nuke.toNode('RotoPaint1')
+p = ShapePanel(node)
+p.showModalDialog()</pre>
+</div>
+<img alt="_images/shapePanel_03.png" src="_images/shapePanel_03.png" />
+<p>Note how the <strong>showModalDialog</strong> method gave us <strong>Ok</strong> and <strong>Cancel</strong> buttons for free. Let&#8217;s do some cosmetics:</p>
+<p>By default, enumeration knobs start a new line but, if we clear that flag, we can get both knobs on the same row:</p>
+<div class="highlight-python"><pre>class ShapePanel(nukescripts.PythonPanel):
+    def __init__(self, node):
+                nukescripts.PythonPanel.__init__(self, 'RotoPaint Elements')
+                self.rpNode = node
+
+                self.typeKnob = nuke.Enumeration_Knob('element', 'element / shape', ['Shapes', 'Strokes'])
+                self.elementKnob = nuke.Enumeration_Knob('curve', '', [])
+                self.elementKnob.clearFlag(nuke.STARTLINE)
+
+                for k in (self.typeKnob, self.elementKnob):
+                        self.addKnob(k)</pre>
+</div>
+<p>This also changes the label on the first knob and removes the label from the second one to make things look a little more compact:</p>
+<img alt="_images/shapePanel_04.png" src="_images/shapePanel_04.png" />
+<p>One last thing we want to do in the constructor is to initialize a dictionary that holds the elements per type. Add this line at the bottom of the <strong>__init__</strong> function:</p>
+<div class="highlight-python"><pre>self.curveDict = {}</pre>
+</div>
+<p>This is not really required, though you can initialize variables in the global scope inside the __init__ function for transparency.</p>
+<p>Now on to writing a function that fills this dictionary with the node&#8217;s shapes and strokes:</p>
+<div class="highlight-python"><pre>def getData(self):
+    self.curveDict={ 'Shapes':[], 'Strokes':[] }
+    rootLayer = self.rpNode['curves'].rootLayer</pre>
+</div>
+<ol class="arabic simple">
+<li>Give the dictionary the same keys as we used for the first enumeration knob&#8217;s values (&#8220;Shapes&#8221; and &#8220;Strokes&#8221;).</li>
+<li>Grab the node&#8217;s curve knob, which is the knob that lists all elements in a Roto or RotoPaint node) and get its <strong>rootLayer</strong>.</li>
+</ol>
+<p>The <strong>rootLayer</strong> is an iterable object that yields all elements as listed in the curve knob, so we can just loop over it to get all its child elements. As we go, check for the respective element&#8217;s type and sort it into our dictionary accordingly:</p>
+<div class="highlight-python"><pre>for e in rootLayer:
+    if isinstance(e, nuke.rotopaint.Shape):
+        self.curveDict[ 'Shapes' ].append(e.name)
+    elif isinstance(e, nuke.rotopaint.Stroke):
+        self.curveDict[ 'Strokes' ].append(e.name)</pre>
+</div>
+<p>This fills the dictionary with all elements of interest, neatly sorted by &#8220;Shape&#8221; and &#8220;Stroke&#8221;. Run this in the last line of the  <strong>__init__</strong> function to parse the node and make the info available the moment the panel is created:</p>
+<div class="highlight-python"><pre>class ShapePanel(nukescripts.PythonPanel):
+    def __init__(self, node):
+        '''List all roto paint nodes and the name of their respective shapes and strokes'''
+        nukescripts.PythonPanel.__init__(self, 'RotoPaint Elements')
+        self.rpNode = node
+        # CREATE KNOBS
+        self.typeKnob = nuke.Enumeration_Knob('element', 'element / curve', ['Shapes', 'Strokes'])
+        self.elementKnob = nuke.Enumeration_Knob('curve', '', [])
+        self.elementKnob.clearFlag(nuke.STARTLINE)
+        # ADD KNOBS
+        for k in (self.typeKnob, self.elementKnob):
+            self.addKnob(k)
+
+        # STORE DICTIONARY OF ELEMENTS PER TYPE
+        self.curveDict = {}
+        # FILL DICTIONARY
+        self.getData()</pre>
+</div>
+<p>Finally, add a <strong>knobChanged</strong> method to our new class which is automatically triggered every time a knob within the panel changes. The <strong>knobChanged</strong> method takes an extra argument which passes the knob into the function that is currently being changed.
+To see what&#8217;s going on and for debugging, it&#8217;s a good idea to just print out the knob&#8217;s name as you change stuff in the panel and keep an eye out on the script editor&#8217;s output panel:</p>
+<div class="highlight-python"><pre>def knobChanged(self, knob):
+        print knob.name()</pre>
+</div>
+<p>If you run the panel code at this stage, notice that even opening the panel triggers the <strong>knobChanged</strong> callback with the knob <strong>showPanel</strong>:</p>
+<img alt="_images/shapePanel_05.png" src="_images/shapePanel_05.png" />
+<p>If you now change the first enumeration knob you&#8217;ll see its name being printed to the output panel as well.</p>
+<p>Now let&#8217;s do something useful with this. We already have a dictionary that holds all the shapes and strokes, so all we need to do is read it and assign the respective values (based on the first knob&#8217;s current value):</p>
+<div class="highlight-python"><pre>def knobChanged(self, knob):
+        self.elementKnob.setValues(self.curveDict[ self.typeKnob.value() ])</pre>
+</div>
+<p>This sets the values for <strong>self.elementKnob</strong> by reading the dictionary with the current value found in <strong>typeKnob</strong>. However, we only want to do this when the panel opens or when <strong>typeKnob</strong> changes:</p>
+<div class="highlight-python"><pre>def knobChanged(self, knob):
+    if knob is self.typeKnob or knob.name()=='showPanel':
+        self.elementKnob.setValues(self.curveDict[ self.typeKnob.value() ])</pre>
+</div>
+<p>You can now switch the first enumeration knob from <strong>Shapes</strong> to <strong>Strokes</strong> and see the second knob update its contents accordingly.</p>
+<p>The final code:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts
+
+class ShapePanel( nukescripts.PythonPanel ):
+    def __init__( self, node ):
+        '''List all roto paint nodes and the name of their respective shapes and strokes'''
+        nukescripts.PythonPanel.__init__( self, 'RotoPaint Elements' )
+        self.rpNode = node
+        # CREATE KNOBS
+        self.typeKnob = nuke.Enumeration_Knob( 'element', 'element / curve', ['Shapes', 'Strokes'] )
+        self.elementKnob = nuke.Enumeration_Knob( 'curve', '', [] )
+        self.elementKnob.clearFlag( nuke.STARTLINE )
+        # ADD KNOBS
+        for k in ( self.typeKnob, self.elementKnob ):
+            self.addKnob( k )
+
+        # STORE DICTIONARY OF ELEMENTS PER TYPE
+        self.curveDict = {}
+        # FILL DICTIONARY
+        self.getData()
+
+    def getData( self ):
+        '''return a nested dictionary of all shapes and strokes per node'''
+        self.curveDict={ 'Shapes':[], 'Strokes':[] }
+        rootLayer = self.rpNode['curves'].rootLayer
+        for e in rootLayer:
+            if isinstance( e, nuke.rotopaint.Shape ):
+                self.curveDict[ 'Shapes' ].append( e.name )
+            elif isinstance( e, nuke.rotopaint.Stroke ):
+                self.curveDict[ 'Strokes' ].append( e.name )
+
+
+    def knobChanged( self, knob ):
+        if knob is self.typeKnob or knob.name()=='showPanel':
+            self.elementKnob.setValues( self.curveDict[ self.typeKnob.value() ] )
+</pre>
+</div>
+<p>By calling the panel with the <strong>showModalDialog</strong> method, we make sure the user makes a choice and either confirms or cancels the panel before anything else can happen. This method returns <em>True</em> when the user hits the <strong>OK</strong> button and <em>False</em> otherwise.
+By referencing the knobs in the panel&#8217;s global scope (<strong>self.elementKnob</strong> = ...) we can access the knob&#8217;s value after the panel was closed. Here is an example:</p>
+<div class="highlight-python"><pre>node = nuke.toNode('RotoPaint1')
+p = ShapePanel(node)
+if p.showModalDialog():
+    print p.elementKnob.value()</pre>
+</div>
+<p>This prints the value of the element knob only when the panel was closed with the <strong>OK</strong> button, otherwise nothing happens.</p>
+</div>
+<div class="section" id="shapeandcvpanel">
+<span id="shapeandcvpanel-ref-label"></span><h3>ShapeAndCVPanel<a class="headerlink" href="#shapeandcvpanel" title="Permalink to this headline">¶</a></h3>
+<p>This simple panel scans a Roto or RotoPaint node for shapes and populates a dropdown list with any names found. It also let&#8217;s the use specify a frame range and a CV number.
+It is used for the <a class="reference internal" href="rotopaint.html#trackcv-ref-label"><em>trackCV</em></a></p>
+<img alt="_images/shapeAndCVPanel_01.png" src="_images/shapeAndCVPanel_01.png" />
+<p>Start by importing the required modules and packages:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts
+import nuke.rotopaint as rp</pre>
+</div>
+<p>Then create a class that takes one argument called <strong>node</strong> and inherits the <strong>PythonPanel</strong> class from the <strong>nukescripts</strong> package. Run the parent class&#8217; constructor to provide a title for the panel:</p>
+<div class="highlight-python"><pre>class ShapeAndCVPanel(nukescripts.PythonPanel):
+def __init__(self, node):
+        nukescripts.PythonPanel.__init__(self, 'Get Shape and CV index')</pre>
+</div>
+<p>Reference the node provided to the panel in it&#8217;s global name space so we can access it from other functions inside the panel class:</p>
+<div class="highlight-python"><pre>self.rpNode = node</pre>
+</div>
+<p>Get the root layer from the given node&#8217;s <strong>curves</strong> knob:</p>
+<div class="highlight-python"><pre>root = node['curves'].rootLayer</pre>
+</div>
+<p>Then use list comprehension to extract a list of all shape names in the given node:</p>
+<div class="highlight-python"><pre>shapeNames = [ c.name for c in root if isinstance(c, rp.Shape) ]</pre>
+</div>
+<p>Add a quick check to see if we found anything to work with:</p>
+<div class="highlight-python"><pre>if not shapeNames:
+    nuke.message('No Shapes found in %s' % node.name())
+    return</pre>
+</div>
+<p>Now start adding knobs to the panel. First a string knob to input the frame range:</p>
+<div class="highlight-python"><pre>self.fRange = nuke.String_Knob('fRange', 'Track Range')</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We&#8217;re referencing the knob in the panel&#8217;s global name space (&#8220;self.&#8221;) so it is accessible later from outside the panel.</p>
+</div>
+<p>The string knob can take an optional third argument to provide a default value. Let&#8217;s use that to assign the script range as the default value:</p>
+<div class="highlight-python"><pre>self.fRange = nuke.String_Knob('fRange', 'Track Range', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()))</pre>
+</div>
+<p>Next, add the dropdown list and an associated enumeration knob and use the list of shape names we found above as the values:</p>
+<div class="highlight-python"><pre>self.shape = nuke.Enumeration_Knob('shape', 'Shape', shapeNames)</pre>
+</div>
+<p>Now add a simple integer knob to let the user input a point number:</p>
+<div class="highlight-python"><pre>self.cv = nuke.Int_Knob('pointNumber', 'Point Number')</pre>
+</div>
+<p>This panel checks if the given point number is valid. If not, we want to display some static text so let&#8217;s prepare that:</p>
+<div class="highlight-python"><pre>self.warning = nuke.Text_Knob('warning', 'invalid index')</pre>
+</div>
+<p>To give the warning a bit more emphasis we can use simple html code to turn the font red:</p>
+<div class="highlight-python"><pre>self.warning = nuke.Text_Knob('warning', '&lt;span style="color:red"&gt;invalid index&lt;/span&gt;')</pre>
+</div>
+<p>This static text knob appears next to the previous (&#8220;pointNumber&#8221;) knob, so we need to clear the flag that puts it into a new line by default:</p>
+<div class="highlight-python"><pre>self.warning.clearFlag(nuke.STARTLINE)</pre>
+</div>
+<p>And lastly, when the panel opens, we don&#8217;t want to see the warning so let&#8217;s hide it initially:</p>
+<div class="highlight-python"><pre>self.warning.setVisible(False)</pre>
+</div>
+<p>Now add all four knobs in the order you want them to show up in the panel:</p>
+<div class="highlight-python"><pre>self.addKnob(self.fRange)
+self.addKnob(self.shape)
+self.addKnob(self.cv)
+self.addKnob(self.warning)</pre>
+</div>
+<p>Or if you want to avoid repeating yourself:</p>
+<div class="highlight-python"><pre>for k in (self.fRange, self.shape, self.cv, self.warning):
+        self.addKnob(k)</pre>
+</div>
+<p>The code up to this point:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts
+import nuke.rotopaint as rp
+
+class ShapeAndCVPanel(nukescripts.PythonPanel):
+    def __init__(self, node):
+        nukescripts.PythonPanel.__init__(self, 'Get Shape and CV index')
+        self.rpNode  = node
+        # GET THE NODES ROOT LAYER AND COLLECT ALL SHAPES IN IT
+        root = node['curves'].rootLayer
+        shapeNames = [ c.name for c in root if isinstance(c, rp.Shape) ]
+        if not shapeNames:
+            nuke.message('No Shapes found in %s' % node.name())
+            return
+        # CREATE KNOBS
+        self.fRange = nuke.String_Knob('fRange', 'Track Range', '%s-%s' % (nuke.root().firstFrame(), nuke.root().lastFrame()))
+        self.shape = nuke.Enumeration_Knob('shape', 'Shape', shapeNames)
+        self.cv = nuke.Int_Knob('pointNumber', 'Point Number')
+        self.warning = nuke.Text_Knob('warning', 'invalid index')
+        self.warning.clearFlag(nuke.STARTLINE)
+        self.warning.setVisible(False)
+
+        # ADD KNOBS
+        for k in (self.fRange, self.shape, self.cv, self.warning):
+            self.addKnob(k)</pre>
+</div>
+<p>In order to make the panel check whether the given point number is valid or not, we need to add the <strong>knobChanged</strong> method which is automatically run when a knob changes in the panel. This method requires the <strong>knob</strong> argument which provides the function and the knob that triggered this callback:</p>
+<div class="highlight-python"><pre>def knobChanged(self, knob):</pre>
+</div>
+<p>We only want to run the check when either the knob is referenced by <strong>self.cv</strong> or <strong>self.shape</strong> is changed by the user:</p>
+<div class="highlight-python"><pre>def knobChanged(self, knob):
+    if knob in(self.cv, self.shape):</pre>
+</div>
+<p>If so, we need to grab the shape that the <strong>shape</strong> knob (referenced by <strong>self.shape</strong>) is set to:</p>
+<div class="highlight-python"><pre>currentShape = self.rpNode['curves'].toElement(self.shape.value())</pre>
+</div>
+<p>We just want to know how many points are in this shape:</p>
+<div class="highlight-python"><pre>size = len([pt for pt in currentShape])</pre>
+</div>
+<p>Now check if the current value of the <strong>pointNumber</strong> knob is within the range of the found size:</p>
+<blockquote>
+<div>validNumber = -1 &lt; knob.value() &lt; size</div></blockquote>
+<p>The above returns <em>True</em> if the number is within the available range of points and <em>False</em> otherwise, so we use its inverse value to drive the visibility of the warning knob:</p>
+<div class="highlight-python"><pre>self.warning.setVisible(not validNumber)</pre>
+</div>
+<p>The final code:</p>
+<div class="highlight-python"><pre>import nuke
+import nukescripts
+import nuke.rotopaint as rp
+
+class ShapeAndCVPanel( nukescripts.PythonPanel ):
+    def __init__( self, node ):
+        nukescripts.PythonPanel.__init__( self, 'Get Shape and CV index' )
+        self.rpNode  = node
+        # GET THE NODES ROOT LAYER AND COLLECT ALL SHAPES IN IT
+        root = node['curves'].rootLayer
+        shapeNames = [ c.name for c in root if isinstance( c, rp.Shape ) ]
+        if not shapeNames:
+            nuke.message( 'No Shapes found in %s' % node.name() )
+            return
+        # CREATE KOBS
+        self.fRange = nuke.String_Knob( 'fRange', 'Track Range', '%s-%s' % ( nuke.root().firstFrame(), nuke.root().lastFrame() ) )        
+        self.shape = nuke.Enumeration_Knob( 'shape', 'Shape', shapeNames )
+        self.cv = nuke.Int_Knob( 'pointNumber', 'Point Number' )
+        self.warning = nuke.Text_Knob( 'warning', '&lt;span style="color:red"&gt;invalid index&lt;/span&gt;' )
+        self.warning.clearFlag( nuke.STARTLINE )
+        self.warning.setVisible( False )
+
+        # ADD KOBS
+        for k in ( self.fRange, self.shape, self.cv, self.warning ):
+            self.addKnob( k )
+
+    def knobChanged( self, knob ):
+        # IF AN INVALID INDEX IS SHOWN DISPLAY THE WARNING TEXT
+        if knob in( self.cv, self.shape ):
+            currentShape = self.rpNode['curves'].toElement( self.shape.value() )
+            size = len( [pt for pt in currentShape] )
+            validNumber = -1 &lt; knob.value() &lt; size
+            self.warning.setVisible( not validNumber )
+</pre>
+</div>
+<p>To test the panel, create a Roto or RotoPaint node and a few shapes, then run:</p>
+<div class="highlight-python"><pre>ShapeAndCVPanel(nuke.selectedNode()).showModalDialog()</pre>
+</div>
+<p>This shows the panel with the warning hidden:</p>
+<img alt="_images/shapeAndCVPanel_02.png" src="_images/shapeAndCVPanel_02.png" />
+<p>If the point number is smaller or larger than the amount of points in the currently selected shape, the warning is visible:</p>
+<img alt="_images/shapeAndCVPanel_03.png" src="_images/shapeAndCVPanel_03.png" />
+<p>Let&#8217;s make the panel wider to make space for the warning:</p>
+<div class="highlight-python"><pre>p = ShapeAndCVPanel(nuke.selectedNode())
+p.setMinimumSize(400, 50)
+p.showModalDialog()</pre>
+</div>
+<img alt="_images/shapeAndCVPanel_04.png" src="_images/shapeAndCVPanel_04.png" />
+</div>
+<div class="section" id="search-and-replace-panel">
+<h3>Search and Replace Panel<a class="headerlink" href="#search-and-replace-panel" title="Permalink to this headline">¶</a></h3>
+<p>Below is a script that creates a panel to perform a search and replace across the current NUKE script. It uses the helper function <strong>search</strong> to do the work and keep the panel code simple.
+The tutorial video for this can be found at <a class="reference external" href="http://www.nukepedia.com/video-tutorials/37/video/">Nukepedia</a></p>
+<div class="highlight-python"><pre>def search(searchstr, nodes):
+    """ Search in nodes with file knobs. """
+    fileKnobNodes = [i for i in nodes if __NodeHasKnobWithName(i, 'file')]
+    proxyKnobNodes = [i for i in nodes if __NodeHasKnobWithName(i, 'proxy')]
+    if not fileKnobNodes and not proxyKnobNodes: raise ValueError, "No file nodes selected"
+    nodeMatches = []
+    knobMatches = []
+    for i in fileKnobNodes:
+        if __FindNode(searchstr, i['file']):
+            nodeMatches.append(i)
+            knobMatches.append(i['file'])
+    for i in proxyKnobNodes:
+        if __FindNode(searchstr, i['proxy']):
+            nodeMatches.append(i)
+            knobMatches.append(i['proxy'])
+    return nodeMatches, knobMatches</pre>
+</div>
+<p>Note the reverse URL as the second argument to the constructor which enables this panel to be saved and recalled as part of custom layouts:</p>
+<div class="highlight-python"><pre>class SearchReplacePanel(nukescripts.PythonPanel):
+    def __init__(self):
+        nukescripts.PythonPanel.__init__(self, 'Search and Replace', 'com.ohufx.SearchReplace')
+        # CREATE KNOBS
+        self.nodesChoice = nuke.Enumeration_Knob('nodes', 'Source Nodes', ['all', 'selected'])
+        self.searchStr = nuke.String_Knob('searchStr', 'Search for:')
+        self.update = nuke.PyScript_Knob('update', 'Update')
+        self.info = nuke.Multiline_Eval_String_Knob('info', 'Found')
+        self.info.setEnabled(False)
+        self.replaceStr = nuke.String_Knob('replaceStr', 'Replace with:')
+        self.replace = nuke.PyScript_Knob('replace', 'Replace')
+        # ADD KNOBS
+        self.addKnob(self.nodesChoice)
+        self.addKnob(self.searchStr)
+        self.addKnob(self.update)
+        self.addKnob(self.info)
+        self.addKnob(self.replaceStr)
+        self.addKnob(self.replace)
+
+        self.matches = None
+
+    def search(self, nodes):
+        nodeMatches, knobMatches = search(self.searchStr.value(), nodes)
+        nodes = [n.name() for n in nodeMatches]
+        infoStr = '%s node(s) found:\n\t%s' % (len(nodes), ', '.join(nodes))
+        self.info.setValue(infoStr)
+        return knobMatches
+
+    def knobChanged(self, knob):
+        if knob in (self.searchStr, self.update, self.nodesChoice):
+            srcNodes = { 'all': nuke.allNodes(), 'selected': nuke.selectedNodes() }
+            self.matches = self.search(srcNodes[self.nodesChoice.value()])
+        elif knob is self.replace and self.matches is not None:
+            for k in self.matches:
+                newStr = re.sub(self.searchStr.value(), self.replaceStr.value(), k.value())
+                k.setValue(newStr)</pre>
+</div>
+<p>Here is how to add the panel to the <strong>Pane</strong> menu by default (this code should go into the <strong>menu.py</strong>):</p>
+<div class="highlight-python"><pre>def addSRPanel():
+    global srPanel
+    srPanel = SearchReplacePanel()
+    return srPanel.addToPane()
+
+paneMenu = nuke.menu('Pane')
+paneMenu.addCommand('SearchReplace', addSRPanel)
+nukescripts.registerPanel('com.ohufx.SearchReplace', addSRPanel)</pre>
+</div>
+<img alt="_images/srPanel_01.png" src="_images/srPanel_01.png" />
+</div>
+</div>
+</div>
+<div class="section" id="extending-nuke-with-pyside">
+<h1>Extending NUKE with PySide<a class="headerlink" href="#extending-nuke-with-pyside" title="Permalink to this headline">¶</a></h1>
+<p>NUKE&#8217;s UI is extendable through python and Qt with PySide.  PySide is shipped with NUKE 6.3v5 and higher.</p>
+<div class="section" id="my-first-pyside-window">
+<h2>My First PySide Window<a class="headerlink" href="#my-first-pyside-window" title="Permalink to this headline">¶</a></h2>
+<p>Launch NUKE, open the script editor, and type the following:</p>
+<div class="highlight-python"><pre>from PySide import QtGui
+label = QtGui.QLabel("Hello World")
+label.show()</pre>
+</div>
+<p>A window displays with &#8216;Hello World&#8217; in it, yeah!</p>
+</div>
+<div class="section" id="dockable-pyside-widgets">
+<span id="pyside-docked"></span><h2>Dockable PySide Widgets<a class="headerlink" href="#dockable-pyside-widgets" title="Permalink to this headline">¶</a></h2>
+<p>To make a dockable PySide widget there is a helper function in the <strong>nukescripts.panels</strong> module to create dockable widgets.</p>
+<p>The definition looks like this:</p>
+<div class="highlight-python"><pre>registerWidgetAsPanel(widget, name, id, create=False)
+
+    registerWidgetAsPanel(widget, name, id, create) -&gt; PythonPanel
+
+    Wraps and registers a widget to be used in a NUKE panel.
+
+    widget - should be a string of the class for the widget
+    name - is is the name as it will appear on the Pane menu
+    id - should the the unique ID for this widget panel
+    create - if this is set to true a new NukePanel will be returned that wraps this widget</pre>
+</div>
+<p>Here&#8217;s a simple example that creates a new dockable table widget:</p>
+<div class="highlight-python"><pre>import nuke
+import PySide.QtCore as QtCore
+import PySide.QtGui as QtGui
+from nukescripts import panels
+
+class NukeTestWindow(QtGui.QWidget):
+    def __init__(self, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+        self.setLayout(QtGui.QVBoxLayout())
+        self.myTable    = QtGui.QTableWidget()
+        self.myTable.header = ['Date', 'Files', 'Size', 'Path' ]
+        self.myTable.size = [ 75, 375, 85, 600 ]
+        self.myTable.setColumnCount(len(self.myTable.header))
+        self.myTable.setHorizontalHeaderLabels(self.myTable.header)
+        self.myTable.setSelectionMode(QtGui.QTableView.ExtendedSelection)
+        self.myTable.setSelectionBehavior(QtGui.QTableView.SelectRows)
+        self.myTable.setSortingEnabled(1)
+        self.myTable.sortByColumn(1, QtCore.Qt.DescendingOrder)
+        self.myTable.setAlternatingRowColors(True)
+        self.myTable.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.myTable.setRowCount(50)
+        self.layout().addWidget(self.myTable)
+        self.myTable.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding))
+        self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding))
+
+panels.registerWidgetAsPanel('NukeTestWindow', 'Test table panel', 'uk.co.thefoundry.NukeTestWindow')</pre>
+</div>
+<p>This example adds the new dockable panel to the <strong>Pane</strong> menu.</p>
+<p>To add the widget to the <strong>Pane</strong> menu and open the panel docked next to the <strong>Properties</strong> panel, you can run code like this:</p>
+<div class="highlight-python"><pre>pane = nuke.getPaneFor('Properties.1')
+panels.registerWidgetAsPanel('NukeTestWindow', 'Test table panel', 'uk.co.thefoundry.NukeTestWindow', True).addToPane(pane)</pre>
+</div>
+</div>
+<div class="section" id="a-web-browser-panel-example">
+<h2>A Web browser panel example<a class="headerlink" href="#a-web-browser-panel-example" title="Permalink to this headline">¶</a></h2>
+<p>Below is a more complicated example which creates a docked web browser widget.  In also shows the use of signals and slots.</p>
+<p>To use, add the example to your NUKE path or copy and paste into the script editor and then select &#8216;Web Browser&#8217; from the <strong>Pane</strong> menu.</p>
+<div class="highlight-python"><pre>## example PySide panel that implements a simple web browser in Nuke
+## JW 12/10/11
+
+import nuke
+import nukescripts
+from nukescripts import panels
+
+from PySide.QtGui import *
+from PySide.QtCore import *
+from PySide.QtWebKit import *
+
+
+class WebBrowserWidget(QWidget):
+  def changeLocation(self):
+    url = self.locationEdit.text()
+    if not url.startswith( 'http://' ):
+      url = 'http://' + url
+    self.webView.load( QUrl(url) )
+
+  def urlChanged(self, url):
+    self.locationEdit.setText( url.toString() )
+
+  def __init__(self):
+    QWidget.__init__(self)
+    self.webView = QWebView()
+   
+    self.setLayout( QVBoxLayout() )  
+    
+    self.locationEdit = QLineEdit( 'http://www.google.com' )
+    self.locationEdit.setSizePolicy( QSizePolicy.Expanding, self.locationEdit.sizePolicy().verticalPolicy() )
+    
+    QObject.connect( self.locationEdit, SIGNAL('returnPressed()'),  self.changeLocation )
+    QObject.connect( self.webView,   SIGNAL('urlChanged(QUrl)'),     self.urlChanged )
+
+    self.layout().addWidget( self.locationEdit )
+  
+    bar = QToolBar()
+    bar.addAction( self.webView.pageAction(QWebPage.Back))
+    bar.addAction( self.webView.pageAction(QWebPage.Forward))
+    bar.addAction( self.webView.pageAction(QWebPage.Stop))
+    bar.addAction( self.webView.pageAction(QWebPage.Reload))
+    bar.addSeparator()
+    
+    self.layout().addWidget( bar )
+    self.layout().addWidget( self.webView )
+
+    url = 'http://www.thefoundry.co.uk/' 
+    self.webView.load( QUrl( url ) )
+    self.locationEdit.setText( url ) 
+    self.setSizePolicy( QSizePolicy( QSizePolicy.Expanding,  QSizePolicy.Expanding))
+
+## make this work in a .py file and in 'copy and paste' into the script editor
+moduleName = __name__
+if moduleName == '__main__':
+  moduleName = ''
+else:
+  moduleName = moduleName + '.'
+
+panels.registerWidgetAsPanel( moduleName + 'WebBrowserWidget', 'Web Browser','uk.co.thefoundry.WebBrowserWidget')
+
+
+
+</pre>
+</div>
+</div>
+<div class="section" id="migrating-from-pyqt-applications">
+<h2>Migrating from PyQt Applications<a class="headerlink" href="#migrating-from-pyqt-applications" title="Permalink to this headline">¶</a></h2>
+<p>In general PySide and PyQt applications are compatible, it is just simply a matter of changing the import statement from PyQt4 to PySide.</p>
+<p>For example in PyQt:</p>
+<div class="highlight-python"><pre>from PyQt4 import QtGui
+label = QtGui.QLabel("Hello World")
+label.show()</pre>
+</div>
+<p>And in PySide:</p>
+<div class="highlight-python"><pre>from PySide import QtGui
+label = QtGui.QLabel("Hello World")
+label.show()</pre>
+</div>
+</div>
+</div>
+<div class="section" id="extending-nuke-with-pyqt">
+<h1>Extending NUKE with PyQt<a class="headerlink" href="#extending-nuke-with-pyqt" title="Permalink to this headline">¶</a></h1>
+<p>Although as of NUKE 6.3v5 PySide is included with NUKE prebuilt and ready to go you can still use PyQt if preferred.</p>
+<p>In order to achieve this, there are a few steps that need to be taken for each individual platform in order to be able to use it correctly and effectively from within NUKE - you&#8217;ll also need to have Python 2.7.3 installed.</p>
+<p>To use PyQt with NUKE, download the NUKE specific Qt 4.8.5 source code <a class="reference external" href="http://thefoundry.s3.amazonaws.com/products/nuke/developers/80/nuke-qt-4.8.5-src.tar.gz">http://thefoundry.s3.amazonaws.com/products/nuke/developers/80/nuke-qt-4.8.5-src.tar.gz</a>.
+Run the <strong>build.py</strong> script with the arguments &#8220;release 64&#8221; to build all of the binaries (shared libraries and executables) needed to link PyQt.</p>
+<p>After the build is complete, make sure your path environment variable contains the file path to the built make executable (&lt;qtbuilddir&gt;/bin/).</p>
+<p>After that, follow the appropriate instructions for your platform:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#macos-instructions"><em>Mac OSX</em></a></li>
+<li><a class="reference internal" href="#linux-instructions"><em>Linux</em></a></li>
+<li><a class="reference internal" href="#windows-instructions"><em>Windows</em></a></li>
+</ul>
+<p>Finally, configure your environment according to these steps:
+<a class="reference internal" href="#environment-setup"><em>Environment Setup</em></a></p>
+<div class="section" id="mac-osx">
+<span id="macos-instructions"></span><h2>Mac OSX<a class="headerlink" href="#mac-osx" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Download the SIP source package for Mac OSX from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/sip/download">http://www.riverbankcomputing.co.uk/software/sip/download</a> and unpack it.</p>
+</li>
+<li><p class="first">Navigate to the unpacked directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+make
+make install</pre>
+</div>
+</li>
+<li><p class="first">Download PyQt4 source for Mac OSX from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/pyqt/download">http://www.riverbankcomputing.co.uk/software/pyqt/download</a> and unpack it.</p>
+</li>
+<li><p class="first">Navigate to the unpacked directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+make
+make install</pre>
+</div>
+</li>
+<li><p class="first">PyQt libraries now need to be fixed so that they internally point to NUKE&#8217;s Qt binaries. To achieve this run soFileFixForMacPyQt.py, which is bundled with the Qt source code, with the path to the PyQt binaries as the argument.</p>
+</li>
+</ul>
+<p>Finally, configure your environment according to these steps:
+<a class="reference internal" href="#environment-setup"><em>Environment Setup</em></a></p>
+</div>
+<div class="section" id="linux">
+<span id="linux-instructions"></span><h2>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Download the SIP source package for Linux from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/sip/download">http://www.riverbankcomputing.co.uk/software/sip/download</a> and unpack it.</p>
+</li>
+<li><p class="first">Navigate to the unpacked directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+make
+make install</pre>
+</div>
+</li>
+<li><p class="first">Download PyQt4 source for Linux from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/pyqt/download">http://www.riverbankcomputing.co.uk/software/pyqt/download</a> and unpack it.</p>
+</li>
+<li><p class="first">Navigate to the unpacked directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+make
+make install</pre>
+</div>
+</li>
+</ul>
+<p>Finally, configure your environment according to these steps:
+<a class="reference internal" href="#environment-setup"><em>Environment Setup</em></a></p>
+</div>
+<div class="section" id="windows">
+<span id="windows-instructions"></span><h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Download the SIP source for windows from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/sip/download">http://www.riverbankcomputing.co.uk/software/sip/download</a>.</p>
+</li>
+<li><p class="first">Unpack the source files and open a Visual Studio command line console.</p>
+</li>
+<li><p class="first">Navigate to the unpacked SIP directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+nmake
+nmake install</pre>
+</div>
+</li>
+<li><p class="first">Download PyQt4 source for Windows from the Riverbank website <a class="reference external" href="http://www.riverbankcomputing.co.uk/software/pyqt/download">http://www.riverbankcomputing.co.uk/software/pyqt/download</a>.</p>
+</li>
+<li><p class="first">Unpack the source and open a Visual Studio command line console</p>
+</li>
+<li><p class="first">Navigate to the unpacked PyQt directory and run the following commands:</p>
+<div class="highlight-python"><pre>configure.py
+nmake
+nmake install</pre>
+</div>
+</li>
+</ul>
+<p>Finally, configure your environment according to these steps:
+<a class="reference internal" href="#environment-setup"><em>Environment Setup</em></a></p>
+</div>
+<div class="section" id="environment-setup">
+<span id="id2"></span><h2>Environment Setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<p>The compiled versions of SIP and PyQt should now be in your Python installation site-packages directory. We recommended that you copy SIP and PyQt out to a special directory for NUKE and then add this to your Python path as described below.</p>
+<p>For example, create a directory for the NUKE PyQt files (&lt;pyqtbuilddir&gt;) and copy the files below into that directory:</p>
+<div class="highlight-python"><pre>## files and dirs to copy
+
+PyQt4/
+sip.so
+sipconfig.py
+sipdistutils.py
+
+## final directory tree looks like
+
+&lt;pyqtbuilddir&gt;/PyQt4/*
+&lt;pyqtbuilddir&gt;/sip.so
+&lt;pyqtbuilddir&gt;/sipconfig.py
+&lt;pyqtbuilddir&gt;/sipdistutils.py</pre>
+</div>
+<p>By adding the PyQt path to your Python, you should now be able to use PyQt from within NUKE:</p>
+<div class="highlight-python"><pre>export PYTHONPATH=&lt;pyqtbuilddir&gt;</pre>
+</div>
+<p>Alternatively add the file to your <strong>menu.py</strong>:</p>
+<div class="highlight-python"><pre>sys.path.append ("&lt;pyqtbuilddir&gt;")</pre>
+</div>
+</div>
+<div class="section" id="my-first-pyqt-window">
+<h2>My First PyQt Window<a class="headerlink" href="#my-first-pyqt-window" title="Permalink to this headline">¶</a></h2>
+<p>Launch NUKE, open the script editor, and type the following:</p>
+<div class="highlight-python"><pre>from PyQt4 import QtGui
+label = QtGui.QLabel("Hello World")
+label.show()</pre>
+</div>
+<p>A window displays with &#8216;Hello World&#8217; in it.</p>
+</div>
+<div class="section" id="pyside-and-pyqt-knobs">
+<h2>PySide and PyQt Knobs<a class="headerlink" href="#pyside-and-pyqt-knobs" title="Permalink to this headline">¶</a></h2>
+<p>You can insert PyQt widgets into NUKE Python Panels and dock them just like any other NUKE panel.</p>
+<p>In order to make a PyQt widget dockable, it must be created by a wrapper knob class which can be created by a <strong>PyCustom_Knob</strong>.</p>
+<p>The wrapper knob must have a <strong>makeUI()</strong> function that returns the widget for the knob.</p>
+<p>As an example, see <strong>webBrowser.py</strong> in the <strong>nukescripts/pyQtExamples</strong> directory.</p>
+<p>To try out the example, in the script editor:</p>
+<div class="highlight-python"><pre>import nukescripts.pyQtExamples.webBrowser</pre>
+</div>
+<p>You should now have a <strong>Web Browser</strong> option available in the <strong>Pane</strong> menu.</p>
+<p>You can also use the <strong>panels.registerWidgetAsPanel</strong> wrapper function to wrap a PyQt widget rather that creating a custom python knob just has you can with PySide widgets. See <a class="reference internal" href="#pyside-docked"><em>Dockable PySide Widgets</em></a> for more details.</p>
+</div>
+<div class="section" id="migrating-from-qt-applications-nuke-6-2">
+<h2>Migrating from Qt Applications - NUKE 6.2<a class="headerlink" href="#migrating-from-qt-applications-nuke-6-2" title="Permalink to this headline">¶</a></h2>
+<p>In previous versions of NUKE, it was necessary to run PyQt windows from a separate thread, and also call NUKE using the <strong>executeInMainThread</strong> function.</p>
+<p>This is no longer required in NUKE 6.3 and greater.</p>
+<p>For backwards compatibility, the <strong>pyQtAppUtils.py</strong> helper functions from previous versions can still be used, but it is recommended that you update your code to use standard Qt methods such as &#8216;show&#8217;.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Custom Panels</a><ul>
+<li><a class="reference internal" href="#simple-panel-commands">Simple Panel Commands</a></li>
+<li><a class="reference internal" href="#simple-panel-object">Simple Panel Object</a></li>
+<li><a class="reference internal" href="#python-panels">Python Panels</a><ul>
+<li><a class="reference internal" href="#shapepanel">ShapePanel</a></li>
+<li><a class="reference internal" href="#shapeandcvpanel">ShapeAndCVPanel</a></li>
+<li><a class="reference internal" href="#search-and-replace-panel">Search and Replace Panel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extending-nuke-with-pyside">Extending NUKE with PySide</a><ul>
+<li><a class="reference internal" href="#my-first-pyside-window">My First PySide Window</a></li>
+<li><a class="reference internal" href="#dockable-pyside-widgets">Dockable PySide Widgets</a></li>
+<li><a class="reference internal" href="#a-web-browser-panel-example">A Web browser panel example</a></li>
+<li><a class="reference internal" href="#migrating-from-pyqt-applications">Migrating from PyQt Applications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extending-nuke-with-pyqt">Extending NUKE with PyQt</a><ul>
+<li><a class="reference internal" href="#mac-osx">Mac OSX</a></li>
+<li><a class="reference internal" href="#linux">Linux</a></li>
+<li><a class="reference internal" href="#windows">Windows</a></li>
+<li><a class="reference internal" href="#environment-setup">Environment Setup</a></li>
+<li><a class="reference internal" href="#my-first-pyqt-window">My First PyQt Window</a></li>
+<li><a class="reference internal" href="#pyside-and-pyqt-knobs">PySide and PyQt Knobs</a></li>
+<li><a class="reference internal" href="#migrating-from-qt-applications-nuke-6-2">Migrating from Qt Applications - NUKE 6.2</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="image_data.html"
+                        title="previous chapter">Accessing Image Data</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="custom_ui.html"
+                        title="next chapter">Customizing the UI</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="custom_ui.html" title="Customizing the UI"
+             >next</a></li>
+        <li class="right" >
+          <a href="image_data.html" title="Accessing Image Data"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

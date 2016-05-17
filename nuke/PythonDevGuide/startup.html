@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Start-up Scripts &mdash; NUKE Python Developer&#39;s Guide v10.0v1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '10.0v1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NUKE Python Developer&#39;s Guide v10.0v1 documentation" href="index.html" />
+    <link rel="next" title="Getting Started" href="basics.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="basics.html" title="Getting Started"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="start-up-scripts">
+<h1>Start-up Scripts<a class="headerlink" href="#start-up-scripts" title="Permalink to this headline">¶</a></h1>
+<p>This section describes the scripts that NUKE runs on start-up.</p>
+<div class="section" id="evaluation-order">
+<span id="evaluationorder-ref-label"></span><h2>Evaluation Order<a class="headerlink" href="#evaluation-order" title="Permalink to this headline">¶</a></h2>
+<p>NUKE initialization scripts are run in reverse order of the NUKE plug-in path. At start-up, the default NUKE plug-in path is as follows:</p>
+<p>[&#8216;/home/nukeuser/.nuke&#8217;, &#8216;/usr/local/NUKE/6.2/plugins&#8217;, &#8216;/usr/local/Nuke6.2v4/plugins/user&#8217;, &#8216;/usr/local/Nuke6.2v4/plugins/icons&#8217;, &#8216;/usr/local/Nuke6.2v4/plugins&#8217;]</p>
+<p>This example shows the NUKE plug-in path for NUKE 6.2v4 and a user called &#8216;nukeuser&#8217;. In this case, scripts in &#8216;/usr/local/Nuke6.2v4/plugins&#8217; are run first, with scripts in &#8216;/home/nukeuser/.nuke&#8217; run last.</p>
+<p>You can query the plug-in directory using nuke.pluginPath(). If necessary, you can prefix additional directories to the path by calling nuke.pluginAddPath(), or append them using nuke.pluginAppendPath(). You can also edit the path by modifying the NUKE_PATH environment variable.</p>
+<p>In each plug-in directory, NUKE first executes the init.py file (if one exists), followed by the menu.py file (again, if one exists).</p>
+</div>
+<div class="section" id="menu-py">
+<span id="menupy-ref-label"></span><h2>menu.py<a class="headerlink" href="#menu-py" title="Permalink to this headline">¶</a></h2>
+<p>Any file called <strong>menu.py</strong> that is placed in one of NUKE&#8217;s plug-in path directories is automatically read when NUKE starts in an interactive session. It is <strong>not</strong> read, however, when NUKE is launched for a command-line session or render. Because of this, you should use menu.py exclusively for commands that are only relevant to interactive sessions. A typical example would be adding favorites to the File Browser or creating custom menus and hotkeys. For more details, see <a class="reference internal" href="custom_ui.html#customisingui-ref-label"><em>Customizing the UI</em></a>.</p>
+</div>
+<div class="section" id="init-py">
+<span id="initpy-ref-label"></span><h2>init.py<a class="headerlink" href="#init-py" title="Permalink to this headline">¶</a></h2>
+<p>Any file called <strong>init.py</strong> that is placed in one of NUKE&#8217;s plug-in path directories is automatically read whenever NUKE is launched. In other words, this file is read for both command-line and interactive sessions. Note that you should <strong>not</strong> use init.py for any commands that create UI elements, as this may lead to errors or prevent NUKE from launching.</p>
+<p>Here are some examples of what the init.py file is typically used for (though depending on your workflow, most of these can live in the menu.py file instead if they&#8217;re not needed in command-line sessions):</p>
+<ul class="simple">
+<li>adding custom plug-in paths - see <a class="reference internal" href="installing_plugins.html#installingplugins-ref-label"><em>Installing Plug-ins</em></a></li>
+<li>setting knob defaults - see <a class="reference internal" href="custom_ui.html#knobdefaults-ref-label"><em>Defining Knob Defaults</em></a></li>
+<li>setting custom formats - see <a class="reference internal" href="formats.html#formats-ref-label"><em>Formats</em></a>.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Start-up Scripts</a><ul>
+<li><a class="reference internal" href="#evaluation-order">Evaluation Order</a></li>
+<li><a class="reference internal" href="#menu-py">menu.py</a></li>
+<li><a class="reference internal" href="#init-py">init.py</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="basics.html"
+                        title="next chapter">Getting Started</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="basics.html" title="Getting Started"
+             >next</a></li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="index.html">NUKE Python Developer&#39;s Guide v10.0v1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, JW, FR.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
