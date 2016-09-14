@@ -8,7 +8,7 @@ __author__ = 'Crayon Chaney <mmmmmcclxxvii@gmail.com>'
 l =[]
 
 for _ in range(input()):
-    order = raw_input().spilt()
+    order = raw_input().split()
     cmd = order[0]
     args = order[1:]
     if cmd != 'print':
