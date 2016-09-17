@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
-#recursive solution
+# recursive solution
 def findall(s, sub):
     if s.find(sub) == -1:
         return 0
