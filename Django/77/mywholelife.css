@@ -1,0 +1,55 @@
+body{
+	width:100%;
+	height:100%;
+	text-align:center;
+	background-color:rgb(0,0,0);
+}
+html{
+	width:100%;
+	height:100%
+}
+
+#container{
+	min-height:100%;
+	min-width:100%;
+	height:inherit;
+	width:inherit;
+}
+#container .container_1{
+	margin:auto;
+	position:relative;
+	height:inherit;
+}
+#container #container_words{
+	width:45%;
+	background-color:#00FF33;
+	float:left;
+}
+
+#container #container_timeline{
+	width:10%;
+	background-color:red;
+	float:left;
+}
+
+#container #container_music{
+	width:45%;
+	background-color:blue;
+	float:left;
+}
+
+#container_words .canvas_words{
+	height:inherit;
+	width:100%;
+	background-color:violet;
+}
+
+#container_timeline .canvas_timeline{
+	height:inherit;
+	width:100%;
+}
+
+#container_music .canvas_music{
+	height:inherit;
+	width:100%;
+}

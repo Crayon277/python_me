@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <meta charset = "utf-8">
+		<link href = "mywholelife.css" rel = "stylesheet">
+	    <title>
+			You are the reason I go on
+		</title>
+
+	</head>
+
+	<body>
+	        <canvas id = "character" width =  height = 1000 style = "float = left">test</canvas>
+			<canvas id = "timeline">test</canvas>
+			<canvas id = "backmusic" >test</canvas>
+	</body>
+
+
+</html>
