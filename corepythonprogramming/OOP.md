@@ -177,7 +177,7 @@ lily.info()
 
 ### 静态方法和类方法
 
-通常的方法需要一个实例（self）作为第一个参数，并且对于（绑定的）方法调用来说，self是自动传递给这个方法的。而对于_**累方法**_而言，需要类而不是实例作为第一个参数，它是由解释器传给方法。类不需要特别的命名，类似self，不过很多人使用cls作为变量的名字
+通常的方法需要一个实例（self）作为第一个参数，并且对于（绑定的）方法调用来说，self是自动传递给这个方法的。而对于_**类方法**_而言，需要类而不是实例作为第一个参数，它是由解释器传给方法。类不需要特别的命名，类似self，不过很多人使用cls作为变量的名字
 
 ``` python
 
@@ -230,15 +230,43 @@ class Book(object):
         self.title = title
 
     @classmethod
-    def create(cls, title):
+    def create(cls, title):  
         book = cls(title=title)
-        return book
+        return book #这句话返回这个类对象，重要
 
 book1 = Book("python")
-book2 = Book.create("python and django") # 可以用来当作构建函数
+book2 = Book.create("python and django") # 可以用来当作构建函数，这样灵活了。
+#如果它不是类方法的话，我们知道是要有实例对象才能调用方法的
 print(book1.title)
 print(book2.title)
 ```
+
+```python
+>>> class test:
+...     def __init__(self,a):
+...             self.name = a
+...     @classmethod
+...     def create(cls,a,b): # 这里其实是创建了类属性，不是实例属性。也就是静态成员。类属性是所有类共享一个存储单元，所以一改都改。实力属性有自己独立的存储单元
+...             cls.name = a
+...             cls.age = b
+        #这里没有return语句
+...
+>>> t = test()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() takes exactly 2 arguments (1 given)
+>>> t = test.create('chen',23)
+>>> t.name
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'name'
+>>> test.name
+'chen'
+>>> test.age
+23
+
+```
+
 2. 类中静态方法方法调用静态方法的情况。
 下面的代码，静态方法调用另一个静态方法，如果改用类方法调用静态方法，可以让cls代替类，
 让代码看起来精简一些。也防止类名修改了，不用在类定义中修改原来的类名。
