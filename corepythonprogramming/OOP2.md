@@ -153,10 +153,18 @@ Types are written like this: <class 'int'>.
 >>>type(list)
 <type 'type'> #list是type类的实例
 ```
+
+> The type of this object is <type 'int'>. This <type 'int'> is another object, which we will now explore. Note that this object is also called just int and <type 'int'> is the printable representation.
+
 ---
 **那type类和object类** 什么关系
 
 [鸡生蛋，蛋生鸡的关系](http://www.cafepy.com/article/python_types_and_objects/python_types_and_objects.html) **一定要看**
+
+\_\_base\_\_类属性是什么，子类的这个属性值指向父类，（最上面的父类指向object）
+其实也就道出了父子的关系
+
+type()函数返回的是\_\_class\_\_的值，因为类和类型统一了
 
 ```python
 #A来自上面python2新式类
