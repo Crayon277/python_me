@@ -292,19 +292,19 @@ Types and (er.. for lack of a better word) non-types (ugh!) are both objects but
 
 ```python
 
->>> list 1
+>>> list #1
 <type 'list'>
->>> list.__class__  2
+>>> list.__class__  #2
 <type 'type'>
->>> list.__bases__  3
+>>> list.__bases__  #3
 (<type 'object'>,)
->>> tuple.__class__, tuple.__bases__ 4
+>>> tuple.__class__, tuple.__bases__ #4
 (<type 'type'>, (<type 'object'>,))
->>> dict.__class__, dict.__bases__ 5
+>>> dict.__class__, dict.__bases__ #5
 (<type 'type'>, (<type 'object'>,))
 >>>
->>> mylist = [1,2,3] 6
->>> mylist.__class__ 7
+>>> mylist = [1,2,3] #6
+>>> mylist.__class__ #7
 <type 'list'>
 ```
 
@@ -405,7 +405,7 @@ mylist = [1,2,3] #3
 # 总结
 
 [The python objects map](http://www.cafepy.com/article/python_types_and_objects/images/types_map.png)
-
+![python obejcts map](http://www.cafepy.com/article/python_types_and_objects/images/types_map.png)
 1. Dashed lines cross spacial boundaries (i.e. go from object to meta-object). Only exception is <type 'type'> (which is good, otherwise we would need another space to the left of it, and another, and another...).
 
 2. Solid lines do not cross space boundaries. Again, <type 'type'> -> <type 'object'> is an exception.

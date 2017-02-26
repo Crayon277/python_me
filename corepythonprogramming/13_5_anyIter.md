@@ -7,7 +7,12 @@ class AnyIter(object):
         self.safe = safe
 
         self.iter = iter(data)  #接受一个可迭代的数据类型
-
+        """
+        知道这里为什么要转化为iter对象了，因为后面要用到next(）方法
+        而测试数据是range(10)是一个列表，如果不转化，列表是没有
+        next()方法的。如果不转化，可以用
+        retval.append(self.data.pop(0))来完成这个功能
+        """
     def __iter__(self):
         return self  #将一个对象声明为迭代器的方式
 
@@ -54,5 +59,4 @@ if __name__=="__main__":
     [9]
     '''
 ```
-
-![代码结构图](http://a3.qpic.cn/psb?/V10X9IqN05vrJi/hgbGFw5qYobyMsDy*n9RwtY8vAYdYLQoPDpk389xLf0!/b/dB8BAAAAAAAA&bo=gALwAgAAAAADB1I!&rf=viewer_4)
+![代码结构图](http://b287.photo.store.qq.com/psb?/V10X9IqN05vrJi/hgbGFw5qYobyMsDy*n9RwtY8vAYdYLQoPDpk389xLf0!/b/dB8BAAAAAAAA&bo=gALwAgAAAAADB1I!&rf=viewer_4)

@@ -44,6 +44,7 @@ def monisen(no):
             no+=1
 """
 start = time.clock()
+print 'enter some number'
 print monisen(input())
 end = time.clock()
 print 'time use: %f '%(end-start)
